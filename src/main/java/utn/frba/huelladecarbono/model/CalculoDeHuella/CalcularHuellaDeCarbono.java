@@ -1,0 +1,42 @@
+package utn.frba.huelladecarbono.model.CalculoDeHuella;
+
+
+import utn.frba.huelladecarbono.model.CargaDeMediciones.DatoDeMedicion;
+import utn.frba.huelladecarbono.model.ManejoAmbiental.Miembro;
+
+import java.util.List;
+
+public class CalcularHuellaDeCarbono {
+
+    Double k = 0.0;
+    private static CalcularHuellaDeCarbono instance = new CalcularHuellaDeCarbono();
+
+    public Double getK() {
+        return k;
+    }
+
+    public static CalcularHuellaDeCarbono getCalculadora() {
+        return instance;
+      }
+
+    public void setK(Double k) {
+        this.k = k;
+    }
+
+    /* public CalcularHuellaDeCarbono(Double k) {
+        this.k = k;
+    } */
+
+    public CalcularHuellaDeCarbono(){
+        this.k = 0.0;
+    }
+
+    //Todos los calculos de HC se hacen respecto a un mes de consumo
+    public Double calcularHCMedicion(List<DatoDeMedicion> datoDeMedicion) {
+        return CalcularHuellaDeCarbonoMedicion.calcularHCMedicion(datoDeMedicion, k);
+    }
+
+    public Double calcularHCMiembro(Miembro miembro) throws Exception {
+        return CalcularHuellaDeCarbonoMiembro.calcularHCMiembro(miembro);
+    }
+}
