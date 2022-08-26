@@ -27,6 +27,14 @@ public class CalcularHuellaDeCarbonoMiembro {
         FactoresDeEmision FE = FactoresDeEmision.getInstance();
         System.out.println(FE.getFE("AUTO"));
         return trayecto.distanciaMedia() * FE.getFE(trayecto.getMedioTransporte().getTipo());
+
+    }
+
+    //TODO Version con carpooling
+    public  static  Double calcularHCTrayectoCarpooling(Trayecto trayecto) throws Exception {
+        FactoresDeEmision FE = FactoresDeEmision.getInstance();
+        System.out.println(FE.getFE("AUTO"));
+        return (trayecto.distanciaMedia() * FE.getFE(trayecto.getMedioTransporte().getTipo())) / trayecto.getPasajeros().size();
     }
 
 }

@@ -39,4 +39,11 @@ public class CalcularHuellaDeCarbono {
     public Double calcularHCMiembro(Miembro miembro) throws Exception {
         return CalcularHuellaDeCarbonoMiembro.calcularHCMiembro(miembro);
     }
+
+
+    //TODO Para calculo de HC mensual
+
+    public Double calcularHCMensual(Miembro miembro) throws Exception {
+        return 4.5 * CalcularHuellaDeCarbonoMiembro.calcularHCMiembro(miembro);
+    }
 }

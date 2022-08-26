@@ -7,8 +7,10 @@ import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioMotorizado;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioTrayectos;
 import lombok.Getter;
 import lombok.Setter;
+import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Getter @Setter
 @Entity
@@ -22,6 +24,9 @@ public class Trayecto {
     private Ubicacion puntoLlegada;
     @Transient
     private Medio medioTransporte;
+    // Se agrega carpooling
+    @Transient
+    private ArrayList<Usuario> pasajeros;
 
 
     static public Trayecto getTrayecto(Ubicacion salida, Ubicacion llegada, Medio medio){
@@ -31,12 +36,21 @@ public class Trayecto {
         }
         return trayectoNuevo;
     }
+
     public Trayecto() {
     }
     public Trayecto(Ubicacion salida, Ubicacion llegada, Medio medio){
         this.puntoPartida = salida;
         this.puntoLlegada = llegada;
         this.medioTransporte = medio;
+    }
+
+    //TODO Opcion con carpooling
+    public Trayecto(Ubicacion salida, Ubicacion llegada, Medio medio, ArrayList<Usuario> pasajeros){
+        this.puntoPartida = salida;
+        this.puntoLlegada = llegada;
+        this.medioTransporte = medio;
+        this.pasajeros = pasajeros;
     }
 
     public Ubicacion getPuntoPartida() {
@@ -61,6 +75,14 @@ public class Trayecto {
 
     public void setMedioTransporte(Medio medioTransporte) {
         this.medioTransporte = medioTransporte;
+    }
+
+    public ArrayList<Usuario> getPasajeros() {
+        return pasajeros;
+    }
+
+    public void setPasajeros(ArrayList<Usuario> pasajeros) {
+        this.pasajeros = pasajeros;
     }
 
     public Double distanciaMedia() throws Exception {
