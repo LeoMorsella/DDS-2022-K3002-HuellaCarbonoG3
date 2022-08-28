@@ -18,7 +18,7 @@ public class CalcularHuellaDeCarbonoMiembro {
     private static Double calcularHCRecorrido (Recorrido recorrido) throws Exception {
         Double HC = 0.0;
         for(Trayecto trayecto : recorrido.getTrayectos()) {
-            HC += calcularHCTrayecto(trayecto) /** recorrido.getFactorDeUso()*/;
+            HC += calcularHCTrayecto(trayecto) * trayecto.getPeso();
         }
         return HC;
     }

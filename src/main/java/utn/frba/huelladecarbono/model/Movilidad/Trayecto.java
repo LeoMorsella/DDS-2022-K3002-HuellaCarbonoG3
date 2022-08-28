@@ -27,10 +27,12 @@ public class Trayecto {
     // Se agrega carpooling
     @Transient
     private ArrayList<Usuario> pasajeros;
+    @Transient
+    private Double peso;
 
 
-    static public Trayecto getTrayecto(Ubicacion salida, Ubicacion llegada, Medio medio){
-        Trayecto trayectoNuevo = new Trayecto(salida, llegada, medio);
+    static public Trayecto getTrayecto(Ubicacion salida, Ubicacion llegada, Medio medio, Double peso){
+        Trayecto trayectoNuevo = new Trayecto(salida, llegada, medio, peso);
         if(medio == new MedioMotorizado()){
             RepositorioTrayectos.getRepositorio().agregarTrayecto(trayectoNuevo);
         }
@@ -39,10 +41,11 @@ public class Trayecto {
 
     public Trayecto() {
     }
-    public Trayecto(Ubicacion salida, Ubicacion llegada, Medio medio){
+    public Trayecto(Ubicacion salida, Ubicacion llegada, Medio medio, Double peso){
         this.puntoPartida = salida;
         this.puntoLlegada = llegada;
         this.medioTransporte = medio;
+        this.peso = peso;
     }
 
     //TODO Opcion con carpooling
@@ -55,6 +58,10 @@ public class Trayecto {
 
     public Ubicacion getPuntoPartida() {
         return puntoPartida;
+    }
+
+    public Double getPeso(){
+        return this.peso;
     }
 
     public void setPuntoPartida(Ubicacion puntoPartida) {

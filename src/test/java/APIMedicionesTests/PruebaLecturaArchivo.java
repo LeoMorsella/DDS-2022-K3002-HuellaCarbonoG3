@@ -31,8 +31,8 @@ public class PruebaLecturaArchivo {
     Ubicacion ubicacion3 = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "300");
     MedioMotorizado medio1 = new MedioMotorizado();
     MedioNoMotorizado medio2 = new MedioNoMotorizado();
-    Trayecto trayecto1 = new Trayecto(ubicacion1,ubicacion2, medio1);
-    Trayecto trayecto2 = new Trayecto(ubicacion2,ubicacion3, medio2);
+    Trayecto trayecto1 = new Trayecto(ubicacion1,ubicacion2, medio1, 0.2);
+    Trayecto trayecto2 = new Trayecto(ubicacion2,ubicacion3, medio2, 0.1);
     Recorrido recorrido = null;
 
     Organizacion organizacion = new Organizacion("", TipoOrg.GUBERNAMENTAL,ubicacion3,areas, Clasificacion.MINISTERIO,miembros,miembros);

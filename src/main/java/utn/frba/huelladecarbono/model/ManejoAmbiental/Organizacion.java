@@ -1,5 +1,6 @@
 package utn.frba.huelladecarbono.model.ManejoAmbiental;
 
+import utn.frba.huelladecarbono.model.CalculoDeHuella.CalcularHuellaDeCarbono;
 import utn.frba.huelladecarbono.model.CargaDeMediciones.DatoDeMedicion;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Medio;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
@@ -29,6 +30,8 @@ public class Organizacion {
     private ArrayList<Miembro> contactosMail = null;
     @Transient
     private ArrayList<Miembro> contactosWP = null;
+    @Transient
+    private ArrayList<Double> hcMensual = new ArrayList<>();
 
     public String getRazonSocial() {
         return razonSocial;
@@ -132,8 +135,8 @@ public class Organizacion {
         this.areas.add(area);
     }
 
-    public void generarTrayecto(Ubicacion salida, Ubicacion llegada, Medio medio){
-        Trayecto nuevoTrayecto = new Trayecto(salida, llegada, medio);
+    public void generarTrayecto(Ubicacion salida, Ubicacion llegada, Medio medio, Double peso){
+        Trayecto nuevoTrayecto = new Trayecto(salida, llegada, medio, peso);
         RepositorioTrayectos.getRepositorio().agregarTrayecto(nuevoTrayecto);
     }
 
@@ -159,5 +162,24 @@ public class Organizacion {
 
     public Double HCpromedio() throws Exception {
         return this.calcularHC() / this.getMiembros().size();
+    }
+
+    //La idea es que cada mes se agrega el del mes correspondiente
+    //Cuando vuelva a ser enero, se limpia esa lista con HC mensuales
+    public void agregarHCMensual() throws Exception{
+        Double valor = 0.0;
+        List<Miembro> miembrosOrg = this.getMiembros();
+        for(Miembro miembro : miembrosOrg){
+            valor += CalcularHuellaDeCarbono.getCalculadora().calcularHCMensual(miembro);
+        }
+        this.hcMensual.add(valor);
+    }
+
+    public Double calucloHCAnual(){
+        Double valor = 0.0;
+        for(Double hcMensual : this.hcMensual){
+            valor += hcMensual;
+        }
+        return valor;
     }
 }
