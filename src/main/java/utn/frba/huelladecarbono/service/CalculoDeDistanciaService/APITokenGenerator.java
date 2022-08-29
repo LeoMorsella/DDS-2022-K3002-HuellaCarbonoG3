@@ -1,5 +1,7 @@
-package utn.frba.huelladecarbono.model.CalculoDeDistancias;
+package utn.frba.huelladecarbono.service.CalculoDeDistanciaService;
 
+import utn.frba.huelladecarbono.model.CalculoDeDistancias.AutenticacionRequest;
+import utn.frba.huelladecarbono.model.CalculoDeDistancias.AutenticacionResponse;
 import utn.frba.huelladecarbono.model.UserExceptions.BadResponseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

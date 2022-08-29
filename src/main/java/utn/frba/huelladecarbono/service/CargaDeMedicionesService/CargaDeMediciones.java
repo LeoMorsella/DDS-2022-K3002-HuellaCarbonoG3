@@ -1,9 +1,11 @@
-package utn.frba.huelladecarbono.model.CargaDeMediciones;
+package utn.frba.huelladecarbono.service.CargaDeMedicionesService;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import utn.frba.huelladecarbono.model.ManejoAmbiental.DatoDeMedicion;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;

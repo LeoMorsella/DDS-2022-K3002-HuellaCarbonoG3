@@ -1,6 +1,6 @@
 package APIDistanciaTests;
 
-import utn.frba.huelladecarbono.model.CalculoDeDistancias.APIDistanciaService;
+import utn.frba.huelladecarbono.service.CalculoDeDistanciaService.APIDistanciaService;
 import utn.frba.huelladecarbono.model.ManejoAmbiental.Ubicacion;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;

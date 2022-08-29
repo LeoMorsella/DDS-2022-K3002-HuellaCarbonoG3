@@ -1,6 +1,6 @@
 package utn.frba.huelladecarbono.model.ManejoAmbiental;
 
-import utn.frba.huelladecarbono.model.CalculoDeHuella.CalcularHuellaDeCarbono;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalcularHuellaDeCarbono;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
 import lombok.Getter;

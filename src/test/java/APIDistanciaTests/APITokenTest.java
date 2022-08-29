@@ -1,6 +1,6 @@
 package APIDistanciaTests;
 
-import utn.frba.huelladecarbono.model.CalculoDeDistancias.APITokenGenerator;
+import utn.frba.huelladecarbono.service.CalculoDeDistanciaService.APITokenGenerator;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 

@@ -1,9 +1,7 @@
 package APIMedicionesTests;
 
-import utn.frba.huelladecarbono.model.CalculoDeHuella.FactoresDeEmision;
-import utn.frba.huelladecarbono.model.CargaDeMediciones.CargaDeMediciones;
-import utn.frba.huelladecarbono.model.CargaDeMediciones.DatoDeMedicion;
-import utn.frba.huelladecarbono.model.ManejoAmbiental.*;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.*;
+import utn.frba.huelladecarbono.service.CargaDeMedicionesService.*;
 import utn.frba.huelladecarbono.model.ManejoAmbiental.*;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioMotorizado;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioNoMotorizado;
@@ -11,7 +9,6 @@ import utn.frba.huelladecarbono.model.MedioDeTransporte.TipoMedioNoMotorizado;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.TipoVehiculoMotorizado;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
-import utn.frba.huelladecarbono.model.ManejoAmbiental.*;
 import org.junit.Assert;
 import org.junit.Test;
 

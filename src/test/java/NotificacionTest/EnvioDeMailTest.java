@@ -1,6 +1,6 @@
 package NotificacionTest;
 
-import utn.frba.huelladecarbono.model.Notificacion.EnviarMail;
+import utn.frba.huelladecarbono.service.NotificacionService.EnviarMail;
 import org.junit.Test;
 
 public class EnvioDeMailTest {

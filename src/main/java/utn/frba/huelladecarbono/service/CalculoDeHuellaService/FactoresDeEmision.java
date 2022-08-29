@@ -1,4 +1,4 @@
-package utn.frba.huelladecarbono.model.CalculoDeHuella;
+package utn.frba.huelladecarbono.service.CalculoDeHuellaService;
 
 import java.util.HashMap;
 

@@ -1,8 +1,8 @@
-package utn.frba.huelladecarbono.model.CalculoDeDistancias;
+package utn.frba.huelladecarbono.service.CalculoDeDistanciaService;
 
-import utn.frba.huelladecarbono.model.CalculoDeDistancias.Strategies.StrategyTransporte;
-import utn.frba.huelladecarbono.model.CalculoDeDistancias.Strategies.StrategyTransportePublico;
-import utn.frba.huelladecarbono.model.CalculoDeDistancias.Strategies.StrategyVehiculoMotorizado;
+import utn.frba.huelladecarbono.service.CalculoDeDistanciaService.Strategies.StrategyTransporte;
+import utn.frba.huelladecarbono.service.CalculoDeDistanciaService.Strategies.StrategyTransportePublico;
+import utn.frba.huelladecarbono.service.CalculoDeDistanciaService.Strategies.StrategyVehiculoMotorizado;
 import utn.frba.huelladecarbono.model.ManejoAmbiental.Ubicacion;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Medio;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioMotorizado;

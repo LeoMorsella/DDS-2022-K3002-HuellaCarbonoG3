@@ -1,10 +1,7 @@
 package OrganizacionTest;
 
-import utn.frba.huelladecarbono.model.CargaDeMediciones.DatoDeMedicion;
-import utn.frba.huelladecarbono.model.ManejoAmbiental.*;
 import utn.frba.huelladecarbono.model.ManejoAmbiental.*;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
-import utn.frba.huelladecarbono.model.ManejoAmbiental.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

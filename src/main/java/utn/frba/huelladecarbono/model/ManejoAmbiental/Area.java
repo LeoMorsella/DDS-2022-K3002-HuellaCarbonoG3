@@ -1,10 +1,9 @@
 package utn.frba.huelladecarbono.model.ManejoAmbiental;
 
-import utn.frba.huelladecarbono.model.CalculoDeHuella.CalcularHuellaDeCarbono;
-import utn.frba.huelladecarbono.model.CargaDeMediciones.CargaDeMediciones;
-import utn.frba.huelladecarbono.model.CargaDeMediciones.DatoDeMedicion;
 import lombok.Getter;
 import lombok.Setter;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalcularHuellaDeCarbono;
+import utn.frba.huelladecarbono.service.CargaDeMedicionesService.CargaDeMediciones;
 
 import javax.persistence.*;
 import java.util.ArrayList;

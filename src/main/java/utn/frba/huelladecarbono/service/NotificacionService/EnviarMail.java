@@ -1,4 +1,4 @@
-package utn.frba.huelladecarbono.model.Notificacion;
+package utn.frba.huelladecarbono.service.NotificacionService;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;

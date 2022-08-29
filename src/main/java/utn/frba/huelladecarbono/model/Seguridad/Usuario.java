@@ -2,6 +2,7 @@ package utn.frba.huelladecarbono.model.Seguridad;
 
 import utn.frba.huelladecarbono.model.ManejoAmbiental.Miembro;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioUsuarios;
+import utn.frba.huelladecarbono.service.ValidadorContraseniasService;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,7 +36,7 @@ public class Usuario {
     private void validarCredencialesUser(String user, String psw){
         this.username = user;
         this.password = psw;
-        ValidadorContrasenias.getValidadorContrasenias().validarPassword(password);
+        ValidadorContraseniasService.getValidadorContrasenias().validarPassword(password);
     }
 
     public String getUsername() {

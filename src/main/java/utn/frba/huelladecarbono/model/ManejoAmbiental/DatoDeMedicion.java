@@ -1,4 +1,4 @@
-package utn.frba.huelladecarbono.model.CargaDeMediciones;
+package utn.frba.huelladecarbono.model.ManejoAmbiental;
 
 import lombok.Getter;
 import lombok.Setter;

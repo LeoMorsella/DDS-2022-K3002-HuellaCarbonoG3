@@ -1,4 +1,4 @@
-package utn.frba.huelladecarbono.model.Notificacion;
+package utn.frba.huelladecarbono.service.NotificacionService;
 
 import utn.frba.huelladecarbono.model.ManejoAmbiental.Miembro;
 import utn.frba.huelladecarbono.model.ManejoAmbiental.Organizacion;

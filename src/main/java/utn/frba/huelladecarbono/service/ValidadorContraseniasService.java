@@ -1,4 +1,4 @@
-package utn.frba.huelladecarbono.model.Seguridad;
+package utn.frba.huelladecarbono.service;
 
 import utn.frba.huelladecarbono.model.UserExceptions.ArchivoNotFoundException;
 import utn.frba.huelladecarbono.model.UserExceptions.EasyPasswordException;
@@ -13,14 +13,14 @@ import java.util.regex.Pattern;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-public class ValidadorContrasenias {
+public class ValidadorContraseniasService {
         private final String yourDesktopPath = System.getProperty("user.dir")+"/";
 
-        private static ValidadorContrasenias validadorContrasenias = new ValidadorContrasenias();
+        private static ValidadorContraseniasService validadorContrasenias = new ValidadorContraseniasService();
 
-        private ValidadorContrasenias() {}
+        private ValidadorContraseniasService() {}
 
-        public static ValidadorContrasenias getValidadorContrasenias() {
+        public static ValidadorContraseniasService getValidadorContrasenias() {
             return validadorContrasenias;
         }
 
