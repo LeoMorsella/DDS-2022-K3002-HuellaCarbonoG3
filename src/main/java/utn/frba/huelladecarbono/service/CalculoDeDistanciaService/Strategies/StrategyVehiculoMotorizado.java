@@ -1,7 +1,7 @@
 package utn.frba.huelladecarbono.service.CalculoDeDistanciaService.Strategies;
 
 import utn.frba.huelladecarbono.service.CalculoDeDistanciaService.APIDistanciaService;
-import utn.frba.huelladecarbono.model.ManejoAmbiental.Ubicacion;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Ubicacion;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Medio;
 
 public class StrategyVehiculoMotorizado extends StrategyTransporte{

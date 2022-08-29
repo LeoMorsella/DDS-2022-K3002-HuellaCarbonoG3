@@ -1,6 +1,6 @@
 package utn.frba.huelladecarbono.model.Repositorios;
 
-import utn.frba.huelladecarbono.model.ManejoAmbiental.Organizacion;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 
 import java.util.ArrayList;
 import java.util.List;

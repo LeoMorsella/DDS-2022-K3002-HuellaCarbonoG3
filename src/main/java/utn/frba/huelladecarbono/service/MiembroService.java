@@ -2,7 +2,7 @@ package utn.frba.huelladecarbono.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import utn.frba.huelladecarbono.model.ManejoAmbiental.Miembro;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.repository.MiembroRepository;
 
 import java.util.List;

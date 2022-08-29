@@ -1,6 +1,6 @@
 package utn.frba.huelladecarbono.service.CalculoDeHuellaService;
 
-import utn.frba.huelladecarbono.model.ManejoAmbiental.DatoDeMedicion;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.DatoDeMedicion;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package utn.frba.huelladecarbono.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import utn.frba.huelladecarbono.model.ManejoAmbiental.Organizacion;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.service.IOrganizacionService;
 
 import java.util.List;

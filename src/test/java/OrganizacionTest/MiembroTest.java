@@ -1,6 +1,6 @@
 package OrganizacionTest;
 
-import utn.frba.huelladecarbono.model.ManejoAmbiental.*;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

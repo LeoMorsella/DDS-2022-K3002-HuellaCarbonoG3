@@ -1,11 +1,11 @@
 package utn.frba.huelladecarbono.service.CalculoDeHuellaService;
 
 
-import utn.frba.huelladecarbono.model.ManejoAmbiental.Area;
-import utn.frba.huelladecarbono.model.ManejoAmbiental.DatoDeMedicion;
-import utn.frba.huelladecarbono.model.ManejoAmbiental.Miembro;
-import utn.frba.huelladecarbono.model.ManejoAmbiental.Organizacion;
-import utn.frba.huelladecarbono.model.ManejoAmbiental.SectorTerritorial;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.DatoDeMedicion;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.SectorTerritorial;
 
 import java.util.List;
 

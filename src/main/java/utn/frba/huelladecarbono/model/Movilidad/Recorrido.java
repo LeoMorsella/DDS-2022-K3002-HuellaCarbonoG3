@@ -1,8 +1,9 @@
 package utn.frba.huelladecarbono.model.Movilidad;
 
-import utn.frba.huelladecarbono.model.ManejoAmbiental.Miembro;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import lombok.Getter;
 import lombok.Setter;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,51 +17,32 @@ public class Recorrido {
     private Integer id;
     @Transient
     private ArrayList<Trayecto> trayectos;
-
-    private Double factorDeUso = null;
-
-    private Date fechaDeInicio = null;
+    @Transient
+    private Organizacion organizacion;
 
     public ArrayList<Trayecto> getTrayectos() {
         return trayectos;
     }
 
-    public Recorrido(ArrayList<Trayecto> trayectos, Double unFactorDeUso) {
-        this.trayectos = trayectos;
-        this.factorDeUso = unFactorDeUso;
+    public Recorrido(Organizacion organizacion) {
+        this.organizacion = organizacion;
     }
-
-    public static Recorrido nuevoRecorrido(ArrayList<Trayecto> trayectos, Double unFactorDeUso){
-        Recorrido nuevoRecorrido = new Recorrido(trayectos, unFactorDeUso);
-        System.out.println(nuevoRecorrido.getFactorDeUso());
+    public static Recorrido nuevoRecorrido(Organizacion organizacion){
+        Recorrido nuevoRecorrido = new Recorrido(organizacion);
         //RepositorioRecorrido.getRepositorio().agregarRecorrido(nuevoRecorrido);
         return nuevoRecorrido;
     }
 
-    public Double getFactorDeUso() {
-        return factorDeUso;
+    //Si se cambian los valores hay que remover el trayecto y agregarlo de nuevo
+    public void addTrayecto(Trayecto trayecto, Date fechaDeInicio, Date fechaDeFin, Double factorDeUso, Organizacion organizacion){
+        trayecto.setFactorDeUso(factorDeUso);
+        trayecto.setFechaDeFin(fechaDeFin);
+        trayecto.setFechaDeInicio(fechaDeInicio);
+        this.trayectos.add(trayecto);
     }
 
-    public Date getFechaDeInicio() {
-        return fechaDeInicio;
-    }
-
-    public void setFechaDeInicio(Date fechaDeInicio) {
-        this.fechaDeInicio = fechaDeInicio;
-    }
-
-    public void setTrayectos(ArrayList<Trayecto> trayectos) {
-        this.trayectos = trayectos;
-    }
-
-    public void asociarA(Miembro miembro, Double factorDeUso, Date fechaDeInicio){
-        this.factorDeUso = factorDeUso;
-        this.fechaDeInicio = fechaDeInicio;
-        miembro.getRecorridos().add(this);
-    }
-
-    public void addTrayectos(ArrayList<Trayecto> nuevosTrayectos){
-        for(Trayecto trayecto : nuevosTrayectos) trayectos.add(trayecto);
+    public void removeTrayecto(Trayecto trayecto){
+        trayectos.remove(trayecto);
     }
 
     public Double distanciaTotal() throws Exception {
@@ -69,12 +51,6 @@ public class Recorrido {
             distanciaTotal = distanciaTotal + trayecto.distanciaMedia();
         }
         return distanciaTotal;
-    }
-
-    public Recorrido(ArrayList<Trayecto> trayectos, Double factorDeUso, Date fechaDeInicio) {
-        this.trayectos = trayectos;
-        this.factorDeUso = factorDeUso;
-        this.fechaDeInicio = fechaDeInicio;
     }
 
     public Recorrido() {

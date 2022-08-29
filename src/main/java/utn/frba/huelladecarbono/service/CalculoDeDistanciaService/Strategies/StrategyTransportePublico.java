@@ -1,6 +1,6 @@
 package utn.frba.huelladecarbono.service.CalculoDeDistanciaService.Strategies;
 
-import utn.frba.huelladecarbono.model.ManejoAmbiental.Ubicacion;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Ubicacion;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Medio;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Parada;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.TransportePublico;

@@ -1,4 +1,4 @@
-package utn.frba.huelladecarbono.model.ManejoAmbiental;
+package utn.frba.huelladecarbono.model.ModeloDeNegocio;
 
 public enum Clasificacion {
     MINISTERIO,

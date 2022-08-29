@@ -1,4 +1,4 @@
-package utn.frba.huelladecarbono.model.ManejoAmbiental;
+package utn.frba.huelladecarbono.model.ModeloDeNegocio;
 
 import lombok.Getter;
 import lombok.Setter;

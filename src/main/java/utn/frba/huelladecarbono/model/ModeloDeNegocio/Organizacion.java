@@ -1,4 +1,4 @@
-package utn.frba.huelladecarbono.model.ManejoAmbiental;
+package utn.frba.huelladecarbono.model.ModeloDeNegocio;
 
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalcularHuellaDeCarbonoService;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Medio;
@@ -137,8 +137,8 @@ public class Organizacion {
         this.areas.add(area);
     }
 
-    public void generarTrayecto(Ubicacion salida, Ubicacion llegada, Medio medio, Double peso){
-        Trayecto nuevoTrayecto = new Trayecto(salida, llegada, medio, peso);
+    public void generarTrayecto(Ubicacion salida, Ubicacion llegada, Medio medio){
+        Trayecto nuevoTrayecto = new Trayecto(salida, llegada, medio);
         RepositorioTrayectos.getRepositorio().agregarTrayecto(nuevoTrayecto);
     }
 

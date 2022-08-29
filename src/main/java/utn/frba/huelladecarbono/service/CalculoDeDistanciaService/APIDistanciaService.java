@@ -1,7 +1,7 @@
 package utn.frba.huelladecarbono.service.CalculoDeDistanciaService;
 
 import utn.frba.huelladecarbono.model.CalculoDeDistancias.*;
-import utn.frba.huelladecarbono.model.ManejoAmbiental.Ubicacion;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Ubicacion;
 import utn.frba.huelladecarbono.model.UserExceptions.BadResponseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,8 +11,6 @@ import javax.ws.rs.core.Response;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class APIDistanciaService {

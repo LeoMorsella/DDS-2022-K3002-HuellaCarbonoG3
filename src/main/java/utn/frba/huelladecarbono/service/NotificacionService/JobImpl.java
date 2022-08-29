@@ -1,7 +1,7 @@
 package utn.frba.huelladecarbono.service.NotificacionService;
 
-import utn.frba.huelladecarbono.model.ManejoAmbiental.Miembro;
-import utn.frba.huelladecarbono.model.ManejoAmbiental.Organizacion;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import org.quartz.Job;
 import org.quartz.JobDetail;

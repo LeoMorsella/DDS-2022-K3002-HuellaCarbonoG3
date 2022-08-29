@@ -1,7 +1,7 @@
 package utn.frba.huelladecarbono.model.MedioDeTransporte;
 
 import utn.frba.huelladecarbono.model.CalculoDeDistancias.Distancia;
-import utn.frba.huelladecarbono.model.ManejoAmbiental.Ubicacion;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Ubicacion;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;

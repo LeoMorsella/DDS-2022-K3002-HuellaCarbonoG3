@@ -1,4 +1,4 @@
-package utn.frba.huelladecarbono.model.ManejoAmbiental;
+package utn.frba.huelladecarbono.model.ModeloDeNegocio;
 
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalcularHuellaDeCarbonoService;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;

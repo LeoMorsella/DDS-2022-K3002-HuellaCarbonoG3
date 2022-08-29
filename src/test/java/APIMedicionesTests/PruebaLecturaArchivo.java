@@ -2,7 +2,7 @@ package APIMedicionesTests;
 
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.*;
 import utn.frba.huelladecarbono.service.CargaDeMedicionesService.*;
-import utn.frba.huelladecarbono.model.ManejoAmbiental.*;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioMotorizado;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioNoMotorizado;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.TipoMedioNoMotorizado;
@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class PruebaLecturaArchivo {
+
     FactoresDeEmision FE = FactoresDeEmision.getInstance();
     ArrayList<Area> areas = new ArrayList<Area>();
     ArrayList<Miembro> miembros = new ArrayList<Miembro>();
@@ -28,8 +29,8 @@ public class PruebaLecturaArchivo {
     Ubicacion ubicacion3 = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "300");
     MedioMotorizado medio1 = new MedioMotorizado();
     MedioNoMotorizado medio2 = new MedioNoMotorizado();
-    Trayecto trayecto1 = new Trayecto(ubicacion1,ubicacion2, medio1, 0.2);
-    Trayecto trayecto2 = new Trayecto(ubicacion2,ubicacion3, medio2, 0.1);
+    Trayecto trayecto1 = new Trayecto(ubicacion1,ubicacion2, medio1);
+    Trayecto trayecto2 = new Trayecto(ubicacion2,ubicacion3, medio2);
     Recorrido recorrido = null;
 
     Organizacion organizacion = new Organizacion("", TipoOrg.GUBERNAMENTAL,ubicacion3,areas, Clasificacion.MINISTERIO,miembros,miembros);
@@ -82,6 +83,8 @@ public class PruebaLecturaArchivo {
     }
 
 
+    //TODO poner en otro test de aca para abajo
+
     @Test
     public void calcularHuellaMiembro() {
         FE.setFE("AUTO",0.5);
@@ -92,8 +95,7 @@ public class PruebaLecturaArchivo {
         miembros.add(miembro);
         trayectos.add(trayecto1);
         trayectos.add(trayecto2);
-        recorrido = Recorrido.nuevoRecorrido(trayectos, 5.0);
-        System.out.println(recorrido.getFactorDeUso());
+        recorrido = Recorrido.nuevoRecorrido(organizacion);
         recorridos.add(recorrido);
         System.out.println(FE.getFE("AUTO"));
 
