@@ -32,7 +32,6 @@ public class SectorTerritorial {
     }
 
     public ArrayList<Organizacion> getOrganizaciones() {
-        List<Organizacion> organizaciones = new ArrayList<>();
         List<Organizacion> organizacionesTotales = RepositorioOrganizaciones.getRepositorio().getOrganizaciones();
         if (municipio != null){
             return generarOrganizacionesPorCriterio(organizacionesTotales, municipio);

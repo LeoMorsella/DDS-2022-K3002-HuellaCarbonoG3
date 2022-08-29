@@ -6,24 +6,22 @@ import java.util.List;
 
 public class CalcularHuellaDeCarbonoMedicion {
     static public Double calcularHCMedicionEstandar(DatoDeMedicion datoDeMedicion){
-        Double HC = 0.0;
         Double FE = FactoresDeEmision.getInstance().getFE(datoDeMedicion.getActividad());
         Double valor = (Double) datoDeMedicion.getValor();
         if(datoDeMedicion.getPeriodicidad() == "mensual"){
-            return HC = valor * FE;
+            return valor * FE;
         }
         else{
-            return HC = valor/12 * FE;
+            return valor/12 * FE;
         }
     }
 
     static public Double calcularHCMedicionLogistica (Double distancia, Double peso, String periocidad, Double FE, Double k) {
-        Double HC = 0.0;
         if(periocidad == "Mensual"){
-            return HC = distancia * peso * k * FE;
+            return distancia * peso * k * FE;
         }
         else{
-            return HC = (distancia * peso)/12 * k * FE;
+            return (distancia * peso)/12 * k * FE;
         }
     }
     static public Double calcularHCMedicion(List<DatoDeMedicion> mediciones, Double k) {

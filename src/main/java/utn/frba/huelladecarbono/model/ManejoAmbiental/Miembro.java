@@ -136,7 +136,7 @@ public class Miembro {
     public Double calcularHC() throws RuntimeException {
         Double HC;
         try {
-            HC = new CalcularHuellaDeCarbono().getCalculadora().calcularHCMiembro(this);
+            HC = CalcularHuellaDeCarbono.getCalculadora().calcularHCMiembro(this);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
