@@ -1,6 +1,6 @@
 package utn.frba.huelladecarbono.model.ManejoAmbiental;
 
-import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalcularHuellaDeCarbono;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalcularHuellaDeCarbonoService;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
 import lombok.Getter;
@@ -134,14 +134,14 @@ public class Miembro {
     public Boolean perteneceA(Area area) {return areas.contains(area);}
 
     public Double calcularHC() throws RuntimeException {
-        Double HC;
         try {
-            HC = CalcularHuellaDeCarbono.getCalculadora().calcularHCMiembro(this);
+            return CalcularHuellaDeCarbonoService.getCalculadora().calcularHC(this);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return HC;
     }
+
+    //Meter en service quizas
     public Double calcularImpactoIndividual(Organizacion organizacion) throws Exception {
         Double HCInd;
         Double HCorg;

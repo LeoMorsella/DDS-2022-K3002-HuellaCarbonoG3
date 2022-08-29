@@ -2,7 +2,7 @@ package utn.frba.huelladecarbono.model.ManejoAmbiental;
 
 import lombok.Getter;
 import lombok.Setter;
-import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalcularHuellaDeCarbono;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalcularHuellaDeCarbonoService;
 import utn.frba.huelladecarbono.service.CargaDeMedicionesService.CargaDeMediciones;
 
 import javax.persistence.*;
@@ -77,17 +77,10 @@ public class Area {
     }
 
     public Double calcularHC() throws Exception {
-        Double HC = 0.0;
-        for (Miembro miembro : miembros) {
-            HC += CalcularHuellaDeCarbono.getCalculadora().calcularHCMiembro(miembro);
-        }
-        for (List<DatoDeMedicion> mediciones : mediciones ) {
-            HC += CalcularHuellaDeCarbono.getCalculadora().calcularHCMedicion(mediciones);
-        }
-        return HC;
+        return CalcularHuellaDeCarbonoService.getCalculadora().calcularHC(this);
     }
 
     public Double HCpromedio() throws Exception {
-        return this.calcularHC() / this.getMiembros().size();
+        return CalcularHuellaDeCarbonoService.getCalculadora().HCpromedio(this);
     }
 }

@@ -1,6 +1,6 @@
 package utn.frba.huelladecarbono.model.ManejoAmbiental;
 
-import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalcularHuellaDeCarbono;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalcularHuellaDeCarbonoService;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Medio;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioTrayectos;
@@ -153,17 +153,12 @@ public class Organizacion {
     }
 
     public Double calcularHC() throws Exception {
-        Double HC = 0.0;
-
-        for( Area area : areas) {
-            HC += area.calcularHC();
-        }
-        return HC   ;
+        return CalcularHuellaDeCarbonoService.getCalculadora().calcularHC(this);
     }
 
 
     public Double HCpromedio() throws Exception {
-        return this.calcularHC() / this.getMiembros().size();
+        return CalcularHuellaDeCarbonoService.getCalculadora().HCpromedio(this);
     }
 
     //La idea es que cada mes se agrega el del mes correspondiente
@@ -172,7 +167,7 @@ public class Organizacion {
         Double valor = 0.0;
         List<Miembro> miembrosOrg = this.getMiembros();
         for(Miembro miembro : miembrosOrg){
-            valor += CalcularHuellaDeCarbono.getCalculadora().calcularHCMensual(miembro);
+            valor += CalcularHuellaDeCarbonoService.getCalculadora().calcularHCMensual(miembro);
         }
         this.hcMensual.add(valor);
     }
