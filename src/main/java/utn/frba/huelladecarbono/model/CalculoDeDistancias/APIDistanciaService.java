@@ -7,11 +7,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.cxf.jaxrs.client.WebClient;
 
 import javax.ws.rs.core.Response;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class APIDistanciaService {
 
-    private final String token = "Bearer 5PLixIkvvSuNT23px0g/L6iOS8N2R6gxj1nbTG1DrSo="; // hardcodeado para pruebas
+    //private final String token = "Bearer 5PLixIkvvSuNT23px0g/L6iOS8N2R6gxj1nbTG1DrSo="; // hardcodeado para pruebas
+    private final String token = leerArchivoToken();
+
+    public APIDistanciaService() throws IOException {
+    }
 
     private int buscarIdLocalidad(Ubicacion ubicacion) throws Exception {
         int idPais      = this.buscarId("pais"     , -1, ubicacion);
@@ -132,4 +141,19 @@ public class APIDistanciaService {
         }
     }
 
+    static private String leerArchivoToken() throws IOException {
+
+        String token = null;
+
+        File doc = new File("token.txt");
+        doc.createNewFile();
+        FileReader freader = new FileReader(doc);
+        char [] i = new char[1000];
+        freader.read(i);
+        for(char j : i)
+            token+=j;
+        freader.close();
+        return token;
+
+    }
 }

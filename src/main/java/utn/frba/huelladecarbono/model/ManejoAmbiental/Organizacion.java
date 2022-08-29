@@ -23,6 +23,9 @@ public class Organizacion {
     private TipoOrg tipo;
     @Transient
     private Ubicacion ubicacion;
+
+    //TODO cambiar esto porque así no lo persiste
+    @Transient
     private ArrayList<Area> areas;
     @Enumerated(EnumType.STRING)
     private Clasificacion clasificacion;
@@ -175,7 +178,7 @@ public class Organizacion {
         this.hcMensual.add(valor);
     }
 
-    public Double calucloHCAnual(){
+    public Double calculoHCAnual(){
         Double valor = 0.0;
         for(Double hcMensual : this.hcMensual){
             valor += hcMensual;
