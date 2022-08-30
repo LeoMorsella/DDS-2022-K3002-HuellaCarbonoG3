@@ -6,7 +6,11 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.DatoDeMedicion;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.SectorTerritorial;
+import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class CalcularHuellaDeCarbonoService {
@@ -83,6 +87,23 @@ public class CalcularHuellaDeCarbonoService {
         return calcularHC(area) / area.getMiembros().size();
     }
 
+    //Falta Implementar peso
+    public Double HCTrayecto(Trayecto trayecto) throws Exception {
+        Double HC = 0.0;
+        Date fechaI = trayecto.getFechaDeInicio();
+        Date fechaF = trayecto.getFechaDeFin();
+        int mesInicio = fechaI.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getMonthValue();
+        int mesFin = fechaF.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getMonthValue();
+        int cantMeses = mesFin - mesInicio;
+        for(int i= 0; i<cantMeses;i++) {
+            List<Miembro> pasajeros = trayecto.getPasajeros();
+            for(Miembro pasajero: pasajeros) {
+                HC += calcularHCMensual(pasajero);
+
+            }
+        }
+        return HC;
+    }
 
     //TODO Para calculo de HC mensual
 
