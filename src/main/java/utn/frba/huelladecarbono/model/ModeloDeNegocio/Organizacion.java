@@ -1,14 +1,17 @@
 package utn.frba.huelladecarbono.model.ModeloDeNegocio;
 
-import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalcularHuellaDeCarbonoService;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCService;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Medio;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioTrayectos;
 import lombok.Getter;
 import lombok.Setter;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Getter @Setter
@@ -152,22 +155,14 @@ public class Organizacion {
         return medicionesOrga;
     }
 
-    public Double calcularHC() throws Exception {
-        return CalcularHuellaDeCarbonoService.getCalculadora().calcularHC(this);
-    }
-
-
-    public Double HCpromedio() throws Exception {
-        return CalcularHuellaDeCarbonoService.getCalculadora().HCpromedio(this);
-    }
-
     //La idea es que cada mes se agrega el del mes correspondiente
     //Cuando vuelva a ser enero, se limpia esa lista con HC mensuales
     public void agregarHCMensual() throws Exception{
         Double valor = 0.0;
         List<Miembro> miembrosOrg = this.getMiembros();
+        Calendar mes = Calendario.fechaActual();
         for(Miembro miembro : miembrosOrg){
-            valor += CalcularHuellaDeCarbonoService.getCalculadora().calcularHCMensual(miembro);
+            valor += CalculadoraHCService.getCalculadoraHC().calcularHCMensual(miembro, mes);
         }
         this.hcMensual.add(valor);
     }

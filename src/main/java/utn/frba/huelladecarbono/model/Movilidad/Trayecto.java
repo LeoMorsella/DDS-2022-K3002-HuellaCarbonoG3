@@ -1,7 +1,6 @@
 package utn.frba.huelladecarbono.model.Movilidad;
 
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
-import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
 import utn.frba.huelladecarbono.service.CalculoDeDistanciaService.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Ubicacion;
@@ -10,10 +9,9 @@ import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioMotorizado;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioTrayectos;
 import lombok.Getter;
 import lombok.Setter;
-import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,13 +30,8 @@ public class Trayecto {
     private Medio medioTransporte;
     @Transient
     private Double factorDeUso;
-    @Transient
-    private Date fechaDeInicio;
-    @Transient
-    private Date fechaDeFin;
 
-    public Trayecto() {
-    }
+    public Trayecto() {}
 
     static public Trayecto getTrayecto(Ubicacion salida, Ubicacion llegada, Medio medio){
         Trayecto trayectoNuevo = new Trayecto(salida, llegada, medio);
@@ -54,36 +47,12 @@ public class Trayecto {
         this.medioTransporte = medio;
     }
 
-    public Ubicacion getPuntoPartida() {
-        return puntoPartida;
-    }
-
     public Double getPeso(){
         return this.factorDeUso;
     }
 
-    public Double getFactorDeUso() {
-        return factorDeUso;
-    }
-
     public void setFactorDeUso(Double factorDeUso) {
         this.factorDeUso = factorDeUso;
-    }
-
-    public Date getFechaDeInicio() {
-        return fechaDeInicio;
-    }
-
-    public void setFechaDeInicio(Date fechaDeInicio) {
-        this.fechaDeInicio = fechaDeInicio;
-    }
-
-    public Date getFechaDeFin() {
-        return fechaDeFin;
-    }
-
-    public void setFechaDeFin(Date fechaDeFin) {
-        this.fechaDeFin = fechaDeFin;
     }
 
     public List<Miembro> getPasajeros(){

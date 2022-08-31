@@ -1,7 +1,6 @@
 package utn.frba.huelladecarbono.model.ModeloDeNegocio;
 
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
-import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalcularHuellaDeCarbonoService;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -64,11 +63,6 @@ public class SectorTerritorial {
 
     public void setAgenteSectorial(AgenteSectorial agenteSectorial) {
         this.agenteSectorial = agenteSectorial;
-    }
-
-    //TODO metodo Calculo de Huella
-    public Double calcularHC() throws Exception {
-        return CalcularHuellaDeCarbonoService.getCalculadora().calcularHC(this);
     }
 
     public SectorTerritorial() {

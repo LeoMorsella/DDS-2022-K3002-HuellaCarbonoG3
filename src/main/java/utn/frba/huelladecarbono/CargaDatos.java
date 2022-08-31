@@ -116,7 +116,7 @@ public class CargaDatos {
     }
 
     public static Recorrido cargarRecorrido1(){
-        return Recorrido.nuevoRecorrido(cargarOrganizacion1());
+        return Recorrido.nuevoRecorrido(cargarOrganizacion1(), mesInicio, mesFin);
     }
 
     public static ArrayList<Recorrido> cargarRecorridos1(){

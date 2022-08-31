@@ -1,6 +1,5 @@
 package utn.frba.huelladecarbono.model.ModeloDeNegocio;
 
-import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalcularHuellaDeCarbonoService;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
 import lombok.Getter;
@@ -132,33 +131,5 @@ public class Miembro {
     }
 
     public Boolean perteneceA(Area area) {return areas.contains(area);}
-
-    public Double calcularHC() throws RuntimeException {
-        try {
-            return CalcularHuellaDeCarbonoService.getCalculadora().calcularHC(this);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    //Meter en service quizas
-    public Double calcularImpactoIndividual(Organizacion organizacion) throws Exception {
-        Double HCInd;
-        Double HCorg;
-        Double promedio;
-        Double impacto;
-    //  Double k = CalcularHuellaDeCarbono.getCalculadora().getK();
-
-        HCorg = organizacion.calcularHC();
-        //TODO: Asociar recorridos a las organizaciones donde se usan
-        HCInd = this.calcularHC();
-        promedio = HCorg / organizacion.getMiembros().size();
-        impacto = (HCInd * promedio) / 100;
-        
-        System.out.println("La Huella de carbono de su compañía es: " + HCorg +". Su Huella de carbono"
-        +" individual es: " + HCInd + ". Eso equivale a un: " +impacto+ "% de la Huella de carbono de " +
-                "organización");
-        return impacto;
-    }
 
 }

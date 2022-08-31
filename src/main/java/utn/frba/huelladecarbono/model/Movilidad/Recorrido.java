@@ -1,12 +1,14 @@
 package utn.frba.huelladecarbono.model.Movilidad;
 
-import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import lombok.Getter;
 import lombok.Setter;
+import sun.util.resources.cldr.ne.CalendarData_ne_IN;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 @Getter @Setter
@@ -19,25 +21,27 @@ public class Recorrido {
     private ArrayList<Trayecto> trayectos;
     @Transient
     private Organizacion organizacion;
+    private Calendar mesInicio;
+    private Calendar mesFin;
 
     public ArrayList<Trayecto> getTrayectos() {
         return trayectos;
     }
 
-    public Recorrido(Organizacion organizacion) {
+    public Recorrido(Organizacion organizacion, Calendar mesInicio, Calendar mesFin) {
         this.organizacion = organizacion;
+        this.mesInicio = mesInicio;
+        this.mesFin = mesFin;
     }
-    public static Recorrido nuevoRecorrido(Organizacion organizacion){
-        Recorrido nuevoRecorrido = new Recorrido(organizacion);
+    public static Recorrido nuevoRecorrido(Organizacion organizacion, Calendar mesInicio, Calendar mesFin){
+        Recorrido nuevoRecorrido = new Recorrido(organizacion, mesInicio, mesFin);
         //RepositorioRecorrido.getRepositorio().agregarRecorrido(nuevoRecorrido);
         return nuevoRecorrido;
     }
 
     //Si se cambian los valores hay que remover el trayecto y agregarlo de nuevo
-    public void addTrayecto(Trayecto trayecto, Date fechaDeInicio, Date fechaDeFin, Double factorDeUso, Organizacion organizacion){
+    public void addTrayecto(Trayecto trayecto, Double factorDeUso, Organizacion organizacion){
         trayecto.setFactorDeUso(factorDeUso);
-        trayecto.setFechaDeFin(fechaDeFin);
-        trayecto.setFechaDeInicio(fechaDeInicio);
         this.trayectos.add(trayecto);
     }
 

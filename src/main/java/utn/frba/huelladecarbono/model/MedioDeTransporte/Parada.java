@@ -38,7 +38,7 @@ public class Parada {
         this.distanciaAProximaParada = distanciaAProximaParada;
     }
 
-    public Double distancaAProximaParada() throws Exception {
+    public Double distancaAProximaParada() {
         if (distanciaAProximaParada.getValor()!= 0) {
             return distanciaAProximaParada.getValor();
         }

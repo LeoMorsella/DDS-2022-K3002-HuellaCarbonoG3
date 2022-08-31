@@ -2,7 +2,6 @@ package utn.frba.huelladecarbono.model.ModeloDeNegocio;
 
 import lombok.Getter;
 import lombok.Setter;
-import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalcularHuellaDeCarbonoService;
 import utn.frba.huelladecarbono.service.CargaDeMedicionesService.CargaDeMediciones;
 
 import javax.persistence.*;
@@ -76,11 +75,4 @@ public class Area {
         mediciones.add(nuevasDatoDeMedicion);
     }
 
-    public Double calcularHC() throws Exception {
-        return CalcularHuellaDeCarbonoService.getCalculadora().calcularHC(this);
-    }
-
-    public Double HCpromedio() throws Exception {
-        return CalcularHuellaDeCarbonoService.getCalculadora().HCpromedio(this);
-    }
 }

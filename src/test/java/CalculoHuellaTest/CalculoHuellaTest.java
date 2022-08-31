@@ -4,10 +4,10 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Optional;
 
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.*;
-import utn.frba.huelladecarbono.service.CargaDeMedicionesService.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
@@ -35,7 +35,7 @@ public class CalculoHuellaTest {
     SectorTerritorial sector = CargaDatos.cargarSector1();
 
     @Test
-    public void calcularHuellaMiembro() {
+    public void calcularHuellaMiembro() throws Exception {
         FE.setFE("AUTO",0.5);
         FE.setFE("BICI",0.0);
         medio1.setTipo(TipoVehiculoMotorizado.AUTO);
@@ -44,8 +44,10 @@ public class CalculoHuellaTest {
         miembros.add(miembro);
         recorridos.add(recorrido);
         System.out.println(FE.getFE("AUTO"));
+        Calendar mesInicio = Calendario.crearFecha(0, 2022);
+        Calendar mesFin = Calendario.crearFecha(11, 2022);
 
-        Double huella = miembro.calcularHC();
+        Double huella = CalculadoraHCService.getCalculadoraHC().calcularHCMiembro(miembro, mesInicio, mesFin);
 
         Assert.assertEquals(Optional.of(1.1),huella);
     }
@@ -55,8 +57,10 @@ public class CalculoHuellaTest {
         areas.add(area);
         recorridos.add(recorrido);
         miembros.add(miembro);
+        Calendar mesInicio = Calendario.crearFecha(0, 2022);
+        Calendar mesFin = Calendario.crearFecha(11, 2022);
 
-        Double huella = organizacion.calcularHC();
+        Double huella = CalculadoraHCService.getCalculadoraHC().calcularHCArea(area, mesInicio, mesFin);
 
         Assert.assertEquals(Optional.of(1.1),huella);
     }
@@ -66,8 +70,10 @@ public class CalculoHuellaTest {
         areas.add(area);
         recorridos.add(recorrido);
         miembros.add(miembro);
+        Calendar mesInicio = Calendario.crearFecha(0, 2022);
+        Calendar mesFin = Calendario.crearFecha(11, 2022);
 
-        Double huella = area.calcularHC();
+        Double huella = CalculadoraHCService.getCalculadoraHC().calcularHCArea(area, mesInicio, mesFin);
 
         Assert.assertEquals(Optional.of(1.1),huella);
     }

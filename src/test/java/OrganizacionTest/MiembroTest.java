@@ -2,15 +2,17 @@ package OrganizacionTest;
 
 import utn.frba.huelladecarbono.CargaDatos;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
-import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCService;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MiembroTest {
     @Test
-
     public void agregarAreaCorrectamente() {
         Organizacion organizacionPrueba = CargaDatos.cargarOrganizacion5();
         Miembro miembro = CargaDatos.cargarMiembro2();
@@ -30,6 +32,8 @@ public class MiembroTest {
         ArrayList<DatoDeMedicion> mediciones = new ArrayList<>();
         mediciones.add(datoDeMedicion);
         // miembro.setMediciones(medicion); // TODO el miembro tiene mediciones?
-        Assertions.assertEquals(2000,miembro.calcularImpactoIndividual(organizacionPrueba));
+        Calendar mesInicio = Calendario.crearFecha(0, 2022);
+        Calendar mesFin = Calendario.crearFecha(1, 2022);
+        Assertions.assertEquals(2000, CalculadoraHCService.getCalculadoraHC().calcularImpactoIndividual(miembro, organizacionPrueba, mesInicio, mesFin));
     }
 }
