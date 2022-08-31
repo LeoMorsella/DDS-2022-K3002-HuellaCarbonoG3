@@ -1,5 +1,6 @@
 package OrganizacionTest;
 
+import utn.frba.huelladecarbono.CargaDatos;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import org.junit.jupiter.api.Assertions;
@@ -11,11 +12,8 @@ public class MiembroTest {
     @Test
 
     public void agregarAreaCorrectamente() {
-        Ubicacion ubicacion = new Ubicacion("Argentina","Buenos Aires","La Matanza","Gonzalez Catan","Matienzo","15500");
-        ArrayList<Area> areasPrueba = new ArrayList<>();
-        Organizacion organizacionPrueba = new Organizacion("SA", TipoOrg.EMPRESA,ubicacion,areasPrueba, Clasificacion.MINISTERIO, null, null);
-        ArrayList<Recorrido> recorrido = new ArrayList<>();
-        Miembro miembro = new Miembro("Juan","Perez","DNI",123456789,areasPrueba,recorrido);
+        Organizacion organizacionPrueba = CargaDatos.cargarOrganizacion5();
+        Miembro miembro = CargaDatos.cargarMiembro2();
         ArrayList<Miembro> miembrosPrueba = new ArrayList<>();
         miembrosPrueba.add(miembro);
         Area areaPrueba = new Area("AreaPrueba",miembrosPrueba,organizacionPrueba);
@@ -26,12 +24,9 @@ public class MiembroTest {
 
     @Test
     public void medirImpactoPersonal() throws Exception {
-        Ubicacion ubicacion = new Ubicacion("Argentina","Buenos Aires","La Matanza","Gonzalez Catan","Matienzo","15500");
-        ArrayList<Area> areasPrueba = new ArrayList<>();
-        Organizacion organizacionPrueba = new Organizacion("SA", TipoOrg.EMPRESA,ubicacion,areasPrueba,Clasificacion.MINISTERIO, null, null);
-        ArrayList<Recorrido> recorrido = new ArrayList<>();
-        Miembro miembro = new Miembro("Juan","Perez","DNI",123456789,areasPrueba,recorrido);
-        DatoDeMedicion datoDeMedicion = new DatoDeMedicion("Electricidad adquirida y consumida","m3","Electricidad","2000","Diaria","30");
+        Organizacion organizacionPrueba = CargaDatos.cargarOrganizacion5();
+        Miembro miembro = CargaDatos.cargarMiembro2();
+        DatoDeMedicion datoDeMedicion = CargaDatos.cargarDatoMedicion1();
         ArrayList<DatoDeMedicion> mediciones = new ArrayList<>();
         mediciones.add(datoDeMedicion);
         // miembro.setMediciones(medicion); // TODO el miembro tiene mediciones?
