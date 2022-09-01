@@ -1,6 +1,7 @@
 package utn.frba.huelladecarbono;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioMotorizado;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioNoMotorizado;
@@ -90,16 +91,18 @@ public class CargaDatos {
         return new ArrayList<>();
     }
 
+    public static DatoDeMedicion cargarDatoMedicion1(){
+        return new DatoDeMedicion("Electricidad adquirida y consumida","m3","Electricidad","2000","Diaria","30");
+    }
+
     public static Area cargarArea1(){
-        return new Area("nombre del area", cargarMiembros1(), cargarOrganizacion1());
+        Area area = new Area("nombre del area", cargarMiembros1(), cargarOrganizacion1());
+        area.cargarMediciones("..\\DDS-2022-K3002-HuellaCarbonoG3\\mediciones1.xlsx");
+        return area;
     }
 
     public static Miembro cargarMiembro1(){
         return new Miembro("algo","","",12345, cargarAreasVacias(), cargarRecorridos1());
-    }
-
-    public static DatoDeMedicion cargarDatoMedicion1(){
-        return new DatoDeMedicion("Electricidad adquirida y consumida","m3","Electricidad","2000","Diaria","30");
     }
 
     public static Miembro cargarMiembro2(){

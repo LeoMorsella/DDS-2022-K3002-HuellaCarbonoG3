@@ -20,7 +20,7 @@ public class Recorrido {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Transient
-    private ArrayList<Trayecto> trayectos;
+    public ArrayList<Trayecto> trayectos = new ArrayList<>();
     @Transient
     private Organizacion organizacion;
     private Double peso;

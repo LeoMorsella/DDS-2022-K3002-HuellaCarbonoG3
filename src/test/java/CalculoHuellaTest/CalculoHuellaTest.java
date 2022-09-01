@@ -80,9 +80,11 @@ public class CalculoHuellaTest {
 
     @Test
     public void calcularHuellaSectorTerritorial() throws Exception{
-        //Double huella = sector.calcularHC();
-
-        //Assert.assertEquals(Optional.of(1.1), huella);
+        Calendar mesInicio = Calendario.crearFecha(0, 2022);
+        Calendar mesFin = Calendario.crearFecha(11, 2022);
+        Double huella = CalculadoraHCService.getCalculadoraHC().calcularHCSectorTerritorial(sector, mesInicio, mesFin);
+    
+        Assert.assertEquals(Optional.of(1.1),huella);
     }
 
     @Test

@@ -18,13 +18,12 @@ public class DistanciasTest {
         Trayecto trayectoPrueba1 = CargaDatos.cargarTrayecto1();
         Trayecto trayectoPrueba2 = CargaDatos.cargarTrayecto3();
 
-        ArrayList<Trayecto> trayectos = new ArrayList<Trayecto>();
-        trayectos.add(trayectoPrueba1);
-        trayectos.add(trayectoPrueba2);
-
         Recorrido recorridoPrueba = CargaDatos.cargarRecorrido1();
         System.out.println(trayectoPrueba1.distanciaMedia());
         System.out.println(trayectoPrueba2.distanciaMedia());
+
+        Organizacion org = recorridoPrueba.getOrganizacion();
+        recorridoPrueba.addTrayecto(trayectoPrueba1, 0.0, org);
 
         System.out.println(recorridoPrueba.distanciaTotal());
 

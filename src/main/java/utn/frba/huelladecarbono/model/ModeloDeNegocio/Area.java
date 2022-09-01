@@ -20,7 +20,7 @@ public class Area {
     @Transient
     private  Organizacion organizacion;
     @Transient
-    private  List<List<DatoDeMedicion>> mediciones = null;
+    private  List<List<DatoDeMedicion>> mediciones = new ArrayList<>();
 
     public Area() {
     }
