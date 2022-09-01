@@ -23,7 +23,7 @@ public class DistanciasTest {
         System.out.println(trayectoPrueba2.distanciaMedia());
 
         Organizacion org = recorridoPrueba.getOrganizacion();
-        recorridoPrueba.addTrayecto(trayectoPrueba1, 0.0, org);
+        recorridoPrueba.addTrayecto(trayectoPrueba1, org);
 
         System.out.println(recorridoPrueba.distanciaTotal());
 

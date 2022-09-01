@@ -1,6 +1,7 @@
 package utn.frba.huelladecarbono.model.MedioDeTransporte;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.Enumerated;
 
 @Getter @Setter
 @Entity
+@NoArgsConstructor
 public class MedioMotorizado extends Medio {
 
     @Enumerated(EnumType.STRING)
@@ -28,7 +30,12 @@ public class MedioMotorizado extends Medio {
         return String.valueOf(tipoVehiculoMotorizado);
     }
 
-    public MedioMotorizado() {
+    public MedioMotorizado(TipoVehiculoMotorizado tipoVehiculoMotorizado, TipoCombustible tipoCombustible, String patente, Boolean esServicioContratado, String tipoServicio) {
+        this.tipoVehiculoMotorizado = tipoVehiculoMotorizado;
+        this.tipoCombustible = tipoCombustible;
+        this.patente = patente;
+        this.esServicioContratado = esServicioContratado;
+        this.tipoServicio = tipoServicio;
     }
 
     public void setTipo(TipoVehiculoMotorizado tipoVehiculoMotorizado) {
@@ -48,35 +55,15 @@ public class MedioMotorizado extends Medio {
         return tipoCombustible;
     }
 
-    public void setTipoCombustible(TipoCombustible tipoCombustible) {
-        this.tipoCombustible = tipoCombustible;
-    }
-
     public String getPatente() {
         return patente;
-    }
-
-    public void setPatente(String patente) {
-        this.patente = patente;
     }
 
     public Boolean getEsServicioContratado() {
         return esServicioContratado;
     }
 
-    public void setEsServicioContratado(Boolean esServicioContratado) {
-        this.esServicioContratado = esServicioContratado;
-    }
-
     public String getTipoServicio() {
         return tipoServicio;
-    }
-
-    public void setTipoServicio(String tipoServicio) {
-        this.tipoServicio = tipoServicio;
-    }
-
-    public Double getFE() {
-        return null; // TODO
     }
 }

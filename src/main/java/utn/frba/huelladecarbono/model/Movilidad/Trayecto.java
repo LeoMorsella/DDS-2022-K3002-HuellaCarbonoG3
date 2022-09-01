@@ -28,14 +28,12 @@ public class Trayecto {
     private Ubicacion puntoLlegada;
     @Transient
     private Medio medioTransporte;
-    @Transient
-    private Double factorDeUso;
 
     public Trayecto() {}
 
     static public Trayecto getTrayecto(Ubicacion salida, Ubicacion llegada, Medio medio){
         Trayecto trayectoNuevo = new Trayecto(salida, llegada, medio);
-        if(medio == new MedioMotorizado() && !(RepositorioTrayectos.getRepositorio().getTrayectos().contains(trayectoNuevo))){
+        if(medio.getClass() == new MedioMotorizado(null,null,null,null,null,null).getClass() && !(RepositorioTrayectos.getRepositorio().getTrayectos().contains(trayectoNuevo))){
             RepositorioTrayectos.getRepositorio().agregarTrayecto(trayectoNuevo);
         }
         return trayectoNuevo;
@@ -45,14 +43,6 @@ public class Trayecto {
         this.puntoPartida = salida;
         this.puntoLlegada = llegada;
         this.medioTransporte = medio;
-    }
-
-    public Double getPeso(){
-        return this.factorDeUso;
-    }
-
-    public void setFactorDeUso(Double factorDeUso) {
-        this.factorDeUso = factorDeUso;
     }
 
     public List<Miembro> getPasajeros(){

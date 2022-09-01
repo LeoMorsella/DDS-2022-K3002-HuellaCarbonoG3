@@ -28,7 +28,7 @@ public class Organizacion {
 
     //TODO cambiar esto porque así no lo persiste
     @Transient
-    private ArrayList<Area> areas;
+    private ArrayList<Area> areas = new ArrayList<>();
     @Enumerated(EnumType.STRING)
     private Clasificacion clasificacion;
     @Transient
@@ -70,6 +70,10 @@ public class Organizacion {
         this.areas = areas;
     }
 
+    public void setArea(Area area) {
+        this.areas.add(area);
+    }
+
     public Clasificacion getClasificacion() {
         return clasificacion;
     }
@@ -104,27 +108,24 @@ public class Organizacion {
     public Organizacion() {
     }
 
-    public Organizacion(Integer id, String razonSocial, TipoOrg tipo, Ubicacion ubicacion, ArrayList<Area> areas, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP) {
+    public Organizacion(Integer id, String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP) {
         this.id = id;
         this.razonSocial = razonSocial;
         this.tipo = tipo;
         this.ubicacion = ubicacion;
-        this.areas = areas;
         this.clasificacion = clasificacion;
         this.contactosMail = contactosMail;
         this.contactosWP = contactosWP;
     }
 
-    public Organizacion(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, ArrayList<Area> areas, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP) {
+    public Organizacion(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP) {
         this.razonSocial = razonSocial;
         this.tipo = tipo;
         this.ubicacion = ubicacion;
-        this.areas = areas;
         this.clasificacion = clasificacion;
         this.contactosMail = contactosMail;
         this.contactosWP = contactosWP;
     }
-
 
     public List<Miembro> getMiembros(){
         List<Miembro> miembros = new ArrayList<>();

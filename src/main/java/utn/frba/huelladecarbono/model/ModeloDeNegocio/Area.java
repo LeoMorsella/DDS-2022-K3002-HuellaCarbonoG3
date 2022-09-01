@@ -15,7 +15,7 @@ public class Area {
     private Integer id;
     private String nombre;
     @Transient
-    private  ArrayList<Miembro> miembros;
+    private  ArrayList<Miembro> miembros = new ArrayList<>();
 
     @Transient
     private  Organizacion organizacion;
@@ -25,17 +25,15 @@ public class Area {
     public Area() {
     }
 
-    public Area(Integer id, String nombre, ArrayList<Miembro> miembros, Organizacion organizacion, List<List<DatoDeMedicion>> mediciones) {
+    public Area(Integer id, String nombre, Organizacion organizacion, List<List<DatoDeMedicion>> mediciones) {
         this.id = id;
         this.nombre = nombre;
-        this.miembros = miembros;
         this.organizacion = organizacion;
         this.mediciones = mediciones;
     }
 
-    public Area(String nombre, ArrayList<Miembro> miembros, Organizacion organizacion) {
+    public Area(String nombre, Organizacion organizacion) {
         this.nombre = nombre;
-        this.miembros = miembros;
         this.organizacion = organizacion;
     }
 
@@ -53,6 +51,9 @@ public class Area {
 
     public void setMiembros(ArrayList<Miembro> miembro) {
         this.miembros = miembro;
+    }
+    public void setMiembro(Miembro miembro) {
+        this.miembros.add(miembro);
     }
 
     public Organizacion getOrganizacion() {

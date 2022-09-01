@@ -26,13 +26,13 @@ public class Calendario {
     }
 
     public static int mesesEntreMedio(Calendar inicioCalculo, Calendar finCalculo, Calendar inicioRecorrido, Calendar finRecorrido) {
-        Calendar inicio = Calendar.getInstance();
-        Calendar fin = Calendar.getInstance();
+        Calendar inicio;
+        Calendar fin;
 
         if(finRecorrido == null) {
             finRecorrido = Calendar.getInstance();
         }
-
+        //TODO revisar
         if(inicioCalculo.before(finRecorrido) && finCalculo.after(inicioRecorrido)) {
             if(inicioCalculo.before(inicioRecorrido)) {
                 inicio = inicioCalculo;

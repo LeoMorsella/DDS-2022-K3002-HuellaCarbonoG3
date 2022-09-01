@@ -20,7 +20,7 @@ import utn.frba.huelladecarbono.model.MedioDeTransporte.TipoVehiculoMotorizado;
 public class CalculoHuellaTest {
 
     FactoresDeEmision FE = FactoresDeEmision.getInstance();
-    ArrayList<Area> areas = CargaDatos.cargarAreasVacias();
+    ArrayList<Area> areas = CargaDatos.cargarAreas1();
     ArrayList<Miembro> miembros = CargaDatos.cargarMiembros1();
     ArrayList<Trayecto> trayectos = CargaDatos.cargarTrayectos1();
     ArrayList<Recorrido> recorridos = CargaDatos.cargarRecorridos1();

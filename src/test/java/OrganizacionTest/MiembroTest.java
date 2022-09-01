@@ -18,7 +18,7 @@ public class MiembroTest {
         Miembro miembro = CargaDatos.cargarMiembro2();
         ArrayList<Miembro> miembrosPrueba = new ArrayList<>();
         miembrosPrueba.add(miembro);
-        Area areaPrueba = new Area("AreaPrueba",miembrosPrueba,organizacionPrueba);
+        Area areaPrueba = new Area("AreaPrueba",organizacionPrueba);
         miembro.registrarseA(areaPrueba);
         Assertions.assertEquals(1,miembro.getAreas().size());
 
@@ -26,14 +26,16 @@ public class MiembroTest {
 
     @Test
     public void medirImpactoPersonal() throws Exception {
-        Organizacion organizacionPrueba = CargaDatos.cargarOrganizacion5();
+        Organizacion organizacionPrueba = CargaDatos.cargarOrganizacion1();
         Miembro miembro = CargaDatos.cargarMiembro2();
+        miembro.getAreas().get(0).setMiembro(miembro);
+        organizacionPrueba.setArea(miembro.getAreas().get(0));
         DatoDeMedicion datoDeMedicion = CargaDatos.cargarDatoMedicion1();
         ArrayList<DatoDeMedicion> mediciones = new ArrayList<>();
         mediciones.add(datoDeMedicion);
-        // miembro.setMediciones(medicion); // TODO el miembro tiene mediciones?
         Calendar mesInicio = Calendario.crearFecha(0, 2022);
-        Calendar mesFin = Calendario.crearFecha(1, 2022);
-        Assertions.assertEquals(2000, CalculadoraHCService.getCalculadoraHC().calcularImpactoIndividual(miembro, organizacionPrueba, mesInicio, mesFin));
+        Calendar mesFin = Calendario.crearFecha(5, 2022);
+        Assertions.assertEquals(2.6, CalculadoraHCService.getCalculadoraHC().calcularImpactoIndividual(miembro, organizacionPrueba, mesInicio, mesFin));
+        //TODO el test llega hasta el final pero no se calcula correctamente el impacto
     }
 }

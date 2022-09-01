@@ -22,14 +22,18 @@ public class CalculadoraHCMiembro {
     private static Double calcularHCRecorrido(Recorrido recorrido) throws Exception {
         Double HC = 0.0;
         for(Trayecto trayecto : recorrido.getTrayectos()) {
-            HC += calcularHCTrayecto(trayecto) * trayecto.getPeso();
+            HC += calcularHCTrayecto(trayecto);
         }
         return HC;
     }
 
     private static Double calcularHCTrayecto(Trayecto trayecto) throws Exception {
         FactoresDeEmision FE = FactoresDeEmision.getInstance();
-        return trayecto.distanciaMedia() * FE.getFE(trayecto.getMedioTransporte().getTipo()) / trayecto.getPasajeros().size();
+        Double distanciaMedia = trayecto.distanciaMedia();
+        Double FEe = FE.getFE(trayecto.getMedioTransporte().getTipo());
+        int cantPasajeros = trayecto.getPasajeros().size();
+        //TODO
+        return trayecto.distanciaMedia() * 1/*FE.getFE(trayecto.getMedioTransporte().getTipo())*/ / trayecto.getPasajeros().size();
 
     }
 

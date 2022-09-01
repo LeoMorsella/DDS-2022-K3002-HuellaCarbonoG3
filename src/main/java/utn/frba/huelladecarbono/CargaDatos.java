@@ -5,6 +5,8 @@ import java.util.List;
 
 import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioMotorizado;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioNoMotorizado;
+import utn.frba.huelladecarbono.model.MedioDeTransporte.TipoCombustible;
+import utn.frba.huelladecarbono.model.MedioDeTransporte.TipoVehiculoMotorizado;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.AgenteSectorial;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Clasificacion;
@@ -17,6 +19,7 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.Ubicacion;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.FactoresDeEmision;
 
 public class CargaDatos {
     public static Ubicacion cargarUbicacion1(){
@@ -40,7 +43,7 @@ public class CargaDatos {
     }
 
     public static MedioMotorizado cargarMedioMotorizado1(){
-        return new MedioMotorizado();
+        return new MedioMotorizado(TipoVehiculoMotorizado.AUTO, TipoCombustible.GASOIL, "AGE342", false, "Particular");
     }
 
     public static MedioNoMotorizado cargarMedioNoMotorizado1(){
@@ -67,10 +70,6 @@ public class CargaDatos {
         return new AgenteSectorial();
     }
 
-    public static ArrayList<Area> cargarAreasVacias(){
-        return new ArrayList<>();
-    }
-
     public static ArrayList<Miembro> cargarContactosMail1(){
         return new ArrayList<>();
     }
@@ -80,33 +79,42 @@ public class CargaDatos {
     }
 
     public static Organizacion cargarOrganizacion1(){
-        return new Organizacion("", TipoOrg.GUBERNAMENTAL,cargarUbicacion3(), cargarAreasVacias(), Clasificacion.MINISTERIO, cargarContactosMail1(), cargarContactosWPP1());
+        return new Organizacion("", TipoOrg.GUBERNAMENTAL,cargarUbicacion3(), Clasificacion.MINISTERIO, cargarContactosMail1(), cargarContactosWPP1());
     }
 
     public static Organizacion cargarOrganizacion5(){
-        return new Organizacion("SA", TipoOrg.EMPRESA,cargarUbicacion5(),cargarAreasVacias(), Clasificacion.MINISTERIO, null, null);
+        return new Organizacion("SA", TipoOrg.EMPRESA,cargarUbicacion5(), Clasificacion.MINISTERIO, null, null);
+    }
+
+    public static ArrayList<Area> cargarAreas1() {
+        ArrayList<Area> areas = new ArrayList<>();
+        areas.add(cargarArea1());
+        return areas;
+    }
+
+    public static Area cargarArea1() {
+        Area area = new Area("nombre del area", cargarOrganizacion1());
+        area.getOrganizacion().setArea(area);
+        return area;
     }
 
     public static ArrayList<Miembro> cargarMiembros1(){
-        return new ArrayList<>();
+        ArrayList<Miembro> miembros = new ArrayList<>();
+        miembros.add(cargarMiembro1());
+        miembros.add(cargarMiembro2());
+        return miembros;
     }
 
     public static DatoDeMedicion cargarDatoMedicion1(){
         return new DatoDeMedicion("Electricidad adquirida y consumida","m3","Electricidad","2000","Diaria","30");
     }
 
-    public static Area cargarArea1(){
-        Area area = new Area("nombre del area", cargarMiembros1(), cargarOrganizacion1());
-        area.cargarMediciones("..\\DDS-2022-K3002-HuellaCarbonoG3\\mediciones1.xlsx");
-        return area;
-    }
-
     public static Miembro cargarMiembro1(){
-        return new Miembro("algo","","",12345, cargarAreasVacias(), cargarRecorridos1());
+        return new Miembro("Pepe","","",12345, cargarAreas1(), cargarRecorridos1());
     }
 
     public static Miembro cargarMiembro2(){
-        return new Miembro("Juan","Perez","DNI",123456789,cargarAreasVacias(),cargarRecorridosVacios());
+        return new Miembro("Juan","Perez","DNI",123456789,cargarAreas1(), cargarRecorridos1());
     }
 
     public static ArrayList<Trayecto> cargarTrayectos1(){
@@ -116,19 +124,23 @@ public class CargaDatos {
         return lista;
     }
 
-    public static ArrayList<Recorrido> cargarRecorridosVacios(){
-        return new ArrayList<>();
-    }
-
     public static Recorrido cargarRecorrido1(){
-        Calendar mesInicio = Calendario.crearFecha(0,2022);
-        Calendar mesFin = Calendario.sinFecha();
-        return new Recorrido(cargarOrganizacion1(), 1.0, mesInicio, mesFin);
+        Calendar mesInicio = Calendario.crearFecha(0,2021);
+        Calendar mesFin = Calendario.crearFecha(0,2023);
+        Recorrido recorrido = new Recorrido(cargarOrganizacion1(), 1.0, mesInicio, mesFin);
+        recorrido.addTrayecto(cargarTrayecto1(), cargarOrganizacion1());
+        recorrido.addTrayecto(cargarTrayecto2(), cargarOrganizacion1());
+        recorrido.addTrayecto(cargarTrayecto3(), cargarOrganizacion1());
+        return recorrido;
     }
 
     public static ArrayList<Recorrido> cargarRecorridos1(){
         ArrayList<Recorrido> lista = new ArrayList<>();
         lista.add(cargarRecorrido1());
         return lista;
+    }
+
+    public static void cargarFE() {
+        //TODO
     }
 }
