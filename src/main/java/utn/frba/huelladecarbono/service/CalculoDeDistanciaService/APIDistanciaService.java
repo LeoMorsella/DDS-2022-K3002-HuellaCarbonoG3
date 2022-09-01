@@ -15,8 +15,8 @@ import java.util.Objects;
 
 public class APIDistanciaService {
 
-    //private final String token = "Bearer 5PLixIkvvSuNT23px0g/L6iOS8N2R6gxj1nbTG1DrSo="; // hardcodeado para pruebas
-    private final String token = leerArchivoToken();
+    private final String token = "Bearer 5PLixIkvvSuNT23px0g/L6iOS8N2R6gxj1nbTG1DrSo="; // hardcodeado para pruebas
+    //private final String token = leerArchivoToken();
 
     public APIDistanciaService() throws IOException {
     }
@@ -112,10 +112,8 @@ public class APIDistanciaService {
         }
     }
     public Double medirDistancia(Ubicacion ubicacion1, Ubicacion ubicacion2) throws Exception {
-
         int idLocalidadOrigen  = this.buscarIdLocalidad(ubicacion1);
         int idLocalidadDestino = this.buscarIdLocalidad(ubicacion1);
-
 
         WebClient clientDistancia = WebClient.create("https://ddstpa.com.ar/api/distancia?localidadOrigenId=" + idLocalidadOrigen + "&calleOrigen=" + ubicacion1.getCalle() + "&alturaOrigen=" + ubicacion1.getAltura() + "&localidadDestinoId=" + idLocalidadDestino + "&calleDestino=" + ubicacion2.getCalle() + "&alturaDestino=" + ubicacion2.getAltura());
 

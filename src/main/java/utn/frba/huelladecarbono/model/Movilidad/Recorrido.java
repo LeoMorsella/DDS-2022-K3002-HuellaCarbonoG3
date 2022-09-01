@@ -1,6 +1,7 @@
 package utn.frba.huelladecarbono.model.Movilidad;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import sun.util.resources.cldr.ne.CalendarData_ne_IN;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
@@ -13,6 +14,7 @@ import java.util.Date;
 
 @Getter @Setter
 @Entity
+@NoArgsConstructor
 public class Recorrido {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,25 +23,18 @@ public class Recorrido {
     private ArrayList<Trayecto> trayectos;
     @Transient
     private Organizacion organizacion;
+    private Double peso;
     private Calendar mesInicio;
     private Calendar mesFin;
 
-    public ArrayList<Trayecto> getTrayectos() {
-        return trayectos;
-    }
-
-    public Recorrido(Organizacion organizacion, Calendar mesInicio, Calendar mesFin) {
+    public Recorrido(Organizacion organizacion, Double peso, Calendar mesInicio, Calendar mesFin) {
         this.organizacion = organizacion;
         this.mesInicio = mesInicio;
         this.mesFin = mesFin;
-    }
-    public static Recorrido nuevoRecorrido(Organizacion organizacion, Calendar mesInicio, Calendar mesFin){
-        Recorrido nuevoRecorrido = new Recorrido(organizacion, mesInicio, mesFin);
+        this.peso = peso;
         //RepositorioRecorrido.getRepositorio().agregarRecorrido(nuevoRecorrido);
-        return nuevoRecorrido;
     }
 
-    //Si se cambian los valores hay que remover el trayecto y agregarlo de nuevo
     public void addTrayecto(Trayecto trayecto, Double factorDeUso, Organizacion organizacion){
         trayecto.setFactorDeUso(factorDeUso);
         this.trayectos.add(trayecto);
@@ -55,9 +50,6 @@ public class Recorrido {
             distanciaTotal = distanciaTotal + trayecto.distanciaMedia();
         }
         return distanciaTotal;
-    }
-
-    public Recorrido() {
     }
 }
 

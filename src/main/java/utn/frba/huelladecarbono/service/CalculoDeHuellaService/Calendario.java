@@ -25,7 +25,31 @@ public class Calendario {
         return Calendar.getInstance();
     }
 
-    public static boolean estaEntre(Calendar fechaInicio, Calendar fechaFin, Calendar fecha) {
-        return fecha.after(fechaInicio) && fecha.before(fechaFin);
+    public static int mesesEntreMedio(Calendar inicioCalculo, Calendar finCalculo, Calendar inicioRecorrido, Calendar finRecorrido) {
+        Calendar inicio = Calendar.getInstance();
+        Calendar fin = Calendar.getInstance();
+
+        if(finRecorrido == null) {
+            finRecorrido = Calendar.getInstance();
+        }
+
+        if(inicioCalculo.before(finRecorrido) && finCalculo.after(inicioRecorrido)) {
+            if(inicioCalculo.before(inicioRecorrido)) {
+                inicio = inicioCalculo;
+            } else {
+                inicio = inicioRecorrido;
+            }
+
+            if(finCalculo.after(finRecorrido)) {
+                fin = finCalculo;
+            } else {
+                fin = finRecorrido;
+            }
+
+            int diferenciaAnios = fin.get(Calendar.YEAR) - inicio.get(Calendar.YEAR);
+            return diferenciaAnios * 12 + fin.get(Calendar.MONTH) - inicio.get(Calendar.MONTH);
+        } else {
+            return 0;
+        }
     }
 }

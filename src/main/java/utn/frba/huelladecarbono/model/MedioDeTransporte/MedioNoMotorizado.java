@@ -40,6 +40,5 @@ public class MedioNoMotorizado extends Medio {
         this.ID = ID;
     }
 
-    public MedioNoMotorizado() {
-    }
+    public MedioNoMotorizado() {}
 }

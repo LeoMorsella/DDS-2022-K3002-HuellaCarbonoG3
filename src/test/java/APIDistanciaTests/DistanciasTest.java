@@ -21,10 +21,8 @@ public class DistanciasTest {
         ArrayList<Trayecto> trayectos = new ArrayList<Trayecto>();
         trayectos.add(trayectoPrueba1);
         trayectos.add(trayectoPrueba2);
-        Calendar mesInicio = Calendario.crearFecha(0,2022);
-        Calendar mesFin = Calendario.sinFecha();
 
-        Recorrido recorridoPrueba = Recorrido.nuevoRecorrido(new Organizacion(), mesInicio, mesFin);
+        Recorrido recorridoPrueba = CargaDatos.cargarRecorrido1();
         System.out.println(trayectoPrueba1.distanciaMedia());
         System.out.println(trayectoPrueba2.distanciaMedia());
 

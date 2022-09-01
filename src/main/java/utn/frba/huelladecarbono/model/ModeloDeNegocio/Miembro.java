@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Getter @Setter
 @Entity
@@ -28,82 +29,23 @@ public class Miembro {
 
     private String telefono;
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getTipoDoc() {
-        return tipoDoc;
-    }
-
-    public void setTipoDoc(String tipoDoc) {
-        this.tipoDoc = tipoDoc;
-    }
-
-    public int getNumDoc() {
-        return numDoc;
-    }
-
-    public void setNumDoc(int numDoc) {
-        this.numDoc = numDoc;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public ArrayList<Area> getAreas() {
-        return areas;
-    }
-
-    public void setAreas(ArrayList<Area> areas) {
-        this.areas = areas;
-    }
-
-    public ArrayList<Recorrido> getRecorridos() {
-        return recorridos;
-    }
-
-    public void setRecorridos(ArrayList<Recorrido> recorridos) {
-        this.recorridos = recorridos;
-    }
-
     public Miembro(String nom, String ape, String tipoDocu, int numeroDoc, ArrayList<Area> listaAreas,
-                   ArrayList<Recorrido> unRecorrido){
+                   ArrayList<Recorrido> recorridos) {
         this.nombre = nom;
         this.apellido = ape;
         this.tipoDoc = tipoDocu;
         this.numDoc = numeroDoc;
         this.areas = listaAreas;
-        this.recorridos = unRecorrido;
+        AtomicReference<Double> pesoTotal = new AtomicReference<>(Double.valueOf(0));
+        recorridos.forEach( recorrido -> pesoTotal.updateAndGet(v -> v + recorrido.getPeso()));
+        if(pesoTotal.get() != 1) {
+            throw new RuntimeException("Peso inválido en los recorrridos");
+        }
+        this.recorridos = recorridos;
         RepositorioMiembros.getRepositorio().agregarMiembro(this);
     }
 
-    public Miembro(Integer id, String nombre, String apellido ,String mail, String telefono) {
+    public Miembro(Integer id, String nombre, String apellido, String mail, String telefono) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -111,8 +53,7 @@ public class Miembro {
         this.telefono = telefono;
     }
 
-    public Miembro() {
-    }
+    public Miembro() {}
 
     public Miembro(Integer id, String nombre, String apellido, String tipoDoc, int numDoc, ArrayList<Area> areas, ArrayList<Recorrido> recorridos, String mail, String telefono) {
         this.id = id;
@@ -127,9 +68,6 @@ public class Miembro {
     }
 
     public void registrarseA(Area area) {
-            areas.add(area);
+        areas.add(area);
     }
-
-    public Boolean perteneceA(Area area) {return areas.contains(area);}
-
 }

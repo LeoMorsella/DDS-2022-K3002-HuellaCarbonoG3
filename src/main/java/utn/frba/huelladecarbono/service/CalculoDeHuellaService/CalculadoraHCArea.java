@@ -5,7 +5,6 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.DatoDeMedicion;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class CalculadoraHCArea {

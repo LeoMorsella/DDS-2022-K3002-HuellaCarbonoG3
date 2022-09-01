@@ -1,5 +1,6 @@
 package utn.frba.huelladecarbono;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioMotorizado;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioNoMotorizado;
@@ -14,6 +15,7 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.TipoOrg;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Ubicacion;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 
 public class CargaDatos {
     public static Ubicacion cargarUbicacion1(){
@@ -116,7 +118,9 @@ public class CargaDatos {
     }
 
     public static Recorrido cargarRecorrido1(){
-        return Recorrido.nuevoRecorrido(cargarOrganizacion1(), mesInicio, mesFin);
+        Calendar mesInicio = Calendario.crearFecha(0,2022);
+        Calendar mesFin = Calendario.sinFecha();
+        return new Recorrido(cargarOrganizacion1(), 1.0, mesInicio, mesFin);
     }
 
     public static ArrayList<Recorrido> cargarRecorridos1(){
