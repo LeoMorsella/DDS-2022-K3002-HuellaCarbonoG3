@@ -70,4 +70,12 @@ public class Miembro {
     public void registrarseA(Area area) {
         areas.add(area);
     }
+
+    public void addRecorrido(Recorrido recorrido){
+        recorridos.add(recorrido);
+    }
+
+    public void addRecorrido(ArrayList<Recorrido> recorridos){
+        recorridos.addAll(recorridos);
+    }
 }

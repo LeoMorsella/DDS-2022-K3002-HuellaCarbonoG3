@@ -52,9 +52,6 @@ public class Area {
     public void setMiembros(ArrayList<Miembro> miembro) {
         this.miembros = miembro;
     }
-    public void setMiembro(Miembro miembro) {
-        this.miembros.add(miembro);
-    }
 
     public Organizacion getOrganizacion() {
         return organizacion;
@@ -74,6 +71,18 @@ public class Area {
         cargaMediciones.useExistingWorkbook(filePath);
         List<DatoDeMedicion> nuevasDatoDeMedicion = cargaMediciones.lecturaArchivo(0);
         mediciones.add(nuevasDatoDeMedicion);
+    }
+
+    public void addMedicion(ArrayList<DatoDeMedicion> mediciones){
+        this.mediciones.add(mediciones);
+    }
+
+    public void addMiembro(Miembro miembro){
+        miembros.add(miembro);
+    }
+
+    public void addMiembro(ArrayList<Miembro> miembros){
+        this.miembros.addAll(miembros);
     }
 
 }

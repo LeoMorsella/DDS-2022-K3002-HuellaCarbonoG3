@@ -70,7 +70,7 @@ public class Organizacion {
         this.areas = areas;
     }
 
-    public void setArea(Area area) {
+    public void addArea(Area area) {
         this.areas.add(area);
     }
 
@@ -137,10 +137,6 @@ public class Organizacion {
         return miembros;
     }
 
-    public void agregarSector(Area area){
-        this.areas.add(area);
-    }
-
     public void generarTrayecto(Ubicacion salida, Ubicacion llegada, Medio medio){
         Trayecto nuevoTrayecto = new Trayecto(salida, llegada, medio);
         RepositorioTrayectos.getRepositorio().agregarTrayecto(nuevoTrayecto);
@@ -156,23 +152,4 @@ public class Organizacion {
         return medicionesOrga;
     }
 
-    //La idea es que cada mes se agrega el del mes correspondiente
-    //Cuando vuelva a ser enero, se limpia esa lista con HC mensuales
-    public void agregarHCMensual() throws Exception{
-        Double valor = 0.0;
-        List<Miembro> miembrosOrg = this.getMiembros();
-        Calendar mes = Calendario.fechaActual();
-        for(Miembro miembro : miembrosOrg){
-            valor += CalculadoraHCService.getCalculadoraHC().calcularHCMensual(miembro, mes);
-        }
-        this.hcMensual.add(valor);
-    }
-
-    public Double calculoHCAnual(){
-        Double valor = 0.0;
-        for(Double hcMensual : this.hcMensual){
-            valor += hcMensual;
-        }
-        return valor;
-    }
 }
