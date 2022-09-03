@@ -1,6 +1,7 @@
 package utn.frba.huelladecarbono.service.CalculoDeHuellaService;
 
 
+import org.aspectj.weaver.ast.Or;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 
 import java.util.Calendar;
@@ -51,5 +52,10 @@ public class CalculadoraHCService {
 
     public Double calcularImpactoIndividual(Miembro miembro, Organizacion organizacion, Calendar mesInicio, Calendar mesFin) throws Exception {
         return CalculadoraHCMiembro.calcularImpactoIndividual(miembro, organizacion, mesInicio, mesFin);
+    }
+
+    //Metodo tentativo REVISAR TODO
+    public Double calcularHCPromedio(Miembro miembro, Organizacion organizacion,Calendar mesInicio,Calendar mesFin) throws Exception {
+        return CalculadoraHCOrganizacion.calcularHC(organizacion,mesInicio,mesFin) * CalculadoraHCMiembro.calcularImpactoIndividual(miembro,organizacion,mesInicio,mesFin) / organizacion.getMiembros().size();
     }
 }
