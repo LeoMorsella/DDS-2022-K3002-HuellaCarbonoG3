@@ -23,19 +23,19 @@ import utn.frba.huelladecarbono.service.CalculoDeHuellaService.FactoresDeEmision
 
 public class CargaDatos {
     public static Ubicacion cargarUbicacion1(){
-        return new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
+        return new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY", "maipu", "100");
     }
 
     public static Ubicacion cargarUbicacion2(){
-        return new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "200");
+        return new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY", "maipu", "200");
     }
 
     public static Ubicacion cargarUbicacion3(){
-        return new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "300");
+        return new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY", "maipu", "300");
     }
 
     public static Ubicacion cargarUbicacion4(){
-        return new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "400");
+        return new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY", "maipu", "400");
     }
 
     public static Ubicacion cargarUbicacion5(){

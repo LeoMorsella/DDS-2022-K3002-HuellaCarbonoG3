@@ -76,7 +76,8 @@ public class Trayecto {
 
     public Double distanciaMedia() throws Exception {
         CalculoDistanciaService distanciaService = new CalculoDistanciaService();
-        return distanciaService.calcularDistancia(puntoPartida, puntoLlegada, medioTransporte);
+        Double resultado = distanciaService.calcularDistancia(puntoPartida, puntoLlegada, medioTransporte);
+        return resultado;
     }
 
 

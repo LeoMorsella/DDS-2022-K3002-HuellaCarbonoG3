@@ -22,7 +22,7 @@ public class APIDistanciaService {
     }
 
     private int buscarIdLocalidad(Ubicacion ubicacion) throws Exception {
-        int idPais      = this.buscarId("pais"     , -1, ubicacion);
+        int idPais      = this.buscarId("pais", -1, ubicacion);
         int idProvincia = this.buscarId("provincia", idPais     , ubicacion);
         int idMunicipio = this.buscarId("municipio", idProvincia, ubicacion);
         return this.buscarId("localidad", idMunicipio, ubicacion);
@@ -113,7 +113,7 @@ public class APIDistanciaService {
     }
     public Double medirDistancia(Ubicacion ubicacion1, Ubicacion ubicacion2) throws Exception {
         int idLocalidadOrigen  = this.buscarIdLocalidad(ubicacion1);
-        int idLocalidadDestino = this.buscarIdLocalidad(ubicacion1);
+        int idLocalidadDestino = this.buscarIdLocalidad(ubicacion2);
 
         WebClient clientDistancia = WebClient.create("https://ddstpa.com.ar/api/distancia?localidadOrigenId=" + idLocalidadOrigen + "&calleOrigen=" + ubicacion1.getCalle() + "&alturaOrigen=" + ubicacion1.getAltura() + "&localidadDestinoId=" + idLocalidadDestino + "&calleDestino=" + ubicacion2.getCalle() + "&alturaDestino=" + ubicacion2.getAltura());
 
@@ -131,7 +131,8 @@ public class APIDistanciaService {
         String responseBody = response.readEntity(String.class);
         if (status == 200) {
             Distancia newDistancia = mapper.readValue(responseBody, Distancia.class);
-            return newDistancia.getValor();
+            Double distancia = newDistancia.getValor(); 
+            return distancia;
         } else {
             System.out.println("Error response = " + responseBody);
             throw new BadResponseException("Error en la llamada a /api/user");

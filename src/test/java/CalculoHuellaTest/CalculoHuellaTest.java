@@ -57,12 +57,17 @@ public class CalculoHuellaTest {
         areas.add(area);
         recorridos.add(recorrido);
         miembros.add(miembro);
+        for(Area area : areas){
+            area.setMiembros(miembros);
+        }
+        organizacion.setAreas(areas);
         Calendar mesInicio = Calendario.crearFecha(0, 2022);
         Calendar mesFin = Calendario.crearFecha(11, 2022);
 
-        Double huella = CalculadoraHCService.getCalculadoraHC().calcularHCArea(area, mesInicio, mesFin);
+        Double huella = CalculadoraHCService.getCalculadoraHC().calcularHCOrganizacion(organizacion, mesInicio, mesFin);
 
-        Assert.assertEquals(Optional.of(1.1),huella);
+        Assert.assertEquals(Optional.of(1.1), huella);
+        //Assert.assertNotEquals(Optional.of(0.0), huella);
     }
 
     @Test
@@ -70,6 +75,9 @@ public class CalculoHuellaTest {
         areas.add(area);
         recorridos.add(recorrido);
         miembros.add(miembro);
+        for(Area area : areas){
+            area.setMiembros(miembros);
+        }
         Calendar mesInicio = Calendario.crearFecha(0, 2022);
         Calendar mesFin = Calendario.crearFecha(11, 2022);
 
@@ -90,5 +98,21 @@ public class CalculoHuellaTest {
     @Test
     public void calcularHuellaPromedio() throws Exception{
         
+    }
+
+    @Test
+    public void calcularHuellaImpactoIndividual() throws Exception{
+        Double res = 0.0;
+        Calendar mesInicio = Calendario.crearFecha(0, 2022);
+        Calendar mesFin = Calendario.crearFecha(11, 2022);
+        for(Area area : areas){
+            area.setMiembros(miembros);
+        }
+        organizacion.setAreas(areas);
+        for(Miembro miembro : organizacion.getMiembros()){
+            res += CalculadoraHCService.getCalculadoraHC().calcularImpactoIndividual(miembro, organizacion, mesInicio, mesFin);
+        }
+
+        Assert.assertEquals(Optional.of(1.1), res);
     }
 }

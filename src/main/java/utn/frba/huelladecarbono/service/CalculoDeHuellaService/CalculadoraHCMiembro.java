@@ -32,9 +32,10 @@ public class CalculadoraHCMiembro {
         Double distanciaMedia = trayecto.distanciaMedia();
         Double FEe = FE.getFE(trayecto.getMedioTransporte().getTipo());
         int cantPasajeros = trayecto.getPasajeros().size();
+        Double resultado = distanciaMedia / cantPasajeros;
         //TODO
-        return trayecto.distanciaMedia() * 1/*FE.getFE(trayecto.getMedioTransporte().getTipo())*/ / trayecto.getPasajeros().size();
-
+        //return distanciaMedia * 1/*FE.getFE(trayecto.getMedioTransporte().getTipo())*/ / cantPasajeros;
+        return resultado;
     }
 
     public static Double calcularImpactoIndividual(Miembro miembro, Organizacion organizacion, Calendar mesInicio, Calendar mesFin) throws Exception {
