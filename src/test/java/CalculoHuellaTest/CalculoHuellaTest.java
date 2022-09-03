@@ -3,49 +3,25 @@ package CalculoHuellaTest;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Optional;
 
+import utn.frba.huelladecarbono.model.MedioDeTransporte.*;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.SectorTerritorial;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.*;
-import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
-import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
-import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
-import utn.frba.huelladecarbono.CargaDatos;
-import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioMotorizado;
-import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioNoMotorizado;
-import utn.frba.huelladecarbono.model.MedioDeTransporte.TipoMedioNoMotorizado;
-import utn.frba.huelladecarbono.model.MedioDeTransporte.TipoVehiculoMotorizado;
+import CargaDatos.CargarDatos;
 
 public class CalculoHuellaTest {
 
-    FactoresDeEmision FE = FactoresDeEmision.getInstance();
-    ArrayList<Area> areas = CargaDatos.cargarAreas1();
-    ArrayList<Miembro> miembros = CargaDatos.cargarMiembros1();
-    ArrayList<Trayecto> trayectos = CargaDatos.cargarTrayectos1();
-    ArrayList<Recorrido> recorridos = CargaDatos.cargarRecorridos1();
-    MedioMotorizado medio1 = CargaDatos.cargarMedioMotorizado1();
-    MedioNoMotorizado medio2 = CargaDatos.cargarMedioNoMotorizado1();
-    Recorrido recorrido = CargaDatos.cargarRecorrido1();
-
-    Organizacion organizacion = CargaDatos.cargarOrganizacion1();
-    Area area = CargaDatos.cargarArea1();
-    Miembro miembro = CargaDatos.cargarMiembro1();
-
-    SectorTerritorial sector = CargaDatos.cargarSector1();
-
     @Test
     public void calcularHuellaMiembro() throws Exception {
-        FE.setFE("AUTO",0.5);
-        FE.setFE("BICI",0.0);
-        medio1.setTipo(TipoVehiculoMotorizado.AUTO);
-        medio2.setTipo(TipoMedioNoMotorizado.BICI);
-        areas.add(area);
-        miembros.add(miembro);
-        recorridos.add(recorrido);
-        System.out.println(FE.getFE("AUTO"));
+        CargarDatos.cargarFE();
         Calendar mesInicio = Calendario.crearFecha(0, 2022);
         Calendar mesFin = Calendario.crearFecha(11, 2022);
+        Miembro miembro = CargarDatos.cargarMiembro1();
 
         Double huella = CalculadoraHCService.getCalculadoraHC().calcularHCMiembro(miembro, mesInicio, mesFin);
 
@@ -54,6 +30,7 @@ public class CalculoHuellaTest {
 
     @Test
     public void calcularHuellaOrganizacion() throws Exception {
+<<<<<<< HEAD
         areas.add(area);
         recorridos.add(recorrido);
         miembros.add(miembro);
@@ -61,8 +38,13 @@ public class CalculoHuellaTest {
             area.setMiembros(miembros);
         }
         organizacion.setAreas(areas);
+=======
+        CargarDatos.cargarFE();
+>>>>>>> b463e358dbc33ef1c8e2bd9e510181335c610749
         Calendar mesInicio = Calendario.crearFecha(0, 2022);
         Calendar mesFin = Calendario.crearFecha(11, 2022);
+        Organizacion organizacion = CargarDatos.cargarOrganizacion1();
+        organizacion.addArea(CargarDatos.cargarArea1());
 
         Double huella = CalculadoraHCService.getCalculadoraHC().calcularHCOrganizacion(organizacion, mesInicio, mesFin);
 
@@ -72,24 +54,33 @@ public class CalculoHuellaTest {
 
     @Test
     public void calcularHuellaArea() throws Exception {
+<<<<<<< HEAD
         areas.add(area);
         recorridos.add(recorrido);
         miembros.add(miembro);
         for(Area area : areas){
             area.setMiembros(miembros);
         }
+=======
+        CargarDatos.cargarFE();
+>>>>>>> b463e358dbc33ef1c8e2bd9e510181335c610749
         Calendar mesInicio = Calendario.crearFecha(0, 2022);
         Calendar mesFin = Calendario.crearFecha(11, 2022);
+        Area area = CargarDatos.cargarArea1();
 
         Double huella = CalculadoraHCService.getCalculadoraHC().calcularHCArea(area, mesInicio, mesFin);
 
         Assert.assertEquals(Optional.of(1.1),huella);
     }
 
+    //No calcula respeecto a nada porque esta vacío el repo de organizaciones
     @Test
     public void calcularHuellaSectorTerritorial() throws Exception{
+        CargarDatos.cargarFE();
         Calendar mesInicio = Calendario.crearFecha(0, 2022);
         Calendar mesFin = Calendario.crearFecha(11, 2022);
+        SectorTerritorial sector = CargarDatos.cargarSector1();
+
         Double huella = CalculadoraHCService.getCalculadoraHC().calcularHCSectorTerritorial(sector, mesInicio, mesFin);
     
         Assert.assertEquals(Optional.of(1.1),huella);
@@ -97,7 +88,7 @@ public class CalculoHuellaTest {
 
     @Test
     public void calcularHuellaPromedio() throws Exception{
-        
+        CargarDatos.cargarFE();
     }
 
     @Test

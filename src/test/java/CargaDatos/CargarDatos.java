@@ -1,12 +1,8 @@
-package utn.frba.huelladecarbono;
+package CargaDatos;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
-import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioMotorizado;
-import utn.frba.huelladecarbono.model.MedioDeTransporte.MedioNoMotorizado;
-import utn.frba.huelladecarbono.model.MedioDeTransporte.TipoCombustible;
-import utn.frba.huelladecarbono.model.MedioDeTransporte.TipoVehiculoMotorizado;
+import utn.frba.huelladecarbono.model.MedioDeTransporte.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.AgenteSectorial;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Clasificacion;
@@ -21,7 +17,7 @@ import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.FactoresDeEmision;
 
-public class CargaDatos {
+public class CargarDatos {
     public static Ubicacion cargarUbicacion1(){
         return new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY", "maipu", "100");
     }
@@ -47,7 +43,7 @@ public class CargaDatos {
     }
 
     public static MedioNoMotorizado cargarMedioNoMotorizado1(){
-        return new MedioNoMotorizado();
+        return new MedioNoMotorizado(TipoMedioNoMotorizado.BICI);
     }
 
     public static Trayecto cargarTrayecto1(){
@@ -79,12 +75,14 @@ public class CargaDatos {
     }
 
     public static Organizacion cargarOrganizacion1(){
-        return new Organizacion("", TipoOrg.GUBERNAMENTAL,cargarUbicacion3(), Clasificacion.MINISTERIO, cargarContactosMail1(), cargarContactosWPP1());
+        Organizacion organizacion = new Organizacion("", TipoOrg.GUBERNAMENTAL,cargarUbicacion3(), Clasificacion.MINISTERIO, cargarContactosMail1(), cargarContactosWPP1());
+        return organizacion;
     }
 
     public static Organizacion cargarOrganizacion5(){
         return new Organizacion("SA", TipoOrg.EMPRESA,cargarUbicacion5(), Clasificacion.MINISTERIO, null, null);
     }
+
 
     public static ArrayList<Area> cargarAreas1() {
         ArrayList<Area> areas = new ArrayList<>();
@@ -93,8 +91,11 @@ public class CargaDatos {
     }
 
     public static Area cargarArea1() {
-        Area area = new Area("nombre del area", cargarOrganizacion1());
-        area.getOrganizacion().setArea(area);
+        Area area = new Area();
+        ArrayList<DatoDeMedicion> mediciones = new ArrayList<>();
+        mediciones.add(cargarDatoMedicion1());
+        area.addMedicion(mediciones);
+        area.addMiembro(cargarMiembros1());
         return area;
     }
 
@@ -110,18 +111,18 @@ public class CargaDatos {
     }
 
     public static Miembro cargarMiembro1(){
-        return new Miembro("Pepe","","",12345, cargarAreas1(), cargarRecorridos1());
+        return new Miembro("Pepe","","",12345, new ArrayList<>(), cargarRecorridos1());
     }
 
     public static Miembro cargarMiembro2(){
-        return new Miembro("Juan","Perez","DNI",123456789,cargarAreas1(), cargarRecorridos1());
+        return new Miembro("Juan","Perez","DNI",123456789,new ArrayList<Area>(), cargarRecorridos1());
     }
 
     public static ArrayList<Trayecto> cargarTrayectos1(){
-        ArrayList<Trayecto> lista = new ArrayList<>();
-        lista.add(cargarTrayecto1());
-        lista.add(cargarTrayecto2());
-        return lista;
+        ArrayList<Trayecto> trayectos = new ArrayList<>();
+        trayectos.add(cargarTrayecto1());
+        trayectos.add(cargarTrayecto2());
+        return trayectos;
     }
 
     public static Recorrido cargarRecorrido1(){
@@ -141,6 +142,9 @@ public class CargaDatos {
     }
 
     public static void cargarFE() {
-        //TODO
+        FactoresDeEmision fe = FactoresDeEmision.getInstance();
+        fe.setFE("AUTO",0.5);
+        fe.setFE("BICI",0.0);
+        fe.setFE("Electricidad adquirida y consumida", 0.1);
     }
 }

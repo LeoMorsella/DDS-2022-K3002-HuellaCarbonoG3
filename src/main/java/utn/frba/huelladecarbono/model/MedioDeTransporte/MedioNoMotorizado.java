@@ -35,9 +35,8 @@ public class MedioNoMotorizado extends Medio {
         return 0.0;
     }
 
-    public MedioNoMotorizado(TipoMedioNoMotorizado tipo, String ID) {
+    public MedioNoMotorizado(TipoMedioNoMotorizado tipo) {
         this.tipo = tipo;
-        this.ID = ID;
     }
 
     public MedioNoMotorizado() {}
