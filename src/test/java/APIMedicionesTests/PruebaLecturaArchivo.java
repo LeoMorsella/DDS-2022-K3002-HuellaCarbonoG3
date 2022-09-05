@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PruebaLecturaArchivo {
     @Test
-    public void testCargarDatosALista() {
+    public void testCargarDatosALista1() {
         String filePath = "..\\DDS-2022-K3002-HuellaCarbonoG3\\mediciones1.xlsx";
         CargaDeMediciones cargaMediciones = new CargaDeMediciones();
         cargaMediciones.useExistingWorkbook(filePath);

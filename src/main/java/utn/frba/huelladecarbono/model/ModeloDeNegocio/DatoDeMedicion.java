@@ -94,9 +94,6 @@ public class DatoDeMedicion {
         this.unidad = unidad;
     }
 
-    public Double calculoHuella() {
-            return null; // TODO
-    }
 }
 
 

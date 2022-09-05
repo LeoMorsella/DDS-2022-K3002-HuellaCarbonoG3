@@ -1,7 +1,6 @@
 package utn.frba.huelladecarbono.service.CalculoDeHuellaService;
 
 
-import org.aspectj.weaver.ast.Or;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 
 import java.util.Calendar;
@@ -29,8 +28,8 @@ public class CalculadoraHCService {
         return CalculadoraHCArea.calcularHC(area, mesInicio, mesFin);
     }
 
-    public Double calcularHCMiembro(Miembro miembro, Calendar mesInicio, Calendar mesFin) throws Exception {
-        return CalculadoraHCMiembro.calcularHC(miembro, mesInicio, mesFin);
+    public Double calcularHCMiembro(Miembro miembro, Calendar mesInicio, Calendar mesFin, Organizacion organizacion) throws Exception {
+        return CalculadoraHCMiembro.calcularHC(miembro, mesInicio, mesFin, organizacion);
     }
 
     public Double calcularHCMedicion(List<DatoDeMedicion> datoDeMedicion, Calendar mesInicio, Calendar mesFin) {
@@ -45,17 +44,20 @@ public class CalculadoraHCService {
         return HCTotal;
     }
 
-    public Double calcularHCMensual(Miembro miembro, Calendar mes) throws Exception {
+    public Double calcularHCMensual(Miembro miembro, Calendar mes, Organizacion organizacion) throws Exception {
         //TODO
-        return CalculadoraHCMiembro.calcularHC(miembro, mes, mes);
+        return CalculadoraHCMiembro.calcularHC(miembro, mes, mes, organizacion);
     }
 
     public Double calcularImpactoIndividual(Miembro miembro, Organizacion organizacion, Calendar mesInicio, Calendar mesFin) throws Exception {
         return CalculadoraHCMiembro.calcularImpactoIndividual(miembro, organizacion, mesInicio, mesFin);
     }
 
-    //Metodo tentativo REVISAR TODO
     public Double calcularHCPromedio(Miembro miembro, Organizacion organizacion,Calendar mesInicio,Calendar mesFin) throws Exception {
-        return CalculadoraHCOrganizacion.calcularHC(organizacion,mesInicio,mesFin) * CalculadoraHCMiembro.calcularImpactoIndividual(miembro,organizacion,mesInicio,mesFin) / organizacion.getMiembros().size();
+        return CalculadoraHCOrganizacion.HCpromedio(organizacion, mesInicio, mesFin);
+    }
+
+    public Double calcularHCPromedio(Miembro miembro, Area area,Calendar mesInicio,Calendar mesFin) throws Exception {
+        return CalculadoraHCArea.HCpromedio(area, mesInicio, mesFin);
     }
 }

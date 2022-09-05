@@ -52,8 +52,8 @@ import java.util.regex.Pattern;
             String periodoImputacion = null;
             String unidad = null;
 
-            List<DatoDeMedicion> datoDeMedicion = new ArrayList<>();
-            DatoDeMedicion DatoDeMedicion;
+            List<DatoDeMedicion> datosDeMedicion = new ArrayList<>();
+            DatoDeMedicion datoDeMedicionTemp;
 
             final String primerasFilas = "^[A-F]1|^[A-F]2";
             pattern = Pattern.compile(primerasFilas);
@@ -87,12 +87,11 @@ import java.util.regex.Pattern;
                     }
                 }
                 if (!matcher.matches()) {
-                    DatoDeMedicion = new DatoDeMedicion(actividad, unidad, tipoDeConsumo, valor, periodicidad, periodoImputacion);
-                    datoDeMedicion.add(DatoDeMedicion);
+                    datoDeMedicionTemp = new DatoDeMedicion(actividad, unidad, tipoDeConsumo, valor, periodicidad, periodoImputacion);
+                    datosDeMedicion.add(datoDeMedicionTemp);
                 }
             }
-            System.out.println(datoDeMedicion);
-            return datoDeMedicion;
+            return datosDeMedicion;
         }
 
     }

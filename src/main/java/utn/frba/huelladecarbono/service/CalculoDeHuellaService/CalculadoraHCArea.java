@@ -12,7 +12,7 @@ public class CalculadoraHCArea {
         Double HC = 0.0;
         for (Miembro miembro : area.getMiembros()) {
             try {
-                HC += CalculadoraHCService.getCalculadoraHC().calcularHCMiembro(miembro, mesInicio, mesFin);
+                HC += CalculadoraHCService.getCalculadoraHC().calcularHCMiembro(miembro, mesInicio, mesFin, area.getOrganizacion());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -23,7 +23,7 @@ public class CalculadoraHCArea {
         return HC;
     }
 
-    public Double HCpromedio(Area area, Calendar mesInicio, Calendar mesFin) {
-        return this.calcularHC(area, mesInicio, mesFin) / area.getMiembros().size();
+    public static Double HCpromedio(Area area, Calendar mesInicio, Calendar mesFin) {
+        return calcularHC(area, mesInicio, mesFin) / area.getMiembros().size();
     }
 }

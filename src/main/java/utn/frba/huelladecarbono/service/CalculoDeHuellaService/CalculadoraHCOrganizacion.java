@@ -15,7 +15,7 @@ public class CalculadoraHCOrganizacion {
         return HC;
     }
 
-    public Double HCpromedio(Organizacion organizacion, Calendar mesInicio, Calendar mesFin) {
+    public static Double HCpromedio(Organizacion organizacion, Calendar mesInicio, Calendar mesFin) {
         return calcularHC(organizacion, mesInicio, mesFin) / organizacion.getMiembros().size();
     }
 }

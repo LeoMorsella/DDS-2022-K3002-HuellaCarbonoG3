@@ -1,6 +1,5 @@
 package CalculoHuellaTest;
 
-import org.aspectj.weaver.ast.Or;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
@@ -8,14 +7,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Optional;
 
-import utn.frba.huelladecarbono.model.MedioDeTransporte.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
-import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.*;
 import CargaDatos.CargarDatos;
 
 public class CalculoHuellaTest {
+
+    //Correcciones: Todavía faltan los valores de cada test
+    //Se cargan muchos datos acá cuando se podrían poner en la clase de carga de datos
+    //No se cargan los datos en el test de sector territorial
 
     @Test
     public void calcularHuellaMiembro() throws Exception {
@@ -37,7 +38,7 @@ public class CalculoHuellaTest {
         recorridos.add(recorrido);
         miembros.add(miembro);
 
-        Double huella = CalculadoraHCService.getCalculadoraHC().calcularHCMiembro(miembro, mesInicio, mesFin);
+        Double huella = CalculadoraHCService.getCalculadoraHC().calcularHCMiembro(miembro, mesInicio, mesFin, organizacion);
 
         Assert.assertEquals(Optional.of(1.1),huella);
     }
@@ -128,7 +129,7 @@ public class CalculoHuellaTest {
     }
 
     @Test
-    public void calcularHuellaPromedio() throws Exception{
+    public void calcularImpactoIndividualOrganizacion() throws Exception{
         Calendar mesInicio = Calendario.crearFecha(0, 2022);
         Calendar mesFin = Calendario.crearFecha(11, 2022);
         Ubicacion ubicacion = CargarDatos.cargarUbicacion1();
