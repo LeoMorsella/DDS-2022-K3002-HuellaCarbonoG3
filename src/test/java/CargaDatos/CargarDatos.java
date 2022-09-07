@@ -147,4 +147,11 @@ public class CargarDatos {
         fe.setFE("BICI",0.0);
         fe.setFE("Electricidad adquirida y consumida", 0.1);
     }
+
+    public static void cargarFE2() {
+        FactoresDeEmision fe = FactoresDeEmision.getInstance();
+        fe.setFE("AUTO",0.6);
+        fe.setFE("BICI",0.0);
+        fe.setFE("Electricidad adquirida y consumida", 0.4);
+    }
 }
