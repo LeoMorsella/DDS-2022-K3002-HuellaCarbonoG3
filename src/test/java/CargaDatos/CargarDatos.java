@@ -75,12 +75,12 @@ public class CargarDatos {
     }
 
     public static Organizacion cargarOrganizacion1(){
-        Organizacion organizacion = new Organizacion("", TipoOrg.GUBERNAMENTAL,cargarUbicacion3(), Clasificacion.MINISTERIO, cargarContactosMail1(), cargarContactosWPP1());
+        Organizacion organizacion = new Organizacion("", TipoOrg.GUBERNAMENTAL,cargarUbicacion1(), Clasificacion.MINISTERIO, cargarContactosMail1(), cargarContactosWPP1());
         return organizacion;
     }
 
     public static Organizacion cargarOrganizacion5(){
-        return new Organizacion("SA", TipoOrg.EMPRESA,cargarUbicacion5(), Clasificacion.MINISTERIO, null, null);
+        return new Organizacion("SA", TipoOrg.EMPRESA,cargarUbicacion2(), Clasificacion.MINISTERIO, null, null);
     }
 
 
@@ -152,6 +152,6 @@ public class CargarDatos {
         FactoresDeEmision fe = FactoresDeEmision.getInstance();
         fe.setFE("AUTO",0.6);
         fe.setFE("BICI",0.0);
-        fe.setFE("Electricidad adquirida y consumida", 0.4);
+        fe.setFE("Electricidad adquirida y consumida", 0.3);
     }
 }
