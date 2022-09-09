@@ -70,6 +70,10 @@ public class Organizacion {
         this.areas = areas;
     }
 
+    public void setArea(Area area) {
+        this.areas.add(area);
+    }
+
     public void addArea(Area area) {
         this.areas.add(area);
     }

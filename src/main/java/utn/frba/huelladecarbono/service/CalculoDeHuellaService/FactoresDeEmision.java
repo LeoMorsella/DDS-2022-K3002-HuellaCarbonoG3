@@ -1,5 +1,7 @@
 package utn.frba.huelladecarbono.service.CalculoDeHuellaService;
 
+import utn.frba.huelladecarbono.model.MedioDeTransporte.Medio;
+
 import java.util.HashMap;
 
 public class FactoresDeEmision {
@@ -14,8 +16,8 @@ public class FactoresDeEmision {
 
     //Se pueden cargar FE con tipos de consumo o con medios de transporte
 
-    public void setFE(String claveDeFE, Double factorDeEmision){
-        FE.put(claveDeFE, factorDeEmision);
+    public void setFE(String medio, Double factorDeEmision){
+        FE.put(medio, factorDeEmision);
     }
 
     public Double getFE(String claveDeFE){

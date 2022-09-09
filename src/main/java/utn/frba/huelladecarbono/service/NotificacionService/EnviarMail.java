@@ -1,10 +1,7 @@
 package utn.frba.huelladecarbono.service.NotificacionService;
 
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.*;
 import java.util.Properties;
 
 public class EnviarMail {
@@ -34,10 +31,7 @@ public class EnviarMail {
                 });
     }
 
-    public void send(String to) {
-
-        try {
-
+    public void send(String to) throws MessagingException {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("tphcgrupo3@gmail.com"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
@@ -53,10 +47,5 @@ public class EnviarMail {
 
             message.setContent(multipart);
             Transport.send(message);
-
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-
     }
 }

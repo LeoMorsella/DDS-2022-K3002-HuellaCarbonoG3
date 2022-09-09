@@ -34,7 +34,7 @@ public class Recorrido {
         //RepositorioRecorrido.getRepositorio().agregarRecorrido(nuevoRecorrido);
     }
 
-    public void addTrayecto(Trayecto trayecto, Organizacion organizacion){
+    public void addTrayecto(Trayecto trayecto){
         this.trayectos.add(trayecto);
     }
 

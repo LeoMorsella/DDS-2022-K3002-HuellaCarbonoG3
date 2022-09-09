@@ -1,5 +1,6 @@
 package utn.frba.huelladecarbono.service.NotificacionService;
 
+import lombok.SneakyThrows;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
@@ -15,6 +16,7 @@ public class JobImpl implements Job {
 
     private static int count = 0;
 
+    @SneakyThrows
     @Override
     public void execute(JobExecutionContext jobContext) throws JobExecutionException {
 

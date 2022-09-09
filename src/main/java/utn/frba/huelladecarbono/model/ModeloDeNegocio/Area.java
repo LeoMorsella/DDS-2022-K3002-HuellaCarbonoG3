@@ -35,6 +35,7 @@ public class Area {
     public Area(String nombre, Organizacion organizacion) {
         this.nombre = nombre;
         this.organizacion = organizacion;
+        organizacion.setArea(this);
     }
 
     public String getNombre() {

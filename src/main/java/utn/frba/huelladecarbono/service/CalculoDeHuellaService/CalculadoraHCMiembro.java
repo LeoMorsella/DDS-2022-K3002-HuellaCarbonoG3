@@ -1,6 +1,5 @@
 package utn.frba.huelladecarbono.service.CalculoDeHuellaService;
 
-import com.mchange.v2.cfg.PropertiesConfigSource;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;

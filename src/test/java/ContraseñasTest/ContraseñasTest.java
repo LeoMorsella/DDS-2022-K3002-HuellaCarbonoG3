@@ -9,9 +9,6 @@ import org.junit.jupiter.api.Test;
 import java.security.NoSuchAlgorithmException;
 
 public class ContraseñasTest {
-
-
-
         @Test
         public void testCrearMiembroPasswordFacil() {
 
@@ -26,14 +23,11 @@ public class ContraseñasTest {
 
         @Test
         public void testCrearMiembroPasswordNoCumpleRequisitos() {
-
             Assertions.assertThrows(EasyPasswordException.class,()-> new Usuario("prueba","asdfr4",Rol.MIEMBRO));
         }
 
         @Test
-
         public void testTiempoEsperaLogueo() throws InterruptedException {
-
             Usuario usuarioPrueba = new Usuario("prueba","Yagni3210+",Rol.MIEMBRO);
             usuarioPrueba.validarLogueo("asasasas");
             usuarioPrueba.validarLogueo("asasasas");
@@ -41,7 +35,4 @@ public class ContraseñasTest {
             double res = Math.pow(2,usuarioPrueba.getCantIntentos());
             Assertions.assertEquals(8,res);
         }
-
-
-
 }

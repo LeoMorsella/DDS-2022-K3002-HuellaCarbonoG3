@@ -36,6 +36,9 @@ public class Miembro {
         this.tipoDoc = tipoDocu;
         this.numDoc = numeroDoc;
         this.areas = listaAreas;
+
+        areas.forEach(area -> area.addMiembro(this));
+
         AtomicReference<Double> pesoTotal = new AtomicReference<>(Double.valueOf(0));
         recorridos.forEach( recorrido -> pesoTotal.updateAndGet(v -> v + recorrido.getPeso()));
         if(pesoTotal.get() != 1) {

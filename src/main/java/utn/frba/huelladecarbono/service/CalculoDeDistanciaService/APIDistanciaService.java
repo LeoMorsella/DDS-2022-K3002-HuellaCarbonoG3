@@ -1,5 +1,6 @@
 package utn.frba.huelladecarbono.service.CalculoDeDistanciaService;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import utn.frba.huelladecarbono.model.CalculoDeDistancias.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Ubicacion;
 import utn.frba.huelladecarbono.model.UserExceptions.BadResponseException;
@@ -18,9 +19,6 @@ public class APIDistanciaService {
     private final String token = "Bearer 5PLixIkvvSuNT23px0g/L6iOS8N2R6gxj1nbTG1DrSo="; // hardcodeado para pruebas
     //private final String token = leerArchivoToken();
 
-    public APIDistanciaService() throws IOException {
-    }
-
     private int buscarIdLocalidad(Ubicacion ubicacion) throws Exception {
         int idPais      = this.buscarId("pais", -1, ubicacion);
         int idProvincia = this.buscarId("provincia", idPais     , ubicacion);
@@ -28,7 +26,7 @@ public class APIDistanciaService {
         return this.buscarId("localidad", idMunicipio, ubicacion);
     }
 
-    private int buscarId(String variable, int idSuperior, Ubicacion ubicacion) throws Exception {
+    public int buscarId(String variable, int idSuperior, Ubicacion ubicacion) throws Exception {
         int id = -1;
         WebClient client = null;
         ObjectMapper mapper = new ObjectMapper();
@@ -101,6 +99,13 @@ public class APIDistanciaService {
             }
 
             if(id == -1) {
+                System.out.println(ubicacion.getPais());
+                System.out.println(ubicacion.getProvincia());
+                System.out.println(ubicacion.getLocalidad());
+                System.out.println(ubicacion.getMunicipio());
+                System.out.println(ubicacion.getCalle());
+                System.out.println(ubicacion.getAltura());
+                System.out.println(ubicacion.getAltura());
                 throw new Exception("id no encontrado");
             } else {
                 return id;
@@ -111,9 +116,10 @@ public class APIDistanciaService {
             throw new BadResponseException("Error en la llamada de búsqueda de " + variable);
         }
     }
-    public Double medirDistancia(Ubicacion ubicacion1, Ubicacion ubicacion2) throws Exception {
-        int idLocalidadOrigen  = this.buscarIdLocalidad(ubicacion1);
-        int idLocalidadDestino = this.buscarIdLocalidad(ubicacion2);
+
+    public Double medirDistancia(Ubicacion ubicacion1, Ubicacion ubicacion2) throws JsonProcessingException {
+        int idLocalidadOrigen  = ubicacion1.getIdLocalidad();
+        int idLocalidadDestino = ubicacion2.getIdLocalidad();
 
         WebClient clientDistancia = WebClient.create("https://ddstpa.com.ar/api/distancia?localidadOrigenId=" + idLocalidadOrigen + "&calleOrigen=" + ubicacion1.getCalle() + "&alturaOrigen=" + ubicacion1.getAltura() + "&localidadDestinoId=" + idLocalidadDestino + "&calleDestino=" + ubicacion2.getCalle() + "&alturaDestino=" + ubicacion2.getAltura());
 
@@ -131,12 +137,13 @@ public class APIDistanciaService {
         String responseBody = response.readEntity(String.class);
         if (status == 200) {
             Distancia newDistancia = mapper.readValue(responseBody, Distancia.class);
-            Double distancia = newDistancia.getValor(); 
+            Double distancia = newDistancia.getValor();
             return distancia;
         } else {
             System.out.println("Error response = " + responseBody);
             throw new BadResponseException("Error en la llamada a /api/user");
         }
+
     }
 
     static private String leerArchivoToken() throws IOException {
