@@ -113,7 +113,17 @@ public class BaseDeDatos {
         FE.setFE("MONOPATIN", 0.2);
         FE.setFE("A_PIE", 0.0);
         //TODO
-        // SECTORES TERRITORIALES
         // AGENTES SECTORIALES
+        agentesSectoriales.add(new AgenteSectorial());
+        
+        // SECTORES TERRITORIALES
+        SectorTerritorial sector1 = new SectorTerritorial(agentesSectoriales.get(0));
+        sector1.setMunicipio("MONTECARLO");
+        sectoresTerritoriales.add(sector1);
+
+        SectorTerritorial sector2 = new SectorTerritorial();
+        sector2.setProvincia("MISIONES");
+        sectoresTerritoriales.add(sector2);
+        
     }
 }

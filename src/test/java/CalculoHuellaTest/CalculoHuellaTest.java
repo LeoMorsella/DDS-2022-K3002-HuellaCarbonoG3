@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.SectorTerritorial;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.*;
 
 public class CalculoHuellaTest {
@@ -51,12 +52,33 @@ public class CalculoHuellaTest {
 
     @Test
     public void calcularHuellaSectorTerritorial() {
-        //TODO
+        SectorTerritorial sector = BD.getSectoresTerritoriales().get(0);
+        Calendar fechaInicio = Calendario.crearFecha(0,2021);
+        Calendar fechaFin = Calendario.crearFecha(11,2021);
+        Assertions.assertDoesNotThrow(() -> {
+            Double huella = CalculadoraHCService.getCalculadoraHC().calcularHCSectorTerritorial(sector, fechaInicio, fechaFin);
+            System.out.println("La huella de carbono del sector territorial es: " + huella);
+        });
     }
 
     @Test
-    public void calcularHuellaPromedio() {
-        //TODO
+    public void calcularHuellaPromedioArea() {
+        Calendar fechaInicio = Calendario.crearFecha(0,2021);
+        Calendar fechaFin = Calendario.crearFecha(11,2021);
+        Assertions.assertDoesNotThrow(() -> {
+            Double huella = CalculadoraHCService.getCalculadoraHC().calcularHCPromedio(BD.getAreas().get(1), fechaInicio, fechaFin);
+            System.out.println("La huella de carbono promedio para el area es: " + huella);
+        });
+    }
+
+    @Test
+    public void calcularHuellaPromedioOrganizacion() {
+        Calendar fechaInicio = Calendario.crearFecha(0,2021);
+        Calendar fechaFin = Calendario.crearFecha(11,2021);
+        Assertions.assertDoesNotThrow(() -> {
+            Double huella = CalculadoraHCService.getCalculadoraHC().calcularHCPromedio(BD.getOrganizaciones().get(0), fechaInicio, fechaFin);
+            System.out.println("La huella de carbono promedio para la organizacion es: " + huella);
+        });
     }
 
     @Test

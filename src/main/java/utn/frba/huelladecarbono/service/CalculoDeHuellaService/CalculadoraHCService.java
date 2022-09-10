@@ -53,11 +53,11 @@ public class CalculadoraHCService {
         return CalculadoraHCMiembro.calcularImpactoIndividual(miembro, organizacion, mesInicio, mesFin);
     }
 
-    public Double calcularHCPromedio(Miembro miembro, Organizacion organizacion,Calendar mesInicio,Calendar mesFin) throws Exception {
+    public Double calcularHCPromedio(Organizacion organizacion,Calendar mesInicio,Calendar mesFin) throws Exception {
         return CalculadoraHCOrganizacion.HCpromedio(organizacion, mesInicio, mesFin);
     }
 
-    public Double calcularHCPromedio(Miembro miembro, Area area,Calendar mesInicio,Calendar mesFin) throws Exception {
+    public Double calcularHCPromedio(Area area,Calendar mesInicio,Calendar mesFin) throws Exception {
         return CalculadoraHCArea.HCpromedio(area, mesInicio, mesFin);
     }
 }
