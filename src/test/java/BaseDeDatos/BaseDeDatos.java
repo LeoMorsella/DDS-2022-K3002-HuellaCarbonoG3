@@ -104,15 +104,11 @@ public class BaseDeDatos {
         miembros.add(new Miembro("Alexa", "Prieto", "DNI", 54269856, areas, recorridos3));
         miembros.add(new Miembro("Martha", "Paz", "DNI", 12546598, areas1, recorridos1));
         miembros.add(new Miembro("Lucas", "Sosa", "DNI", 45879652, areas2, recorridos1));
+
         // FACTORES DE EMISIÓN
         FactoresDeEmision FE = FactoresDeEmision.getInstance();
-        FE.setFE("AUTO", 1.0);
-        FE.setFE("MOTO", 0.5);
-        FE.setFE("CAMIONETA", 2.0);
-        FE.setFE("BICI", 0.0);
-        FE.setFE("MONOPATIN", 0.2);
-        FE.setFE("A_PIE", 0.0);
-        //TODO
+        FE.cargaDeFactores();
+
         // AGENTES SECTORIALES
         agentesSectoriales.add(new AgenteSectorial());
         

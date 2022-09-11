@@ -1,6 +1,5 @@
 package utn.frba.huelladecarbono.service.CalculoDeDistanciaService;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import utn.frba.huelladecarbono.model.CalculoDeDistancias.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Ubicacion;
 import utn.frba.huelladecarbono.model.UserExceptions.BadResponseException;
@@ -9,15 +8,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.cxf.jaxrs.client.WebClient;
 
 import javax.ws.rs.core.Response;
-import java.io.File;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Properties;
+
 
 public class APIDistanciaService {
-
-    private final String token = "Bearer 5PLixIkvvSuNT23px0g/L6iOS8N2R6gxj1nbTG1DrSo="; // hardcodeado para pruebas
-    //private final String token = leerArchivoToken();
 
     private int buscarIdLocalidad(Ubicacion ubicacion) throws Exception {
         int idPais      = this.buscarId("pais", -1, ubicacion);
@@ -50,7 +48,8 @@ public class APIDistanciaService {
         assert client != null;
         Response response = client
                 .header("Content-Type", "application/json")
-                .authorization(token)
+                //.authorization(token.getToken())
+                .authorization(this.token())
                 .get();
 
         int status = response.getStatus();
@@ -117,7 +116,7 @@ public class APIDistanciaService {
         }
     }
 
-    public Double medirDistancia(Ubicacion ubicacion1, Ubicacion ubicacion2) throws JsonProcessingException {
+    public Double medirDistancia(Ubicacion ubicacion1, Ubicacion ubicacion2) throws IOException {
         int idLocalidadOrigen  = ubicacion1.getIdLocalidad();
         int idLocalidadDestino = ubicacion2.getIdLocalidad();
 
@@ -129,7 +128,8 @@ public class APIDistanciaService {
 
         Response response = clientDistancia
                 .header("Content-Type", "application/json")
-                .authorization(token)
+               // .authorization(token.getToken())
+                .authorization(this.token())
                 .get();
 
         int status = response.getStatus();
@@ -146,19 +146,15 @@ public class APIDistanciaService {
 
     }
 
-    static private String leerArchivoToken() throws IOException {
 
-        String token = null;
 
-        File doc = new File("token.txt");
-        doc.createNewFile();
-        FileReader freader = new FileReader(doc);
-        char [] i = new char[1000];
-        freader.read(i);
-        for(char j : i)
-            token+=j;
-        freader.close();
-        return token;
 
-    }
+    public String token() throws IOException {
+       String CONFIGTOKEN = "src\\main\\resources\\application.properties";
+
+        Properties property = new Properties();
+		property.load(new FileReader(CONFIGTOKEN));
+        String valorToken = property.getProperty("token");
+		return valorToken;
+}
 }
