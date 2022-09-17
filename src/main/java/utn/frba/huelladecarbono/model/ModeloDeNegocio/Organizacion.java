@@ -23,19 +23,19 @@ public class Organizacion {
     private String razonSocial;
     @Enumerated(EnumType.STRING)
     private TipoOrg tipo;
-    @Transient
+    @Transient //ManyToOne
     private Ubicacion ubicacion;
 
     //TODO cambiar esto porque así no lo persiste
-    @Transient
+    @Transient//OneToMany
     private ArrayList<Area> areas = new ArrayList<>();
     @Enumerated(EnumType.STRING)
     private Clasificacion clasificacion;
-    @Transient
+    @Transient//ManyToMany
     private ArrayList<Miembro> contactosMail = null;
-    @Transient
+    @Transient//ManyToMany
     private ArrayList<Miembro> contactosWP = null;
-    @Transient
+    @Transient // Evaluar si es ElementCollection o Transient
     private ArrayList<Double> hcMensual = new ArrayList<>();
 
     public String getRazonSocial() {

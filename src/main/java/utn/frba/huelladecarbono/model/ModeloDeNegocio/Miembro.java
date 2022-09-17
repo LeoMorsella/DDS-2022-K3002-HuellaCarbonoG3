@@ -20,9 +20,9 @@ public class Miembro {
     private String apellido;
     private String tipoDoc;
     private int numDoc;
-    @Transient
+    @Transient//ManyToMany
     private ArrayList<Area> areas;
-    @Transient
+    @Transient//ManyToMany
     private ArrayList<Recorrido> recorridos;
 
     private String mail;

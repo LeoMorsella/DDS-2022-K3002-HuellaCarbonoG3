@@ -14,12 +14,12 @@ public class Area {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String nombre;
-    @Transient
+    @Transient//ManyToMany
     private  ArrayList<Miembro> miembros = new ArrayList<>();
 
-    @Transient
+    @Transient//ManyToOne
     private  Organizacion organizacion;
-    @Transient
+    @Transient//OneToMany
     private  List<List<DatoDeMedicion>> mediciones = new ArrayList<>();
 
     public Area() {
