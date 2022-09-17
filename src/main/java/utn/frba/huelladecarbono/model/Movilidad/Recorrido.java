@@ -18,9 +18,9 @@ public class Recorrido {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Transient
+    @Transient // Problema ArrayList
     public ArrayList<Trayecto> trayectos = new ArrayList<>();
-    @Transient
+    @Transient // OneToMany?
     private Organizacion organizacion;
     private Double peso;
     private Calendar mesInicio;

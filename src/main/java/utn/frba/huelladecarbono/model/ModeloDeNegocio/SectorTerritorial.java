@@ -15,7 +15,7 @@ public class SectorTerritorial {
     private Integer id;
     private String municipio;
     private String provincia;
-    @Transient//OneToOne
+    @OneToOne
     private AgenteSectorial agenteSectorial;
 
     public SectorTerritorial(AgenteSectorial agenteSectorial) {

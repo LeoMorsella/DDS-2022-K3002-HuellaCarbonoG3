@@ -11,7 +11,7 @@ public class AgenteSectorial {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Transient // OneToOne
+    @OneToOne
     private SectorTerritorial sectorTerritorial;
 
     public SectorTerritorial getSectorTerritorial() {

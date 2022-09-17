@@ -6,10 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 @Getter @Setter
 @Entity
@@ -19,9 +16,9 @@ public class Parada {
     @GenericGenerator(name="uuid", strategy="uuid2")
     private String ID;
     private String nombre;
-    @Transient
+    @ManyToOne
     private Ubicacion ubicacion;
-    @Transient
+    @ManyToOne
     private Distancia distanciaAProximaParada;
 
     public Parada() {

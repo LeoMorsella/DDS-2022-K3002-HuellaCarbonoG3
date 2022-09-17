@@ -14,12 +14,11 @@ public class Area {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String nombre;
-    @Transient//ManyToMany
+    @Transient // Problema ArrayList
     private  ArrayList<Miembro> miembros = new ArrayList<>();
-
-    @Transient//ManyToOne
+    @ManyToOne
     private  Organizacion organizacion;
-    @Transient//OneToMany
+    @Transient // Ver como persistir una lista de listas
     private  List<List<DatoDeMedicion>> mediciones = new ArrayList<>();
 
     public Area() {

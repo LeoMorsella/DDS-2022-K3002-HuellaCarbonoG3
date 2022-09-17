@@ -20,7 +20,7 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private Rol rol;
     private int cantIntentos = 0;
-    @Transient
+    @OneToOne
     private Miembro miembro;
 
     public static Usuario nuevoUsuario(String username, String password, Rol unrol){

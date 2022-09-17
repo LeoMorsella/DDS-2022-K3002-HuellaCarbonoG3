@@ -3,11 +3,9 @@ package utn.frba.huelladecarbono.model.MedioDeTransporte;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter @Setter
 @Entity
@@ -15,7 +13,7 @@ public class TransportePublico extends Medio {
     @Enumerated(EnumType.STRING)
     private TipoTransportePublico tipoTransportePublico;
     private String linea;
-    @Transient
+    @Transient //Segun vi es @ManyToMany pero no estoy seguro si existe annotation para arraylist, segun pude ver solo funciona para List
     private  ArrayList<Parada> paradas;
 
     private String ID = "TP";
