@@ -17,4 +17,8 @@ public interface IOrganizacionService {
 
     //Metodo para encontrar a una organizacion
     public Organizacion findOrganizacion(Integer id);
+
+    //Metodo para encontrar a una organizacion por su estado
+    public List<Organizacion> findOrganizacionByEstadoActivo();
+    public void cambiarEstadoOrganizacion(Integer id);
 }

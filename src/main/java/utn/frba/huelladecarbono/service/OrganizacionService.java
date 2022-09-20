@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,12 +29,30 @@ public class OrganizacionService implements IOrganizacionService{
 
     @Override
     public void deleteOrganizacion(Integer id) {
-        organizacionRepository.deleteById(id);
+        cambiarEstadoOrganizacion(id);
     }
+
 
     @Override
     public Organizacion findOrganizacion(Integer id) {
         Organizacion organizacion = organizacionRepository.findById(id).orElse(null);
         return organizacion;
     }
+
+
+    @Override
+    public List<Organizacion> findOrganizacionByEstadoActivo() {
+
+       return organizacionRepository.findByEstaActivo(true);
+    }
+
+    @Override
+    public void cambiarEstadoOrganizacion(Integer id) {
+        Organizacion organizacion = findOrganizacion(id);
+        organizacion.setEstaActivo(false);
+
+        this.saveOrganizacion(organizacion);
+    }
+
+
 }

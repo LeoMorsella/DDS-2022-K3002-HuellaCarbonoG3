@@ -38,6 +38,11 @@ public class Organizacion {
     @Transient // Evaluar si es ElementCollection o Transient
     private ArrayList<Double> hcMensual = new ArrayList<>();
 
+    private Boolean estaActivo;
+
+    public Organizacion(Organizacion organizacionclase) {
+    }
+
     public String getRazonSocial() {
         return razonSocial;
     }
@@ -109,6 +114,22 @@ public class Organizacion {
         contactosWP.add(Contacto);
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Boolean getEstaActivo() {
+        return estaActivo;
+    }
+
+    public void setEstaActivo(Boolean estaActivo) {
+        this.estaActivo = estaActivo;
+    }
+
     public Organizacion() {
     }
 
@@ -129,6 +150,15 @@ public class Organizacion {
         this.clasificacion = clasificacion;
         this.contactosMail = contactosMail;
         this.contactosWP = contactosWP;
+    }
+
+    public Organizacion(String razonSocial, TipoOrg tipo, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, Boolean estaActivo) {
+        this.razonSocial = razonSocial;
+        this.tipo = tipo;
+        this.clasificacion = clasificacion;
+        this.contactosMail = contactosMail;
+        this.contactosWP = contactosWP;
+        this.estaActivo = estaActivo;
     }
 
     public List<Miembro> getMiembros(){
@@ -154,6 +184,22 @@ public class Organizacion {
             }
         }
         return medicionesOrga;
+    }
+
+    @Override
+    public String toString() {
+        return "Organizacion{" +
+                "razonSocial='" + razonSocial + '\'' +
+                ", tipo=" + tipo +
+                ", clasificacion=" + clasificacion +
+                ", contactosMail=" + contactosMail +
+                ", contactosWP=" + contactosWP +
+                ", estaActivo=" + estaActivo +
+                '}';
+    }
+
+    public Boolean estaActiva(){
+        return this.estaActivo;
     }
 
 }
