@@ -1,12 +1,19 @@
 package utn.frba.huelladecarbono.model.Repositorios;
 
+import org.apache.poi.ss.formula.functions.T;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import utn.frba.huelladecarbono.controller.TrayectoController;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Component
 public class RepositorioTrayectos {
+  @Autowired
+  TrayectoController trayectobd;
+
   private static RepositorioTrayectos instance = new RepositorioTrayectos();
   private List<Trayecto> trayectos;
 
@@ -30,5 +37,12 @@ public class RepositorioTrayectos {
     this.trayectos.add(trayecto);
   }
 
+  //TODO probar
+  public void cargarDeTrayectoDeBdAlSistema() {
+    for(Trayecto trayectoclase : trayectobd.getTrayectos()) {
+      Trayecto trayecto = new Trayecto(trayectoclase.getPuntoPartida(),trayectoclase.getPuntoLlegada(),trayectoclase.getMedioTransporte());
+      this.agregarTrayecto(trayecto);
+    }
+  }
 }
 
