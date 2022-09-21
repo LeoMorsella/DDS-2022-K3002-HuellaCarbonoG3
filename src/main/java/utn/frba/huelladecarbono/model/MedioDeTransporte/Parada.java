@@ -12,13 +12,12 @@ import javax.persistence.*;
 @Entity
 public class Parada {
     @Id
-    @GeneratedValue(generator="uuid")
-    @GenericGenerator(name="uuid", strategy="uuid2")
-    private String ID;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     private String nombre;
-    @ManyToOne
+    @Transient
     private Ubicacion ubicacion;
-    @ManyToOne
+    @Transient
     private Distancia distanciaAProximaParada;
 
     public Parada() {
@@ -42,5 +41,15 @@ public class Parada {
         else{
             throw new RuntimeException("No hay siguiente parada (Parada Terminal)");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Parada{" +
+                "ID='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", ubicacion=" + ubicacion +
+                ", distanciaAProximaParada=" + distanciaAProximaParada +
+                '}';
     }
 }
