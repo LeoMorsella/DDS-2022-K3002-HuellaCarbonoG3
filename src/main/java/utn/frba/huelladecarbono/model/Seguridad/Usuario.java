@@ -2,6 +2,7 @@ package utn.frba.huelladecarbono.model.Seguridad;
 
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioUsuarios;
+import utn.frba.huelladecarbono.repository.UsuarioRepository;
 import utn.frba.huelladecarbono.service.ValidadorContraseniasService;
 import lombok.Getter;
 import lombok.Setter;

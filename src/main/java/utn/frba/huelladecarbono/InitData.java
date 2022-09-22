@@ -10,7 +10,9 @@ import utn.frba.huelladecarbono.controller.ParadaController;
 import utn.frba.huelladecarbono.controller.UsuarioController;
 import utn.frba.huelladecarbono.model.CalculoDeDistancias.Distancia;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Parada;
+import utn.frba.huelladecarbono.model.MedioDeTransporte.TransportePublico;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
+import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioParadas;
@@ -18,6 +20,7 @@ import utn.frba.huelladecarbono.model.Repositorios.RepositorioUsuarios;
 import utn.frba.huelladecarbono.model.Seguridad.Rol;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.*;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 
 import java.util.List;
 
@@ -36,6 +39,9 @@ public class InitData implements CommandLineRunner {
     //Usuarios
     @Autowired
     UsuarioRepository repoUsuario;
+
+    @Autowired
+    RecorridoRepository repoRecorrido;
     
 
     //Paradas
@@ -75,6 +81,14 @@ public class InitData implements CommandLineRunner {
             List<Usuario> usuarios = List.of(usuario1);
             usuarios.stream().forEach(usuario -> {
                 repoUsuario.save(usuario);
+            });
+
+
+            //Recorrido
+            Recorrido recorrido1 = new Recorrido(organizacion1,0.5, Calendario.crearFecha(1, 2020), Calendario.crearFecha(9, 2022));
+            List<Recorrido> recorridos = List.of(recorrido1);
+            recorridos.stream().forEach(recorrido -> {
+                repoRecorrido.save(recorrido);
             });
 
 
