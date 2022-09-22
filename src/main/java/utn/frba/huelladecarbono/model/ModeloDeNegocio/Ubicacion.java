@@ -10,20 +10,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Getter
+@Getter @Setter
 @Entity
 @NoArgsConstructor
 public class Ubicacion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private int idPais;
+    private Integer idPais;
     private String pais;
-    private int idProvincia;
+    private Integer idProvincia;
     private String provincia;
-    private int idMunicipio;
+    private Integer idMunicipio;
     private String municipio;
-    private int idLocalidad;
+    private Integer idLocalidad;
     private String localidad;
     private String calle;
     private String altura;
@@ -55,5 +55,26 @@ public class Ubicacion {
         this.idProvincia = API.buscarId("provincia", idPais, this);
         this.idMunicipio = API.buscarId("municipio", idProvincia, this);
         this.idLocalidad = API.buscarId("localidad", idMunicipio, this);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Ubicacion(Integer idPais, String pais, Integer idProvincia, String provincia, Integer idMunicipio, String municipio, Integer idLocalidad, String localidad, String calle, String altura) {
+        this.idPais = idPais;
+        this.pais = pais;
+        this.idProvincia = idProvincia;
+        this.provincia = provincia;
+        this.idMunicipio = idMunicipio;
+        this.municipio = municipio;
+        this.idLocalidad = idLocalidad;
+        this.localidad = localidad;
+        this.calle = calle;
+        this.altura = altura;
     }
 }

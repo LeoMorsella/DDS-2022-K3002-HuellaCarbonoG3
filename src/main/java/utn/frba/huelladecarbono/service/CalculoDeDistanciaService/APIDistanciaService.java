@@ -17,15 +17,15 @@ import java.util.Properties;
 
 public class APIDistanciaService {
 
-    private int buscarIdLocalidad(Ubicacion ubicacion) throws Exception {
-        int idPais      = this.buscarId("pais", -1, ubicacion);
-        int idProvincia = this.buscarId("provincia", idPais     , ubicacion);
-        int idMunicipio = this.buscarId("municipio", idProvincia, ubicacion);
+    private Integer buscarIdLocalidad(Ubicacion ubicacion) throws Exception {
+        Integer idPais      = this.buscarId("pais", -1, ubicacion);
+        Integer idProvincia = this.buscarId("provincia", idPais     , ubicacion);
+        Integer idMunicipio = this.buscarId("municipio", idProvincia, ubicacion);
         return this.buscarId("localidad", idMunicipio, ubicacion);
     }
 
-    public int buscarId(String variable, int idSuperior, Ubicacion ubicacion) throws Exception {
-        int id = -1;
+    public Integer buscarId(String variable, Integer idSuperior, Ubicacion ubicacion) throws Exception {
+        Integer id = -1;
         WebClient client = null;
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -48,11 +48,10 @@ public class APIDistanciaService {
         assert client != null;
         Response response = client
                 .header("Content-Type", "application/json")
-                //.authorization(token.getToken())
                 .authorization(this.token())
                 .get();
 
-        int status = response.getStatus();
+        Integer status = response.getStatus();
         String responseBody = response.readEntity(String.class);
 
         if (status == 200) {
@@ -128,11 +127,10 @@ public class APIDistanciaService {
 
         Response response = clientDistancia
                 .header("Content-Type", "application/json")
-               // .authorization(token.getToken())
                 .authorization(this.token())
                 .get();
 
-        int status = response.getStatus();
+        Integer status = response.getStatus();
         System.out.println("Status: " + status);
         String responseBody = response.readEntity(String.class);
         if (status == 200) {

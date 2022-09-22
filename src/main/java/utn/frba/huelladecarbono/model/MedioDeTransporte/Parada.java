@@ -20,6 +20,14 @@ public class Parada {
     @Transient
     private Distancia distanciaAProximaParada;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Parada() {
     }
 
