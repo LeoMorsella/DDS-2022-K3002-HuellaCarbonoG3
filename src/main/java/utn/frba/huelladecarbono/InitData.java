@@ -4,19 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.stereotype.Component;
-import utn.frba.huelladecarbono.controller.MiembroController;
 import utn.frba.huelladecarbono.controller.OrganizacionController;
-import utn.frba.huelladecarbono.controller.ParadaController;
-import utn.frba.huelladecarbono.controller.UsuarioController;
 import utn.frba.huelladecarbono.model.CalculoDeDistancias.Distancia;
+import utn.frba.huelladecarbono.model.Creador.CreaElementos;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Parada;
-import utn.frba.huelladecarbono.model.MedioDeTransporte.TransportePublico;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
-import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
-import utn.frba.huelladecarbono.model.Repositorios.RepositorioParadas;
-import utn.frba.huelladecarbono.model.Repositorios.RepositorioUsuarios;
 import utn.frba.huelladecarbono.model.Seguridad.Rol;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.*;
@@ -82,6 +76,9 @@ public class InitData implements CommandLineRunner {
             usuarios.stream().forEach(usuario -> {
                 repoUsuario.save(usuario);
             });
+            // De esta manera se carga el usuario cada vez que se crea
+            CreaElementos f = new CreaElementos();
+            f.crearUsuario("prueba2","Yagni3890+",Rol.MIEMBRO,repoUsuario);
 
 
             //Recorrido
@@ -90,6 +87,9 @@ public class InitData implements CommandLineRunner {
             recorridos.stream().forEach(recorrido -> {
                 repoRecorrido.save(recorrido);
             });
+            //De esta manera se carga el recorrido
+            f.crearRecorrido(organizacion3,0.8,Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021),repoRecorrido);
+
 
 
  //Funciona la abstraccion
