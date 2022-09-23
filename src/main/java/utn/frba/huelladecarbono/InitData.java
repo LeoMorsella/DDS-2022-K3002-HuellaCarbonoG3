@@ -6,8 +6,9 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.stereotype.Component;
 import utn.frba.huelladecarbono.controller.OrganizacionController;
 import utn.frba.huelladecarbono.model.CalculoDeDistancias.Distancia;
-import utn.frba.huelladecarbono.model.Creador.CreaElementos;
+import utn.frba.huelladecarbono.model.Creador.*;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Parada;
+import utn.frba.huelladecarbono.model.MedioDeTransporte.TipoTransportePublico;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
@@ -16,6 +17,7 @@ import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.*;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -43,8 +45,13 @@ public class InitData implements CommandLineRunner {
     ParadaRepository repoParadas;
 
     //Transporte
+
+    @Autowired
+    TransportePublicoRepository repoTransportes;
+
     @Autowired
     MiembroRepository repoMiembros;
+
 
     @Autowired
     RepositoryRestConfiguration config;
@@ -63,6 +70,7 @@ public class InitData implements CommandLineRunner {
             organizaciones.stream().forEach(organizacion -> {
                 repoOrganizacion.save(organizacion);
             });
+            CrearOrganizacion.crearOrganizacion("SRL",TipoOrg.EMPRESA,Clasificacion.MINISTERIO,null,null,true,repoOrganizacion);
             System.out.println("*******************************************");
             repositorioOrganizaciones.cargarDeOrganizacionesDeBdAlSistema();
             //Prueba para mostrar las organizaciones activas
@@ -77,8 +85,7 @@ public class InitData implements CommandLineRunner {
                 repoUsuario.save(usuario);
             });
             // De esta manera se carga el usuario cada vez que se crea
-            CreaElementos f = new CreaElementos();
-            f.crearUsuario("prueba2","Yagni3890+",Rol.MIEMBRO);
+            CrearUsuario.crearUsuario("prueba2","Yagni3890+",Rol.MIEMBRO,repoUsuario);
 
 
             //Recorrido
@@ -88,7 +95,7 @@ public class InitData implements CommandLineRunner {
                 repoRecorrido.save(recorrido);
             });
             //De esta manera se carga el recorrido
-            f.crearRecorrido(organizacion3,0.8,Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021),repoRecorrido);
+            CrearRecorrido.crearRecorrido(organizacion3,0.8,Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021),repoRecorrido);
 
 
 
@@ -103,6 +110,12 @@ public class InitData implements CommandLineRunner {
             //Parada paradaPruebaDos = new Parada("50",ubicacionPruebaUno);
             List<Parada> paradas = List.of(paradaPruebaUno);
             paradas.stream().forEach(parada -> {repoParadas.save(parada);});
+            CrearParada.crearParada("280",ubicacionPruebaUno,repoParadas);
+
+            ArrayList<Parada> paradas1 = new ArrayList<>();
+            paradas1.add(paradaPruebaUno);
+            CreaTransportePublico c = new CreaTransportePublico();
+            c.creaTransportePublico(TipoTransportePublico.COLECTIVO,"88",paradas1,"12",repoTransportes);
 
         } else {
             System.out.println("Ya existen Organizaciones creadas anteriormente");
@@ -119,6 +132,7 @@ public class InitData implements CommandLineRunner {
             Miembro miembroPruebaUno = new Miembro(20,"Pablo","Ortiz","pablo@prueba","2323");
             List<Miembro> miembros = List.of(miembroPruebaUno);
             miembros.stream().forEach(miembro->{repoMiembros.save(miembroPruebaUno);});
+            CrearMiembro.crearMiembro(25,"Nazuna","Nanakusa","nazuna@gmail.com","154987",repoMiembros);
         }
         else{
             System.out.println("Ya existen Organizaciones creadas anteriormente");

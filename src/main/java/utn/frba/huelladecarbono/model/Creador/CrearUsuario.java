@@ -10,23 +10,16 @@ import utn.frba.huelladecarbono.repository.UsuarioRepository;
 
 import java.util.Calendar;
 
-public class CreaElementos {
+public class CrearUsuario {
 
-    @Autowired
-    UsuarioRepository repoUsuario;
 
-    public Usuario crearUsuario(String username, String password, Rol rol){
+    public static Usuario crearUsuario(String username, String password, Rol rol,UsuarioRepository u){
         Usuario usuario = new Usuario(username,password,rol);
-        repoUsuario.save(usuario);
+        u.save(usuario);
        // RepositorioUsuarios.getRepositorio().agregarUsuario(usuario);
         return usuario;
     }
 
-    public Recorrido crearRecorrido(Organizacion organizacion, Double peso, Calendar mesInicio, Calendar mesFin, RecorridoRepository r) {
-        Recorrido recorrido = new Recorrido(organizacion,peso,mesInicio,mesFin);
-        r.save(recorrido);
-       // RepositorioRecorrido.getRepositorio().agregarRecorrido(recorrido);
-        return recorrido;
-    }
+
 
 }
