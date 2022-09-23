@@ -1,5 +1,6 @@
 package utn.frba.huelladecarbono.model.Creador;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Seguridad.Rol;
@@ -11,9 +12,12 @@ import java.util.Calendar;
 
 public class CreaElementos {
 
-    public Usuario crearUsuario(String username, String password, Rol rol,UsuarioRepository u){
+    @Autowired
+    UsuarioRepository repoUsuario;
+
+    public Usuario crearUsuario(String username, String password, Rol rol){
         Usuario usuario = new Usuario(username,password,rol);
-        u.save(usuario);
+        repoUsuario.save(usuario);
        // RepositorioUsuarios.getRepositorio().agregarUsuario(usuario);
         return usuario;
     }

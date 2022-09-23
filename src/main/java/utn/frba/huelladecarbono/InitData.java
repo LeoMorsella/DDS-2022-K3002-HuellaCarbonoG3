@@ -78,7 +78,7 @@ public class InitData implements CommandLineRunner {
             });
             // De esta manera se carga el usuario cada vez que se crea
             CreaElementos f = new CreaElementos();
-            f.crearUsuario("prueba2","Yagni3890+",Rol.MIEMBRO,repoUsuario);
+            f.crearUsuario("prueba2","Yagni3890+",Rol.MIEMBRO);
 
 
             //Recorrido
@@ -118,7 +118,7 @@ public class InitData implements CommandLineRunner {
 
             Miembro miembroPruebaUno = new Miembro(20,"Pablo","Ortiz","pablo@prueba","2323");
             List<Miembro> miembros = List.of(miembroPruebaUno);
-            miembros.stream().forEach(parada->{repoMiembros.save(miembroPruebaUno);});
+            miembros.stream().forEach(miembro->{repoMiembros.save(miembroPruebaUno);});
         }
         else{
             System.out.println("Ya existen Organizaciones creadas anteriormente");
