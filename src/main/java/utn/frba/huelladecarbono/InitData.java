@@ -127,7 +127,7 @@ public class InitData implements CommandLineRunner {
     public void cargarMiembros() throws Exception
     {
         config.exposeIdsFor(Organizacion.class);
-        if(repoMiembros.count() == 0 && repoMiembros.count() == 0) {
+        if(repoMiembros.count() == 0) {
 
             Miembro miembroPruebaUno = new Miembro(20,"Pablo","Ortiz","pablo@prueba","2323");
             List<Miembro> miembros = List.of(miembroPruebaUno);
@@ -135,7 +135,7 @@ public class InitData implements CommandLineRunner {
             CrearMiembro.crearMiembro(25,"Nazuna","Nanakusa","nazuna@gmail.com","154987",repoMiembros);
         }
         else{
-            System.out.println("Ya existen Organizaciones creadas anteriormente");
+            System.out.println("Ya existen Miembros creados anteriormente");
         }
     }
 }
