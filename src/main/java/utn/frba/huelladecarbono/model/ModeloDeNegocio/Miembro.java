@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Getter @Setter
@@ -28,6 +29,16 @@ public class Miembro {
     private String mail;
 
     private String telefono;
+
+    private Double huellaCarbono = 0.0;
+
+    private Double impactoIndividual = 0.0;
+
+    @ElementCollection
+    @CollectionTable(name = "huellas_carbono")
+    @MapKeyColumn(name = "vigencia")
+    @Column(name = "valor_huella")
+    private HashMap<Vigencia, Double> huellasCarbono = new HashMap<>();
 
     public Miembro(String nom, String ape, String tipoDocu, int numeroDoc, ArrayList<Area> listaAreas,
                    ArrayList<Recorrido> recorridos) {
@@ -74,11 +85,23 @@ public class Miembro {
         areas.add(area);
     }
 
+    public void setHC(Double valor){
+        this.huellaCarbono = valor;
+    }
+
     public void addRecorrido(Recorrido recorrido){
         recorridos.add(recorrido);
     }
 
     public void addRecorrido(ArrayList<Recorrido> recorridos){
         recorridos.addAll(recorridos);
+    }
+
+    public void setImpacto(Double valor){
+        this.impactoIndividual = valor;
+    }
+
+    public void agregarHuella(Vigencia vigencia, Double valor){
+        this.huellasCarbono.put(vigencia, valor);
     }
 }

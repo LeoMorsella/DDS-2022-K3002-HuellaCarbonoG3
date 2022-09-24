@@ -3,6 +3,9 @@ package utn.frba.huelladecarbono.model.ModeloDeNegocio;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashMap;
+
+import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +24,12 @@ public class DatoDeMedicion {
         private  String periodicidad;
         private String periodoImputacion;
         private String unidad;
+
+    @ElementCollection
+    @CollectionTable(name = "huellas_carbono")
+    @MapKeyColumn(name = "vigencia")
+    @Column(name = "valor_huella")
+    private HashMap<Vigencia, Double> huellasCarbono = new HashMap<>();
 
     public DatoDeMedicion() {
     }
@@ -64,6 +73,10 @@ public class DatoDeMedicion {
             if(this.tipoDeConsumo != "Categoria de producto transportado" && this.tipoDeConsumo !=
                     "Medio de Transporte") return Double.parseDouble(valor);
             else return valor;
+    }
+
+    public void agregarHuella(Vigencia vigencia, Double valor){
+        this.huellasCarbono.put(vigencia, valor);
     }
 
     public void setValor(String valor) {

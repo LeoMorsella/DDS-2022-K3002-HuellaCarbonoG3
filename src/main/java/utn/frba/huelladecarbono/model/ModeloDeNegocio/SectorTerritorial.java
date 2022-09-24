@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 @Getter @Setter
 @Entity
@@ -15,6 +16,14 @@ public class SectorTerritorial {
     private Integer id;
     private String municipio;
     private String provincia;
+    private Double huellaCarbono = 0.0;
+
+    @ElementCollection
+    @CollectionTable(name = "huellas_carbono")
+    @MapKeyColumn(name = "vigencia")
+    @Column(name = "valor_huella")
+    private HashMap<Vigencia, Double> huellasCarbono = new HashMap<>();
+    
     @OneToOne
     private AgenteSectorial agenteSectorial;
 
@@ -45,6 +54,10 @@ public class SectorTerritorial {
         return provincia;
     }
 
+    public void setHC(Double valor){
+        this.huellaCarbono = valor;
+    }
+
     public String getMunicipio() {
         return municipio;
     }
@@ -59,6 +72,10 @@ public class SectorTerritorial {
 
     public AgenteSectorial getAgenteSectorial() {
         return agenteSectorial;
+    }
+
+    public void agregarHuella(Vigencia vigencia, Double valor){
+        this.huellasCarbono.put(vigencia, valor);
     }
 
     public void setAgenteSectorial(AgenteSectorial agenteSectorial) {

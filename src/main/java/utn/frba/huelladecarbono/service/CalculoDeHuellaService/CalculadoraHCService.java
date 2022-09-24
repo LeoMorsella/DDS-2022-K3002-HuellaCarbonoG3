@@ -21,19 +21,35 @@ public class CalculadoraHCService {
     }
 
     public Double calcularHCOrganizacion(Organizacion organizacion, Calendar mesInicio, Calendar mesFin) {
-        return CalculadoraHCOrganizacion.calcularHC(organizacion, mesInicio, mesFin);
+        Double valor = CalculadoraHCOrganizacion.calcularHC(organizacion, mesInicio, mesFin);
+        organizacion.setHC(valor);
+        Vigencia vigencia = new Vigencia(mesInicio, mesFin);
+        organizacion.agregarHuella(vigencia, valor);
+        return valor;
     }
 
     public Double calcularHCArea(Area area, Calendar mesInicio, Calendar mesFin) {
-        return CalculadoraHCArea.calcularHC(area, mesInicio, mesFin);
+        Double valor = CalculadoraHCArea.calcularHC(area, mesInicio, mesFin);
+        area.setHC(valor);
+        Vigencia vigencia = new Vigencia(mesInicio, mesFin);
+        area.agregarHuella(vigencia, valor);
+        return valor;
     }
 
     public Double calcularHCMiembro(Miembro miembro, Calendar mesInicio, Calendar mesFin, Organizacion organizacion) throws Exception {
-        return CalculadoraHCMiembro.calcularHC(miembro, mesInicio, mesFin, organizacion);
+        Double valor = CalculadoraHCMiembro.calcularHC(miembro, mesInicio, mesFin, organizacion);
+        Vigencia vigencia = new Vigencia(mesInicio, mesFin);
+        miembro.agregarHuella(vigencia, valor);
+        return valor;
     }
 
     public Double calcularHCMedicion(List<DatoDeMedicion> datoDeMedicion, Calendar mesInicio, Calendar mesFin) {
-        return CalculadoraHCMedicion.calcularHC(datoDeMedicion, k, mesInicio, mesFin);
+        Double valor = CalculadoraHCMedicion.calcularHC(datoDeMedicion, k, mesInicio, mesFin);
+        Vigencia vigencia = new Vigencia(mesInicio, mesFin);
+        for(DatoDeMedicion dato : datoDeMedicion){
+            dato.agregarHuella(vigencia, valor);
+        }
+        return valor;
     }
 
     public Double calcularHCSectorTerritorial(SectorTerritorial sectorTerritorial, Calendar mesInicio, Calendar mesFin) {
@@ -41,6 +57,9 @@ public class CalculadoraHCService {
         for (Organizacion organizacion : sectorTerritorial.getOrganizaciones()) {
             HCTotal += CalculadoraHCOrganizacion.calcularHC(organizacion, mesInicio, mesFin);
         }
+        sectorTerritorial.setHC(HCTotal);
+        Vigencia vigencia = new Vigencia(mesInicio, mesFin);
+        sectorTerritorial.agregarHuella(vigencia, HCTotal);
         return HCTotal;
     }
 
@@ -50,14 +69,20 @@ public class CalculadoraHCService {
     }
 
     public Double calcularImpactoIndividual(Miembro miembro, Organizacion organizacion, Calendar mesInicio, Calendar mesFin) throws Exception {
-        return CalculadoraHCMiembro.calcularImpactoIndividual(miembro, organizacion, mesInicio, mesFin);
+        Double valor = CalculadoraHCMiembro.calcularImpactoIndividual(miembro, organizacion, mesInicio, mesFin);
+        miembro.setImpacto(valor);
+        return valor;
     }
 
     public Double calcularHCPromedio(Organizacion organizacion,Calendar mesInicio,Calendar mesFin) throws Exception {
-        return CalculadoraHCOrganizacion.HCpromedio(organizacion, mesInicio, mesFin);
+        Double valor = CalculadoraHCOrganizacion.HCpromedio(organizacion, mesInicio, mesFin);
+        organizacion.setHCPromedio(valor);
+        return valor;
     }
 
     public Double calcularHCPromedio(Area area,Calendar mesInicio,Calendar mesFin) throws Exception {
-        return CalculadoraHCArea.HCpromedio(area, mesInicio, mesFin);
+        Double valor = CalculadoraHCArea.HCpromedio(area, mesInicio, mesFin);
+        area.setHCPromedio(valor);
+        return valor;
     }
 }

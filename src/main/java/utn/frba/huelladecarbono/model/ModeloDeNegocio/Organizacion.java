@@ -12,6 +12,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Getter @Setter
@@ -21,6 +22,7 @@ public class Organizacion {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String razonSocial;
+    private Double huellaCarbono = 0.0;
     @Enumerated(EnumType.STRING)
     private TipoOrg tipo;
     @ManyToOne
@@ -37,6 +39,13 @@ public class Organizacion {
     private ArrayList<Miembro> contactosWP = null;
     @Transient // Evaluar si es ElementCollection o Transient
     private ArrayList<Double> hcMensual = new ArrayList<>();
+    private Double hcPromedio = 0.0;
+
+    @ElementCollection
+    @CollectionTable(name = "huellas_carbono")
+    @MapKeyColumn(name = "vigencia")
+    @Column(name = "valor_huella")
+    private HashMap<Vigencia, Double> huellasCarbono = new HashMap<>();
 
     public String getRazonSocial() {
         return razonSocial;
@@ -58,8 +67,16 @@ public class Organizacion {
         return ubicacion;
     }
 
+    public void agregarHuella(Vigencia vigencia, Double valor){
+        this.huellasCarbono.put(vigencia, valor);
+    }
+
     public void setUbicacion(Ubicacion ubicacion) {
         this.ubicacion = ubicacion;
+    }
+
+    public void setHC(Double valor){
+        this.huellaCarbono = valor;
     }
 
     public ArrayList<Area> getAreas() {
@@ -154,6 +171,10 @@ public class Organizacion {
             }
         }
         return medicionesOrga;
+    }
+
+    public void setHCPromedio(Double valor) {
+        this.hcPromedio = valor;
     }
 
 }

@@ -6,6 +6,7 @@ import utn.frba.huelladecarbono.service.CargaDeMedicionesService.CargaDeMedicion
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Getter @Setter
@@ -20,6 +21,16 @@ public class Area {
     private  Organizacion organizacion;
     @Transient // Ver como persistir una lista de listas
     private  List<List<DatoDeMedicion>> mediciones = new ArrayList<>();
+
+    @ElementCollection
+    @CollectionTable(name = "huellas_carbono")
+    @MapKeyColumn(name = "vigencia")
+    @Column(name = "valor_huella")
+    private HashMap<Vigencia, Double> huellasCarbono = new HashMap<>();
+
+    private Double huellaCarbono = 0.0;
+
+    private Double hcPromedio = 0.0;
 
     public Area() {
     }
@@ -53,12 +64,24 @@ public class Area {
         this.miembros = miembro;
     }
 
+    public void agregarHuella(Vigencia vigencia, Double valor){
+        this.huellasCarbono.put(vigencia, valor);
+    }
+
     public Organizacion getOrganizacion() {
         return organizacion;
     }
 
     public void setOrganizacion(Organizacion organizacion) {
         this.organizacion = organizacion;
+    }
+
+    public void setHCPromedio(Double valor){
+        this.hcPromedio = valor;
+    }
+
+    public void setHC(Double valor){
+        this.huellaCarbono = valor;
     }
 
     public List<List<DatoDeMedicion>> getMediciones() {
