@@ -65,10 +65,10 @@ public class InitData implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         cargarOrganizaciones();
-        //cargarMiembros();
-        //cargarUsuarios();
-        //cargarRecorridos();
-        //cargarParadas();
+        cargarMiembros();
+        cargarUsuarios();
+        cargarRecorridos();
+        cargarParadas();
         actualizarOrganizacion();
         darDeBajaOrganizacion();
 
