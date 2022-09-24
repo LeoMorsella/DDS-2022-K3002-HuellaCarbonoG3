@@ -76,19 +76,14 @@ public class InitData implements CommandLineRunner {
     {
         config.exposeIdsFor(Recorrido.class);
         if(repoRecorrido.count() == 0) {
-
             Organizacion organizacion1 = new Organizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
-            Recorrido recorrido1 = new Recorrido(organizacion1,0.5, Calendario.crearFecha(1, 2020), Calendario.crearFecha(9, 2022));
-            List<Recorrido> recorridos = List.of(recorrido1);
-            recorridos.stream().forEach(recorrido -> {
-                repoRecorrido.save(recorrido);
-            });
+            Recorrido recorrido1 = creadorDeObjetos.crearRecorrido(organizacion1,0.5, Calendario.crearFecha(1, 2020), Calendario.crearFecha(9, 2022));
             //De esta manera se carga el recorrido
             Organizacion organizacion3 = new Organizacion("SRL", TipoOrg.ONG, Clasificacion.ESCUELA, null, null, true);
-            //CrearRecorrido.crearRecorrido(organizacion3,0.8,Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021),repoRecorrido);
+            Recorrido recorridoPruebaDos =creadorDeObjetos.crearRecorrido(organizacion3,0.8,Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021));
         }
         else{
-            System.out.println("Ya existen Miembros creados anteriormente");
+            System.out.println("Ya existen Recorridos creados anteriormente");
         }
     }
 
@@ -98,16 +93,11 @@ public class InitData implements CommandLineRunner {
         if(repoParadas.count() == 0) {
 
             Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
-            Parada paradaPruebaUno = new Parada("120", ubicacionPruebaUno);
-            Parada paradaPruebaDos = new Parada("50",ubicacionPruebaUno);
-            List<Parada> paradas = List.of(paradaPruebaUno,paradaPruebaDos);
-            paradas.stream().forEach(parada -> {repoParadas.save(parada);});
-            CrearParada.crearParada("280",ubicacionPruebaUno,repoParadas);
-            ArrayList<Parada> paradas1 = new ArrayList<>();
-            paradas1.add(paradaPruebaUno);
+            Parada paradaPruebaUno = creadorDeObjetos.crearParada("120", ubicacionPruebaUno);
+            Parada paradaPruebaDos = creadorDeObjetos.crearParada("50",ubicacionPruebaUno);
         }
         else{
-            System.out.println("Ya existen Miembros creados anteriormente");
+            System.out.println("Ya existen Paradas creados anteriormente");
         }
     }
 
@@ -123,7 +113,7 @@ public class InitData implements CommandLineRunner {
             });
         }
         else{
-            System.out.println("Ya existen Miembros creados anteriormente");
+            System.out.println("Ya existen Usuarios creados anteriormente");
         }
     }
 
@@ -146,13 +136,13 @@ public class InitData implements CommandLineRunner {
         config.exposeIdsFor(Organizacion.class);
         if(repoOrganizacion.count() == 0) {
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
-            Organizacion organizacion2 =creadorDeObjetos.crearOrganizacion("SRA", TipoOrg.GUBERNAMENTAL, Clasificacion.EMPRESA_SECTOR_PRIMARIO, null, null, false);
-            Organizacion organizacion3 = new Organizacion("SRL", TipoOrg.ONG, Clasificacion.ESCUELA, null, null, true);
-            Organizacion organizacion4 = new Organizacion("SA", TipoOrg.INSTITUCION, Clasificacion.EMPRESA_SECTOR_SECUNDARIO, null, null, false);
+            Organizacion organizacion2 = creadorDeObjetos.crearOrganizacion("SRA", TipoOrg.GUBERNAMENTAL, Clasificacion.EMPRESA_SECTOR_PRIMARIO, null, null, false);
+            Organizacion organizacion3 = creadorDeObjetos.crearOrganizacion("SRL", TipoOrg.ONG, Clasificacion.ESCUELA, null, null, true);
+            Organizacion organizacion4 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.INSTITUCION, Clasificacion.EMPRESA_SECTOR_SECUNDARIO, null, null, false);
 
         }
         else{
-            System.out.println("Ya existen Miembros creados anteriormente");
+            System.out.println("Ya existen Organizaciones creados anteriormente");
         }
     }
 }
