@@ -1,10 +1,14 @@
 package utn.frba.huelladecarbono.service;
 
+import org.apache.poi.ss.extractor.ExcelExtractor;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 
 import java.util.List;
 
 public interface IOrganizacionService {
+
+    //metodo para obtener organizacion por ID
+    public Organizacion findById(Integer id)throws Exception;
 
     //metodo para obtener a todas las organizaciones
     public List<Organizacion> getOrganizaciones();
@@ -20,5 +24,6 @@ public interface IOrganizacionService {
 
     //Metodo para encontrar a una organizacion por su estado
     public List<Organizacion> findOrganizacionByEstadoActivo();
+
     public void cambiarEstadoOrganizacion(Integer id);
 }

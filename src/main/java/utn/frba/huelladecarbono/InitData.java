@@ -64,10 +64,13 @@ public class InitData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        cargarRecorridos();
-        cargarParadas();
-        cargarUsuarios();
-        cargarMiembros();
+        cargarOrganizaciones();
+        //cargarMiembros();
+        //cargarUsuarios();
+        //cargarRecorridos();
+        //cargarParadas();
+        actualizarOrganizacion();
+        darDeBajaOrganizacion();
 
     }
 
@@ -144,6 +147,18 @@ public class InitData implements CommandLineRunner {
         else{
             System.out.println("Ya existen Organizaciones creados anteriormente");
         }
+    }
+
+    public void actualizarOrganizacion() throws Exception
+    {
+        Organizacion nuevaOrganizacion = repoOrganizacion.findById(1).get();
+        nuevaOrganizacion.setRazonSocial("OrganizacionPableken");
+        organizacionController.actualizarOrganizacion(1,nuevaOrganizacion);
+    }
+
+    public void darDeBajaOrganizacion() throws Exception
+    {
+        organizacionController.deleteOrganizacion(3);
     }
 }
 

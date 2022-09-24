@@ -1,6 +1,7 @@
 package utn.frba.huelladecarbono.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,5 +55,14 @@ public class OrganizacionController {
         interfazOrganizacion.cambiarEstadoOrganizacion(id);
         Organizacion orga = interfazOrganizacion.findOrganizacion(id);
         return orga;
+    }
+
+    @PutMapping("/organizacion/editar/{id}")
+    public Organizacion actualizarOrganizacion(@PathVariable Integer id, @RequestBody Organizacion organizacion) throws Exception {
+        Organizacion organizacionActualizada = interfazOrganizacion.findById(id);
+        organizacionActualizada.setRazonSocial(organizacion.getRazonSocial());
+        organizacionActualizada.setTipo(organizacion.getTipo());
+        interfazOrganizacion.saveOrganizacion(organizacionActualizada);
+        return organizacionActualizada;
     }
 }

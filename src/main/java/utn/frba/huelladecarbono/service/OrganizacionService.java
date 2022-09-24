@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -14,6 +13,11 @@ public class OrganizacionService implements IOrganizacionService{
     @Autowired
     private OrganizacionRepository organizacionRepository;
 
+
+    @Override
+    public Organizacion findById(Integer id) throws Exception {
+        return organizacionRepository.findById(id).get();
+    }
 
     @Override
     public List<Organizacion> getOrganizaciones() {
@@ -45,6 +49,7 @@ public class OrganizacionService implements IOrganizacionService{
 
        return organizacionRepository.findByEstaActivo(true);
     }
+
 
     @Override
     public void cambiarEstadoOrganizacion(Integer id) {
