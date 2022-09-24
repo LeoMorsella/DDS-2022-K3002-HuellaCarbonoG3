@@ -2,6 +2,7 @@ package utn.frba.huelladecarbono.model.Seguridad;
 
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioUsuarios;
+import utn.frba.huelladecarbono.repository.UsuarioRepository;
 import utn.frba.huelladecarbono.service.ValidadorContraseniasService;
 import lombok.Getter;
 import lombok.Setter;
@@ -85,5 +86,17 @@ public class Usuario {
         this.rol = rol;
         this.cantIntentos = cantIntentos;
         this.miembro = miembro;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", rol=" + rol +
+                ", cantIntentos=" + cantIntentos +
+                ", miembro=" + miembro +
+                '}';
     }
 }

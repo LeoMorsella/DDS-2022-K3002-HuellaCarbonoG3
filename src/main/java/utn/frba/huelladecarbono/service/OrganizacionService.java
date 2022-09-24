@@ -15,6 +15,11 @@ public class OrganizacionService implements IOrganizacionService{
 
 
     @Override
+    public Organizacion findById(Integer id) throws Exception {
+        return organizacionRepository.findById(id).get();
+    }
+
+    @Override
     public List<Organizacion> getOrganizaciones() {
         List <Organizacion> listaOrganizaciones = organizacionRepository.findAll();
 
@@ -28,12 +33,31 @@ public class OrganizacionService implements IOrganizacionService{
 
     @Override
     public void deleteOrganizacion(Integer id) {
-        organizacionRepository.deleteById(id);
+        cambiarEstadoOrganizacion(id);
     }
+
 
     @Override
     public Organizacion findOrganizacion(Integer id) {
         Organizacion organizacion = organizacionRepository.findById(id).orElse(null);
         return organizacion;
     }
+
+
+    @Override
+    public List<Organizacion> findOrganizacionByEstadoActivo() {
+
+       return organizacionRepository.findByEstaActivo(true);
+    }
+
+
+    @Override
+    public void cambiarEstadoOrganizacion(Integer id) {
+        Organizacion organizacion = findOrganizacion(id);
+        organizacion.setEstaActivo(false);
+
+        this.saveOrganizacion(organizacion);
+    }
+
+
 }

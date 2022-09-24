@@ -4,6 +4,7 @@ package utn.frba.huelladecarbono.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
+import utn.frba.huelladecarbono.repository.MiembroRepository;
 import utn.frba.huelladecarbono.service.IMiembroService;
 
 import java.util.List;
@@ -14,6 +15,8 @@ public class MiembroController {
 
     @Autowired
     private IMiembroService interfazMiembro;
+
+    MiembroRepository miembroRepository;
 
     //Prueba para obtener a un miembro
     @RequestMapping(value = "miembro")

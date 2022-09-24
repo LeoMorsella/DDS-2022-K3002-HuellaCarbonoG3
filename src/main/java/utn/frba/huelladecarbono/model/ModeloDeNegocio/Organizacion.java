@@ -47,6 +47,11 @@ public class Organizacion {
     @Column(name = "valor_huella")
     private HashMap<Vigencia, Double> huellasCarbono = new HashMap<>();
 
+    private Boolean estaActivo;
+
+    public Organizacion(Organizacion organizacionclase) {
+    }
+
     public String getRazonSocial() {
         return razonSocial;
     }
@@ -126,6 +131,22 @@ public class Organizacion {
         contactosWP.add(Contacto);
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Boolean getEstaActivo() {
+        return estaActivo;
+    }
+
+    public void setEstaActivo(Boolean estaActivo) {
+        this.estaActivo = estaActivo;
+    }
+
     public Organizacion() {
     }
 
@@ -146,6 +167,15 @@ public class Organizacion {
         this.clasificacion = clasificacion;
         this.contactosMail = contactosMail;
         this.contactosWP = contactosWP;
+    }
+
+    public Organizacion(String razonSocial, TipoOrg tipo, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, Boolean estaActivo) {
+        this.razonSocial = razonSocial;
+        this.tipo = tipo;
+        this.clasificacion = clasificacion;
+        this.contactosMail = contactosMail;
+        this.contactosWP = contactosWP;
+        this.estaActivo = estaActivo;
     }
 
     public List<Miembro> getMiembros(){
@@ -173,8 +203,29 @@ public class Organizacion {
         return medicionesOrga;
     }
 
+<<<<<<< HEAD
     public void setHCPromedio(Double valor) {
         this.hcPromedio = valor;
+=======
+    @Override
+    public String toString() {
+        return "Organizacion{" +
+                "id=" + id +
+                ", razonSocial='" + razonSocial + '\'' +
+                ", tipo=" + tipo +
+                ", ubicacion=" + ubicacion +
+                ", areas=" + areas +
+                ", clasificacion=" + clasificacion +
+                ", contactosMail=" + contactosMail +
+                ", contactosWP=" + contactosWP +
+                ", hcMensual=" + hcMensual +
+                ", estaActivo=" + estaActivo +
+                '}';
+    }
+
+    public Boolean estaActiva(){
+        return this.estaActivo;
+>>>>>>> 78b974ad37a6fc8f9ff12a3d94a202c07d4a2c68
     }
 
 }
