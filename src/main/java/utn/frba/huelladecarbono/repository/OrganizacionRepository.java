@@ -11,4 +11,7 @@ public interface OrganizacionRepository extends JpaRepository<Organizacion, Inte
 
     List<Organizacion> findByEstaActivo(Boolean estado);
 
+    List<Organizacion> findByRazonSocial(String razonSocial);
+
+
 }

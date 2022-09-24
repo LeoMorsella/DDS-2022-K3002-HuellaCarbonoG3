@@ -189,11 +189,15 @@ public class Organizacion {
     @Override
     public String toString() {
         return "Organizacion{" +
-                "razonSocial='" + razonSocial + '\'' +
+                "id=" + id +
+                ", razonSocial='" + razonSocial + '\'' +
                 ", tipo=" + tipo +
+                ", ubicacion=" + ubicacion +
+                ", areas=" + areas +
                 ", clasificacion=" + clasificacion +
                 ", contactosMail=" + contactosMail +
                 ", contactosWP=" + contactosWP +
+                ", hcMensual=" + hcMensual +
                 ", estaActivo=" + estaActivo +
                 '}';
     }

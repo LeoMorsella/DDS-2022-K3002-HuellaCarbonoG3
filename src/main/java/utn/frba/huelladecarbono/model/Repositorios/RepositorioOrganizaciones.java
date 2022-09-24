@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import utn.frba.huelladecarbono.controller.OrganizacionController;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
+import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,4 +58,7 @@ public class RepositorioOrganizaciones {
    public List<Organizacion> organizacionesActivas(){
     return this.getOrganizaciones().stream().filter(organizacion -> organizacion.estaActiva()).collect(Collectors.toList());
    }
+
+
+
 }
