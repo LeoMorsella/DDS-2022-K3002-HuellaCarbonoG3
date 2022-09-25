@@ -148,9 +148,9 @@ public class InitData implements CommandLineRunner {
             Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
             ArrayList<Double> listaHCPrueba = new ArrayList<>();
             listaHCPrueba.add(100.00);
-            Vigencia vigenciaPrueba = new Vigencia(Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021));
-            HashMap <Vigencia, Double> hashMapPrueba=new HashMap<Vigencia, Double>();
-            hashMapPrueba.put(vigenciaPrueba,250.00);
+            HuellaCarbono huellaPrueba = new HuellaCarbono(Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021), 250.00);
+            ArrayList<HuellaCarbono> hashMapPrueba = new ArrayList<>();
+            hashMapPrueba.add(huellaPrueba);
             Organizacion organizacionConHC = creadorDeObjetos.crearOrganizacionConHC("SA",TipoOrg.INSTITUCION,ubicacionPruebaUno,null,Clasificacion.EMPRESA_SECTOR_SECUNDARIO,null,null,listaHCPrueba,250.00,hashMapPrueba,false);
         }
         else{

@@ -42,10 +42,8 @@ public class Organizacion {
     private Double hcPromedio = 0.0;
 
     @ElementCollection
-    @CollectionTable(name = "huellas_carbono")
-    @MapKeyColumn(name = "vigencia")
-    @Column(name = "valor_huella")
-    private HashMap<Vigencia, Double> huellasCarbono = new HashMap<>();
+    @ManyToMany
+    private ArrayList<HuellaCarbono> huellasCarbono = new ArrayList<>();
 
     private Boolean estaActivo;
 
@@ -74,8 +72,8 @@ public class Organizacion {
         return ubicacion;
     }
 
-    public void agregarHuella(Vigencia vigencia, Double valor){
-        this.huellasCarbono.put(vigencia, valor);
+    public void agregarHuella(HuellaCarbono huella){
+        this.huellasCarbono.add(huella);
     }
 
     public void setUbicacion(Ubicacion ubicacion) {
@@ -180,7 +178,7 @@ public class Organizacion {
         this.estaActivo = estaActivo;
     }
 
-    public Organizacion(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, ArrayList<Area> areas, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, ArrayList<Double> hcMensual, Double hcPromedio, HashMap<Vigencia, Double> huellasCarbono, Boolean estaActivo) {
+    public Organizacion(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, ArrayList<Area> areas, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, ArrayList<Double> hcMensual, Double hcPromedio, ArrayList<HuellaCarbono> huellasCarbono, Boolean estaActivo) {
         this.razonSocial = razonSocial;
         this.tipo = tipo;
         this.ubicacion = ubicacion;

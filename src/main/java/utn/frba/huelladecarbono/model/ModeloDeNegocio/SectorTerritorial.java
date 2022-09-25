@@ -19,10 +19,8 @@ public class SectorTerritorial {
     private Double huellaCarbono = 0.0;
 
     @ElementCollection
-    @CollectionTable(name = "huellas_carbono")
-    @MapKeyColumn(name = "vigencia")
-    @Column(name = "valor_huella")
-    private HashMap<Vigencia, Double> huellasCarbono = new HashMap<>();
+    @ManyToMany
+    private ArrayList<HuellaCarbono> huellasCarbono = new ArrayList<>();
     
     @OneToOne
     private AgenteSectorial agenteSectorial;
@@ -74,8 +72,8 @@ public class SectorTerritorial {
         return agenteSectorial;
     }
 
-    public void agregarHuella(Vigencia vigencia, Double valor){
-        this.huellasCarbono.put(vigencia, valor);
+    public void agregarHuella(HuellaCarbono huella){
+        this.huellasCarbono.add(huella);
     }
 
     public void setAgenteSectorial(AgenteSectorial agenteSectorial) {

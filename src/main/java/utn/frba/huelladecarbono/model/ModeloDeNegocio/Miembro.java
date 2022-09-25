@@ -35,10 +35,8 @@ public class Miembro {
     private Double impactoIndividual = 0.0;
 
     @ElementCollection
-    @CollectionTable(name = "huellas_carbono")
-    @MapKeyColumn(name = "vigencia")
-    @Column(name = "valor_huella")
-    private HashMap<Vigencia, Double> huellasCarbono = new HashMap<>();
+    @ManyToMany
+    private ArrayList<HuellaCarbono> huellasCarbono = new ArrayList<>();
 
     public Miembro(String nom, String ape, String tipoDocu, int numeroDoc, ArrayList<Area> listaAreas,
                    ArrayList<Recorrido> recorridos) {
@@ -101,7 +99,7 @@ public class Miembro {
         this.impactoIndividual = valor;
     }
 
-    public void agregarHuella(Vigencia vigencia, Double valor){
-        this.huellasCarbono.put(vigencia, valor);
+    public void agregarHuella(HuellaCarbono huella){
+        this.huellasCarbono.add(huella);
     }
 }

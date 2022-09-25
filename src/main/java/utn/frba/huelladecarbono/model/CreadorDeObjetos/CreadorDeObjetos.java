@@ -44,7 +44,7 @@ public class CreadorDeObjetos {
         return organizacion;
     }
 
-    public Organizacion crearOrganizacionConHC(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, ArrayList<Area> areas, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, ArrayList<Double> hcMensual, Double hcPromedio, HashMap<Vigencia, Double> huellasCarbono, Boolean estaActivo) {
+    public Organizacion crearOrganizacionConHC(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, ArrayList<Area> areas, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, ArrayList<Double> hcMensual, Double hcPromedio, ArrayList<HuellaCarbono> huellasCarbono, Boolean estaActivo) {
         Organizacion organizacion = new Organizacion( razonSocial,  tipo,  ubicacion, areas, clasificacion, contactosMail, contactosWP, hcMensual,  hcPromedio, huellasCarbono,  estaActivo);
         repoOrganizaciones.save(organizacion);
         return organizacion;

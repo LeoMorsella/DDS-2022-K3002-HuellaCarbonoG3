@@ -23,31 +23,31 @@ public class CalculadoraHCService {
     public Double calcularHCOrganizacion(Organizacion organizacion, Calendar mesInicio, Calendar mesFin) {
         Double valor = CalculadoraHCOrganizacion.calcularHC(organizacion, mesInicio, mesFin);
         organizacion.setHC(valor);
-        Vigencia vigencia = new Vigencia(mesInicio, mesFin);
-        organizacion.agregarHuella(vigencia, valor);
+        HuellaCarbono huella = new HuellaCarbono(mesInicio, mesFin, valor);
+        organizacion.agregarHuella(huella);
         return valor;
     }
 
     public Double calcularHCArea(Area area, Calendar mesInicio, Calendar mesFin) {
         Double valor = CalculadoraHCArea.calcularHC(area, mesInicio, mesFin);
         area.setHC(valor);
-        Vigencia vigencia = new Vigencia(mesInicio, mesFin);
-        area.agregarHuella(vigencia, valor);
+        HuellaCarbono huella = new HuellaCarbono(mesInicio, mesFin, valor);
+        area.agregarHuella(huella);
         return valor;
     }
 
     public Double calcularHCMiembro(Miembro miembro, Calendar mesInicio, Calendar mesFin, Organizacion organizacion) throws Exception {
         Double valor = CalculadoraHCMiembro.calcularHC(miembro, mesInicio, mesFin, organizacion);
-        Vigencia vigencia = new Vigencia(mesInicio, mesFin);
-        miembro.agregarHuella(vigencia, valor);
+        HuellaCarbono huella = new HuellaCarbono(mesInicio, mesFin, valor);
+        miembro.agregarHuella(huella);
         return valor;
     }
 
     public Double calcularHCMedicion(List<DatoDeMedicion> datoDeMedicion, Calendar mesInicio, Calendar mesFin) {
         Double valor = CalculadoraHCMedicion.calcularHC(datoDeMedicion, k, mesInicio, mesFin);
-        Vigencia vigencia = new Vigencia(mesInicio, mesFin);
+        HuellaCarbono huella = new HuellaCarbono(mesInicio, mesFin, valor);
         for(DatoDeMedicion dato : datoDeMedicion){
-            dato.agregarHuella(vigencia, valor);
+            dato.agregarHuella(huella);
         }
         return valor;
     }
@@ -58,8 +58,8 @@ public class CalculadoraHCService {
             HCTotal += CalculadoraHCOrganizacion.calcularHC(organizacion, mesInicio, mesFin);
         }
         sectorTerritorial.setHC(HCTotal);
-        Vigencia vigencia = new Vigencia(mesInicio, mesFin);
-        sectorTerritorial.agregarHuella(vigencia, HCTotal);
+        HuellaCarbono huella = new HuellaCarbono(mesInicio, mesFin, HCTotal);
+        sectorTerritorial.agregarHuella(huella);
         return HCTotal;
     }
 
