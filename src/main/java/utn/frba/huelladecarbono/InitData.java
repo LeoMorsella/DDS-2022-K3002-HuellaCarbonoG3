@@ -19,6 +19,8 @@ import utn.frba.huelladecarbono.repository.*;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 @Component
@@ -138,11 +140,18 @@ public class InitData implements CommandLineRunner {
     {
         config.exposeIdsFor(Organizacion.class);
         if(repoOrganizacion.count() == 0) {
+
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
             Organizacion organizacion2 = creadorDeObjetos.crearOrganizacion("SRA", TipoOrg.GUBERNAMENTAL, Clasificacion.EMPRESA_SECTOR_PRIMARIO, null, null, false);
             Organizacion organizacion3 = creadorDeObjetos.crearOrganizacion("SRL", TipoOrg.ONG, Clasificacion.ESCUELA, null, null, true);
             Organizacion organizacion4 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.INSTITUCION, Clasificacion.EMPRESA_SECTOR_SECUNDARIO, null, null, false);
-
+            Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
+            ArrayList<Double> listaHCPrueba = new ArrayList<>();
+            listaHCPrueba.add(100.00);
+            Vigencia vigenciaPrueba = new Vigencia(Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021));
+            HashMap <Vigencia, Double> hashMapPrueba=new HashMap<Vigencia, Double>();
+            hashMapPrueba.put(vigenciaPrueba,250.00);
+            Organizacion organizacionConHC = creadorDeObjetos.crearOrganizacionConHC("SA",TipoOrg.INSTITUCION,ubicacionPruebaUno,null,Clasificacion.EMPRESA_SECTOR_SECUNDARIO,null,null,listaHCPrueba,250.00,hashMapPrueba,false);
         }
         else{
             System.out.println("Ya existen Organizaciones creados anteriormente");

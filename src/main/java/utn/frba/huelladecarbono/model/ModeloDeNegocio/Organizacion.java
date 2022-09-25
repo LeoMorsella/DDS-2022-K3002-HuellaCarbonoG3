@@ -49,6 +49,8 @@ public class Organizacion {
 
     private Boolean estaActivo;
 
+
+
     public Organizacion(Organizacion organizacionclase) {
     }
 
@@ -178,6 +180,20 @@ public class Organizacion {
         this.estaActivo = estaActivo;
     }
 
+    public Organizacion(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, ArrayList<Area> areas, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, ArrayList<Double> hcMensual, Double hcPromedio, HashMap<Vigencia, Double> huellasCarbono, Boolean estaActivo) {
+        this.razonSocial = razonSocial;
+        this.tipo = tipo;
+        this.ubicacion = ubicacion;
+        this.areas = areas;
+        this.clasificacion = clasificacion;
+        this.contactosMail = contactosMail;
+        this.contactosWP = contactosWP;
+        this.hcMensual = hcMensual;
+        this.hcPromedio = hcPromedio;
+        this.huellasCarbono = huellasCarbono;
+        this.estaActivo = estaActivo;
+    }
+
     public List<Miembro> getMiembros(){
         List<Miembro> miembros = new ArrayList<>();
         for (Area area: areas){
@@ -202,16 +218,21 @@ public class Organizacion {
         }
         return medicionesOrga;
     }
-
-<<<<<<< HEAD
     public void setHCPromedio(Double valor) {
         this.hcPromedio = valor;
-=======
+    }
+
+
+    public Boolean estaActiva(){
+        return this.getEstaActivo();
+    }
+
     @Override
     public String toString() {
         return "Organizacion{" +
                 "id=" + id +
                 ", razonSocial='" + razonSocial + '\'' +
+                ", huellaCarbono=" + huellaCarbono +
                 ", tipo=" + tipo +
                 ", ubicacion=" + ubicacion +
                 ", areas=" + areas +
@@ -219,13 +240,9 @@ public class Organizacion {
                 ", contactosMail=" + contactosMail +
                 ", contactosWP=" + contactosWP +
                 ", hcMensual=" + hcMensual +
+                ", hcPromedio=" + hcPromedio +
+                ", huellasCarbono=" + huellasCarbono +
                 ", estaActivo=" + estaActivo +
                 '}';
     }
-
-    public Boolean estaActiva(){
-        return this.estaActivo;
->>>>>>> 78b974ad37a6fc8f9ff12a3d94a202c07d4a2c68
-    }
-
 }

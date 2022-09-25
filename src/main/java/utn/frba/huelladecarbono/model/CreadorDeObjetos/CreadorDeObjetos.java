@@ -13,6 +13,7 @@ import utn.frba.huelladecarbono.repository.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 @Component
 public class CreadorDeObjetos {
@@ -39,6 +40,12 @@ public class CreadorDeObjetos {
 
     public Organizacion crearOrganizacion(String razonSocial, TipoOrg tipo, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, Boolean estaActivo) {
         Organizacion organizacion = new Organizacion(razonSocial,tipo,clasificacion,contactosMail,contactosWP,estaActivo);
+        repoOrganizaciones.save(organizacion);
+        return organizacion;
+    }
+
+    public Organizacion crearOrganizacionConHC(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, ArrayList<Area> areas, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, ArrayList<Double> hcMensual, Double hcPromedio, HashMap<Vigencia, Double> huellasCarbono, Boolean estaActivo) {
+        Organizacion organizacion = new Organizacion( razonSocial,  tipo,  ubicacion, areas, clasificacion, contactosMail, contactosWP, hcMensual,  hcPromedio, huellasCarbono,  estaActivo);
         repoOrganizaciones.save(organizacion);
         return organizacion;
     }
