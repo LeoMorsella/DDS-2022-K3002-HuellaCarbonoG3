@@ -41,8 +41,8 @@ public class Organizacion {
     private ArrayList<Double> hcMensual = new ArrayList<>();
     private Double hcPromedio = 0.0;
 
-    @ElementCollection
-    @ManyToMany
+ //   @ElementCollection
+  //  @ManyToMany
     private ArrayList<HuellaCarbono> huellasCarbono = new ArrayList<>();
 
     private Boolean estaActivo;

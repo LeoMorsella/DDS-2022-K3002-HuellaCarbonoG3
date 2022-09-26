@@ -34,8 +34,8 @@ public class Miembro {
 
     private Double impactoIndividual = 0.0;
 
-    @ElementCollection
-    @ManyToMany
+    //@ElementCollection
+    //@ManyToMany
     private ArrayList<HuellaCarbono> huellasCarbono = new ArrayList<>();
 
     public Miembro(String nom, String ape, String tipoDocu, int numeroDoc, ArrayList<Area> listaAreas,

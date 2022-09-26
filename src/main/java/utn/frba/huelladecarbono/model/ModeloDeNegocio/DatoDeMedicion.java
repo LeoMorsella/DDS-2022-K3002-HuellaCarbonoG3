@@ -26,8 +26,8 @@ public class DatoDeMedicion {
     private String periodoImputacion;
     private String unidad;
 
-    @ElementCollection
-    @ManyToMany
+    //@ElementCollection
+    //@ManyToMany
     private ArrayList<HuellaCarbono> huellasCarbono = new ArrayList<>();
 
     public DatoDeMedicion() {

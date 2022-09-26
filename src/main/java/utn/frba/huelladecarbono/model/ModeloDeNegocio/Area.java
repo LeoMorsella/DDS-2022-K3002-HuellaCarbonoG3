@@ -22,9 +22,9 @@ public class Area {
     @Transient // Ver como persistir una lista de listas
     private  List<List<DatoDeMedicion>> mediciones = new ArrayList<>();
 
-    @ElementCollection
-    @ManyToMany
-    private ArrayList<HuellaCarbono> huellasCarbono = new ArrayList<>();
+    //Hay que replicar esto en todos los arraylist para el many to many
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<HuellaCarbono> huellasCarbono = new ArrayList<>();
 
     private Double huellaCarbono = 0.0;
 

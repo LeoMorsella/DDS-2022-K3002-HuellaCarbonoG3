@@ -18,8 +18,8 @@ public class SectorTerritorial {
     private String provincia;
     private Double huellaCarbono = 0.0;
 
-    @ElementCollection
-    @ManyToMany
+  //  @ElementCollection
+   // @ManyToMany
     private ArrayList<HuellaCarbono> huellasCarbono = new ArrayList<>();
     
     @OneToOne
