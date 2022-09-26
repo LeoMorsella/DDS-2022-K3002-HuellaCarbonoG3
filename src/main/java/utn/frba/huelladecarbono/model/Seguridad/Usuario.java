@@ -24,6 +24,8 @@ public class Usuario {
     @OneToOne
     private Miembro miembro;
 
+    private  Boolean estaActivo;
+
     public static Usuario nuevoUsuario(String username, String password, Rol unrol){
         Usuario nuevoUsuario = new Usuario(username, password, unrol);
         RepositorioUsuarios.getRepositorio().agregarUsuario(nuevoUsuario);
@@ -88,6 +90,14 @@ public class Usuario {
         this.miembro = miembro;
     }
 
+    public Boolean getEstaActivo() {
+        return estaActivo;
+    }
+
+    public void setEstaActivo(Boolean estaActivo) {
+        this.estaActivo = estaActivo;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -99,4 +109,6 @@ public class Usuario {
                 ", miembro=" + miembro +
                 '}';
     }
+
+
 }

@@ -2,6 +2,7 @@ package utn.frba.huelladecarbono.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.service.IRecorridoService;
 
@@ -30,5 +31,14 @@ public class RecorridoController {
         return "El recorrido fue creado correctamente";
     }
 
-
+    @PatchMapping("/recorrido/editar/{id}")
+    public Recorrido cambiarEstadoRecorrido(@PathVariable Integer id){
+        interfazRecorrido.cambiarEstadoRecorrico(id);
+        Recorrido recorrido = interfazRecorrido.findRecorrido(id);
+        return recorrido;
+    }
+    @PutMapping("/recorrido/editar/{id}")
+    public Recorrido actualizarRecorrido(@PathVariable Integer id, @RequestBody Recorrido recorrido) throws Exception {
+        return interfazRecorrido.modificarRecorrido(id,recorrido);
+    }
 }

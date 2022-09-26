@@ -2,6 +2,7 @@ package utn.frba.huelladecarbono.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.repository.RecorridoRepository;
 
@@ -37,5 +38,24 @@ public class RecorridoService implements IRecorridoService{
         return recorrido;
     }
 
+    @Override
+    public Recorrido modificarRecorrido(Integer id, Recorrido recorrido) {
+        Recorrido recorridoActualizado = this.findRecorrido(id);
+        recorridoActualizado.setEstaActivo(recorrido.getEstaActivo());
+        recorridoActualizado.setOrganizacion(recorrido.getOrganizacion());
+        recorridoActualizado.setMesInicio(recorrido.getMesInicio());
+        recorridoActualizado.setMesFin(recorrido.getMesFin());
+        recorridoActualizado.setPeso(recorrido.getPeso());
+        recorridoActualizado.setTrayectos(recorrido.getTrayectos());
+        this.saveRecorrido(recorridoActualizado);
+        return recorridoActualizado;
+        }
 
-}
+    @Override
+    public void cambiarEstadoRecorrico(Integer id) {
+       Recorrido recorrido = findRecorrido(id);
+        recorrido.setEstaActivo(false);
+        this.saveRecorrido(recorrido);
+    }
+    }
+

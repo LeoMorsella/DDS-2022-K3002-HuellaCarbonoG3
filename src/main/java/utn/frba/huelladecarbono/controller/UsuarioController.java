@@ -20,7 +20,7 @@ public class UsuarioController {
 
     @DeleteMapping("usuario/eliminar/{id}")
     public String deleteUsuario(@PathVariable Integer id) {
-        interfazUsuario.deleteUsuario(id);
+        interfazUsuario.cambiarEstadoUsuario(id);
         return "El usuario fue eliminado correctamente";
     }
 
@@ -30,5 +30,16 @@ public class UsuarioController {
         return "El usuario fue creado correctamente";
     }
 
+    @PatchMapping("/usuario/editar/{id}")
+    public Usuario cambiarEstadoUsuario(@PathVariable Integer id){
+        interfazUsuario.cambiarEstadoUsuario(id);
+        Usuario usuario = interfazUsuario.findUsuario(id);
+        return usuario;
+    }
+
+    @PutMapping("/usuario/editar/{id}")
+    public Usuario actualizarUsuario(@PathVariable Integer id, @RequestBody Usuario usuario) throws Exception {
+        return interfazUsuario.modificarUsuario(id,usuario);
+    }
 
 }

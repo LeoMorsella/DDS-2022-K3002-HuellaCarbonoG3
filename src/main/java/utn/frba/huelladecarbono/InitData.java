@@ -72,7 +72,7 @@ public class InitData implements CommandLineRunner {
         cargarRecorridos();
         cargarParadas();
         actualizarOrganizacion();
-        darDeBajaOrganizacion();
+       darDeBajaOrganizacion();
 
     }
 
@@ -129,7 +129,7 @@ public class InitData implements CommandLineRunner {
         config.exposeIdsFor(Miembro.class);
         if(repoMiembros.count() == 0) {
 
-            Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro(20,"Pablo","Ortiz","pablo@prueba","2323");
+            Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro(20,"Pablo","Ortiz","pablo@prueba","2323",true);
         }
         else{
             System.out.println("Ya existen Miembros creados anteriormente");
@@ -149,9 +149,9 @@ public class InitData implements CommandLineRunner {
             ArrayList<Double> listaHCPrueba = new ArrayList<>();
             listaHCPrueba.add(100.00);
             HuellaCarbono huellaPrueba = new HuellaCarbono(Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021), 250.00);
-            ArrayList<HuellaCarbono> hashMapPrueba = new ArrayList<>();
+            List<HuellaCarbono> hashMapPrueba = new ArrayList<>();
             hashMapPrueba.add(huellaPrueba);
-            Organizacion organizacionConHC = creadorDeObjetos.crearOrganizacionConHC("SA",TipoOrg.INSTITUCION,ubicacionPruebaUno,null,Clasificacion.EMPRESA_SECTOR_SECUNDARIO,null,null,listaHCPrueba,250.00,hashMapPrueba,false);
+            Organizacion organizacionConHC = creadorDeObjetos.crearOrganizacionConHC("SA",TipoOrg.INSTITUCION,ubicacionPruebaUno,Clasificacion.EMPRESA_SECTOR_SECUNDARIO,null,null,listaHCPrueba,250.00,hashMapPrueba,false);
         }
         else{
             System.out.println("Ya existen Organizaciones creados anteriormente");
@@ -161,7 +161,7 @@ public class InitData implements CommandLineRunner {
     public void actualizarOrganizacion() throws Exception
     {
         Organizacion nuevaOrganizacion = repoOrganizacion.findById(1).get();
-        nuevaOrganizacion.setRazonSocial("OrganizacionPableken");
+        nuevaOrganizacion.setRazonSocial("OrganizacionPableken!");
         organizacionController.actualizarOrganizacion(1,nuevaOrganizacion);
     }
 

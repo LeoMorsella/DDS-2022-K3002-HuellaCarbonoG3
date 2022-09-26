@@ -13,4 +13,7 @@ public interface IRecorridoService {
     public void deleteRecorrido(Integer id);
 
     public Recorrido findRecorrido(Integer id);
+
+    public void cambiarEstadoRecorrico(Integer id);
+    Recorrido modificarRecorrido(Integer id, Recorrido recorrido);
 }

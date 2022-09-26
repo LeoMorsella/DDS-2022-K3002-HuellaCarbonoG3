@@ -26,4 +26,6 @@ public interface IOrganizacionService {
     public List<Organizacion> findOrganizacionByEstadoActivo();
 
     public void cambiarEstadoOrganizacion(Integer id);
+
+    public Organizacion modificarOrganizacion(Integer id, Organizacion organizacion);
 }

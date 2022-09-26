@@ -2,7 +2,10 @@ package utn.frba.huelladecarbono.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
+import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.repository.MiembroRepository;
 
 import java.util.List;
@@ -35,5 +38,27 @@ public class MiembroService implements IMiembroService {
     public Miembro findMiembro(Integer id) {
         Miembro miembro = miembroRepository.findById(id).orElse(null);
         return miembro;
+    }
+
+    public Miembro modificarMiembro(Integer id, Miembro miembro){
+        Miembro miembroActualizado = this.findMiembro(id);
+        miembroActualizado.setNombre(miembro.getNombre());
+        miembroActualizado.setApellido(miembro.getApellido());
+        miembroActualizado.setTipoDoc(miembro.getTipoDoc());
+        miembroActualizado.setAreas(miembro.getAreas());
+        miembroActualizado.setMail(miembro.getMail());
+        miembroActualizado.setTelefono(miembro.getTelefono());
+        miembroActualizado.setEstaActivo(miembro.getEstaActivo());
+        this.saveMiembro(miembroActualizado);
+        return miembroActualizado;
+
+        }
+
+    @Override
+    public void cambiarEstadoMiembro(Integer id) {
+        Miembro miembro = findMiembro(id);
+        miembro.setEstaActivo(false);
+
+        this.saveMiembro(miembro);
     }
 }

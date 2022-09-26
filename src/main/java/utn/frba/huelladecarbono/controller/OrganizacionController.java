@@ -59,14 +59,6 @@ public class OrganizacionController {
 
     @PutMapping("/organizacion/editar/{id}")
     public Organizacion actualizarOrganizacion(@PathVariable Integer id, @RequestBody Organizacion organizacion) throws Exception {
-        Organizacion organizacionActualizada = interfazOrganizacion.findById(id);
-        organizacionActualizada.setRazonSocial(organizacion.getRazonSocial());
-        organizacionActualizada.setTipo(organizacion.getTipo());
-        organizacionActualizada.setClasificacion(organizacion.getClasificacion());
-        organizacionActualizada.setContactosMail(organizacion.getContactosMail());
-        organizacionActualizada.setContactosWP(organizacion.getContactosWP());
-        organizacionActualizada.setEstaActivo(organizacion.getEstaActivo());
-        interfazOrganizacion.saveOrganizacion(organizacionActualizada);
-        return organizacionActualizada;
+       return interfazOrganizacion.modificarOrganizacion(id,organizacion);
     }
 }

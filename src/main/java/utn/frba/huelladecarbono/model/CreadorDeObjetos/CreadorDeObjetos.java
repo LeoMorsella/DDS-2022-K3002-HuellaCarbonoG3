@@ -14,6 +14,7 @@ import utn.frba.huelladecarbono.repository.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 @Component
 public class CreadorDeObjetos {
@@ -43,15 +44,21 @@ public class CreadorDeObjetos {
         repoOrganizaciones.save(organizacion);
         return organizacion;
     }
-
+/*
     public Organizacion crearOrganizacionConHC(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, ArrayList<Area> areas, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, ArrayList<Double> hcMensual, Double hcPromedio, ArrayList<HuellaCarbono> huellasCarbono, Boolean estaActivo) {
         Organizacion organizacion = new Organizacion( razonSocial,  tipo,  ubicacion, areas, clasificacion, contactosMail, contactosWP, hcMensual,  hcPromedio, huellasCarbono,  estaActivo);
         repoOrganizaciones.save(organizacion);
         return organizacion;
     }
+*/
+    public Organizacion crearOrganizacionConHC(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, ArrayList<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Boolean estaActivo) {
+        Organizacion organizacion = new Organizacion( razonSocial,  tipo,  ubicacion, clasificacion, contactosMail, contactosWP, hcMensual,  hcPromedio, huellasCarbono,  estaActivo);
+        repoOrganizaciones.save(organizacion);
+        return organizacion;
+    }
 
-    public  Miembro crearMiembro(int id, String nombre, String apellido, String mail, String telefono) {
-        Miembro miembro = new Miembro(id,nombre,apellido,mail,telefono);
+    public  Miembro crearMiembro(int id, String nombre, String apellido, String mail, String telefono, Boolean estaActivo) {
+        Miembro miembro = new Miembro(id,nombre,apellido,mail,telefono,estaActivo);
         repoMiembros.save(miembro);
         return miembro;
     }

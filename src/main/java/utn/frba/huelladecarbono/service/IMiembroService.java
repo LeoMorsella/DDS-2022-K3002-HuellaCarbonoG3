@@ -3,6 +3,7 @@ package utn.frba.huelladecarbono.service;
 
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 
+
 import java.util.List;
 
 public interface IMiembroService {
@@ -18,4 +19,9 @@ public interface IMiembroService {
 
     //Metodo para encontrar a un miembro
     public Miembro findMiembro(Integer id);
+
+    //Metodo para actualizar la informacion de un miembro
+    public Miembro modificarMiembro(Integer id, Miembro miembro);
+
+    void cambiarEstadoMiembro(Integer id);
 }

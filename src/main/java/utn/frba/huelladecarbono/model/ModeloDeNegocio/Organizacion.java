@@ -1,5 +1,6 @@
 package utn.frba.huelladecarbono.model.ModeloDeNegocio;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCService;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Medio;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
@@ -25,7 +26,7 @@ public class Organizacion {
     private Double huellaCarbono = 0.0;
     @Enumerated(EnumType.STRING)
     private TipoOrg tipo;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Ubicacion ubicacion;
 
     //TODO cambiar esto porque así no lo persiste
@@ -41,15 +42,37 @@ public class Organizacion {
     private ArrayList<Double> hcMensual = new ArrayList<>();
     private Double hcPromedio = 0.0;
 
- //   @ElementCollection
-  //  @ManyToMany
-    private ArrayList<HuellaCarbono> huellasCarbono = new ArrayList<>();
+ @ManyToMany(fetch = FetchType.LAZY,
+         cascade = {
+                 CascadeType.PERSIST,
+                 CascadeType.MERGE
+         })
+ @JoinTable(name = "organizacion_huellaCarbono",
+         joinColumns = { @JoinColumn(name = "organizacion_id") },
+         inverseJoinColumns = { @JoinColumn(name = "huellaCarbono_id") })
+    private List<HuellaCarbono> huellasCarbono = new ArrayList<>();
 
     private Boolean estaActivo;
 
 
 
     public Organizacion(Organizacion organizacionclase) {
+    }
+
+
+
+    public Organizacion(String razonSocial, TipoOrg tipo,Ubicacion ubicacion, Clasificacion clasificacion,ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP,ArrayList<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Boolean estaActivo) {
+
+        this.razonSocial = razonSocial;
+        this.tipo = tipo;
+        this.ubicacion = ubicacion;
+        this.clasificacion = clasificacion;
+        this.contactosMail = contactosMail;
+        this.contactosWP = contactosWP;
+        this.hcMensual = hcMensual;
+        this.hcPromedio = hcPromedio;
+        this.huellasCarbono = huellasCarbono;
+        this.estaActivo = estaActivo;
     }
 
     public String getRazonSocial() {
@@ -178,7 +201,7 @@ public class Organizacion {
         this.estaActivo = estaActivo;
     }
 
-    public Organizacion(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, ArrayList<Area> areas, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, ArrayList<Double> hcMensual, Double hcPromedio, ArrayList<HuellaCarbono> huellasCarbono, Boolean estaActivo) {
+    public Organizacion(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, ArrayList<Area> areas, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, ArrayList<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Boolean estaActivo) {
         this.razonSocial = razonSocial;
         this.tipo = tipo;
         this.ubicacion = ubicacion;

@@ -13,7 +13,6 @@ import java.util.Date;
 
 @Getter @Setter
 @Entity
-@NoArgsConstructor
 public class Recorrido {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,14 +24,52 @@ public class Recorrido {
     private Double peso;
     private Calendar mesInicio;
     private Calendar mesFin;
+    private Boolean estaActivo;
 
-    public Recorrido(Organizacion organizacion, Double peso, Calendar mesInicio, Calendar mesFin) {
+    public Recorrido(Organizacion organizacion, Double peso, Calendar mesInicio, Calendar mesFin,Boolean estaActivo) {
         this.organizacion = organizacion;
         this.mesInicio = mesInicio;
         this.mesFin = mesFin;
         this.peso = peso;
+        this.estaActivo = estaActivo;
         //RepositorioRecorrido.getRepositorio().agregarRecorrido(nuevoRecorrido);
     }
+
+    public Recorrido(Integer id, ArrayList<Trayecto> trayectos, Organizacion organizacion, Double peso, Calendar mesInicio, Calendar mesFin) {
+        this.id = id;
+        this.trayectos = trayectos;
+        this.organizacion = organizacion;
+        this.peso = peso;
+        this.mesInicio = mesInicio;
+        this.mesFin = mesFin;
+    }
+
+    public Recorrido(Organizacion organizacion, Double peso, Calendar mesInicio, Calendar mesFin) {
+        this.organizacion = organizacion;
+        this.peso = peso;
+        this.mesInicio = mesInicio;
+        this.mesFin = mesFin;
+    }
+
+    public Boolean getEstaActivo() {
+        return estaActivo;
+    }
+
+    public void setEstaActivo(Boolean estaActivo) {
+        this.estaActivo = estaActivo;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Recorrido() {
+    }
+
 
     public void addTrayecto(Trayecto trayecto){
         this.trayectos.add(trayecto);
@@ -48,6 +85,18 @@ public class Recorrido {
             distanciaTotal = distanciaTotal + trayecto.distanciaMedia();
         }
         return distanciaTotal;
+    }
+
+    @Override
+    public String toString() {
+        return "Recorrido{" +
+                "id=" + id +
+                ", trayectos=" + trayectos +
+                ", organizacion=" + organizacion +
+                ", peso=" + peso +
+                ", mesInicio=" + mesInicio +
+                ", mesFin=" + mesFin +
+                '}';
     }
 }
 

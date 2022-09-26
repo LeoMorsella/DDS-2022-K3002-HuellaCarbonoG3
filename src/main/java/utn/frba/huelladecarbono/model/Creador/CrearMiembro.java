@@ -9,8 +9,8 @@ import utn.frba.huelladecarbono.repository.RecorridoRepository;
 import java.util.Calendar;
 
 public class CrearMiembro {
-    public static Miembro crearMiembro(int id, String nombre, String apellido, String mail, String telefono, MiembroRepository m) {
-        Miembro miembro = new Miembro(id,nombre,apellido,mail,telefono);
+    public static Miembro crearMiembro(int id, String nombre, String apellido, String mail, String telefono,Boolean estaActivo, MiembroRepository m) {
+        Miembro miembro = new Miembro(id,nombre,apellido,mail,telefono,estaActivo);
         m.save(miembro);
         // RepositorioRecorrido.getRepositorio().agregarRecorrido(recorrido);
         return miembro;

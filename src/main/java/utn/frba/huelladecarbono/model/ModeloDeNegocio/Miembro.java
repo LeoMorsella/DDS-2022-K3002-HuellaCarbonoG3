@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Getter @Setter
@@ -20,7 +21,7 @@ public class Miembro {
     private String nombre;
     private String apellido;
     private String tipoDoc;
-    private int numDoc;
+    private Integer numDoc;
     @Transient//ManyToMany  Problema ArrayList
     private ArrayList<Area> areas;
     @Transient  //Problema ArrayList
@@ -34,9 +35,12 @@ public class Miembro {
 
     private Double impactoIndividual = 0.0;
 
+    private Boolean estaActivo;
+
     //@ElementCollection
     //@ManyToMany
-    private ArrayList<HuellaCarbono> huellasCarbono = new ArrayList<>();
+    @Transient
+    private List<HuellaCarbono> huellasCarbono = new ArrayList<>();
 
     public Miembro(String nom, String ape, String tipoDocu, int numeroDoc, ArrayList<Area> listaAreas,
                    ArrayList<Recorrido> recorridos) {
@@ -57,17 +61,18 @@ public class Miembro {
         RepositorioMiembros.getRepositorio().agregarMiembro(this);
     }
 
-    public Miembro(Integer id, String nombre, String apellido, String mail, String telefono) {
+    public Miembro(Integer id, String nombre, String apellido, String mail, String telefono,Boolean estaActivo) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
         this.telefono = telefono;
+        this.estaActivo = estaActivo;
     }
 
     public Miembro() {}
 
-    public Miembro(Integer id, String nombre, String apellido, String tipoDoc, int numDoc, ArrayList<Area> areas, ArrayList<Recorrido> recorridos, String mail, String telefono) {
+    public Miembro(Integer id, String nombre, String apellido, String tipoDoc, Integer numDoc, ArrayList<Area> areas, ArrayList<Recorrido> recorridos, String mail, String telefono) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -77,6 +82,30 @@ public class Miembro {
         this.recorridos = recorridos;
         this.mail = mail;
         this.telefono = telefono;
+    }
+
+    public Miembro(String nombre, String apellido, String tipoDoc, Integer numDoc, String mail, String telefono, Boolean estaActivo) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.tipoDoc = tipoDoc;
+        this.numDoc = numDoc;
+        this.mail = mail;
+        this.telefono = telefono;
+        this.estaActivo = estaActivo;
+    }
+
+    @Override
+    public String toString() {
+        return "Miembro{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", tipoDoc='" + tipoDoc + '\'' +
+                ", numDoc=" + numDoc +
+                ", mail='" + mail + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", estaActivo=" + estaActivo +
+                '}';
     }
 
     public void registrarseA(Area area) {
@@ -101,5 +130,14 @@ public class Miembro {
 
     public void agregarHuella(HuellaCarbono huella){
         this.huellasCarbono.add(huella);
+    }
+
+
+    public Boolean getEstaActivo() {
+        return estaActivo;
+    }
+
+    public void setEstaActivo(Boolean estaActivo) {
+        this.estaActivo = estaActivo;
     }
 }
