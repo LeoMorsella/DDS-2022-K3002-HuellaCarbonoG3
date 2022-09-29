@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -26,9 +27,8 @@ public class DatoDeMedicion {
     private String periodoImputacion;
     private String unidad;
 
-    //@ElementCollection
-    //@ManyToMany
-    private ArrayList<HuellaCarbono> huellasCarbono = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<HuellaCarbono> huellasCarbono = new ArrayList<>();
 
     public DatoDeMedicion() {
     }

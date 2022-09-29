@@ -15,8 +15,8 @@ public class Area {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String nombre;
-    @Transient // Problema ArrayList
-    private  ArrayList<Miembro> miembros = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private  List<Miembro> miembros = new ArrayList<>();
     @ManyToOne
     private  Organizacion organizacion;
     @Transient // Ver como persistir una lista de listas
@@ -54,7 +54,7 @@ public class Area {
         this.nombre = nombre;
     }
 
-    public ArrayList<Miembro> getMiembros() {
+    public List<Miembro> getMiembros() {
         return miembros;
     }
 

@@ -152,6 +152,7 @@ public class InitData implements CommandLineRunner {
             List<HuellaCarbono> hashMapPrueba = new ArrayList<>();
             hashMapPrueba.add(huellaPrueba);
             Organizacion organizacionConHC = creadorDeObjetos.crearOrganizacionConHC("SA",TipoOrg.INSTITUCION,ubicacionPruebaUno,Clasificacion.EMPRESA_SECTOR_SECUNDARIO,null,null,listaHCPrueba,250.00,hashMapPrueba,false);
+            System.out.println(Calendario.crearFecha(2,2021));
         }
         else{
             System.out.println("Ya existen Organizaciones creados anteriormente");

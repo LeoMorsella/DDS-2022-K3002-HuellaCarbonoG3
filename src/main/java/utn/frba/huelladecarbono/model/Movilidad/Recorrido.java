@@ -7,9 +7,11 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Getter @Setter
 @Entity
@@ -17,16 +19,16 @@ public class Recorrido {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Transient // Problema ArrayList
-    public ArrayList<Trayecto> trayectos = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    public List<Trayecto> trayectos = new ArrayList<>();
     @Transient // OneToMany?
     private Organizacion organizacion;
     private Double peso;
-    private Calendar mesInicio;
-    private Calendar mesFin;
+    private LocalDate mesInicio;
+    private LocalDate mesFin;
     private Boolean estaActivo;
 
-    public Recorrido(Organizacion organizacion, Double peso, Calendar mesInicio, Calendar mesFin,Boolean estaActivo) {
+    public Recorrido(Organizacion organizacion, Double peso, LocalDate mesInicio, LocalDate mesFin,Boolean estaActivo) {
         this.organizacion = organizacion;
         this.mesInicio = mesInicio;
         this.mesFin = mesFin;
@@ -35,7 +37,7 @@ public class Recorrido {
         //RepositorioRecorrido.getRepositorio().agregarRecorrido(nuevoRecorrido);
     }
 
-    public Recorrido(Integer id, ArrayList<Trayecto> trayectos, Organizacion organizacion, Double peso, Calendar mesInicio, Calendar mesFin) {
+    public Recorrido(Integer id, ArrayList<Trayecto> trayectos, Organizacion organizacion, Double peso, LocalDate mesInicio, LocalDate mesFin) {
         this.id = id;
         this.trayectos = trayectos;
         this.organizacion = organizacion;
@@ -44,7 +46,7 @@ public class Recorrido {
         this.mesFin = mesFin;
     }
 
-    public Recorrido(Organizacion organizacion, Double peso, Calendar mesInicio, Calendar mesFin) {
+    public Recorrido(Organizacion organizacion, Double peso, LocalDate mesInicio, LocalDate mesFin) {
         this.organizacion = organizacion;
         this.peso = peso;
         this.mesInicio = mesInicio;

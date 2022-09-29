@@ -1,19 +1,13 @@
 package utn.frba.huelladecarbono.model.ModeloDeNegocio;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCService;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Medio;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioTrayectos;
 import lombok.Getter;
 import lombok.Setter;
-import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 @Getter @Setter
@@ -30,26 +24,27 @@ public class Organizacion {
     private Ubicacion ubicacion;
 
     //TODO cambiar esto porque así no lo persiste
-    @Transient // Problema ArrayList
-    private ArrayList<Area> areas = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Area> areas = new ArrayList<>();
     @Enumerated(EnumType.STRING)
     private Clasificacion clasificacion;
-    @Transient//ManyToMany  Problema ArrayList
-    private ArrayList<Miembro> contactosMail = null;
-    @Transient// ManyToMany Problema ArrayList
-    private ArrayList<Miembro> contactosWP = null;
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Miembro> contactosMail = null;
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Miembro> contactosWP = null;
     @Transient // Evaluar si es ElementCollection o Transient
-    private ArrayList<Double> hcMensual = new ArrayList<>();
+    private List<Double> hcMensual = new ArrayList<>();
     private Double hcPromedio = 0.0;
 
- @ManyToMany(fetch = FetchType.LAZY,
+  /*  @ManyToMany(fetch = FetchType.LAZY,
          cascade = {
                  CascadeType.PERSIST,
                  CascadeType.MERGE
          })
- @JoinTable(name = "organizacion_huellaCarbono",
+    @JoinTable(name = "organizacion_huellaCarbono",
          joinColumns = { @JoinColumn(name = "organizacion_id") },
-         inverseJoinColumns = { @JoinColumn(name = "huellaCarbono_id") })
+         inverseJoinColumns = { @JoinColumn(name = "huellaCarbono_id") })**/
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<HuellaCarbono> huellasCarbono = new ArrayList<>();
 
     private Boolean estaActivo;
@@ -61,7 +56,7 @@ public class Organizacion {
 
 
 
-    public Organizacion(String razonSocial, TipoOrg tipo,Ubicacion ubicacion, Clasificacion clasificacion,ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP,ArrayList<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Boolean estaActivo) {
+    public Organizacion(String razonSocial, TipoOrg tipo,Ubicacion ubicacion, Clasificacion clasificacion,List<Miembro> contactosMail, List<Miembro> contactosWP,List<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Boolean estaActivo) {
 
         this.razonSocial = razonSocial;
         this.tipo = tipo;
@@ -74,6 +69,11 @@ public class Organizacion {
         this.huellasCarbono = huellasCarbono;
         this.estaActivo = estaActivo;
     }
+
+    public Organizacion() {
+
+    }
+
 
     public String getRazonSocial() {
         return razonSocial;
@@ -107,11 +107,11 @@ public class Organizacion {
         this.huellaCarbono = valor;
     }
 
-    public ArrayList<Area> getAreas() {
+    public List<Area> getAreas() {
         return areas;
     }
 
-    public void setAreas(ArrayList<Area> areas) {
+    public void setAreas(List<Area> areas) {
         this.areas = areas;
     }
 
@@ -131,19 +131,19 @@ public class Organizacion {
         this.clasificacion = clasificacion;
     }
 
-    public ArrayList<Miembro> getContactosMail() {
+    public List<Miembro> getContactosMail() {
         return contactosMail;
     }
 
-    public ArrayList<Miembro> getContactosWP() {
+    public List<Miembro> getContactosWP() {
         return contactosWP;
     }
 
-    public void setContactosWP(ArrayList<Miembro> contactosWP) {
+    public void setContactosWP(List<Miembro> contactosWP) {
         this.contactosWP = contactosWP;
     }
 
-    public void setContactosMail(ArrayList<Miembro> contactos) {
+    public void setContactosMail(List<Miembro> contactos) {
         this.contactosMail = contactos;
     }
     public void agregarContactoMail(Miembro Contacto){
@@ -170,10 +170,8 @@ public class Organizacion {
         this.estaActivo = estaActivo;
     }
 
-    public Organizacion() {
-    }
 
-    public Organizacion(Integer id, String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP) {
+    public Organizacion(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, List<Miembro> contactosMail, List<Miembro> contactosWP) {
         this.id = id;
         this.razonSocial = razonSocial;
         this.tipo = tipo;
@@ -183,16 +181,9 @@ public class Organizacion {
         this.contactosWP = contactosWP;
     }
 
-    public Organizacion(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP) {
-        this.razonSocial = razonSocial;
-        this.tipo = tipo;
-        this.ubicacion = ubicacion;
-        this.clasificacion = clasificacion;
-        this.contactosMail = contactosMail;
-        this.contactosWP = contactosWP;
-    }
 
-    public Organizacion(String razonSocial, TipoOrg tipo, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, Boolean estaActivo) {
+
+    public Organizacion(String razonSocial, TipoOrg tipo, Clasificacion clasificacion, List<Miembro> contactosMail, List<Miembro> contactosWP, Boolean estaActivo) {
         this.razonSocial = razonSocial;
         this.tipo = tipo;
         this.clasificacion = clasificacion;
@@ -201,19 +192,7 @@ public class Organizacion {
         this.estaActivo = estaActivo;
     }
 
-    public Organizacion(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, ArrayList<Area> areas, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, ArrayList<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Boolean estaActivo) {
-        this.razonSocial = razonSocial;
-        this.tipo = tipo;
-        this.ubicacion = ubicacion;
-        this.areas = areas;
-        this.clasificacion = clasificacion;
-        this.contactosMail = contactosMail;
-        this.contactosWP = contactosWP;
-        this.hcMensual = hcMensual;
-        this.hcPromedio = hcPromedio;
-        this.huellasCarbono = huellasCarbono;
-        this.estaActivo = estaActivo;
-    }
+
 
     public List<Miembro> getMiembros(){
         List<Miembro> miembros = new ArrayList<>();

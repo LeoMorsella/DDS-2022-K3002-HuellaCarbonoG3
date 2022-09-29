@@ -1,17 +1,17 @@
 package utn.frba.huelladecarbono.service.CalculoDeHuellaService;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public class Calendario {
 
-    public static Calendar crearFecha(int mes, int anio) {
-        Calendar fecha = Calendar.getInstance();
-        fecha.add(Calendar.MONTH, mes);
-        fecha.add(Calendar.YEAR, anio);
+
+    public static LocalDate  crearFecha(int mes, int anio) {
+        LocalDate fecha = LocalDate.of(anio,mes,1);
         return fecha;
     }
 
-    public static Calendar sinFecha() {
+   public static Calendar sinFecha() {
         return null;
     }
 
@@ -21,33 +21,33 @@ public class Calendario {
         return anioC;
     }
 
-    public static Calendar fechaActual() {
-        return Calendar.getInstance();
+    public static LocalDate fechaActual() {
+        return LocalDate.now();
     }
 
-    public static int mesesEntreMedio(Calendar inicioCalculo, Calendar finCalculo, Calendar inicioRecorrido, Calendar finRecorrido) {
-        Calendar inicio;
-        Calendar fin;
+    public static int mesesEntreMedio(LocalDate inicioCalculo, LocalDate finCalculo, LocalDate inicioRecorrido, LocalDate finRecorrido) {
+        LocalDate inicio;
+        LocalDate fin;
 
         if(finRecorrido == null) {
-            finRecorrido = Calendar.getInstance();
+            finRecorrido = fechaActual();
         }
         //TODO revisar
-        if(inicioCalculo.before(finRecorrido) && finCalculo.after(inicioRecorrido)) {
-            if(inicioCalculo.before(inicioRecorrido)) {
+        if(inicioCalculo.isBefore(finRecorrido) && finCalculo.isAfter(inicioRecorrido)) {
+            if(inicioCalculo.isBefore(finRecorrido)) {
                 inicio = inicioCalculo;
             } else {
                 inicio = inicioRecorrido;
             }
 
-            if(finCalculo.after(finRecorrido)) {
+            if(finCalculo.isAfter(finRecorrido)) {
                 fin = finCalculo;
             } else {
                 fin = finRecorrido;
             }
 
-            int diferenciaAnios = fin.get(Calendar.YEAR) - inicio.get(Calendar.YEAR);
-            return diferenciaAnios * 12 + fin.get(Calendar.MONTH) - inicio.get(Calendar.MONTH);
+            int diferenciaAnios = fin.getYear() - inicio.getYear();
+            return diferenciaAnios * 12 + (fin.getMonthValue() - inicio.getMonthValue());
         } else {
             return 0;
         }

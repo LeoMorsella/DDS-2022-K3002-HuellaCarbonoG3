@@ -2,8 +2,7 @@ package utn.frba.huelladecarbono.service.CalculoDeHuellaService;
 
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.DatoDeMedicion;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class CalculadoraHCMedicion {
@@ -26,7 +25,7 @@ public class CalculadoraHCMedicion {
             return (distancia * peso)/12 * k * FE;
         }
     }
-    static public Double calcularHC(List<DatoDeMedicion> mediciones, Double k, Calendar mesInicio, Calendar mesFin) {
+    static public Double calcularHC(List<DatoDeMedicion> mediciones, Double k, LocalDate mesInicio, LocalDate mesFin) {
     Double HCTotal = 0.0;
     Double peso = 0.0;
     Double distancia = 0.0;

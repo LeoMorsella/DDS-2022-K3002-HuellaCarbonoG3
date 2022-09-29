@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -23,9 +22,9 @@ public class Miembro {
     private String tipoDoc;
     private Integer numDoc;
     @Transient//ManyToMany  Problema ArrayList
-    private ArrayList<Area> areas;
+    private List<Area> areas;
     @Transient  //Problema ArrayList
-    private ArrayList<Recorrido> recorridos;
+    private List<Recorrido> recorridos;
 
     private String mail;
 
@@ -42,8 +41,8 @@ public class Miembro {
     @Transient
     private List<HuellaCarbono> huellasCarbono = new ArrayList<>();
 
-    public Miembro(String nom, String ape, String tipoDocu, int numeroDoc, ArrayList<Area> listaAreas,
-                   ArrayList<Recorrido> recorridos) {
+    public Miembro(String nom, String ape, String tipoDocu, int numeroDoc, List<Area> listaAreas,
+                   List<Recorrido> recorridos) {
         this.nombre = nom;
         this.apellido = ape;
         this.tipoDoc = tipoDocu;
@@ -72,7 +71,7 @@ public class Miembro {
 
     public Miembro() {}
 
-    public Miembro(Integer id, String nombre, String apellido, String tipoDoc, Integer numDoc, ArrayList<Area> areas, ArrayList<Recorrido> recorridos, String mail, String telefono) {
+    public Miembro(Integer id, String nombre, String apellido, String tipoDoc, Integer numDoc, List<Area> areas, List<Recorrido> recorridos, String mail, String telefono) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;

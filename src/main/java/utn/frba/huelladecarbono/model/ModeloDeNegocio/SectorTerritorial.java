@@ -18,9 +18,9 @@ public class SectorTerritorial {
     private String provincia;
     private Double huellaCarbono = 0.0;
 
-  //  @ElementCollection
-   // @ManyToMany
-    private ArrayList<HuellaCarbono> huellasCarbono = new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<HuellaCarbono> huellasCarbono = new ArrayList<>();
     
     @OneToOne
     private AgenteSectorial agenteSectorial;

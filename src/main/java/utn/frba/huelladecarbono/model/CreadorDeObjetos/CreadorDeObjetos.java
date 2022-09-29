@@ -11,9 +11,8 @@ import utn.frba.huelladecarbono.model.Seguridad.Rol;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
 @Component
@@ -44,14 +43,8 @@ public class CreadorDeObjetos {
         repoOrganizaciones.save(organizacion);
         return organizacion;
     }
-/*
-    public Organizacion crearOrganizacionConHC(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, ArrayList<Area> areas, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, ArrayList<Double> hcMensual, Double hcPromedio, ArrayList<HuellaCarbono> huellasCarbono, Boolean estaActivo) {
-        Organizacion organizacion = new Organizacion( razonSocial,  tipo,  ubicacion, areas, clasificacion, contactosMail, contactosWP, hcMensual,  hcPromedio, huellasCarbono,  estaActivo);
-        repoOrganizaciones.save(organizacion);
-        return organizacion;
-    }
-*/
-    public Organizacion crearOrganizacionConHC(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, ArrayList<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Boolean estaActivo) {
+
+    public Organizacion crearOrganizacionConHC(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, List<Miembro> contactosMail, List<Miembro> contactosWP, List<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Boolean estaActivo) {
         Organizacion organizacion = new Organizacion( razonSocial,  tipo,  ubicacion, clasificacion, contactosMail, contactosWP, hcMensual,  hcPromedio, huellasCarbono,  estaActivo);
         repoOrganizaciones.save(organizacion);
         return organizacion;
@@ -70,7 +63,7 @@ public class CreadorDeObjetos {
     }
 
 
-    public  Recorrido crearRecorrido(Organizacion organizacion, Double peso, Calendar mesInicio, Calendar mesFin) {
+    public  Recorrido crearRecorrido(Organizacion organizacion, Double peso, LocalDate mesInicio, LocalDate mesFin) {
         Recorrido recorrido = new Recorrido(organizacion,peso,mesInicio,mesFin);
         repoRecorridos.save(recorrido);
         return recorrido;

@@ -3,10 +3,10 @@ package utn.frba.huelladecarbono.service.CalculoDeHuellaService;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 public class CalculadoraHCOrganizacion {
-    public static Double calcularHC(Organizacion organizacion, Calendar mesInicio, Calendar mesFin){
+    public static Double calcularHC(Organizacion organizacion, LocalDate mesInicio, LocalDate mesFin){
         Double HC = 0.0;
 
         for( Area area : organizacion.getAreas()) {
@@ -15,7 +15,7 @@ public class CalculadoraHCOrganizacion {
         return HC;
     }
 
-    public static Double HCpromedio(Organizacion organizacion, Calendar mesInicio, Calendar mesFin) {
+    public static Double HCpromedio(Organizacion organizacion, LocalDate mesInicio, LocalDate mesFin) {
         return calcularHC(organizacion, mesInicio, mesFin) / organizacion.getMiembros().size();
     }
 }

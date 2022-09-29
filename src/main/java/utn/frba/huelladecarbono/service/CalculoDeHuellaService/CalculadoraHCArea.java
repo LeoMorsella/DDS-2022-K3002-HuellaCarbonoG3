@@ -4,11 +4,12 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.DatoDeMedicion;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 
 public class CalculadoraHCArea {
-    public static Double calcularHC(Area area, Calendar mesInicio, Calendar mesFin){
+    public static Double calcularHC(Area area, LocalDate mesInicio, LocalDate mesFin){
         Double HC = 0.0;
         for (Miembro miembro : area.getMiembros()) {
             try {
@@ -23,7 +24,7 @@ public class CalculadoraHCArea {
         return HC;
     }
 
-    public static Double HCpromedio(Area area, Calendar mesInicio, Calendar mesFin) {
+    public static Double HCpromedio(Area area, LocalDate mesInicio, LocalDate mesFin) {
         return calcularHC(area, mesInicio, mesFin) / area.getMiembros().size();
     }
 }

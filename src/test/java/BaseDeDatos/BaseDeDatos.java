@@ -1,5 +1,6 @@
 package BaseDeDatos;
 import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Getter;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.*;
@@ -20,14 +21,14 @@ import utn.frba.huelladecarbono.service.CalculoDeHuellaService.FactoresDeEmision
 @Getter
 public class BaseDeDatos {
     static BaseDeDatos instance = null;
-    ArrayList<Organizacion> organizaciones = new ArrayList<>();
-    ArrayList<Area> areas = new ArrayList<>();
-    ArrayList<Miembro> miembros = new ArrayList<>();
-    ArrayList<Ubicacion> ubicaciones = new ArrayList<>();
-    ArrayList<Recorrido> recorridos = new ArrayList<>();
-    ArrayList<Trayecto> trayectos = new ArrayList<>();
-    ArrayList<SectorTerritorial> sectoresTerritoriales = new ArrayList<>();
-    ArrayList<AgenteSectorial> agentesSectoriales = new ArrayList<>();
+    List<Organizacion> organizaciones = new ArrayList<>();
+    List<Area> areas = new ArrayList<>();
+    List<Miembro> miembros = new ArrayList<>();
+    List<Ubicacion> ubicaciones = new ArrayList<>();
+    List<Recorrido> recorridos = new ArrayList<>();
+    List<Trayecto> trayectos = new ArrayList<>();
+    List<SectorTerritorial> sectoresTerritoriales = new ArrayList<>();
+    List<AgenteSectorial> agentesSectoriales = new ArrayList<>();
 
     public static BaseDeDatos getInstance() throws Exception {
         if(instance == null) {
@@ -57,9 +58,9 @@ public class BaseDeDatos {
         areas.add(new Area("Sistemas", organizaciones.get(1)));
         areas.add(new Area("Legal", organizaciones.get(2)));
         areas.add(new Area("Ventas", organizaciones.get(3)));
-        ArrayList<Area> areas1 = new ArrayList<>();
+        List<Area> areas1 = new ArrayList<>();
         areas1.add(areas.get(0));
-        ArrayList<Area> areas2 = new ArrayList<>();
+        List<Area> areas2 = new ArrayList<>();
         areas2.add(areas.get(0));
         areas2.add(areas.get(1));
         areas2.add(areas.get(2));
@@ -89,14 +90,14 @@ public class BaseDeDatos {
         recorridos.get(4).addTrayecto(trayectos.get(2));
         recorridos.get(4).addTrayecto(trayectos.get(3));
 
-        ArrayList<Recorrido> recorridos1 = new ArrayList<>();
+        List<Recorrido> recorridos1 = new ArrayList<>();
         recorridos1.add(recorridos.get(0));
         recorridos1.add(recorridos.get(4));
-        ArrayList<Recorrido> recorridos2 = new ArrayList<>();
+        List<Recorrido> recorridos2 = new ArrayList<>();
         recorridos2.add(recorridos.get(0));
         recorridos2.add(recorridos.get(1));
         recorridos2.add(recorridos.get(3));
-        ArrayList<Recorrido> recorridos3 = new ArrayList<>();
+        List<Recorrido> recorridos3 = new ArrayList<>();
         recorridos3.add(recorridos.get(2));
         // MIEMBROS
         miembros.add(new Miembro("Carlos", "Castaño", "DNI", 14589653, areas1, recorridos1));

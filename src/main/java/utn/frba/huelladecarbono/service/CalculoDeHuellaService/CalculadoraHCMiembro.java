@@ -5,11 +5,12 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public class CalculadoraHCMiembro {
 
-    public static Double calcularHC(Miembro miembro, Calendar mesInicio, Calendar mesFin, Organizacion organizacion) throws Exception {
+    public static Double calcularHC(Miembro miembro, LocalDate mesInicio, LocalDate mesFin, Organizacion organizacion) throws Exception {
         Double HC = 0.0;
         int mesesRecorridos;
         for(Recorrido recorrido : miembro.getRecorridos()) {
@@ -40,7 +41,7 @@ public class CalculadoraHCMiembro {
         return resultado;
     }
 
-    public static Double calcularImpactoIndividual(Miembro miembro, Organizacion organizacion, Calendar mesInicio, Calendar mesFin) throws Exception {
+    public static Double calcularImpactoIndividual(Miembro miembro, Organizacion organizacion, LocalDate mesInicio, LocalDate mesFin) throws Exception {
         Double HCMiembro;
         Double HCOrganizacion;
         Double promedio;
