@@ -36,9 +36,9 @@ public class ObtenerDatosInformes {
         String hcTotalPais = "";
         List<SectorTerritorial> sectoresTerritoriales = RepositorioSectorTerritorial.getRepositorio().getSectoresTerritoriales();
         for(SectorTerritorial st : sectoresTerritoriales){
-            if(st.getMunicipio().isEmpty()){
+
                 hcTotalPais += "Sector de Provincia: " + st.getProvincia() + ". HC total: " + st.getHuellaCarbono() + "\n";
-            }
+
         }
         return hcTotalPais;
     }
