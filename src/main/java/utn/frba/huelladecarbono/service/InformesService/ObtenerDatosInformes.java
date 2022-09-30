@@ -7,51 +7,48 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.TipoOrg;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioSectorTerritorial;
 
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ObtenerDatosInformes {
 
     public String hcTotalPorST(){
-        String hCtotalPorSt = "";
+        String hcTotalPorST = "";
         List<SectorTerritorial> sectoresTerritoriales = RepositorioSectorTerritorial.getRepositorio().getSectoresTerritoriales();
         for(SectorTerritorial st : sectoresTerritoriales){
-            if(st.getMunicipio().isEmpty()){
-                hCtotalPorSt += "Sector de Provincia: " + st.getProvincia() + ". HC total: " + st.getHuellaCarbono() + "\n";
-            }
-            else{
-                hCtotalPorSt += "Sector de Municipio: " + st.getMunicipio() + ". HC total: " + st.getHuellaCarbono() + "\n";
-            }
+            hcTotalPorST += hcTotalDeST(st);
         }
-        return hCtotalPorSt;
+        return hcTotalPorST;
     }
 
     public String hcTotalDeST(SectorTerritorial sector) {
-        String hcTotalDeST = "";
         if(sector.getMunicipio().isEmpty()){
-            hcTotalDeST += "Sector de Provincia: " + sector.getProvincia() + ". HC total: " + sector.getHuellaCarbono() + "\n";
+            return "Sector de Provincia: " + sector.getProvincia() + ". HC total: " + sector.getHuellaCarbono() + "\n";
         }
         else{
-            hcTotalDeST += "Sector de Municipio: " + sector.getMunicipio() + ". HC total: " + sector.getHuellaCarbono() + "\n";
+            return "Sector de Municipio: " + sector.getMunicipio() + ". HC total: " + sector.getHuellaCarbono() + "\n";
         }
-        return  hcTotalDeST;
     }
 
     public String hcTotalPais() {
-        String hCtotalPais = "";
+        String hcTotalPais = "";
         List<SectorTerritorial> sectoresTerritoriales = RepositorioSectorTerritorial.getRepositorio().getSectoresTerritoriales();
         for(SectorTerritorial st : sectoresTerritoriales){
-            hCtotalPais += "Sector de Provincia: " + st.getProvincia() + ". HC total: " + st.getHuellaCarbono() + "\n";
+            if(st.getMunicipio().isEmpty()){
+                hcTotalPais += "Sector de Provincia: " + st.getProvincia() + ". HC total: " + st.getHuellaCarbono() + "\n";
+            }
         }
-        return hCtotalPais;
+        return hcTotalPais;
     }
 
     public String hcTotalPorTipoDeOrg(){
         List<Organizacion> organizaciones = RepositorioOrganizaciones.getRepositorio().getOrganizaciones();
-        String valoresGubernamental = getValores(organizaciones, TipoOrg.GUBERNAMENTAL);
-        String valoresONG = getValores(organizaciones, TipoOrg.ONG);
-        String valoresEmpresa = getValores(organizaciones, TipoOrg.EMPRESA);
-        String valoresInstitucion = getValores(organizaciones, TipoOrg.INSTITUCION);
+        String valoresGubernamental = getValoresOrg(organizaciones, TipoOrg.GUBERNAMENTAL);
+        String valoresONG = getValoresOrg(organizaciones, TipoOrg.ONG);
+        String valoresEmpresa = getValoresOrg(organizaciones, TipoOrg.EMPRESA);
+        String valoresInstitucion = getValoresOrg(organizaciones, TipoOrg.INSTITUCION);
         return  "HC Gubernamental: " + valoresGubernamental + "\n" +
                 "HC Empresa: " + valoresEmpresa + "\n" +
                 "HC ONG: " + valoresONG + "\n" +
@@ -59,16 +56,34 @@ public class ObtenerDatosInformes {
     }
 
     public String hcDeOrganizacion(Organizacion organizacion) {
-       String valorHCOrg = "";
-       valorHCOrg += "HC Organizacion: " + organizacion.getHuellaTotal();
-       return valorHCOrg;
+       return "HC Organizacion: " + organizacion.getHuellaTotal();
     }
 
-    public String getValores(List<Organizacion> organizaciones, TipoOrg tipo){
+    public String getValoresOrg(List<Organizacion> organizaciones, TipoOrg tipo){
        return organizaciones.stream()
                 .filter(organizacion -> organizacion.getTipo().equals(tipo))
                 .map(Organizacion::getHuellaTotal)
                 .collect(Collectors.summingDouble(Double::doubleValue))
                 .toString();
-    };
+    }
+
+    public String evolucionOrg(Organizacion organizacion){
+        return evolucion(organizacion.getHuellasDeCarbono());
+    }
+
+    public String evolucionST(SectorTerritorial st){
+        return evolucion(st.getHuellasDeCarbono());
+    }
+
+    private String evolucion(List<HuellaCarbono> huellas){
+        String evolucion = "";
+        List<HuellaCarbono> huellasOrganizadas = huellas.stream()
+                .sorted(Comparator.comparing(HuellaCarbono::getFechaIni))
+                .collect(Collectors.toList());
+        for(HuellaCarbono h : huellasOrganizadas){
+            evolucion += "Hc en el periodo " + h.getFechaIni() +
+                    "/" + h.getFechaFin() + ": " + h.getHuella() + "\n";
+        }
+        return evolucion;
+    }
 }
