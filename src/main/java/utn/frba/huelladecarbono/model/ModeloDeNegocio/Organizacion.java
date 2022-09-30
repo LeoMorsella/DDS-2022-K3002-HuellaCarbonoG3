@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter @Setter
 @Entity
@@ -78,6 +79,8 @@ public class Organizacion {
     public String getRazonSocial() {
         return razonSocial;
     }
+
+    public List<HuellaCarbono> getHuellasDeCarbono() {return huellasCarbono;}
 
     public void setRazonSocial(String razonSocial) {
         this.razonSocial = razonSocial;
@@ -225,6 +228,12 @@ public class Organizacion {
 
     public Boolean estaActiva(){
         return this.getEstaActivo();
+    }
+
+    public double getHuellaTotal(){
+        return this.huellasCarbono.stream()
+                .map(huellaCarbono -> huellaCarbono.getHuella())
+                .collect(Collectors.summingDouble(Double::doubleValue));
     }
 
     @Override
