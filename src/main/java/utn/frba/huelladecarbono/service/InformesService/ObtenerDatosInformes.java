@@ -26,6 +26,26 @@ public class ObtenerDatosInformes {
         return hCtotalPorSt;
     }
 
+    public String hcTotalDeST(SectorTerritorial sector) {
+        String hcTotalDeST = "";
+        if(sector.getMunicipio().isEmpty()){
+            hcTotalDeST += "Sector de Provincia: " + sector.getProvincia() + ". HC total: " + sector.getHuellaCarbono() + "\n";
+        }
+        else{
+            hcTotalDeST += "Sector de Municipio: " + sector.getMunicipio() + ". HC total: " + sector.getHuellaCarbono() + "\n";
+        }
+        return  hcTotalDeST;
+    }
+
+    public String hcTotalPais() {
+        String hCtotalPais = "";
+        List<SectorTerritorial> sectoresTerritoriales = RepositorioSectorTerritorial.getRepositorio().getSectoresTerritoriales();
+        for(SectorTerritorial st : sectoresTerritoriales){
+            hCtotalPais += "Sector de Provincia: " + st.getProvincia() + ". HC total: " + st.getHuellaCarbono() + "\n";
+        }
+        return hCtotalPais;
+    }
+
     public String hcTotalPorTipoDeOrg(){
         List<Organizacion> organizaciones = RepositorioOrganizaciones.getRepositorio().getOrganizaciones();
         String valoresGubernamental = getValores(organizaciones, TipoOrg.GUBERNAMENTAL);
@@ -36,6 +56,12 @@ public class ObtenerDatosInformes {
                 "HC Empresa: " + valoresEmpresa + "\n" +
                 "HC ONG: " + valoresONG + "\n" +
                 "HC Institucion: " + valoresInstitucion;
+    }
+
+    public String hcDeOrganizacion(Organizacion organizacion) {
+       String valorHCOrg = "";
+       valorHCOrg += "HC Organizacion: " + organizacion.getHuellaTotal();
+       return valorHCOrg;
     }
 
     public String getValores(List<Organizacion> organizaciones, TipoOrg tipo){

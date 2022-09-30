@@ -44,7 +44,7 @@ public class SectorTerritorialController {
 
 
     //Endpoint para modificar a un usuario
-    @PutMapping("/miembro/editar/{id}")
+    @PutMapping("/sectorTerritorial/editar/{id}")
     public SectorTerritorial actualizarSectorTerritorial(@PathVariable Integer id, @RequestBody SectorTerritorial sectorTerritorial) throws Exception {
         return interfazSectorTerritorial.modificarSectorTerritorial(id, sectorTerritorial);
     }

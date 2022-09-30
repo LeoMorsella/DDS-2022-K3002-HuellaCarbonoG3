@@ -21,9 +21,9 @@ public class Miembro {
     private String apellido;
     private String tipoDoc;
     private Integer numDoc;
-    @Transient//ManyToMany  Problema ArrayList
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Area> areas;
-    @Transient  //Problema ArrayList
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Recorrido> recorridos;
 
     private String mail;
