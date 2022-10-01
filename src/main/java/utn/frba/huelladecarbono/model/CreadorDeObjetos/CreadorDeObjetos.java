@@ -2,10 +2,7 @@ package utn.frba.huelladecarbono.model.CreadorDeObjetos;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import utn.frba.huelladecarbono.model.MedioDeTransporte.Medio;
-import utn.frba.huelladecarbono.model.MedioDeTransporte.Parada;
-import utn.frba.huelladecarbono.model.MedioDeTransporte.TipoTransportePublico;
-import utn.frba.huelladecarbono.model.MedioDeTransporte.TransportePublico;
+import utn.frba.huelladecarbono.model.MedioDeTransporte.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
@@ -68,6 +65,15 @@ public class CreadorDeObjetos {
     @Autowired
     RepositorioSectorTerritorial repositorioSectorTerritorial;
 
+    @Autowired
+    MedioMotorizadoRepository repoMedioMotorizado;
+    @Autowired
+    RepositorioMedioMotorizado repositorioMedioMotorizado;
+
+    @Autowired
+    MedioNoMotorizadoRepository repoMedioNoMotorizado;
+    @Autowired
+    RepositorioMedioNoMotorizado repositorioMedioNoMotorizado;
 
 
     public Organizacion crearOrganizacion(String razonSocial, TipoOrg tipo, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, Boolean estaActivo) {
@@ -139,5 +145,19 @@ public class CreadorDeObjetos {
         return sectorTerritorial;
     }
 
+    public MedioMotorizado crearMedioMotorizado(TipoVehiculoMotorizado tipoVehiculoMotorizado, TipoCombustible tipoCombustible, String patente, Boolean esServicioContratado, String tipoServicio) {
+        MedioMotorizado medio = new MedioMotorizado(tipoVehiculoMotorizado, tipoCombustible, patente, esServicioContratado, tipoServicio);
+        repoMedioMotorizado.save(medio);
+        repositorioMedioMotorizado.agregarMedioMotorizado(medio);
+        return medio;
+
+    }
+
+    public MedioNoMotorizado crearMedioNoMotorizado(TipoMedioNoMotorizado tipo) {
+        MedioNoMotorizado medio = new MedioNoMotorizado(tipo);
+        repoMedioNoMotorizado.save(medio);
+        repositorioMedioNoMotorizado.agregarMedioNoMotorizado(medio);
+        return medio;
+    }
 
 }
