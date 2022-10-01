@@ -71,5 +71,10 @@ public class OrganizacionService implements IOrganizacionService{
         return organizacionActualizada;
     }
 
+    @Override
+    public Organizacion crearOrganizacion(Organizacion organizacion) {
+        organizacionRepository.save(organizacion);
+        return organizacion;
+    }
 
 }

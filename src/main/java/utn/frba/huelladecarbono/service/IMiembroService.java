@@ -2,6 +2,7 @@ package utn.frba.huelladecarbono.service;
 
 
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 
 
 import java.util.List;
@@ -24,4 +25,5 @@ public interface IMiembroService {
     public Miembro modificarMiembro(Integer id, Miembro miembro);
 
     void cambiarEstadoMiembro(Integer id);
+
 }

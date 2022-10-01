@@ -28,4 +28,6 @@ public interface IOrganizacionService {
     public void cambiarEstadoOrganizacion(Integer id);
 
     public Organizacion modificarOrganizacion(Integer id, Organizacion organizacion);
+
+    public Organizacion crearOrganizacion(Organizacion organizacion);
 }
