@@ -62,7 +62,11 @@ public class CreadorDeObjetos {
     @Autowired
     RepositorioTrayectos repositorioTrayectosEnMemoria;
 
+    @Autowired
+    SectorTerritorialRepository repoSectorTerritorial;
 
+    @Autowired
+    RepositorioSectorTerritorial repositorioSectorTerritorial;
 
 
 
@@ -127,5 +131,13 @@ public class CreadorDeObjetos {
         Area area = new Area(nombre,organizacion,mediciones);
         return area;
     }
+
+    public SectorTerritorial crearSectorTerritorial(Integer id, String municipio, String provincia, AgenteSectorial agenteSectorial){
+        SectorTerritorial sectorTerritorial = new SectorTerritorial(id,municipio,provincia,agenteSectorial);
+        repoSectorTerritorial.save(sectorTerritorial);
+        repositorioSectorTerritorial.agregarSectorTerritorial(sectorTerritorial);
+        return sectorTerritorial;
+    }
+
 
 }
