@@ -33,8 +33,7 @@ public class Area {
     public Area() {
     }
 
-    public Area(Integer id, String nombre, Organizacion organizacion, List<List<DatoDeMedicion>> mediciones) {
-        this.id = id;
+    public Area(String nombre, Organizacion organizacion, List<List<DatoDeMedicion>> mediciones) {
         this.nombre = nombre;
         this.organizacion = organizacion;
         this.mediciones = mediciones;

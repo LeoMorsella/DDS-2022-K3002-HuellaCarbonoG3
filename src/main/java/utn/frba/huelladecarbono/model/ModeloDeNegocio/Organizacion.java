@@ -1,5 +1,8 @@
 package utn.frba.huelladecarbono.model.ModeloDeNegocio;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import utn.frba.huelladecarbono.model.CreadorDeObjetos.CreadorDeObjetos;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Medio;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioTrayectos;
@@ -13,7 +16,12 @@ import java.util.stream.Collectors;
 
 @Getter @Setter
 @Entity
+
 public class Organizacion {
+
+    @Transient
+    @Autowired
+    CreadorDeObjetos creadorDeObjetos;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -73,6 +81,12 @@ public class Organizacion {
 
     public Organizacion() {
 
+    }
+
+    public Area crearArea(String nombre, Organizacion organizacion, List<List<DatoDeMedicion>> mediciones){
+        Area area = creadorDeObjetos.crearArea(nombre, organizacion, mediciones);
+        this.areas.add(area);
+        return area;
     }
 
 

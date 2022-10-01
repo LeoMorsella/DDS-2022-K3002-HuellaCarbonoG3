@@ -64,6 +64,8 @@ public class CreadorDeObjetos {
 
 
 
+
+
     public Organizacion crearOrganizacion(String razonSocial, TipoOrg tipo, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, Boolean estaActivo) {
         Organizacion organizacion = new Organizacion(razonSocial,tipo,clasificacion,contactosMail,contactosWP,estaActivo);
         repoOrganizaciones.save(organizacion);
@@ -119,6 +121,11 @@ public class CreadorDeObjetos {
         repoTrayectos.save(trayecto);
         repositorioTrayectosEnMemoria.agregarTrayecto(trayecto);
         return trayecto;
+    }
+
+    public Area crearArea(String nombre, Organizacion organizacion, List<List<DatoDeMedicion>> mediciones){
+        Area area = new Area(nombre,organizacion,mediciones);
+        return area;
     }
 
 }
