@@ -50,15 +50,6 @@ public class TransportePublico extends Medio {
     public void setTipo(TipoTransportePublico tipoTransportePublico) {
         this.tipoTransportePublico = tipoTransportePublico;
     }
-
-    public String getLinea() {
-        return linea;
-    }
-
-    public void setLinea(String linea) {
-        this.linea = linea;
-    }
-
     public ArrayList<Parada> getParadas() {
         return paradas;
     }

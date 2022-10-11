@@ -38,10 +38,6 @@ public class MedioMotorizado extends Medio {
         this.tipoServicio = tipoServicio;
     }
 
-    public void setTipo(TipoVehiculoMotorizado tipoVehiculoMotorizado) {
-        this.tipoVehiculoMotorizado = tipoVehiculoMotorizado;
-    }
-
     public MedioMotorizado(TipoVehiculoMotorizado tipoVehiculoMotorizado, TipoCombustible tipoCombustible, String patente, String ID, Boolean esServicioContratado, String tipoServicio) {
         this.tipoVehiculoMotorizado = tipoVehiculoMotorizado;
         this.tipoCombustible = tipoCombustible;
@@ -49,21 +45,5 @@ public class MedioMotorizado extends Medio {
         this.ID = ID;
         this.esServicioContratado = esServicioContratado;
         this.tipoServicio = tipoServicio;
-    }
-
-    public TipoCombustible getTipoCombustible() {
-        return tipoCombustible;
-    }
-
-    public String getPatente() {
-        return patente;
-    }
-
-    public Boolean getEsServicioContratado() {
-        return esServicioContratado;
-    }
-
-    public String getTipoServicio() {
-        return tipoServicio;
     }
 }
