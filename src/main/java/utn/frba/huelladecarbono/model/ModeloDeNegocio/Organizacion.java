@@ -38,9 +38,9 @@ public class Organizacion {
     @Enumerated(EnumType.STRING)
     private Clasificacion clasificacion;
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<Miembro> contactosMail = null;
+    private List<Miembro> contactosMail = new ArrayList<>();
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<Miembro> contactosWP = null;
+    private List<Miembro> contactosWP = new ArrayList<>();
     @Transient // Evaluar si es ElementCollection o Transient
     private List<Double> hcMensual = new ArrayList<>();
     private Double hcPromedio = 0.0;
@@ -198,8 +198,6 @@ public class Organizacion {
         this.contactosWP = contactosWP;
     }
 
-
-
     public Organizacion(String razonSocial, TipoOrg tipo, Clasificacion clasificacion, List<Miembro> contactosMail, List<Miembro> contactosWP, Boolean estaActivo) {
         this.razonSocial = razonSocial;
         this.tipo = tipo;
@@ -208,8 +206,6 @@ public class Organizacion {
         this.contactosWP = contactosWP;
         this.estaActivo = estaActivo;
     }
-
-
 
     public List<Miembro> getMiembros(){
         List<Miembro> miembros = new ArrayList<>();
