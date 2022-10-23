@@ -57,14 +57,18 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Registro personal</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                    </svg>
+                    <span>Datos de la organizacion</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="datos-personales.html">Datos personales</a>
-                        <a class="collapse-item" href="organizaciones.html">Organizaciones</a>
-                        <a class="collapse-item" href="recorridos.html">Recorridos</a>
+                        <a class="collapse-item" href="datos-internos.html">Datos internos</a>
+                        <a class="collapse-item" href="areas.html">Areas</a>
+                        <a class="collapse-item" href="miembros.html">Miembros</a>
+                        <a class="collapse-item" href="contactos.html">Contactos</a>
                     </div>
                 </div>
             </li>
@@ -72,7 +76,11 @@
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="calcular-huella.html">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-calculator-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm2 .5v2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5zm0 4v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM4.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM4 12.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM7.5 6a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM7 9.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM10 6.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-.5-.5h-1z" />
+                    </svg>
                     <span>Calcular huella</span>
                 </a>
             </li>
@@ -97,7 +105,7 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <div style="display:flex; justify-content: center;align-items: center">
-                        <h2 style="margin: 0 auto;">Recorridos</h2> 
+                        <h2 style="margin: 0 auto;">Recorridos</h2>
                     </div>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -121,13 +129,10 @@
                 </nav>
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <!-- Page Heading -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Agregar
-                    </button>
 
-                    <!-- Modal -->
+
+                <div class="container-fluid">
+                    <!-- MODAL AGREGAR AREA-->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
@@ -139,33 +144,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <form action="">
-                                        <label for="m-organizacion">Organizacion</label>
-                                        <select id="m-organizacion" name="dataTable_length" aria-controls="dataTable"
-                                            class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                            <option value="" selected disabled></option>
-                                            <option value="Google">Google</option>
-                                            <option value="Apple">Apple</option>
-                                            <option value="Tesla">Tesla</option>
-                                            <option value="Ford">Ford</option>
-                                        </select>
-                                        <br><br>
-                                        <label for="m-peso">Peso</label>
-                                        <input type="number" class="form-control form-control-user"
-                                            id="exampleInputEmail" placeholder="Ingrese el peso del recorrido">
-                                        <br>
-                                        <label for="m-fecha-inicio">Fecha de inicio</label>
-                                        <input type="date" name="" id="" class="form-control form-control-user">
-                                        <br>
-                                        <label for="m-fecha-fin">Fecha de fin</label>
-                                        <input type="date" name="" id="" class="form-control form-control-user">
-                                        <br>
-                                        <div style="text-align: right;">
-                                            <label class="" for="indeterminado">Fin indeterminado</label>
-                                            <input class="form-check-input checkbox" type="checkbox" id="indeterminado">
-                                        </div>
-
                                         <div>
-                                            <label for="">Trayectos</label>
                                             <div class="card cm-4">
                                                 <div class="card-header">
                                                     <h3 class="modal-title fs-6">Trayecto 1</h3>
@@ -341,85 +320,56 @@
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <br>
-                    <table class="table table-bordered dataTable" width="100%" cellspacing="0" role="grid"
-                        aria-describedby="dataTable_info" style="width: 100%;">
-                        <thead>
-                            <tr role="row">
-                                <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                    colspan="1" aria-sort="ascending" style="width: 200px;">Organizacion</th>
-                                <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                    colspan="1" style="width: 100px;">Peso</th>
-                                <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                    colspan="1" style="width: 200px;">Fecha de inicio</th>
-                                <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                    colspan="1" style="width: 200px;">Fecha de fin</th>
-                                <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                    colspan="1" style="width: 100px;">Trayectos</th>
-                                <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                    colspan="1" style="width: 100px;">Estado</th>
-                                <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                    colspan="1" aria-sort="ascending">Modificar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="odd">
-                                <td class="sorting_1">Tesla</td>
-                                <td>0.5</td>
-                                <td>11/08/2020</td>
-                                <td>20/10/2021</td>
-                                <td>5</td>
-                                <td>Inactivo</td>
-                                <td>
-                                    <a href="#" class="btn btn-info btn-circle">
-                                        <img src="../img/pen-fill.svg" alt="Editar">
-                                    </a>
-                                    <a href="#" class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="odd">
-                                <td class="sorting_1">SpaceX</td>
-                                <td>0.3</td>
-                                <td>1/02/2022</td>
-                                <td></td>
-                                <td>1</td>
-                                <td>Activo</td>
-                                <td>
-                                    <a href="#" class="btn btn-info btn-circle">
-                                        <img src="../img/pen-fill.svg" alt="Editar">
-                                    </a>
-                                    <a href="#" class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="odd">
-                                <td class="sorting_1">Neuralink</td>
-                                <td>0.2</td>
-                                <td>11/08/2020</td>
-                                <td></td>
-                                <td>3</td>
-                                <td>Activo</td>
-                                <td>
-                                    <a href="#" class="btn btn-info btn-circle">
-                                        <img src="../img/pen-fill.svg" alt="Editar">
-                                    </a>
-                                    <a href="#" class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <!--FIN MODAL AGREGAR AREA-->
                     <div style="text-align: center;">
-                        <button type="button" class="btn btn-primary">
-                            Guardar
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            Agregar
                         </button>
+                        <br><br>
+                        <div class="card o-hidden border-0 shadow-lg col-lg-10" style="margin: 0 auto">
+                            <div class="card-body">
+                                <table class="table table-bordered dataTable" width="100%" cellspacing="0" role="grid"
+                                    aria-describedby="dataTable_info" style="margin: 0 auto;">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+                                                rowspan="1" colspan="1" aria-sort="ascending" style="width: 50px;">ID
+                                            </th>
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+                                                rowspan="1" colspan="1" aria-sort="ascending" style="width: 300px;">
+                                                Punto de partida</th>
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+                                                rowspan="1" colspan="1" aria-sort="ascending" style="width: 300px;">
+                                                Punto de llegada</th>
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+                                                rowspan="1" colspan="1" aria-sort="ascending">
+                                                Medio</th>
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+                                                rowspan="1" colspan="1" aria-sort="ascending">
+                                                Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd">
+                                            <td class="sorting_1">1</td>
+                                            <td>Jujuy 115, Mariano Acosta, Merlo, Buenos Aires, Argentina</td>
+                                            <td>Corrientes 1500, CABA, CABA, CABA, Argentina</td>
+                                            <td>Auto</td>
+                                            <td>
+                                                <a href="#" class="btn btn-info btn-circle">
+                                                    <img src="../img/pen-fill.svg" alt="Editar">
+                                                </a>
+                                                <a href="#" class="btn btn-danger btn-circle">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-
 
                 </div>
                 <!-- /.container-fluid -->
@@ -459,7 +409,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
         crossorigin="anonymous"></script>
-
 </body>
 
 </html>

@@ -12622,3 +12622,7 @@ table tr td:last-child {
     background-color: #1cc88a;
     border-color: #1cc88a;
 }
+
+.res-area {
+    font-size: 10pt;
+}
