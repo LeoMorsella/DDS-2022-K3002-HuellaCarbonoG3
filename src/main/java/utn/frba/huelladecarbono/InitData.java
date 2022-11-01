@@ -69,14 +69,15 @@ public class InitData implements CommandLineRunner {
         cargarOrganizaciones();
         cargarMiembros();
         cargarUsuarios();
-        cargarRecorridos();
+        //cargarRecorridos();
         cargarParadas();
         actualizarOrganizacion();
        darDeBajaOrganizacion();
 
     }
 
-
+    //TODO Falla de recorridos
+/*
    public void cargarRecorridos() throws Exception
     {
         config.exposeIdsFor(Recorrido.class);
@@ -91,7 +92,7 @@ public class InitData implements CommandLineRunner {
             System.out.println("Ya existen Recorridos creados anteriormente");
         }
     }
-
+*/
     public void cargarParadas() throws Exception
     {
         config.exposeIdsFor(Usuario.class);
