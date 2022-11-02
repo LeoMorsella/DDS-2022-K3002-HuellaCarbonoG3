@@ -9,4 +9,8 @@ public class AppController {
     @GetMapping({"/recomendaciones"})
     public String recomendaciones() {return "recomendaciones.html";}
 
+    @GetMapping({"/login"})
+    public String login() {return "login.html";}
+
+
 }
