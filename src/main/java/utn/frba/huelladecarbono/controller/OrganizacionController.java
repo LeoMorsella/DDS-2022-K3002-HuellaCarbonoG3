@@ -9,6 +9,7 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
+import utn.frba.huelladecarbono.service.AreaService;
 import utn.frba.huelladecarbono.service.IAreaService;
 import utn.frba.huelladecarbono.service.IOrganizacionService;
 
@@ -24,7 +25,7 @@ public class OrganizacionController {
     OrganizacionRepository organizacionRepository;
 
     @Autowired
-    private IAreaService interfazArea;
+    private  AreaService areaService;
 
 
     //Endpoint para obtener a todos las organizaciones
@@ -42,6 +43,12 @@ public class OrganizacionController {
     }
 
     //Obtener las areas de una organizacion en particular
+    @GetMapping("/organizaciones/{id}/areas")
+    public List<Area> getAreas(@PathVariable Integer id) {
+
+        return areaService.getAreasConOrganizacionID(id);
+
+    }
 
     //Endpoint para dar de baja a una organizacion, la baja solamente es logica por lo tanto solo se cambia el estado
     @DeleteMapping("organizacion/eliminar/{id}")

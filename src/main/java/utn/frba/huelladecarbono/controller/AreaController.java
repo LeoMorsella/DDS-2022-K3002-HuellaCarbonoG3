@@ -51,7 +51,7 @@ public class AreaController {
         return "La organización fue creada correctamente";
     }
 
-    @PatchMapping("/organizacion/editar/{id}")
+    @PatchMapping("/area/editar/{id}")
     public Area cambiarEstadoOrganizacion(@PathVariable Integer id){
         interfazArea.cambiarEstadoArea(id);
         Area area = interfazArea.findArea(id);

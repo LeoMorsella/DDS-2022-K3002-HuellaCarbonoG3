@@ -50,6 +50,13 @@ public class AreaService implements IAreaService {
     }
 
 
+    public List<Area> getAreasConOrganizacionID(Integer id) {
+
+        return null;
+    }
+
+
+
     @Override
     public void cambiarEstadoArea(Integer id) {
         Area area = findArea(id);
