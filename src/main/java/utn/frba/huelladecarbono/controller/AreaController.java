@@ -11,7 +11,7 @@ import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 import utn.frba.huelladecarbono.service.IOrganizacionService;
 
 import java.util.List;
-
+/*
 @RestController
 public class AreaController {
 
@@ -62,3 +62,4 @@ public class AreaController {
         return interfazOrganizacion.modificarOrganizacion(id,organizacion);
     }
 }
+*/
