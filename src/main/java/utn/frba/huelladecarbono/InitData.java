@@ -49,6 +49,10 @@ public class InitData implements CommandLineRunner {
     @Autowired
     ParadaRepository repoParadas;
 
+    //Sector
+    @Autowired
+    SectorTerritorialRepository repoSectores;
+
     //Transporte
 
     @Autowired
@@ -72,6 +76,7 @@ public class InitData implements CommandLineRunner {
         cargarMiembros();
         cargarUsuarios();
         cargarRecorridos();
+        cargarSectores();
         cargarParadas();
         actualizarOrganizacion();
         darDeBajaOrganizacion();
@@ -106,6 +111,16 @@ public class InitData implements CommandLineRunner {
         }
         else{
             System.out.println("Ya existen Paradas creados anteriormente");
+        }
+    }
+
+    public void cargarSectores() {
+        config.exposeIdsFor(SectorTerritorial.class);
+        if(repoSectores.count() == 0){
+            SectorTerritorial sector = creadorDeObjetos.crearSector("Almirante Brown","Buenos Aires", new AgenteSectorial());
+        }
+        else{
+            System.out.println("Ya existen sectores territoriales creados anteriormente");
         }
     }
 

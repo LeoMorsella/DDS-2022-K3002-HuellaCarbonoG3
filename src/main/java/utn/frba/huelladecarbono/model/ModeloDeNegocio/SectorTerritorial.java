@@ -30,7 +30,7 @@ public class SectorTerritorial {
         this.agenteSectorial = agenteSectorial;
     }
 
-    private ArrayList<Organizacion> generarOrganizacionesPorCriterio(List<Organizacion> organizacionesTotales, Object criterioUbicacion) {
+    private List<Organizacion> generarOrganizacionesPorCriterio(List<Organizacion> organizacionesTotales, Object criterioUbicacion) {
         ArrayList<Organizacion> organizacionesDelSector = new ArrayList<>();
         for (Organizacion organizacion : organizacionesTotales) {
             if (organizacion.getUbicacion().getMunicipio() == criterioUbicacion)
@@ -39,7 +39,7 @@ public class SectorTerritorial {
         return organizacionesDelSector;
     }
 
-    public ArrayList<Organizacion> getOrganizaciones() {
+    public List<Organizacion> getOrganizaciones() {
         List<Organizacion> organizacionesTotales = RepositorioOrganizaciones.getRepositorio().getOrganizaciones();
         if (municipio != null){
             return generarOrganizacionesPorCriterio(organizacionesTotales, municipio);
@@ -84,11 +84,27 @@ public class SectorTerritorial {
     public SectorTerritorial() {
     }
 
+    public SectorTerritorial(Integer id, String municipio, String provincia, Double huellaCarbono, AgenteSectorial agenteSectorial) {
+        this.id = id;
+        this.municipio = municipio;
+        this.provincia = provincia;
+        this.huellaCarbono = huellaCarbono;
+        this.agenteSectorial = agenteSectorial;
+    }
+
+    public SectorTerritorial(String municipio, String provincia, AgenteSectorial agenteSectorial) {
+        this.municipio = municipio;
+        this.provincia = provincia;
+        this.agenteSectorial = agenteSectorial;
+    }
+
     public SectorTerritorial(Integer id, String municipio, String provincia, AgenteSectorial agenteSectorial) {
         this.id = id;
         this.municipio = municipio;
         this.provincia = provincia;
         this.agenteSectorial = agenteSectorial;
     }
+
+
 
 }

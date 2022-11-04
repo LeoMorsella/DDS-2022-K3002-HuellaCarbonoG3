@@ -8,6 +8,7 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.SectorTerritorial;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class RepositorioSectorTerritorial {
@@ -15,13 +16,13 @@ public class RepositorioSectorTerritorial {
     SectorTerritorialController sectorTerritorialbd;
     private static RepositorioSectorTerritorial instance = new RepositorioSectorTerritorial();
 
-    private ArrayList<SectorTerritorial> sectoresTerritoriales;
+    private List<SectorTerritorial> sectoresTerritoriales;
 
     private RepositorioSectorTerritorial() {
         this.sectoresTerritoriales = new ArrayList<>();
     }
 
-    public ArrayList<SectorTerritorial> getSectoresTerritoriales() {
+    public List<SectorTerritorial> getSectoresTerritoriales() {
         return sectoresTerritoriales;
     }
 
