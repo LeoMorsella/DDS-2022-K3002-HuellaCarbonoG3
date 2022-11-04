@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 import utn.frba.huelladecarbono.controller.OrganizacionController;
 import utn.frba.huelladecarbono.model.CalculoDeDistancias.Distancia;
 import utn.frba.huelladecarbono.model.CreadorDeObjetos.CreadorDeObjetos;
-import utn.frba.huelladecarbono.model.MedioDeTransporte.Parada;
-import utn.frba.huelladecarbono.model.MedioDeTransporte.TipoTransportePublico;
+import utn.frba.huelladecarbono.model.MedioDeTransporte.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
@@ -59,8 +58,16 @@ public class InitData implements CommandLineRunner {
     TransportePublicoRepository repoTransportes;
 
     @Autowired
+    MedioNoMotorizadoRepository repoMedioNoMotorizado;
+
+    @Autowired
+    MedioMotorizadoRepository repoMedioMotorizado;
+
+    @Autowired
     MiembroRepository repoMiembros;
 
+    @Autowired
+    AreaRepository repoAreas;
 
     @Autowired
     RepositoryRestConfiguration config;
@@ -69,17 +76,24 @@ public class InitData implements CommandLineRunner {
 
     CreadorDeObjetos creadorDeObjetos;
 
+
+
     @Override
     public void run(String... args) throws Exception {
 
+        cargarMedioNoMotorizado();
+        cargarMedioMotorizado();
         cargarOrganizaciones();
         cargarMiembros();
         cargarUsuarios();
         cargarRecorridos();
         cargarSectores();
         cargarParadas();
+        cargarAreas();
+        cargarTransportePublico();
         actualizarOrganizacion();
         darDeBajaOrganizacion();
+
 
     }
 
@@ -118,6 +132,13 @@ public class InitData implements CommandLineRunner {
         config.exposeIdsFor(SectorTerritorial.class);
         if(repoSectores.count() == 0){
             SectorTerritorial sector = creadorDeObjetos.crearSectorTerritorial("Almirante Brown","Buenos Aires", null);
+            AgenteSectorial agente = new AgenteSectorial();
+            agente.setSectorTerritorial(sector);
+            sector.setAgenteSectorial(agente);
+            List<SectorTerritorial> sectores = List.of(sector);
+            sectores.stream().forEach(sector1 -> {
+                repoSectores.save(sector1);
+            });
         }
         else{
             System.out.println("Ya existen sectores territoriales creados anteriormente");
@@ -138,6 +159,57 @@ public class InitData implements CommandLineRunner {
         else{
             System.out.println("Ya existen Usuarios creados anteriormente");
         }
+    }
+    public void cargarMedioNoMotorizado() throws Exception
+    {
+        config.exposeIdsFor(MedioNoMotorizado.class);
+        if(repoMedioNoMotorizado.count()==0) {
+            MedioNoMotorizado medio1 = new MedioNoMotorizado(TipoMedioNoMotorizado.A_PIE);
+            List<MedioNoMotorizado> mediosNoMotorizados = List.of(medio1);
+            mediosNoMotorizados.stream().forEach(medio -> {
+                repoMedioNoMotorizado.save(medio);
+            });
+        }
+    }
+
+    public void cargarTransportePublico() throws Exception {
+        config.exposeIdsFor(TransportePublico.class);
+        if(repoTransportes.count()==0) {
+            ArrayList<Parada> paradas = new ArrayList<>();
+            Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
+            Parada paradaPrueba3 = creadorDeObjetos.crearParada("120", ubicacionPruebaUno);
+            paradas.add(paradaPrueba3);
+
+            creadorDeObjetos.crearTransportePublico(TipoTransportePublico.COLECTIVO,"88",paradas,"123456");
+            TransportePublico transporte1 = new TransportePublico(TipoTransportePublico.COLECTIVO,"88", (ArrayList<Parada>) paradas,"123456");
+        }
+    }
+
+    public void cargarMedioMotorizado() throws Exception
+    {
+        config.exposeIdsFor(MedioMotorizado.class);
+        if(repoMedioMotorizado.count()==0) {
+
+            MedioMotorizado medio1 = new MedioMotorizado(TipoVehiculoMotorizado.MOTO,TipoCombustible.NAFTA,"FRX123",Boolean.FALSE,"Particular");
+            List<MedioMotorizado> mediosMotorizados = List.of(medio1);
+            mediosMotorizados.stream().forEach(medio -> {
+                repoMedioMotorizado.save(medio);
+            });
+        }
+    }
+
+    public void cargarAreas() throws Exception {
+        config.exposeIdsFor(Area.class);
+        if(repoAreas.count() == 0) {
+            Area area1 = new Area("Gonzalez Catan",null,null);
+            Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
+            area1.setOrganizacion(organizacion1);
+            List<Area> areas = List.of(area1);
+            areas.stream().forEach(area -> {
+                repoAreas.save(area);
+            });
+        }
+
     }
 
     //Solo a modo prueba es esto
@@ -189,5 +261,7 @@ public class InitData implements CommandLineRunner {
     {
         organizacionController.deleteOrganizacion(3);
     }
+
+
 }
 

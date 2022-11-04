@@ -16,8 +16,8 @@ public class InformesTest {
 
     CreadorDeObjetos creadorDeObjetos;
     AgenteSectorial agente = new AgenteSectorial();
-    SectorTerritorial sectorTerritorialprueba = new SectorTerritorial(1,"Gonzalez Catan","Buenos Aires",agente);
-    SectorTerritorial sectorTerritorialprueba2 = new SectorTerritorial(2,"Isidro Casanova","Buenos Aires",agente);
+    SectorTerritorial sectorTerritorialprueba = new SectorTerritorial("Gonzalez Catan","Buenos Aires",agente);
+    SectorTerritorial sectorTerritorialprueba2 = new SectorTerritorial("Isidro Casanova","Buenos Aires",agente);
     ObtenerDatosInformes obtenerDato = new ObtenerDatosInformes();
 
     Organizacion organizacion1 = new Organizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
