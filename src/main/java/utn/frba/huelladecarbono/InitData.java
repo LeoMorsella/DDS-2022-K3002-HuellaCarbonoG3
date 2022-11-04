@@ -76,7 +76,7 @@ public class InitData implements CommandLineRunner {
         cargarMiembros();
         cargarUsuarios();
         cargarRecorridos();
-        cargarSectores();
+        cargarSectoresTerritoriales();
         cargarParadas();
         actualizarOrganizacion();
         darDeBajaOrganizacion();
@@ -114,10 +114,11 @@ public class InitData implements CommandLineRunner {
         }
     }
 
-    public void cargarSectores() {
+    public void cargarSectoresTerritoriales() {
         config.exposeIdsFor(SectorTerritorial.class);
         if(repoSectores.count() == 0){
-            SectorTerritorial sector = creadorDeObjetos.crearSector("Almirante Brown","Buenos Aires", new AgenteSectorial());
+            AgenteSectorial agenteSectorial = new AgenteSectorial();
+            creadorDeObjetos.crearSectorTerritorial("AlmiranteBrown","BuenosAires", agenteSectorial);
         }
         else{
             System.out.println("Ya existen sectores territoriales creados anteriormente");

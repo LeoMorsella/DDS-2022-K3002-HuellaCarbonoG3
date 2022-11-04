@@ -84,11 +84,11 @@ public class CreadorDeObjetos {
         return organizacion;
     }
 
-    public SectorTerritorial crearSector(String municipio, String prov, AgenteSectorial agent){
-        SectorTerritorial sector = new SectorTerritorial(municipio, prov, agent);
-        repoSectorTerritorial.save(sector);
-        repositorioSectorTerritorialEnMemoria.agregarSectorTerritorial(sector);
-        return sector;
+    public SectorTerritorial crearSectorTerritorial(String municipio, String prov, AgenteSectorial agent){
+        SectorTerritorial sectorTerritorial = new SectorTerritorial(municipio, prov, agent);
+        //repoSectorTerritorial.save(sectorTerritorial);
+        repositorioSectorTerritorialEnMemoria.agregarSectorTerritorial(sectorTerritorial);
+        return sectorTerritorial;
     }
 
     public Organizacion crearOrganizacionConHC(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, List<Miembro> contactosMail, List<Miembro> contactosWP, List<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Boolean estaActivo) {

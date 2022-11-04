@@ -34,9 +34,9 @@ public class RepositorioSectorTerritorial {
         this.sectoresTerritoriales.add(sectorTerritorial);
     }
 
-    public void cargarDeUsuariosDeBdAlSistema() {
+    public void cargarDeSectorTerritorialDeBdAlSistema() {
         for(SectorTerritorial sectorTerritorialbd : sectorTerritorialbd.getSectorTerritorial()) {
-            SectorTerritorial sectorTerritorial= new SectorTerritorial();
+            SectorTerritorial sectorTerritorial= new SectorTerritorial(sectorTerritorialbd.getMunicipio(), sectorTerritorialbd.getProvincia(), sectorTerritorialbd.getAgenteSectorial());
             this.agregarSectorTerritorial(sectorTerritorial);
         }
     }
