@@ -10,6 +10,7 @@ import utn.frba.huelladecarbono.model.CreadorDeObjetos.CreadorDeObjetos;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
+import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.model.Seguridad.Rol;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
@@ -70,6 +71,9 @@ public class InitData implements CommandLineRunner {
     AreaRepository repoAreas;
 
     @Autowired
+    TrayectoRepository repoTrayectos;
+
+    @Autowired
     RepositoryRestConfiguration config;
 
     @Autowired
@@ -90,6 +94,7 @@ public class InitData implements CommandLineRunner {
         cargarSectores();
         cargarParadas();
         cargarAreas();
+        cargarTrayectos();
         cargarTransportePublico();
         actualizarOrganizacion();
         darDeBajaOrganizacion();
@@ -210,6 +215,28 @@ public class InitData implements CommandLineRunner {
             });
         }
 
+    }
+
+    //TODO evaluar si el formato JSON devuelto es valido
+    public void cargarTrayectos() throws Exception {
+        config.exposeIdsFor(Area.class);
+        cargarMedioMotorizado();
+        if(repoTrayectos.count() == 0) {
+            Trayecto trayecto1 = new Trayecto();
+            Ubicacion ubicacion1 = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
+            Ubicacion ubicacion2 = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
+            MedioMotorizado medio1 = new MedioMotorizado(TipoVehiculoMotorizado.MOTO,TipoCombustible.NAFTA,"FRX123",Boolean.FALSE,"Particular");
+            trayecto1.setId(12);
+            trayecto1.setMedioTransporte(medio1);
+            trayecto1.setPuntoPartida(ubicacion1);
+            trayecto1.setPuntoLlegada(ubicacion2);
+            List<Trayecto> trayectos = List.of(trayecto1);
+            List<MedioMotorizado> medios = List.of(medio1);
+            List<Ubicacion> ubicaciones = List.of(ubicacion1,ubicacion2);
+            medios.stream().forEach(medio -> repoMedioMotorizado.save(medio));
+            trayectos.stream().forEach(trayecto -> repoTrayectos.save(trayecto));
+
+        }
     }
 
     //Solo a modo prueba es esto
