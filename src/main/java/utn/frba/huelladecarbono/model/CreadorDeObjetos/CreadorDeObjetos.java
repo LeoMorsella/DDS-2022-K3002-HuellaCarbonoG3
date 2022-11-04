@@ -1,5 +1,6 @@
 package utn.frba.huelladecarbono.model.CreadorDeObjetos;
 
+import org.aspectj.weaver.loadtime.Agent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.*;
@@ -63,7 +64,7 @@ public class CreadorDeObjetos {
     SectorTerritorialRepository repoSectorTerritorial;
 
     @Autowired
-    RepositorioSectorTerritorial repositorioSectorTerritorial;
+    RepositorioSectorTerritorial repositorioSectorTerritorialEnMemoria;
 
     @Autowired
     MedioMotorizadoRepository repoMedioMotorizado;
@@ -81,6 +82,13 @@ public class CreadorDeObjetos {
         repoOrganizaciones.save(organizacion);
         repositorioOrganizacionesEnMemoria.agregarOrganizacion(organizacion);
         return organizacion;
+    }
+
+    public SectorTerritorial crearSector(String municipio, String prov, AgenteSectorial agent){
+        SectorTerritorial sector = new SectorTerritorial(municipio, prov, agent);
+        repoSectorTerritorial.save(sector);
+        repositorioSectorTerritorialEnMemoria.agregarSectorTerritorial(sector);
+        return sector;
     }
 
     public Organizacion crearOrganizacionConHC(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, List<Miembro> contactosMail, List<Miembro> contactosWP, List<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Boolean estaActivo) {
@@ -138,12 +146,12 @@ public class CreadorDeObjetos {
         return area;
     }
 
-    public SectorTerritorial crearSectorTerritorial(Integer id, String municipio, String provincia, AgenteSectorial agenteSectorial){
+    /*public SectorTerritorial crearSectorTerritorial(Integer id, String municipio, String provincia, AgenteSectorial agenteSectorial){
         SectorTerritorial sectorTerritorial = new SectorTerritorial(id,municipio,provincia,agenteSectorial);
         repoSectorTerritorial.save(sectorTerritorial);
-        repositorioSectorTerritorial.agregarSectorTerritorial(sectorTerritorial);
+        repositorioSectorTerritorialEnMemoria.agregarSectorTerritorial(sectorTerritorial);
         return sectorTerritorial;
-    }
+    }*/
 
     public MedioMotorizado crearMedioMotorizado(TipoVehiculoMotorizado tipoVehiculoMotorizado, TipoCombustible tipoCombustible, String patente, Boolean esServicioContratado, String tipoServicio) {
         MedioMotorizado medio = new MedioMotorizado(tipoVehiculoMotorizado, tipoCombustible, patente, esServicioContratado, tipoServicio);
