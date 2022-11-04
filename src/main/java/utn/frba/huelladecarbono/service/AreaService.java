@@ -8,13 +8,11 @@ import utn.frba.huelladecarbono.repository.AreaRepository;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 
 import java.util.List;
-
 @Service
-public class AreaService implements IAreaService{
+public class AreaService implements IAreaService {
 
     @Autowired
     private AreaRepository areaRepository;
-
 
     @Override
     public Area findById(Integer id) throws Exception {

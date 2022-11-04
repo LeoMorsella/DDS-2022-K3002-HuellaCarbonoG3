@@ -5,9 +5,11 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
+import utn.frba.huelladecarbono.service.IAreaService;
 import utn.frba.huelladecarbono.service.IOrganizacionService;
 
 import java.util.List;
@@ -20,6 +22,9 @@ public class OrganizacionController {
 
     @Autowired
     OrganizacionRepository organizacionRepository;
+
+    @Autowired
+    private IAreaService interfazArea;
 
 
     //Endpoint para obtener a todos las organizaciones
@@ -35,6 +40,8 @@ public class OrganizacionController {
             return interfazOrganizacion.findOrganizacionByEstadoActivo();
 
     }
+
+    //Obtener las areas de una organizacion en particular
 
     //Endpoint para dar de baja a una organizacion, la baja solamente es logica por lo tanto solo se cambia el estado
     @DeleteMapping("organizacion/eliminar/{id}")

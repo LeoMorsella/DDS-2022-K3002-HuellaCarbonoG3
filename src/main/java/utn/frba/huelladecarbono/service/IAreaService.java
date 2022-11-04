@@ -30,4 +30,5 @@ public interface IAreaService {
     public Area modificarArea(Integer id, Area area);
 
     public Area crearArea(Area area);
+
 }

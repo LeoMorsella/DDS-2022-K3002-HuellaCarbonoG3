@@ -2,6 +2,7 @@ package utn.frba.huelladecarbono.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 
@@ -75,6 +76,11 @@ public class OrganizacionService implements IOrganizacionService{
     public Organizacion crearOrganizacion(Organizacion organizacion) {
         organizacionRepository.save(organizacion);
         return organizacion;
+    }
+
+    @Override
+    public List<Area> getAreas(Integer id){
+        return organizacionRepository.findById(id).get().getAreas();
     }
 
 }

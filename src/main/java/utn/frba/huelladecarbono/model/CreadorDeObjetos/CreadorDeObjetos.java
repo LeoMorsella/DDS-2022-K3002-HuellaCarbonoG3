@@ -46,6 +46,9 @@ public class CreadorDeObjetos {
     UsuarioRepository repoUsuarios;
 
     @Autowired
+    AreaRepository repoArea;
+
+    @Autowired
     RepositorioUsuarios repositorioUsuariosEnMemoria;
 
     @Autowired
@@ -143,6 +146,13 @@ public class CreadorDeObjetos {
 
     public Area crearArea(String nombre, Organizacion organizacion, List<List<DatoDeMedicion>> mediciones){
         Area area = new Area(nombre,organizacion,mediciones);
+        repoArea.save(area);
+        return area;
+    }
+
+    public Area crearArea(String nombre, Organizacion organizacion){
+        Area area = new Area(nombre,organizacion);
+        repoArea.save(area);
         return area;
     }
 
