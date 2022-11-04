@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
+import utn.frba.huelladecarbono.repository.AreaRepository;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
+import utn.frba.huelladecarbono.service.IAreaService;
 import utn.frba.huelladecarbono.service.IOrganizacionService;
 
 import java.util.List;
@@ -20,7 +22,7 @@ public class AreaController {
     private IAreaService interfazArea;
 
     @Autowired
-    AreaRepository AreaRepository;
+    private AreaRepository areaRepository;
 
 
     //Endpoint para obtener a todos las organizaciones
@@ -31,10 +33,8 @@ public class AreaController {
 
     //Endpoint para obtener solo a las organizaciones que estan activas en la bd
     @GetMapping("/areas/estado")
-    public List<Organizacion> getOrganizacionesActivas() {
-
+    public List<Area> getOrganizacionesActivas() {
         return interfazArea.findAreaByEstadoActivo();
-
     }
 
     //Endpoint para dar de baja a una organizacion, la baja solamente es logica por lo tanto solo se cambia el estado
@@ -47,19 +47,19 @@ public class AreaController {
     //Endpoint para crear una nueva organizacion
     @PostMapping("/area/crear")
     public String saveOrganizacion(@RequestBody Area area){
-        interfazArea.saveArea(organizacion);
+        interfazArea.saveArea(area);
         return "La organización fue creada correctamente";
     }
 
     @PatchMapping("/organizacion/editar/{id}")
-    public Organizacion cambiarEstadoOrganizacion(@PathVariable Integer id){
+    public Area cambiarEstadoOrganizacion(@PathVariable Integer id){
         interfazArea.cambiarEstadoArea(id);
         Area area = interfazArea.findArea(id);
         return area;
     }
 
     @PutMapping("/area/editar/{id}")
-    public Organizacion actualizarOrganizacion(@PathVariable Integer id, @RequestBody Organizacion organizacion) throws Exception {
-        return interfazArea.modificarArea(id,organizacion);
+    public Area actualizarOrganizacion(@PathVariable Integer id, @RequestBody Area area) throws Exception {
+        return interfazArea.modificarArea(id,area);
     }
 }

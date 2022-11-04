@@ -29,6 +29,7 @@ public class Area {
     private Double huellaCarbono = 0.0;
 
     private Double hcPromedio = 0.0;
+    private boolean estaActivo;
 
     public Area() {
     }
@@ -105,4 +106,11 @@ public class Area {
         this.miembros.addAll(miembros);
     }
 
+    public void setEstaActivo(boolean estaActivo) {
+        this.estaActivo = estaActivo;
+    }
+
+    public boolean isEstaActivo() {
+        return estaActivo;
+    }
 }
