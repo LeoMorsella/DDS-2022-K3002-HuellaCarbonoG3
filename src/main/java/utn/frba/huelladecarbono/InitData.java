@@ -117,7 +117,7 @@ public class InitData implements CommandLineRunner {
     public void cargarSectores() {
         config.exposeIdsFor(SectorTerritorial.class);
         if(repoSectores.count() == 0){
-            SectorTerritorial sector = creadorDeObjetos.crearSector("Almirante Brown","Buenos Aires", null);
+            SectorTerritorial sector = creadorDeObjetos.crearSectorTerritorial("Almirante Brown","Buenos Aires", null);
         }
         else{
             System.out.println("Ya existen sectores territoriales creados anteriormente");
