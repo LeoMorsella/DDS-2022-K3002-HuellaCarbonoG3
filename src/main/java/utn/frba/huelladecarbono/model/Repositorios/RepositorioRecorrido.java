@@ -15,19 +15,19 @@ public class RepositorioRecorrido {
     @Autowired
     RecorridoController recorridobd;
     private static RepositorioRecorrido instance = new RepositorioRecorrido();
-    private List<Parada> recorridos;
-    private ArrayList<Recorrido> recorridoArrayList;
+    private List<Recorrido> recorridos;
+
 
     private RepositorioRecorrido() {
         this.recorridos = new ArrayList<>();
 
     }
 
-    public List<Parada> getRecorridos() {
+    public List<Recorrido> getRecorridos() {
         return recorridos;
     }
 
-    public void setRecorridos(List<Parada> recorridos) {
+    public void setRecorridos(List<Recorrido> recorridos) {
         this.recorridos = recorridos;
     }
 
@@ -36,7 +36,7 @@ public class RepositorioRecorrido {
     }
 
     public void agregarRecorrido (Recorrido recorrido) {
-            recorridoArrayList.add(recorrido);
+            recorridos.add(recorrido);
     }
 
     public void cargarDeRecorridoDeBdAlSistema() {

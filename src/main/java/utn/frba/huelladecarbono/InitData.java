@@ -6,7 +6,6 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.stereotype.Component;
 import utn.frba.huelladecarbono.controller.OrganizacionController;
 import utn.frba.huelladecarbono.model.CalculoDeDistancias.Distancia;
-import utn.frba.huelladecarbono.model.Creador.*;
 import utn.frba.huelladecarbono.model.CreadorDeObjetos.CreadorDeObjetos;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Parada;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.TipoTransportePublico;
@@ -18,6 +17,7 @@ import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.*;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -25,6 +25,8 @@ import java.util.List;
 
 @Component
 public class InitData implements CommandLineRunner {
+
+
 
     @Autowired
     OrganizacionRepository repoOrganizacion;
@@ -69,21 +71,21 @@ public class InitData implements CommandLineRunner {
         cargarOrganizaciones();
         cargarMiembros();
         cargarUsuarios();
-        //cargarRecorridos();
+        cargarRecorridos();
         cargarParadas();
         actualizarOrganizacion();
-       darDeBajaOrganizacion();
+        darDeBajaOrganizacion();
 
     }
 
     //TODO Falla de recorridos
-/*
+
    public void cargarRecorridos() throws Exception
     {
         config.exposeIdsFor(Recorrido.class);
         if(repoRecorrido.count() == 0) {
             Organizacion organizacion1 = new Organizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
-            Recorrido recorrido1 = creadorDeObjetos.crearRecorrido(organizacion1,0.5, Calendario.crearFecha(1, 2020), Calendario.crearFecha(9, 2022));
+            creadorDeObjetos.crearRecorrido(organizacion1,0.50, Calendario.crearFecha(1, 2020), Calendario.crearFecha(9, 2022));
             //De esta manera se carga el recorrido
             Organizacion organizacion3 = new Organizacion("SRL", TipoOrg.ONG, Clasificacion.ESCUELA, null, null, true);
             Recorrido recorridoPruebaDos =creadorDeObjetos.crearRecorrido(organizacion3,0.8,Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021));
@@ -92,7 +94,7 @@ public class InitData implements CommandLineRunner {
             System.out.println("Ya existen Recorridos creados anteriormente");
         }
     }
-*/
+
     public void cargarParadas() throws Exception
     {
         config.exposeIdsFor(Usuario.class);

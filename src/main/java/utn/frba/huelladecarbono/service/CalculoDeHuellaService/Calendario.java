@@ -1,14 +1,16 @@
 package utn.frba.huelladecarbono.service.CalculoDeHuellaService;
 
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
 import java.util.Calendar;
 
+@Component
 public class Calendario {
 
 
     public static LocalDate  crearFecha(int mes, int anio) {
-        LocalDate fecha = LocalDate.of(anio,mes,1);
-        return fecha;
+        return LocalDate.of(anio,mes,1);
     }
 
    public static Calendar sinFecha() {
@@ -51,5 +53,8 @@ public class Calendario {
         } else {
             return 0;
         }
+    }
+
+    public Calendario() {
     }
 }

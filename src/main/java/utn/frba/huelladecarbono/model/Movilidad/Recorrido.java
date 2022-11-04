@@ -24,7 +24,10 @@ public class Recorrido {
     @Transient // OneToMany?
     private Organizacion organizacion;
     private Double peso;
+
+    @Column(columnDefinition = "DATE")
     private LocalDate mesInicio;
+    @Column(columnDefinition = "DATE")
     private LocalDate mesFin;
     private Boolean estaActivo;
 
@@ -34,7 +37,6 @@ public class Recorrido {
         this.mesFin = mesFin;
         this.peso = peso;
         this.estaActivo = estaActivo;
-        //RepositorioRecorrido.getRepositorio().agregarRecorrido(nuevoRecorrido);
     }
 
     public Recorrido(Integer id, ArrayList<Trayecto> trayectos, Organizacion organizacion, Double peso, LocalDate mesInicio, LocalDate mesFin) {
