@@ -1,6 +1,7 @@
 package utn.frba.huelladecarbono.service;
 
 import org.apache.poi.ss.extractor.ExcelExtractor;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 
 import java.util.List;
@@ -30,4 +31,6 @@ public interface IOrganizacionService {
     public Organizacion modificarOrganizacion(Integer id, Organizacion organizacion);
 
     public Organizacion crearOrganizacion(Organizacion organizacion);
+
+    List<Area> getAreas(Integer id);
 }

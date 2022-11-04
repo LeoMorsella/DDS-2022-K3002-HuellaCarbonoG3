@@ -76,7 +76,7 @@ public class InitData implements CommandLineRunner {
         cargarMiembros();
         cargarUsuarios();
         cargarRecorridos();
-        cargarSectoresTerritoriales();
+        cargarSectores();
         cargarParadas();
         actualizarOrganizacion();
         darDeBajaOrganizacion();
@@ -114,11 +114,10 @@ public class InitData implements CommandLineRunner {
         }
     }
 
-    public void cargarSectoresTerritoriales() {
+    public void cargarSectores() {
         config.exposeIdsFor(SectorTerritorial.class);
         if(repoSectores.count() == 0){
-            AgenteSectorial agenteSectorial = new AgenteSectorial();
-            creadorDeObjetos.crearSectorTerritorial("AlmiranteBrown","BuenosAires", agenteSectorial);
+            SectorTerritorial sector = creadorDeObjetos.crearSector("Almirante Brown","Buenos Aires", null);
         }
         else{
             System.out.println("Ya existen sectores territoriales creados anteriormente");
@@ -166,6 +165,7 @@ public class InitData implements CommandLineRunner {
             Organizacion organizacion4 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.INSTITUCION, Clasificacion.EMPRESA_SECTOR_SECUNDARIO, null, null, false);
             Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
             ArrayList<Double> listaHCPrueba = new ArrayList<>();
+            Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
             listaHCPrueba.add(100.00);
             HuellaCarbono huellaPrueba = new HuellaCarbono(Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021), 250.00);
             List<HuellaCarbono> hashMapPrueba = new ArrayList<>();
