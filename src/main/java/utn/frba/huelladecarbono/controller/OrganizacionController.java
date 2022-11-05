@@ -12,6 +12,7 @@ import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 import utn.frba.huelladecarbono.service.AreaService;
 import utn.frba.huelladecarbono.service.IAreaService;
 import utn.frba.huelladecarbono.service.IOrganizacionService;
+import utn.frba.huelladecarbono.service.OrganizacionService;
 
 import java.util.List;
 
@@ -43,11 +44,14 @@ public class OrganizacionController {
     }
 
     //Obtener las areas de una organizacion en particular
-    @GetMapping("/organizaciones/{id}/areas")
+    @GetMapping("/organizaciones/areas/{id}")
     public List<Area> getAreas(@PathVariable String id) {
-
         return areaService.findByOrganizacion(id);
+    }
 
+    @GetMapping("/organizaciones/huella/{id}")
+    public Double getHuella(@PathVariable String id) {
+        return interfazOrganizacion.getHuellaTotal(Integer.parseInt(id));
     }
 
     //Endpoint para dar de baja a una organizacion, la baja solamente es logica por lo tanto solo se cambia el estado

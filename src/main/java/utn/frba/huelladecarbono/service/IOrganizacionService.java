@@ -32,5 +32,5 @@ public interface IOrganizacionService {
 
     public Organizacion crearOrganizacion(Organizacion organizacion);
 
-    List<Area> getAreas(Integer id);
+    public Double getHuellaTotal(Integer id);
 }

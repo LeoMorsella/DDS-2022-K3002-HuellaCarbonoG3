@@ -269,8 +269,11 @@ public class InitData implements CommandLineRunner {
             HuellaCarbono huellaPrueba = new HuellaCarbono(Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021), 250.00);
             List<HuellaCarbono> hashMapPrueba = new ArrayList<>();
             hashMapPrueba.add(huellaPrueba);
-            Organizacion organizacionConHC = creadorDeObjetos.crearOrganizacionConHC("SA",TipoOrg.INSTITUCION,ubicacionPruebaUno,Clasificacion.EMPRESA_SECTOR_SECUNDARIO,null,null,listaHCPrueba,250.00,hashMapPrueba,false);
-            System.out.println(Calendario.crearFecha(2,2021));
+            Organizacion organizacionConHC = creadorDeObjetos.crearOrganizacionConHC("SA",TipoOrg.INSTITUCION,ubicacionPruebaUno,Clasificacion.EMPRESA_SECTOR_SECUNDARIO,null,null,listaHCPrueba,250.00,hashMapPrueba,500.00,false);
+            Miembro miembroPruebaMail = creadorDeObjetos.crearMiembro(50,"Gonza","D","mail@prueba","5511",true);
+            Miembro miembroPruebaWP = creadorDeObjetos.crearMiembro(50,"Gonza2","D","mail2@prueba","221",true);
+            organizacion1.agregarContactoWP(miembroPruebaWP);
+            organizacion1.agregarContactoMail(miembroPruebaMail);
         }
         else{
             System.out.println("Ya existen Organizaciones creados anteriormente");

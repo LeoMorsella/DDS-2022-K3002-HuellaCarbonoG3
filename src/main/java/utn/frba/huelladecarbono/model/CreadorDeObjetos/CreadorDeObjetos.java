@@ -94,8 +94,8 @@ public class CreadorDeObjetos {
         return sectorTerritorial;
     }
 
-    public Organizacion crearOrganizacionConHC(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, List<Miembro> contactosMail, List<Miembro> contactosWP, List<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Boolean estaActivo) {
-        Organizacion organizacion = new Organizacion( razonSocial,  tipo,  ubicacion, clasificacion, contactosMail, contactosWP, hcMensual,  hcPromedio, huellasCarbono,  estaActivo);
+    public Organizacion crearOrganizacionConHC(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, List<Miembro> contactosMail, List<Miembro> contactosWP, List<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Double huellaCarbono ,Boolean estaActivo) {
+        Organizacion organizacion = new Organizacion( razonSocial,  tipo,  ubicacion, clasificacion, contactosMail, contactosWP, hcMensual,  hcPromedio, huellasCarbono, huellaCarbono,  estaActivo);
         repoOrganizaciones.save(organizacion);
         repositorioOrganizacionesEnMemoria.agregarOrganizacion(organizacion);
         return organizacion;
@@ -155,13 +155,6 @@ public class CreadorDeObjetos {
         repoArea.save(area);
         return area;
     }
-
-    /*public SectorTerritorial crearSectorTerritorial(Integer id, String municipio, String provincia, AgenteSectorial agenteSectorial){
-        SectorTerritorial sectorTerritorial = new SectorTerritorial(id,municipio,provincia,agenteSectorial);
-        repoSectorTerritorial.save(sectorTerritorial);
-        repositorioSectorTerritorialEnMemoria.agregarSectorTerritorial(sectorTerritorial);
-        return sectorTerritorial;
-    }*/
 
     public MedioMotorizado crearMedioMotorizado(TipoVehiculoMotorizado tipoVehiculoMotorizado, TipoCombustible tipoCombustible, String patente, Boolean esServicioContratado, String tipoServicio) {
         MedioMotorizado medio = new MedioMotorizado(tipoVehiculoMotorizado, tipoCombustible, patente, esServicioContratado, tipoServicio);

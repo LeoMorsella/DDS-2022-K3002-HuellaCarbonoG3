@@ -8,6 +8,7 @@ import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioTrayectos;
 import lombok.Getter;
 import lombok.Setter;
+import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class Organizacion {
     @Transient
     @Autowired
     CreadorDeObjetos creadorDeObjetos;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -65,7 +67,7 @@ public class Organizacion {
 
 
 
-    public Organizacion(String razonSocial, TipoOrg tipo,Ubicacion ubicacion, Clasificacion clasificacion,List<Miembro> contactosMail, List<Miembro> contactosWP,List<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Boolean estaActivo) {
+    public Organizacion(String razonSocial, TipoOrg tipo,Ubicacion ubicacion, Clasificacion clasificacion,List<Miembro> contactosMail, List<Miembro> contactosWP,List<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Double huellaCarbono,Boolean estaActivo) {
 
         this.razonSocial = razonSocial;
         this.tipo = tipo;
@@ -74,6 +76,7 @@ public class Organizacion {
         this.contactosMail = contactosMail;
         this.contactosWP = contactosWP;
         this.hcMensual = hcMensual;
+        this.huellaCarbono = huellaCarbono;
         this.hcPromedio = hcPromedio;
         this.huellasCarbono = huellasCarbono;
         this.estaActivo = estaActivo;
@@ -241,9 +244,13 @@ public class Organizacion {
     }
 
     public double getHuellaTotal(){
-        return this.huellasCarbono.stream()
+        if(this.huellaCarbono == null){
+        Double huellaCTotal = this.huellasCarbono.stream()
                 .map(huellaCarbono -> huellaCarbono.getHuella())
                 .collect(Collectors.summingDouble(Double::doubleValue));
+        this.huellaCarbono = huellaCTotal;
+        }
+        return this.huellaCarbono;
     }
 
     @Override

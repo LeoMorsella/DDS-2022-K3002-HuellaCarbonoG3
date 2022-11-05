@@ -79,8 +79,7 @@ public class OrganizacionService implements IOrganizacionService{
     }
 
     @Override
-    public List<Area> getAreas(Integer id){
-        return organizacionRepository.findById(id).get().getAreas();
+    public Double getHuellaTotal(Integer id){
+        return organizacionRepository.findById(id).get().getHuellaTotal();
     }
-
 }
