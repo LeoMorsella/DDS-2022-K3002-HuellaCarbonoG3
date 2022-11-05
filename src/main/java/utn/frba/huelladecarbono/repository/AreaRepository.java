@@ -13,4 +13,6 @@ import java.util.List;
 public interface AreaRepository extends JpaRepository<Area,Integer> {
     List<Area> findByEstaActivo(Boolean estado);
 
+    List<Area> findByOrganizacion_Id(Integer id);
+
 }

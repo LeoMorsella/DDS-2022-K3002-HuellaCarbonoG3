@@ -50,9 +50,8 @@ public class AreaService implements IAreaService {
     }
 
 
-    public List<Area> getAreasConOrganizacionID(Integer id) {
-
-        return null;
+    public List<Area> findByOrganizacion(String idOrganizacion) {
+        return areaRepository.findByOrganizacion_Id(Integer.parseInt(idOrganizacion));
     }
 
 
@@ -76,5 +75,6 @@ public class AreaService implements IAreaService {
         areaRepository.save(area);
         return area;
     }
+
 
 }

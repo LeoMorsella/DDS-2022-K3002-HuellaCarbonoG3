@@ -44,9 +44,9 @@ public class OrganizacionController {
 
     //Obtener las areas de una organizacion en particular
     @GetMapping("/organizaciones/{id}/areas")
-    public List<Area> getAreas(@PathVariable Integer id) {
+    public List<Area> getAreas(@PathVariable String id) {
 
-        return areaService.getAreasConOrganizacionID(id);
+        return areaService.findByOrganizacion(id);
 
     }
 
