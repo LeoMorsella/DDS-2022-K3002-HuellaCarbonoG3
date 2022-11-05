@@ -14,8 +14,9 @@ public class Parada {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column
     private String nombre;
-    @Transient
+    @ManyToOne
     private Ubicacion ubicacion;
     @Transient
     private Distancia distanciaAProximaParada;
