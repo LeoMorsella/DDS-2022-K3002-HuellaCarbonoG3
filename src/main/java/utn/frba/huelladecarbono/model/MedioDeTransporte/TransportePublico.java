@@ -13,8 +13,8 @@ public class TransportePublico extends Medio {
     @Enumerated(EnumType.STRING)
     private TipoTransportePublico tipoTransportePublico;
     private String linea;
-    @Transient //Segun vi es @ManyToMany pero no estoy seguro si existe annotation para arraylist, segun pude ver solo funciona para List
-    private  ArrayList<Parada> paradas;
+    @ManyToMany
+    private  List<Parada> paradas;
 
     private String ID = "TP";
 
@@ -30,7 +30,7 @@ public class TransportePublico extends Medio {
     public TransportePublico() {
     }
 
-    public TransportePublico(TipoTransportePublico tipoTransportePublico, String linea, ArrayList<Parada> paradas, String ID) {
+    public TransportePublico(TipoTransportePublico tipoTransportePublico, String linea, List<Parada> paradas, String ID) {
         this.tipoTransportePublico = tipoTransportePublico;
         this.linea = linea;
         this.paradas = paradas;
@@ -50,7 +50,7 @@ public class TransportePublico extends Medio {
     public void setTipo(TipoTransportePublico tipoTransportePublico) {
         this.tipoTransportePublico = tipoTransportePublico;
     }
-    public ArrayList<Parada> getParadas() {
+    public List<Parada> getParadas() {
         return paradas;
     }
 

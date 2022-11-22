@@ -5,10 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import utn.frba.huelladecarbono.service.CalculoDeDistanciaService.APIDistanciaService;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter @Setter
 @Entity
@@ -17,15 +14,25 @@ public class Ubicacion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column
     private Integer idPais;
+    @Column
     private String pais;
+    @Column
     private Integer idProvincia;
+    @Column
     private String provincia;
+    @Column
     private Integer idMunicipio;
+    @Column
     private String municipio;
+    @Column
     private Integer idLocalidad;
+    @Column
     private String localidad;
+    @Column
     private String calle;
+    @Column
     private String altura;
 
     public Ubicacion(String pais, String provincia, String municipio, String localidad, String calle, String altura) throws Exception {

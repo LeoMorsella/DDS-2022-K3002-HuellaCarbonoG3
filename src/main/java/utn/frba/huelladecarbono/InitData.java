@@ -16,6 +16,7 @@ import utn.frba.huelladecarbono.model.Seguridad.Rol;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.*;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
+import utn.frba.huelladecarbono.service.UbicacionService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -68,6 +69,9 @@ public class InitData implements CommandLineRunner {
     MiembroRepository repoMiembros;
 
     @Autowired
+    UbicacionRepository repoUbicaciones;
+
+    @Autowired
     AreaRepository repoAreas;
 
     @Autowired
@@ -93,6 +97,7 @@ public class InitData implements CommandLineRunner {
         cargarRecorridos();
         cargarSectores();
         cargarParadas();
+        cargarUbicaciones();
         cargarAreas();
         cargarTrayectos();
         cargarTransportePublico();
@@ -131,6 +136,19 @@ public class InitData implements CommandLineRunner {
         else{
             System.out.println("Ya existen Paradas creados anteriormente");
         }
+    }
+
+    public void cargarUbicaciones() throws Exception
+    {
+            config.exposeIdsFor(Ubicacion.class);
+            if(repoUbicaciones.count()==0) {
+                Ubicacion ubicacion1 = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
+                List<Ubicacion> ubicaciones = List.of(ubicacion1);
+                ubicaciones.stream().forEach(ubicacion -> {repoUbicaciones.save(ubicacion);});
+            }
+            else {
+                System.out.println("Ya existen ubicaciones creadas anteriormente");
+            }
     }
 
     public void cargarSectores() {
@@ -180,13 +198,16 @@ public class InitData implements CommandLineRunner {
     public void cargarTransportePublico() throws Exception {
         config.exposeIdsFor(TransportePublico.class);
         if(repoTransportes.count()==0) {
-            ArrayList<Parada> paradas = new ArrayList<>();
+            List<Parada> paradas = new ArrayList<>();
             Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
             Parada paradaPrueba3 = creadorDeObjetos.crearParada("120", ubicacionPruebaUno);
             paradas.add(paradaPrueba3);
+            TransportePublico transporte1 = new TransportePublico(TipoTransportePublico.COLECTIVO,"88", paradas,"123456");
+            List<TransportePublico> transportePublicos = List.of(transporte1);
+            transportePublicos.stream().forEach(transporte -> {
+                repoTransportes.save(transporte);
+            });
 
-            creadorDeObjetos.crearTransportePublico(TipoTransportePublico.COLECTIVO,"88",paradas,"123456");
-            TransportePublico transporte1 = new TransportePublico(TipoTransportePublico.COLECTIVO,"88", (ArrayList<Parada>) paradas,"123456");
         }
     }
 
@@ -225,6 +246,8 @@ public class InitData implements CommandLineRunner {
             Trayecto trayecto1 = new Trayecto();
             Ubicacion ubicacion1 = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
             Ubicacion ubicacion2 = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
+            List<Ubicacion> ubicaciones = List.of(ubicacion1);
+            ubicaciones.stream().forEach(ubicacion -> {repoUbicaciones.save(ubicacion);});
             MedioMotorizado medio1 = new MedioMotorizado(TipoVehiculoMotorizado.MOTO,TipoCombustible.NAFTA,"FRX123",Boolean.FALSE,"Particular");
             trayecto1.setId(12);
             trayecto1.setMedioTransporte(medio1);
@@ -232,7 +255,6 @@ public class InitData implements CommandLineRunner {
             trayecto1.setPuntoLlegada(ubicacion2);
             List<Trayecto> trayectos = List.of(trayecto1);
             List<MedioMotorizado> medios = List.of(medio1);
-            List<Ubicacion> ubicaciones = List.of(ubicacion1,ubicacion2);
             medios.stream().forEach(medio -> repoMedioMotorizado.save(medio));
             trayectos.stream().forEach(trayecto -> repoTrayectos.save(trayecto));
 

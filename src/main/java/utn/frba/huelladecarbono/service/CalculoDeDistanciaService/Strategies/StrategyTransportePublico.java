@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class StrategyTransportePublico extends StrategyTransporte{
 
     public Double calcularDistancia(Ubicacion ubicacion1, Ubicacion ubicacion2, Medio transportePublico) {
-        ArrayList<Parada> paradas = ((TransportePublico) transportePublico).getParadas();
+        List<Parada> paradas = ((TransportePublico) transportePublico).getParadas();
         List<Ubicacion> ubicaciones = paradas.stream().map(parada -> parada.getUbicacion()).collect(Collectors.toList());
         Double distanciaTotal = 0.0;
         Parada paradaTemp = paradas.get(0);
