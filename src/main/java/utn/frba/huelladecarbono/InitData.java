@@ -19,10 +19,7 @@ import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 import utn.frba.huelladecarbono.service.UbicacionService;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class InitData implements CommandLineRunner {
@@ -173,7 +170,7 @@ public class InitData implements CommandLineRunner {
         config.exposeIdsFor(Usuario.class);
         if(repoUsuario.count() == 0) {
 
-            Usuario usuario1 = new Usuario("prueba", "Yagni3210+", Rol.MIEMBRO);
+            Usuario usuario1 = new Usuario("prueba", "Yagni3210+", Arrays.asList(new Rol("ROLE_USER")));
             List<Usuario> usuarios = List.of(usuario1);
             usuarios.stream().forEach(usuario -> {
                 repoUsuario.save(usuario);

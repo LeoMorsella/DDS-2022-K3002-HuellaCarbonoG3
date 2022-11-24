@@ -123,7 +123,7 @@ public class CreadorDeObjetos {
         return recorrido;
     }
 
-    public  Usuario crearUsuario(String username, String password, Rol rol){
+    public  Usuario crearUsuario(String username, String password, List<Rol> rol){
         Usuario usuario = new Usuario(username,password,rol);
         repoUsuarios.save(usuario);
         repositorioUsuariosEnMemoria.agregarUsuario(usuario);

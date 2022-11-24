@@ -1,12 +1,20 @@
 package utn.frba.huelladecarbono.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
+import utn.frba.huelladecarbono.model.Seguridad.Rol;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.UsuarioRepository;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -25,7 +33,9 @@ public class UsuarioService implements IUsuarioService{
 
     @Override
     public void saveUsuario(Usuario usuario) {
-        usuarioRepository.save(usuario);
+        Usuario usuarioGuardar = new Usuario(usuario.getUsername(),
+                usuario.getPassword(), Arrays.asList(new Rol("ROLE_USER")));
+        usuarioRepository.save(usuarioGuardar);
     }
 
     @Override
@@ -50,10 +60,25 @@ public class UsuarioService implements IUsuarioService{
         Usuario usuarioActualizado = this.findUsuario(id);
         usuarioActualizado.setEstaActivo(usuario.getEstaActivo());
         usuarioActualizado.setPassword(usuario.getPassword());
-        usuarioActualizado.setRol(usuario.getRol());
+        usuarioActualizado.setRoles(usuario.getRoles());
         usuarioActualizado.setUsername(usuario.getUsername());
         usuarioActualizado.setMiembro(usuario.getMiembro());
         this.saveUsuario(usuarioActualizado);
         return usuarioActualizado;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
+        //Buscar el usuario con el repositorio y si no existe lanzar una exepcion
+        Usuario appUser = usuarioRepository.findByNombre(nombre);
+        if (appUser==null){
+            throw new UsernameNotFoundException("no existe");
+        }
+        //Mapear nuestra lista de Authority con la de spring security
+        List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
+        grantList.add(new SimpleGrantedAuthority("ROLE_USER"));
+        //Crear El objeto UserDetails que va a ir en sesion y retornarlo.
+        //Crear El objeto UserDetails que va a ir en sesion y retornarlo.
+        return (UserDetails) new User(appUser.getUsername(), appUser.getPassword(), grantList);
     }
 }
