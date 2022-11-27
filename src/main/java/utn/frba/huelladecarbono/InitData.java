@@ -92,12 +92,12 @@ public class InitData implements CommandLineRunner {
         cargarMiembros();
         cargarUsuarios();
         cargarRecorridos();
-        cargarSectores();
-        cargarParadas();
+        //cargarSectores();
+        //cargarParadas();
         cargarUbicaciones();
         cargarAreas();
-        cargarTrayectos();
-        cargarTransportePublico();
+       // cargarTrayectos();
+        //cargarTransportePublico();
         actualizarOrganizacion();
         darDeBajaOrganizacion();
 
@@ -171,7 +171,8 @@ public class InitData implements CommandLineRunner {
         if(repoUsuario.count() == 0) {
 
             Usuario usuario1 = new Usuario("prueba", "Yagni3210+", Arrays.asList(new Rol("ROLE_USER")));
-            List<Usuario> usuarios = List.of(usuario1);
+            List<Usuario> usuarios = new ArrayList<>();
+            usuarios.add(usuario1);
             usuarios.stream().forEach(usuario -> {
                 repoUsuario.save(usuario);
             });

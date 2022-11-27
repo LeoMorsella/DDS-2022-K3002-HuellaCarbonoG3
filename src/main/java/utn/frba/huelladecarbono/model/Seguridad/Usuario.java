@@ -1,8 +1,6 @@
 package utn.frba.huelladecarbono.model.Seguridad;
 
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
-import utn.frba.huelladecarbono.model.Repositorios.RepositorioUsuarios;
-import utn.frba.huelladecarbono.repository.UsuarioRepository;
 import utn.frba.huelladecarbono.service.ValidadorContraseniasService;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +16,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String username;
+    private String nombre;
     private String password;
 
     public List<Rol> getRoles() {
@@ -29,8 +27,7 @@ public class Usuario {
         this.roles = roles;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "roles_usuarios", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "rol_id"))
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Rol> roles;
     private int cantIntentos = 0;
     @OneToOne
@@ -39,7 +36,7 @@ public class Usuario {
     private  Boolean estaActivo;
 
     public Usuario(String username, String password, List<Rol> roles) {
-        this.username = username;
+        this.nombre = username;
         this.password = password;
         this.roles = roles;
     }
@@ -47,13 +44,13 @@ public class Usuario {
 
 
     private void validarCredencialesUser(String user, String psw){
-        this.username = user;
+        this.nombre = user;
         this.password = psw;
         ValidadorContraseniasService.getValidadorContrasenias().validarPassword(password);
     }
 
-    public String getUsername() {
-        return username;
+    public String getNombre() {
+        return nombre;
     }
 
     public String getPassword() {
@@ -90,7 +87,7 @@ public class Usuario {
     }
 
     public Usuario(String username, String password, int cantIntentos, Miembro miembro) {
-        this.username = username;
+        this.nombre = username;
         this.password = password;
         this.cantIntentos = cantIntentos;
         this.miembro = miembro;
@@ -109,7 +106,7 @@ public class Usuario {
     public String toString() {
         return "Usuario{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", username='" + nombre + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
                 ", cantIntentos=" + cantIntentos +
