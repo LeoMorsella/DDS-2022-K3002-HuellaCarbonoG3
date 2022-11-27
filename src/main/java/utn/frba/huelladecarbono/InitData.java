@@ -92,12 +92,12 @@ public class InitData implements CommandLineRunner {
         cargarMiembros();
         cargarUsuarios();
         cargarRecorridos();
-        //cargarSectores();
-        //cargarParadas();
+        cargarSectores();
+        cargarParadas();
         cargarUbicaciones();
         cargarAreas();
-       // cargarTrayectos();
-        //cargarTransportePublico();
+        cargarTrayectos();
+        cargarTransportePublico();
         actualizarOrganizacion();
         darDeBajaOrganizacion();
 
@@ -151,14 +151,8 @@ public class InitData implements CommandLineRunner {
     public void cargarSectores() {
         config.exposeIdsFor(SectorTerritorial.class);
         if(repoSectores.count() == 0){
-            SectorTerritorial sector = creadorDeObjetos.crearSectorTerritorial("Almirante Brown","Buenos Aires", null);
             AgenteSectorial agente = new AgenteSectorial();
-            agente.setSectorTerritorial(sector);
-            sector.setAgenteSectorial(agente);
-            List<SectorTerritorial> sectores = List.of(sector);
-            sectores.stream().forEach(sector1 -> {
-                repoSectores.save(sector1);
-            });
+            SectorTerritorial sector = creadorDeObjetos.crearSectorTerritorial("Almirante Brown","Buenos Aires", agente);
         }
         else{
             System.out.println("Ya existen sectores territoriales creados anteriormente");
