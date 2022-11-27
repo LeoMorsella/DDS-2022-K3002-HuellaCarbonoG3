@@ -22,10 +22,16 @@ public class Trayecto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    // error
     @Transient // ManyToMany?
     private Ubicacion puntoPartida;
+
+    //error
     @Transient //ManyToMany?
     private Ubicacion puntoLlegada;
+
+    //error
     @Transient // ManyToMany?
     private Medio medioTransporte;
 
