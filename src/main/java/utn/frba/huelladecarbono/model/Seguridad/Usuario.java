@@ -16,7 +16,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String nombre;
+    private String username;
     private String password;
 
     public List<Rol> getRoles() {
@@ -36,7 +36,7 @@ public class Usuario {
     private  Boolean estaActivo;
 
     public Usuario(String username, String password, List<Rol> roles) {
-        this.nombre = username;
+        this.username = username;
         this.password = password;
         this.roles = roles;
     }
@@ -44,13 +44,13 @@ public class Usuario {
 
 
     private void validarCredencialesUser(String user, String psw){
-        this.nombre = user;
+        this.username = user;
         this.password = psw;
         ValidadorContraseniasService.getValidadorContrasenias().validarPassword(password);
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
@@ -87,7 +87,7 @@ public class Usuario {
     }
 
     public Usuario(String username, String password, int cantIntentos, Miembro miembro) {
-        this.nombre = username;
+        this.username = username;
         this.password = password;
         this.cantIntentos = cantIntentos;
         this.miembro = miembro;
@@ -106,7 +106,7 @@ public class Usuario {
     public String toString() {
         return "Usuario{" +
                 "id=" + id +
-                ", username='" + nombre + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
                 ", cantIntentos=" + cantIntentos +

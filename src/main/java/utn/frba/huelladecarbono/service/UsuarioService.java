@@ -32,7 +32,7 @@ public class UsuarioService implements IUsuarioService{
 
     @Override
     public void saveUsuario(Usuario usuario) {
-        Usuario usuarioGuardar = new Usuario(usuario.getNombre(),
+        Usuario usuarioGuardar = new Usuario(usuario.getUsername(),
                 usuario.getPassword(), Arrays.asList(new Rol("ROLE_USER")));
         usuarioRepository.save(usuarioGuardar);
     }
@@ -60,7 +60,7 @@ public class UsuarioService implements IUsuarioService{
         usuarioActualizado.setEstaActivo(usuario.getEstaActivo());
         usuarioActualizado.setPassword(usuario.getPassword());
         usuarioActualizado.setRoles(usuario.getRoles());
-        usuarioActualizado.setNombre(usuario.getNombre());
+        usuarioActualizado.setUsername(usuario.getUsername());
         usuarioActualizado.setMiembro(usuario.getMiembro());
         this.saveUsuario(usuarioActualizado);
         return usuarioActualizado;
@@ -78,6 +78,6 @@ public class UsuarioService implements IUsuarioService{
         grantList.add(new SimpleGrantedAuthority("ROLE_USER"));
         //Crear El objeto UserDetails que va a ir en sesion y retornarlo.
         //Crear El objeto UserDetails que va a ir en sesion y retornarlo.
-        return (UserDetails) new User(appUser.getNombre(), appUser.getPassword(), grantList);
+        return (UserDetails) new User(appUser.getUsername(), appUser.getPassword(), grantList);
     }
 }
