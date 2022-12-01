@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Seguridad.Rol;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.UsuarioRepository;
@@ -33,7 +32,7 @@ public class UsuarioService implements IUsuarioService{
 
     @Override
     public void saveUsuario(Usuario usuario) {
-        Usuario usuarioGuardar = new Usuario(usuario.getUsername(),
+        Usuario usuarioGuardar = new Usuario(usuario.getNombre(),
                 usuario.getPassword(), Arrays.asList(new Rol("ROLE_USER")));
         usuarioRepository.save(usuarioGuardar);
     }
@@ -61,7 +60,7 @@ public class UsuarioService implements IUsuarioService{
         usuarioActualizado.setEstaActivo(usuario.getEstaActivo());
         usuarioActualizado.setPassword(usuario.getPassword());
         usuarioActualizado.setRoles(usuario.getRoles());
-        usuarioActualizado.setUsername(usuario.getUsername());
+        usuarioActualizado.setNombre(usuario.getNombre());
         usuarioActualizado.setMiembro(usuario.getMiembro());
         this.saveUsuario(usuarioActualizado);
         return usuarioActualizado;
@@ -79,6 +78,6 @@ public class UsuarioService implements IUsuarioService{
         grantList.add(new SimpleGrantedAuthority("ROLE_USER"));
         //Crear El objeto UserDetails que va a ir en sesion y retornarlo.
         //Crear El objeto UserDetails que va a ir en sesion y retornarlo.
-        return (UserDetails) new User(appUser.getUsername(), appUser.getPassword(), grantList);
+        return (UserDetails) new User(appUser.getNombre(), appUser.getPassword(), grantList);
     }
 }

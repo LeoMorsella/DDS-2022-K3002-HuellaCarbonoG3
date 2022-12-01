@@ -16,7 +16,9 @@ public class Parada {
     private Integer id;
     @Column
     private String nombre;
-    @ManyToOne
+
+    // aca hay un error
+    @Transient
     private Ubicacion ubicacion;
     @Transient
     private Distancia distanciaAProximaParada;

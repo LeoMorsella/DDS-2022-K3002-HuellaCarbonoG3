@@ -151,14 +151,8 @@ public class InitData implements CommandLineRunner {
     public void cargarSectores() {
         //config.exposeIdsFor(SectorTerritorial.class);
         if(repoSectores.count() == 0){
-            SectorTerritorial sector = creadorDeObjetos.crearSectorTerritorial("Almirante Brown","Buenos Aires", null);
             AgenteSectorial agente = new AgenteSectorial();
-            agente.setSectorTerritorial(sector);
-            sector.setAgenteSectorial(agente);
-            List<SectorTerritorial> sectores = List.of(sector);
-            sectores.stream().forEach(sector1 -> {
-                repoSectores.save(sector1);
-            });
+            SectorTerritorial sector = creadorDeObjetos.crearSectorTerritorial("Almirante Brown","Buenos Aires", agente);
         }
         else{
             System.out.println("Ya existen sectores territoriales creados anteriormente");
@@ -171,7 +165,8 @@ public class InitData implements CommandLineRunner {
         if(repoUsuario.count() == 0) {
 
             Usuario usuario1 = new Usuario("prueba", "Yagni3210+", Arrays.asList(new Rol("ROLE_USER")));
-            List<Usuario> usuarios = List.of(usuario1);
+            List<Usuario> usuarios = new ArrayList<>();
+            usuarios.add(usuario1);
             usuarios.stream().forEach(usuario -> {
                 repoUsuario.save(usuario);
             });

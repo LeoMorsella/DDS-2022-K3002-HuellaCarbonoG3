@@ -37,7 +37,7 @@ public class RepositorioUsuarios {
 
     public void cargarDeUsuariosDeBdAlSistema() {
         for(Usuario usuarioclase : usuariobd.getUsuarios()) {
-            Usuario usuario = new Usuario(usuarioclase.getUsername(),usuarioclase.getPassword(),usuarioclase.getRoles());
+            Usuario usuario = new Usuario(usuarioclase.getNombre(),usuarioclase.getPassword(),usuarioclase.getRoles());
             this.agregarUsuario(usuario);
         }
     }

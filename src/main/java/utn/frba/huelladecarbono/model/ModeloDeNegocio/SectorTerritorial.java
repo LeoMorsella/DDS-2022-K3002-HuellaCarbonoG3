@@ -21,7 +21,7 @@ public class SectorTerritorial {
 
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<HuellaCarbono> huellasCarbono = null;
+    private List<HuellaCarbono> huellasCarbono = new ArrayList<>();
     
     @OneToOne
     private AgenteSectorial agenteSectorial;
