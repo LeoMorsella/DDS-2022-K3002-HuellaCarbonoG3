@@ -70,7 +70,7 @@ public class UsuarioService implements IUsuarioService{
     @Override
     public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
         //Buscar el usuario con el repositorio y si no existe lanzar una exepcion
-        Usuario appUser = usuarioRepository.findByNombre(nombre);
+        Usuario appUser = usuarioRepository.findByUsername(nombre);
         if (appUser==null){
             throw new UsernameNotFoundException("no existe");
         }

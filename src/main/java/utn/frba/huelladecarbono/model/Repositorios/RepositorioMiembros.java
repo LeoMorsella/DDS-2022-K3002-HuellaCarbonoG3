@@ -9,6 +9,8 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class RepositorioMiembros {
 
@@ -37,10 +39,17 @@ public class RepositorioMiembros {
     this.miembros.add(miem);
   }
 
+  public Miembro findMiembro(Integer id){
+    return this.getMiembros().stream()
+            .filter(miembro -> miembro.getID() == id)
+            .collect(Collectors.toList())
+            .get(0);
+  }
+
   //TODO probar
   public void cargarDeMiembrosDeBdAlSistema() {
     for(Miembro miembroclase : miembrobd.getMiembros()) {
-      Miembro miembro = new Miembro(miembroclase.getId(),miembroclase.getNombre(),miembroclase.getApellido(),miembroclase.getTipoDoc(),miembroclase.getNumDoc(),miembroclase.getAreas(),miembroclase.getRecorridos(),miembroclase.getMail(),miembroclase.getTelefono());
+      Miembro miembro = new Miembro(miembroclase.getID(),miembroclase.getNombre(),miembroclase.getApellido(),miembroclase.getTipoDoc(),miembroclase.getNumDoc(),miembroclase.getAreas(),miembroclase.getRecorridos(),miembroclase.getMail(),miembroclase.getTelefono());
       this.agregarMiembro(miembro);
     }
   }

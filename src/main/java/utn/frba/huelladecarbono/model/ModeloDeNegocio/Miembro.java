@@ -7,8 +7,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 @Getter @Setter
 @Entity
@@ -107,6 +109,7 @@ public class Miembro {
                 '}';
     }
 
+    public Integer getID() {return this.id;}
     public void registrarseA(Area area) {
         areas.add(area);
     }
@@ -138,5 +141,13 @@ public class Miembro {
 
     public void setEstaActivo(Boolean estaActivo) {
         this.estaActivo = estaActivo;
+    }
+
+    public List<Organizacion> getOrganizaciones(){
+        List organizaciones = areas.stream()
+                .map(area -> area.getOrganizacion())
+                .collect(Collectors.toList());
+        return new ArrayList<>(new HashSet<>(organizaciones));
+
     }
 }

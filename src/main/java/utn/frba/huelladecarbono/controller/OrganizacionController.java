@@ -79,4 +79,12 @@ public class OrganizacionController {
     public Organizacion actualizarOrganizacion(@PathVariable Integer id, @RequestBody Organizacion organizacion) throws Exception {
        return interfazOrganizacion.modificarOrganizacion(id,organizacion);
     }
+
+    @PutMapping("/{organizacionID}/areas/borrar/{areaID}")
+    public void borrarArea(@PathVariable String areaID, @PathVariable String organizacionID){
+        RepositorioOrganizaciones.getRepositorio()
+                .findOrganizacion(Integer.parseInt(organizacionID))
+                .borrarArea(areaID);
+    }
+
 }

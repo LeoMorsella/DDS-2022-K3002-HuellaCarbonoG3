@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.security.NoSuchAlgorithmException;
 
 public class ContraseñasTest {
+    /*
         @Test
         public void testCrearMiembroPasswordFacil() {
 
@@ -34,5 +35,5 @@ public class ContraseñasTest {
             usuarioPrueba.validarLogueo("asasasas");
             double res = Math.pow(2,usuarioPrueba.getCantIntentos());
             Assertions.assertEquals(8,res);
-        }
+        }*/
 }

@@ -2,6 +2,7 @@ package utn.frba.huelladecarbono.model.ModeloDeNegocio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import utn.frba.huelladecarbono.controller.AreaController;
 import utn.frba.huelladecarbono.model.CreadorDeObjetos.CreadorDeObjetos;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Medio;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
@@ -9,6 +10,7 @@ import utn.frba.huelladecarbono.model.Repositorios.RepositorioTrayectos;
 import lombok.Getter;
 import lombok.Setter;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
+import utn.frba.huelladecarbono.service.AreaService;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -270,5 +272,17 @@ public class Organizacion {
                 ", huellasCarbono=" + huellasCarbono +
                 ", estaActivo=" + estaActivo +
                 '}';
+    }
+
+    public Integer getID() {
+        return this.id;
+    }
+
+    public void borrarArea(String id){
+        Area areaAborrar = this.getAreas().stream()
+                .filter(area -> area.getId() == Integer.parseInt(id))
+                .findFirst()
+                .orElse(new Area());
+        this.getAreas().remove(areaAborrar);
     }
 }

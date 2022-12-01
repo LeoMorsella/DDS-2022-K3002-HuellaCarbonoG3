@@ -42,8 +42,8 @@ public class CreadorDeObjetos {
 
     @Autowired
     RepositorioRecorrido repositorioRecorridoEnMemoria;
-    @Autowired
-    UsuarioRepository repoUsuarios;
+    //@Autowired
+    //UsuarioRepository repoUsuarios;
 
     @Autowired
     AreaRepository repoArea;
@@ -123,12 +123,12 @@ public class CreadorDeObjetos {
         return recorrido;
     }
 
-    public  Usuario crearUsuario(String username, String password, List<Rol> rol){
+    /*public  Usuario crearUsuario(String username, String password, List<Rol> rol){
         Usuario usuario = new Usuario(username,password,rol);
         repoUsuarios.save(usuario);
         repositorioUsuariosEnMemoria.agregarUsuario(usuario);
         return usuario;
-    }
+    }*/
 
     public TransportePublico crearTransportePublico(TipoTransportePublico tipoTransportePublico, String linea, ArrayList<Parada> paradas, String ID){
         TransportePublico transportePublico = new TransportePublico(tipoTransportePublico,linea,paradas,ID);

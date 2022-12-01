@@ -36,8 +36,8 @@ public class InitData implements CommandLineRunner {
     OrganizacionController organizacionController;
 
     //Usuarios
-    @Autowired
-    UsuarioRepository repoUsuario;
+    //@Autowired
+    //UsuarioRepository repoUsuario;
 
     @Autowired
     RecorridoRepository repoRecorrido;
@@ -74,8 +74,8 @@ public class InitData implements CommandLineRunner {
     @Autowired
     TrayectoRepository repoTrayectos;
 
-    @Autowired
-    RepositoryRestConfiguration config;
+    //@Autowired
+    //RepositoryRestConfiguration config;
 
     @Autowired
 
@@ -90,7 +90,7 @@ public class InitData implements CommandLineRunner {
         cargarMedioMotorizado();
         cargarOrganizaciones();
         cargarMiembros();
-        cargarUsuarios();
+        //cargarUsuarios();
         cargarRecorridos();
         cargarSectores();
         cargarParadas();
@@ -108,7 +108,7 @@ public class InitData implements CommandLineRunner {
 
    public void cargarRecorridos() throws Exception
     {
-        config.exposeIdsFor(Recorrido.class);
+        //config.exposeIdsFor(Recorrido.class);
         if(repoRecorrido.count() == 0) {
             Organizacion organizacion1 = new Organizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
             creadorDeObjetos.crearRecorrido(organizacion1,0.50, Calendario.crearFecha(1, 2020), Calendario.crearFecha(9, 2022));
@@ -123,7 +123,7 @@ public class InitData implements CommandLineRunner {
 
     public void cargarParadas() throws Exception
     {
-        config.exposeIdsFor(Usuario.class);
+        //config.exposeIdsFor(Usuario.class);
         if(repoParadas.count() == 0) {
 
             Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
@@ -137,7 +137,7 @@ public class InitData implements CommandLineRunner {
 
     public void cargarUbicaciones() throws Exception
     {
-            config.exposeIdsFor(Ubicacion.class);
+            //config.exposeIdsFor(Ubicacion.class);
             if(repoUbicaciones.count()==0) {
                 Ubicacion ubicacion1 = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
                 List<Ubicacion> ubicaciones = List.of(ubicacion1);
@@ -149,7 +149,7 @@ public class InitData implements CommandLineRunner {
     }
 
     public void cargarSectores() {
-        config.exposeIdsFor(SectorTerritorial.class);
+        //config.exposeIdsFor(SectorTerritorial.class);
         if(repoSectores.count() == 0){
             SectorTerritorial sector = creadorDeObjetos.crearSectorTerritorial("Almirante Brown","Buenos Aires", null);
             AgenteSectorial agente = new AgenteSectorial();
@@ -165,7 +165,7 @@ public class InitData implements CommandLineRunner {
         }
     }
 
-    public void cargarUsuarios() throws Exception
+   /* public void cargarUsuarios() throws Exception
     {
         config.exposeIdsFor(Usuario.class);
         if(repoUsuario.count() == 0) {
@@ -180,9 +180,10 @@ public class InitData implements CommandLineRunner {
             System.out.println("Ya existen Usuarios creados anteriormente");
         }
     }
+    */
     public void cargarMedioNoMotorizado() throws Exception
     {
-        config.exposeIdsFor(MedioNoMotorizado.class);
+        //config.exposeIdsFor(MedioNoMotorizado.class);
         if(repoMedioNoMotorizado.count()==0) {
             MedioNoMotorizado medio1 = new MedioNoMotorizado(TipoMedioNoMotorizado.A_PIE);
             List<MedioNoMotorizado> mediosNoMotorizados = List.of(medio1);
@@ -193,7 +194,7 @@ public class InitData implements CommandLineRunner {
     }
 
     public void cargarTransportePublico() throws Exception {
-        config.exposeIdsFor(TransportePublico.class);
+        //config.exposeIdsFor(TransportePublico.class);
         if(repoTransportes.count()==0) {
             List<Parada> paradas = new ArrayList<>();
             Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
@@ -210,7 +211,7 @@ public class InitData implements CommandLineRunner {
 
     public void cargarMedioMotorizado() throws Exception
     {
-        config.exposeIdsFor(MedioMotorizado.class);
+        //config.exposeIdsFor(MedioMotorizado.class);
         if(repoMedioMotorizado.count()==0) {
 
             MedioMotorizado medio1 = new MedioMotorizado(TipoVehiculoMotorizado.MOTO,TipoCombustible.NAFTA,"FRX123",Boolean.FALSE,"Particular");
@@ -222,7 +223,7 @@ public class InitData implements CommandLineRunner {
     }
 
     public void cargarAreas() throws Exception {
-        config.exposeIdsFor(Area.class);
+        //config.exposeIdsFor(Area.class);
         if(repoAreas.count() == 0) {
             Area area1 = new Area("Gonzalez Catan",null,null);
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
@@ -237,7 +238,7 @@ public class InitData implements CommandLineRunner {
 
     //TODO evaluar si el formato JSON devuelto es valido
     public void cargarTrayectos() throws Exception {
-        config.exposeIdsFor(Area.class);
+        //config.exposeIdsFor(Area.class);
         cargarMedioMotorizado();
         if(repoTrayectos.count() == 0) {
             Trayecto trayecto1 = new Trayecto();
@@ -262,7 +263,7 @@ public class InitData implements CommandLineRunner {
 
     public void cargarMiembros() throws Exception
     {
-        config.exposeIdsFor(Miembro.class);
+        //config.exposeIdsFor(Miembro.class);
         if(repoMiembros.count() == 0) {
 
             Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro(20,"Pablo","Ortiz","pablo@prueba","2323",true);
@@ -274,7 +275,7 @@ public class InitData implements CommandLineRunner {
 
     public void cargarOrganizaciones() throws Exception
     {
-        config.exposeIdsFor(Organizacion.class);
+        //config.exposeIdsFor(Organizacion.class);
         if(repoOrganizacion.count() == 0) {
 
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);

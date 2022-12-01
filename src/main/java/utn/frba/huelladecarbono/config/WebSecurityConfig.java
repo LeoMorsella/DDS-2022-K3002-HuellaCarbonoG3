@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
     IUsuarioService userDetailsService;
-
+/*
     //Registra el service para usuarios y el encriptador de contrasenaº
     @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -52,5 +52,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
+    */
 
 }

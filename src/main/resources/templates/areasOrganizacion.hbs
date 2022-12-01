@@ -186,28 +186,19 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    {{#each area}}
                                         <tr class="odd">
-                                            <td class="sorting_1">Sistemas</td>
+                                            <td class="sorting_1">{{nombre}}</td>
                                             <td>
                                                 <a href="#" class="btn btn-info btn-circle">
                                                     <img src="../img/pen-fill.svg" alt="Editar">
                                                 </a>
-                                                <a href="#" class="btn btn-danger btn-circle">
+                                                <a href="/{{organizacionID}}/areas/borrar/{{{id}}}" class="btn btn-danger btn-circle">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
                                         </tr>
-                                        <tr class="odd">
-                                            <td class="sorting_1">Marketing</td>
-                                            <td>
-                                                <a href="#" class="btn btn-info btn-circle">
-                                                    <img src="../img/pen-fill.svg" alt="Editar">
-                                                </a>
-                                                <a href="#" class="btn btn-danger btn-circle">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        {{/each}}
                                     </tbody>
                                 </table>
                             </div>

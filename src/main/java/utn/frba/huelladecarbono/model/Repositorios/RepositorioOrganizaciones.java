@@ -3,6 +3,7 @@ package utn.frba.huelladecarbono.model.Repositorios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import utn.frba.huelladecarbono.controller.OrganizacionController;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 
@@ -59,6 +60,12 @@ public class RepositorioOrganizaciones {
     return this.getOrganizaciones().stream().filter(organizacion -> organizacion.estaActiva()).collect(Collectors.toList());
    }
 
+  public Organizacion findOrganizacion(Integer id){
+    return this.getOrganizaciones().stream()
+            .filter(organizacion -> organizacion.getID() == id)
+            .collect(Collectors.toList())
+            .get(0);
+  }
 
 
 }
