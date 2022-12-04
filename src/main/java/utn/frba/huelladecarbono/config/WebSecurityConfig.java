@@ -11,22 +11,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import utn.frba.huelladecarbono.service.IUsuarioService;
 
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
-    //Necesario para evitar que la seguridad se aplique a los resources
-    //Como los css, imagenes y javascripts
-    String[] resources = new String[]{
-            "/include/**","/css/**","/icons/**","/img/**","/js/**","/layer/**"
-    };
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers(resources).permitAll()
+        http.authorizeRequests()
+                .antMatchers("/js/**", "/css/**.").permitAll()
                 .antMatchers("/","/index").permitAll()
                 .antMatchers("/organizacion/recomendaciones").permitAll()
                 .antMatchers("/organizacion/miembros").permitAll()

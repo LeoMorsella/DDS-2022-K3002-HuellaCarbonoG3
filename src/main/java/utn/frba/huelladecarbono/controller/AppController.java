@@ -30,17 +30,17 @@ public class AppController {
 
     @GetMapping({"/miembro/calcularHuella", "/miembro/calcularHuella.html"})
     public String calcularHuellaM() {
-        return "calcular-huellaMiembro";
+        return "MiembroCalculadora";
     }
 
     @GetMapping({"/miembro/datosPersonales", "/miembro/datos-personales.html"})
-    public String datosPersonalesM(){return "datos-PersonalesMiembro";}
+    public String datosPersonalesM(){return "MiembroDatosPersonales";}
 
     @GetMapping({"/miembro/organizaciones", "/miembro/organizaciones.html"})
-    public String organizacionesM(){return "organizacionesMiembro";}
+    public String organizacionesM(){return "MiembroOrganizaciones";}
 
     @GetMapping({"/miembro/recorridos", "/miembro/recorridos.html"})
-    public String recorridosM(){return "recorridosMiembro";}
+    public String recorridosM(){return "MiembroRecorridos";}
 
     //Rutas de vistas de organizacion
 
@@ -63,34 +63,34 @@ public class AppController {
     }
 
     @GetMapping({"/organizacion/calcularHuella", "/organizacion/calcular-huella.html"})
-    public String calcularHuellaO(){return "calcular-huellaOrganizacion";}
+    public String calcularHuellaO(){return "OrgCalculadora";}
 
     @GetMapping({"/organizacion/contactos", "/organizacion/contactos.html"})
-    public String contactosO(){return "contactosOrganizacion";}
+    public String contactosO(){return "OrgContactos";}
 
     @GetMapping({"/organizacion/datosDeActividad", "/organizacion/datos-de-actividad.html"})
-    public String datosDeActividadO(){return "datos-de-actividadOrganizacion";}
+    public String datosDeActividadO(){return "OrgDatosDeActividad";}
 
     @GetMapping({"/organizacion/datosInternos", "/organizacion/datos-internos.html"})
-    public String datosInternosO(){return "datos-internosOrganizacion";}
+    public String datosInternosO(){return "OrgDatosInternos";}
 
     @GetMapping({"/organizacion/miembros", "/organizacion/miembros.html"})
-    public String miembrosO(){return "miembrosOrganizacion";}
+    public String miembrosO(){return "OrgMiembros";}
 
     @GetMapping({"/organizacion/recomendaciones", "/organizacion/recomendaciones.html"})
-    public String recomendacionesO(){return "recomendacionesOrganizacion";}
+    public String recomendacionesO(){return "OrgRecomendaciones";}
 
     @GetMapping({"/organizacion/recorridos", "/organizacion/recorridos.html"})
-    public String recorridosO(){return "recorridosOrganizacion";}
+    public String recorridosO(){return "OrgRecorridos";}
 
     @GetMapping({"/organizacion/reportes", "/organizacion/reportes.html"})
-    public String reportesO(){return "reportesOrganizacion";}
+    public String reportesO(){return "OrgReportes";}
 
     // rutas de vistas de Agente Sectorial
 
     @GetMapping({"/AS/reportes", "/AS/reportes.html"})
-    public String reportesAS(){return "reportesAS";}
+    public String reportesAS(){return "AgenteReportes";}
 
     @GetMapping({"/AS/recomendaciones", "/AS/recomendaciones.html"})
-    public String recomendacionesAS(){return "recomendacionesAS";}
+    public String recomendacionesAS(){return "AgenteRecomendaciones";}
 }
