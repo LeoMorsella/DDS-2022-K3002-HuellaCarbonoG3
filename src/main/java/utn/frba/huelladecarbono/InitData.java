@@ -260,8 +260,9 @@ public class InitData implements CommandLineRunner {
     {
         config.exposeIdsFor(Miembro.class);
         if(repoMiembros.count() == 0) {
-
-            Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro(20,"Pablo","Ortiz","pablo@prueba","2323",true);
+            Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
+            Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
+            Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro(20, area1,"Pablo","Ortiz","pablo@prueba","2323",true);
         }
         else{
             System.out.println("Ya existen Miembros creados anteriormente");
