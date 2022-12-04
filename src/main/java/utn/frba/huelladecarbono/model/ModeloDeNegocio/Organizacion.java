@@ -285,4 +285,8 @@ public class Organizacion {
                 .orElse(new Area());
         this.getAreas().remove(areaAborrar);
     }
+
+    public void setID(int i) {
+        this.id = i;
+    }
 }

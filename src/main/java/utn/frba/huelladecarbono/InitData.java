@@ -280,6 +280,7 @@ public class InitData implements CommandLineRunner {
             Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
             ArrayList<Double> listaHCPrueba = new ArrayList<>();
             Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
+            organizacion1.setArea(area1);
             listaHCPrueba.add(100.00);
             HuellaCarbono huellaPrueba = new HuellaCarbono(Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021), 250.00);
             List<HuellaCarbono> hashMapPrueba = new ArrayList<>();
@@ -289,6 +290,7 @@ public class InitData implements CommandLineRunner {
             Miembro miembroPruebaWP = creadorDeObjetos.crearMiembro(50,"Gonza2","D","mail2@prueba","221",true);
             organizacion1.agregarContactoWP(miembroPruebaWP);
             organizacion1.agregarContactoMail(miembroPruebaMail);
+            RepositorioOrganizaciones.getRepositorio().getOrganizaciones().add(organizacion1);
         }
         else{
             System.out.println("Ya existen Organizaciones creados anteriormente");

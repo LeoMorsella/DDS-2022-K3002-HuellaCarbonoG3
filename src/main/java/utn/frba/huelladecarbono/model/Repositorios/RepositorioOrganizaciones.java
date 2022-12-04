@@ -17,14 +17,8 @@ public class RepositorioOrganizaciones {
   @Autowired
   OrganizacionController organizacionbd;
 
-  private static RepositorioOrganizaciones instance = new RepositorioOrganizaciones();
+  private static RepositorioOrganizaciones instance;
   private List<Organizacion> organizaciones;
-
-
-  private RepositorioOrganizaciones() {
-    this.organizaciones = new ArrayList<>();
-
-  }
 
   public List<Organizacion> getOrganizaciones() {
     return organizaciones;
@@ -35,6 +29,10 @@ public class RepositorioOrganizaciones {
   }
 
   public static RepositorioOrganizaciones getRepositorio() {
+    if(instance == null) {
+      instance = new RepositorioOrganizaciones();
+      instance.setOrganizaciones(new ArrayList<>());
+    }
     return instance;
   }
 

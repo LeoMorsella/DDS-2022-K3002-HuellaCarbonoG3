@@ -8,13 +8,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
+import utn.frba.huelladecarbono.model.CreadorDeObjetos.CreadorDeObjetos;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 import utn.frba.huelladecarbono.service.HandleBars;
 
 import javax.swing.text.html.parser.Entity;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,9 +48,29 @@ public class AppController {
     //Rutas de vistas de organizacion
 
     @GetMapping(value="/{idOrganizacion}/areas", produces = MediaType.TEXT_HTML_VALUE)
-    public ResponseEntity<String> areas(@PathVariable String idOrganizacion) throws IOException {
+    public ResponseEntity<String> areas(@PathVariable String idOrganizacion) throws Exception {
 
-        Template template = handlebars.compile("/templates/areasOrganizacion");
+        Template template = handlebars.compile("/templates/OrgAreas");
+
+        Organizacion organizacion1 = new Organizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
+        Organizacion organizacion2 = new Organizacion("SRA", TipoOrg.GUBERNAMENTAL, Clasificacion.EMPRESA_SECTOR_PRIMARIO, null, null, false);
+        Organizacion organizacion3 = new Organizacion("SRL", TipoOrg.ONG, Clasificacion.ESCUELA, null, null, true);
+        Organizacion organizacion4 = new Organizacion("SA", TipoOrg.INSTITUCION, Clasificacion.EMPRESA_SECTOR_SECUNDARIO, null, null, false);
+        Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
+        ArrayList<Double> listaHCPrueba = new ArrayList<>();
+        Area area1 = new Area("AreaPrueba1", organizacion1);
+        Area area2 = new Area("AreaPrueba2", organizacion1);
+        organizacion2.setArea(area1);
+        listaHCPrueba.add(100.00);
+        HuellaCarbono huellaPrueba = new HuellaCarbono(Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021), 250.00);
+        List<HuellaCarbono> hashMapPrueba = new ArrayList<>();
+        hashMapPrueba.add(huellaPrueba);
+        organizacion1.setID(1);
+        organizacion2.setID(2);
+        RepositorioOrganizaciones.getRepositorio().getOrganizaciones().add(organizacion2);
+        RepositorioOrganizaciones.getRepositorio().getOrganizaciones().add(organizacion1);
+
+
         List<Area> areas = RepositorioOrganizaciones
                 .getRepositorio()
                 .findOrganizacion(Integer.parseInt(idOrganizacion))
