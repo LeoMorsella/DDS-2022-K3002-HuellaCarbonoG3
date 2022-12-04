@@ -47,7 +47,7 @@ public class AppController {
     public String recorridosM(){return "MiembroRecorridos";}
 
     //Rutas de vistas de organizacion
-
+/*
     @GetMapping(value="/{idOrganizacion}/areas", produces = MediaType.TEXT_HTML_VALUE)
     public ResponseEntity<String> areas(@PathVariable String idOrganizacion) throws Exception {
 
@@ -88,7 +88,7 @@ public class AppController {
         String html = template.apply(model);
 
         return ResponseEntity.status(200).body(html);
-    }
+    }*/
 
     @GetMapping({"/organizacion/calcularHuella", "/organizacion/calcular-huella.html"})
     public String calcularHuellaO(){return "OrgCalculadora";}
