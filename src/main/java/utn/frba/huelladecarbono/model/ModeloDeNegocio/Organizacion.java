@@ -274,10 +274,6 @@ public class Organizacion {
                 '}';
     }
 
-    public Integer getID() {
-        return this.id;
-    }
-
     public void borrarArea(String id){
         Area areaAborrar = this.getAreas().stream()
                 .filter(area -> area.getId() == Integer.parseInt(id))

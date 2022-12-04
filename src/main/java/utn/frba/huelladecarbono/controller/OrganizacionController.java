@@ -35,6 +35,11 @@ public class OrganizacionController {
         return interfazOrganizacion.getOrganizaciones();
     }
 
+    @GetMapping("/organizaciones/{id}")
+    public Organizacion getOrganizacionPorID(@PathVariable String id) throws Exception {
+        return interfazOrganizacion.findOrganizacion(Integer.parseInt(id));
+    }
+
     //Endpoint para obtener solo a las organizaciones que estan activas en la bd
     @GetMapping("/organizaciones/estado")
     public List<Organizacion> getOrganizacionesActivas() {
@@ -68,13 +73,14 @@ public class OrganizacionController {
         return "La organización fue creada correctamente";
     }
 
-    @PatchMapping("/organizacion/editar/{id}")
+    @PatchMapping("/organizacion/editarEstado/{id}")
     public Organizacion cambiarEstadoOrganizacion(@PathVariable Integer id){
         interfazOrganizacion.cambiarEstadoOrganizacion(id);
         Organizacion orga = interfazOrganizacion.findOrganizacion(id);
         return orga;
     }
 
+    //revisar aca
     @PutMapping("/organizacion/editar/{id}")
     public Organizacion actualizarOrganizacion(@PathVariable Integer id, @RequestBody Organizacion organizacion) throws Exception {
        return interfazOrganizacion.modificarOrganizacion(id,organizacion);

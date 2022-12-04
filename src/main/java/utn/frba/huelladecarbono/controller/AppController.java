@@ -52,6 +52,9 @@ public class AppController {
 
         Template template = handlebars.compile("/templates/OrgAreas");
 
+        //despues borrar cuando funcione lo de los repos en memoria
+        //usar ID de organizacion 1 y 2 para probar
+
         Organizacion organizacion1 = new Organizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
         Organizacion organizacion2 = new Organizacion("SRA", TipoOrg.GUBERNAMENTAL, Clasificacion.EMPRESA_SECTOR_PRIMARIO, null, null, false);
         Organizacion organizacion3 = new Organizacion("SRL", TipoOrg.ONG, Clasificacion.ESCUELA, null, null, true);
@@ -70,6 +73,7 @@ public class AppController {
         RepositorioOrganizaciones.getRepositorio().getOrganizaciones().add(organizacion2);
         RepositorioOrganizaciones.getRepositorio().getOrganizaciones().add(organizacion1);
 
+        //borrar arriba
 
         List<Area> areas = RepositorioOrganizaciones
                 .getRepositorio()

@@ -60,7 +60,7 @@ public class RepositorioOrganizaciones {
 
   public Organizacion findOrganizacion(Integer id){
     return this.getOrganizaciones().stream()
-            .filter(organizacion -> organizacion.getID() == id)
+            .filter(organizacion -> organizacion.getId() == id)
             .collect(Collectors.toList())
             .get(0);
   }
