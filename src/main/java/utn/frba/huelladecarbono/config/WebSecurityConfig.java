@@ -15,10 +15,14 @@ import utn.frba.huelladecarbono.service.IUsuarioService;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
+    String[] resources = new String[]{
+            "/include/**","/css/**","/icons/**","/img/**","/js/**","/layer/**","/static/**"
+    };
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/js/**", "/css/**.").permitAll()
+                .antMatchers(resources).permitAll()
                 .antMatchers("/","/index").permitAll()
                 .antMatchers("/organizacion/recomendaciones").permitAll()
                 .antMatchers("/organizacion/miembros").permitAll()
@@ -29,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/miembros/{id}").permitAll()
                 .antMatchers("/miembros").permitAll()
                 .antMatchers("/login").permitAll()
+                .antMatchers("/miembroDatosPersonales").permitAll()
                 .anyRequest().authenticated()
                 .and()
                /* .formLogin()
