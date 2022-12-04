@@ -12,7 +12,6 @@ import utn.frba.huelladecarbono.service.OrganizacionService;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
