@@ -71,6 +71,16 @@ public class Miembro {
         this.estaActivo = estaActivo;
     }
 
+    public Miembro(Integer id, Area area, String nombre, String apellido, String mail, String telefono,Boolean estaActivo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.mail = mail;
+        this.telefono = telefono;
+        this.estaActivo = estaActivo;
+        this.areas.add(area);
+    }
+
     public Miembro() {}
 
     public Miembro(Integer id, String nombre, String apellido, String tipoDoc, Integer numDoc, List<Area> areas, List<Recorrido> recorridos, String mail, String telefono) {

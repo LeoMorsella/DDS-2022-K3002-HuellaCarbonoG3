@@ -22,7 +22,7 @@ public class MiembroController {
 
     //Prueba para obtener a un miembro
     @RequestMapping(value = "miembro")
-    public Miembro getMiembro(){
+    public Miembro getMiembroPrueba(){
         Miembro miembro = new Miembro();
         miembro.setId(1);
         miembro.setNombre("Gonzalo");
@@ -30,6 +30,11 @@ public class MiembroController {
         miembro.setMail("gduarte@gmail.com");
         miembro.setTelefono("11256635");
      return miembro;
+    }
+
+    @GetMapping("/miembros/{id}")
+    public Miembro getMiembroPorID(@PathVariable String id) throws Exception {
+        return interfazMiembro.findMiembro(Integer.parseInt(id));
     }
 
     //Endpoint para obtener a todos los miembros

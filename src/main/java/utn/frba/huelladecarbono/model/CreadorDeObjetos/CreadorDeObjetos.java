@@ -108,6 +108,13 @@ public class CreadorDeObjetos {
         return miembro;
     }
 
+    public  Miembro crearMiembro(int id,Area area, String nombre, String apellido, String mail, String telefono, Boolean estaActivo) {
+        Miembro miembro = new Miembro(id,area, nombre,apellido,mail,telefono,estaActivo);
+        repoMiembros.save(miembro);
+        repositorioMiembrosEnMemoria.agregarMiembro(miembro);
+        return miembro;
+    }
+
     public  Parada crearParada(String nombre, Ubicacion ubicacion) {
         Parada parada = new Parada(nombre,ubicacion);
         repoParadas.save(parada);

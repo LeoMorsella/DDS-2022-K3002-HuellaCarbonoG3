@@ -38,7 +38,7 @@ public class AreaController {
     }
 
     //Endpoint para dar de baja a una organizacion, la baja solamente es logica por lo tanto solo se cambia el estado
-    @DeleteMapping("area/eliminar/{id}")
+    @DeleteMapping("/area/eliminar/{id}")
     public String deleteOrganizacion(@PathVariable Integer id) {
         interfazArea.deleteArea(id);
         return "La Area fue dada de baja correctamente";
