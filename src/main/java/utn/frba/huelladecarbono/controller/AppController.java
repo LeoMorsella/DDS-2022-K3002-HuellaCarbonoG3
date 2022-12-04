@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 import utn.frba.huelladecarbono.model.CreadorDeObjetos.CreadorDeObjetos;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
@@ -25,13 +26,13 @@ import java.util.Map;
 @Controller
 public class AppController {
 
-    private Handlebars handlebars = HandleBars.getHandleBars();
+  //  private Handlebars handlebars = HandleBars.getHandleBars();
     @GetMapping({"/login", "/", "/index", "/login.html"})
     public String login() {return "login";}
 
     //Rutas de vistas de miembro
 
-    @GetMapping({"/miembro/calcularHuella", "/miembro/calcularHuella.html"})
+  /*  @GetMapping({"/miembro/calcularHuella", "/miembro/calcularHuella.html"})
     public String calcularHuellaM() {
         return "MiembroCalculadora";
     }
@@ -119,5 +120,5 @@ public class AppController {
     public String reportesAS(){return "AgenteReportes";}
 
     @GetMapping({"/AS/recomendaciones", "/AS/recomendaciones.html"})
-    public String recomendacionesAS(){return "AgenteRecomendaciones";}
+    public String recomendacionesAS(){return "AgenteRecomendaciones";}*/
 }
