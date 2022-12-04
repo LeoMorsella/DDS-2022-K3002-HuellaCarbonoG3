@@ -3,10 +3,7 @@ package utn.frba.huelladecarbono.model.CalculoDeDistancias;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter @Setter
 @Entity
@@ -14,7 +11,9 @@ public class Distancia {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column
     private Double valor;
+    @Column
     private String unidad;
 
     public Double getValor() {return valor;}

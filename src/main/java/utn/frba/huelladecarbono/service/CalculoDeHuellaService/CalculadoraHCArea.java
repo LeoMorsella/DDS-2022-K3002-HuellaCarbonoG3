@@ -2,6 +2,7 @@ package utn.frba.huelladecarbono.service.CalculoDeHuellaService;
 
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.DatoDeMedicion;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.ListaDeDatosDeMedicion;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 
 import java.time.LocalDate;
@@ -18,8 +19,8 @@ public class CalculadoraHCArea {
                 e.printStackTrace();
             }
         }
-        for (List<DatoDeMedicion> mediciones :area.getMediciones() ) {
-            HC += CalculadoraHCService.getCalculadoraHC().calcularHCMedicion(mediciones, mesInicio, mesFin);
+        for (ListaDeDatosDeMedicion mediciones :area.getMediciones() ) {
+            HC += CalculadoraHCService.getCalculadoraHC().calcularHCMedicion(mediciones.getDatosDeMedicion(), mesInicio, mesFin);
         }
         return HC;
     }

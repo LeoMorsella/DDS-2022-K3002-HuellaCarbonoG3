@@ -16,17 +16,21 @@ import javax.persistence.Id;
 @Getter @Setter
 @Entity
 public class DatoDeMedicion {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column
     private  String actividad;
+    @Column
     private  String tipoDeConsumo;
+    @Column
     private String valor;
+    @Column
     private  String periodicidad;
+    @Column
     private String periodoImputacion;
+    @Column
     private String unidad;
-
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<HuellaCarbono> huellasCarbono = new ArrayList<>();
 

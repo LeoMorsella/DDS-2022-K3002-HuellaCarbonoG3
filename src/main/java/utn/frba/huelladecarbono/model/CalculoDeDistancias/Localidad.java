@@ -12,12 +12,12 @@ public class Localidad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
+    @Column
     private String nombre;
-
+    @Column
     private String codPostal;
 
-    @Transient
+    @ManyToOne
     private Municipio municipio;
 
     public Integer getId() {

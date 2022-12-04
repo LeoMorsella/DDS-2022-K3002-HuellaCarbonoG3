@@ -19,28 +19,29 @@ public class Miembro {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column
     private String nombre;
+    @Column
     private String apellido;
+    @Column
     private String tipoDoc;
+    @Column
     private Integer numDoc;
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Area> areas;
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Recorrido> recorridos;
-
+    @Column
     private String mail;
-
+    @Column
     private String telefono;
-
-    private Double huellaCarbono = 0.0;
-
-    private Double impactoIndividual = 0.0;
-
+    @Column
+    private Double huellaCarbono;
+    @Column
+    private Double impactoIndividual;
+    @Column
     private Boolean estaActivo;
-
-    //@ElementCollection
-    //@ManyToMany
-    @Transient
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<HuellaCarbono> huellasCarbono = new ArrayList<>();
 
     public Miembro(String nom, String ape, String tipoDocu, int numeroDoc, List<Area> listaAreas,

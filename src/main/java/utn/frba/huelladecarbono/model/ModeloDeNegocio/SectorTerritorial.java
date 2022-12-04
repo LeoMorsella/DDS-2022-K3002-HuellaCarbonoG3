@@ -15,14 +15,14 @@ public class SectorTerritorial {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column
     private String municipio;
+    @Column
     private String provincia;
-    private Double huellaCarbono = 0.0;
-
-
+    @Column
+    private Double huellaCarbono;
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<HuellaCarbono> huellasCarbono = new ArrayList<>();
-    
     @OneToOne
     private AgenteSectorial agenteSectorial;
 

@@ -12,9 +12,9 @@ public class Municipio {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-
+    @Column
     private String nombre;
-    @Transient
+    @ManyToOne
     private Provincia provincia;
 
     public Integer getId() {

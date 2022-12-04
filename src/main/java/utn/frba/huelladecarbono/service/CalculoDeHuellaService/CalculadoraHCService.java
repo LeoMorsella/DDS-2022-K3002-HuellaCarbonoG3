@@ -31,7 +31,7 @@ public class CalculadoraHCService {
 
     public Double calcularHCArea(Area area, LocalDate mesInicio, LocalDate mesFin) {
         Double valor = CalculadoraHCArea.calcularHC(area, mesInicio, mesFin);
-        area.setHC(valor);
+        area.setHcPromedio(valor);
         HuellaCarbono huella = new HuellaCarbono(mesInicio, mesFin, valor);
         area.agregarHuella(huella);
         return valor;
@@ -83,7 +83,7 @@ public class CalculadoraHCService {
 
     public Double calcularHCPromedio(Area area,LocalDate mesInicio,LocalDate mesFin) throws Exception {
         Double valor = CalculadoraHCArea.HCpromedio(area, mesInicio, mesFin);
-        area.setHCPromedio(valor);
+        area.setHcPromedio(valor);
         return valor;
     }
 }

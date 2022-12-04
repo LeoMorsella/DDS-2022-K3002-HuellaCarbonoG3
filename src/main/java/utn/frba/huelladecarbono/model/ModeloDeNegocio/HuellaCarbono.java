@@ -14,17 +14,12 @@ public class HuellaCarbono {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
-
     @Column(columnDefinition = "DATE")
     private LocalDate fechaIni;
-
-    @Transient
+    @Column(columnDefinition = "DATE")
     private LocalDate fechaFin;
-
     @Column
     private Double huella;
-
 
     public HuellaCarbono(LocalDate fechaIni, LocalDate fechaFin, Double huella) {
         this.fechaIni = fechaIni;
@@ -34,29 +29,5 @@ public class HuellaCarbono {
 
     public HuellaCarbono() {
 
-    }
-
-    public void setInicio(LocalDate fecha){
-        this.fechaIni = fecha;
-    }
-
-    public void setFin(LocalDate fecha){
-        this.fechaFin = fecha;
-    }
-
-    public void setHuella(Double valor){
-        this.huella = valor;
-    }
-
-    public Double getHuella(){
-        return this.huella;
-    }
-
-    public LocalDate getFechaIni(){
-        return this.fechaIni;
-    }
-
-    public LocalDate getFechaFin(){
-        return this.fechaFin;
     }
 }

@@ -3,6 +3,7 @@ package utn.frba.huelladecarbono.model.MedioDeTransporte;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,7 +17,7 @@ public class MedioNoMotorizado extends Medio {
     public String getTipo() {
         return String.valueOf(tipo);
     }
-
+    @Column
     private String ID = "MNM";
 
     public Double getFE() {

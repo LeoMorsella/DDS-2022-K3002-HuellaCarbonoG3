@@ -21,14 +21,15 @@ public class Recorrido {
     private Integer id;
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     public List<Trayecto> trayectos = new ArrayList<>();
-    @Transient // OneToMany?
+    @OneToOne
     private Organizacion organizacion;
+    @Column
     private Double peso;
-
     @Column(columnDefinition = "DATE")
     private LocalDate mesInicio;
     @Column(columnDefinition = "DATE")
     private LocalDate mesFin;
+    @Column
     private Boolean estaActivo;
 
     public Recorrido(Organizacion organizacion, Double peso, LocalDate mesInicio, LocalDate mesFin,Boolean estaActivo) {

@@ -16,7 +16,9 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column
     private String username;
+    @Column
     private String password;
 
     public List<Rol> getRoles() {

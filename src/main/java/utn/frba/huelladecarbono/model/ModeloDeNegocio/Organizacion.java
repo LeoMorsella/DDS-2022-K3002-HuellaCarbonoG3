@@ -21,23 +21,20 @@ import java.util.stream.Collectors;
 @Entity
 
 public class Organizacion {
-
     @Transient
-    @Autowired
     CreadorDeObjetos creadorDeObjetos;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column
     private String razonSocial;
-    private Double huellaCarbono = 0.0;
+    @Column
+    private Double huellaCarbono;
     @Enumerated(EnumType.STRING)
     private TipoOrg tipo;
     @ManyToOne(cascade = {CascadeType.ALL})
     private Ubicacion ubicacion;
-
-    //TODO cambiar esto porque así no lo persiste
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany
     private List<Area> areas = new ArrayList<>();
     @Enumerated(EnumType.STRING)
     private Clasificacion clasificacion;
@@ -45,9 +42,10 @@ public class Organizacion {
     private List<Miembro> contactosMail = new ArrayList<>();
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Miembro> contactosWP = new ArrayList<>();
-    @Transient // Evaluar si es ElementCollection o Transient
+    @ElementCollection
     private List<Double> hcMensual = new ArrayList<>();
-    private Double hcPromedio = 0.0;
+    @Column
+    private Double hcPromedio;
 
   /*  @ManyToMany(fetch = FetchType.LAZY,
          cascade = {
@@ -60,6 +58,7 @@ public class Organizacion {
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<HuellaCarbono> huellasCarbono = new ArrayList<>();
 
+    @Column
     private Boolean estaActivo;
 
 
@@ -88,7 +87,7 @@ public class Organizacion {
 
     }
 
-    public Area crearArea(String nombre, Organizacion organizacion, List<List<DatoDeMedicion>> mediciones){
+    public Area crearArea(String nombre, Organizacion organizacion, List<ListaDeDatosDeMedicion> mediciones){
         Area area = creadorDeObjetos.crearArea(nombre, organizacion, mediciones);
         this.areas.add(area);
         return area;
@@ -227,10 +226,10 @@ public class Organizacion {
         RepositorioTrayectos.getRepositorio().agregarTrayecto(nuevoTrayecto);
     }
 
-    public List<List<DatoDeMedicion>> getMediciones(){
-        List<List<DatoDeMedicion>> medicionesOrga = new ArrayList<>();
+    public List<ListaDeDatosDeMedicion> getMediciones(){
+        List<ListaDeDatosDeMedicion> medicionesOrga = new ArrayList<>();
         for (Area area : this.areas){
-            for (List<DatoDeMedicion> datoDeMedicion : area.getMediciones()){
+            for (ListaDeDatosDeMedicion datoDeMedicion : area.getMediciones()){
                 medicionesOrga.add(datoDeMedicion);
             }
         }

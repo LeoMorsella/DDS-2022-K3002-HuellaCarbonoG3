@@ -12,10 +12,11 @@ import java.util.List;
 public class TransportePublico extends Medio {
     @Enumerated(EnumType.STRING)
     private TipoTransportePublico tipoTransportePublico;
+    @Column
     private String linea;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private  List<Parada> paradas;
-
+    @Column
     private String ID = "TP";
 
     public String getID() {

@@ -144,7 +144,7 @@ public class CreadorDeObjetos {
         return trayecto;
     }
 
-    public Area crearArea(String nombre, Organizacion organizacion, List<List<DatoDeMedicion>> mediciones){
+    public Area crearArea(String nombre, Organizacion organizacion, List<ListaDeDatosDeMedicion> mediciones){
         Area area = new Area(nombre,organizacion,mediciones);
         repoArea.save(area);
         return area;
