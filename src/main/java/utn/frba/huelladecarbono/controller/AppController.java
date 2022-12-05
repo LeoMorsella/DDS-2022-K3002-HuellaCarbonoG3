@@ -6,9 +6,7 @@ import org.apache.poi.ss.formula.functions.Areas;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.CreadorDeObjetos.CreadorDeObjetos;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
@@ -45,6 +43,7 @@ public class AppController {
 
     @GetMapping({"/miembro/recorridos", "/miembro/recorridos.html"})
     public String recorridosM(){return "MiembroRecorridos";}
+
 
     //Rutas de vistas de organizacion
 /*
