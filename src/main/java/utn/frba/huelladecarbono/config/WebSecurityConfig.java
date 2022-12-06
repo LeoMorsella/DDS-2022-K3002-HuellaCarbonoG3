@@ -36,6 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/miembro/datosPersonales").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/miembroDatosPersonales").permitAll()
+                .antMatchers("/miembro/crear").permitAll()
+                .antMatchers("/orgMiembros").permitAll()
+                .antMatchers("/orgRecomendaciones").permitAll()
+
                 .anyRequest().authenticated()
                 .and()
                /* .formLogin()

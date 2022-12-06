@@ -44,6 +44,9 @@ public class AppController {
     @GetMapping({"/miembro/recorridos", "/miembro/recorridos.html"})
     public String recorridosM(){return "MiembroRecorridos";}
 
+    @GetMapping({"/orgMiembros", "/orgMiembros.html"})
+    public String orgMiembros(){return "orgMiembros";}
+
 
     //Rutas de vistas de organizacion
 /*
@@ -112,6 +115,8 @@ public class AppController {
 
     @GetMapping({"/organizacion/reportes", "/organizacion/reportes.html"})
     public String reportesO(){return "OrgReportes";}
+    @GetMapping({"orgRecomendaciones", "orgRecomendaciones.html"})
+    public String orgRecomendaciones(){return "orgRecomendaciones";}
 
     // rutas de vistas de Agente Sectorial
 

@@ -263,6 +263,7 @@ public class InitData implements CommandLineRunner {
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
             Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
             Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro(20, area1,"Pablo","Ortiz","pablo@prueba","2323",true);
+            Miembro miembroPruebaDos = creadorDeObjetos.crearMiembro(25, area1,"Juan","Ortiz","juan@prueba","2353",true);
         }
         else{
             System.out.println("Ya existen Miembros creados anteriormente");

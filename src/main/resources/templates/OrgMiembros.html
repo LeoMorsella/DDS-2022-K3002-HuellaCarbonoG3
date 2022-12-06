@@ -34,7 +34,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="OrgRecomendaciones.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="orgRecomendaciones">
                 <div class="sidebar-brand-icon">
                     <img class="logo" src="../static/img/leaf-and-flames-logo.png" alt="">
                 </div>
@@ -46,7 +46,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="OrgRecomendaciones.html">
+                <a class="nav-link" href="orgRecomendaciones">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Recomendaciones</span></a>
             </li>
@@ -194,7 +194,7 @@
                     </div>
                     <br>
                     <div class="card o-hidden border-0 shadow-lg col-lg-10" style="margin: 0 auto">
-                        <div id="app2" class="card-body">
+                        <div id="appVue" class="card-body">
                             <h4>Miembros</h4>
                             <table class="table table-bordered dataTable" width="100%" cellspacing="0" role="grid"
                                 aria-describedby="dataTable_info" style="margin: 0 auto;">
@@ -218,7 +218,7 @@
                                             rowspan="1" colspan="1" aria-sort="ascending">Desvincular</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody  v-for="miembro in miembros">
                                     <tr class="odd">
                                         <td class="sorting_1">{{miembro.nombre}}</td>
                                         <td class="sorting_1">{{miembro.apellido}}</td>
@@ -246,7 +246,6 @@
 
             </div>
             <!-- End of Main Content -->
-
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -264,19 +263,19 @@
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
-<script th:src="@{/vendor/jquery/jquery.min.js}" src="../static/vendor/jquery/jquery.min.js"></script>
+    <script th:src="@{/vendor/jquery/jquery.min.js}" src="../static/vendor/jquery/jquery.min.js"></script>
 
-<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}" src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}" src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}" src="../static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}" src="../static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script th:src="@{/js/sb-admin-2.min.js}" src="../static/js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin-2.min.js}" src="../static/js/sb-admin-2.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+            crossorigin="anonymous"></script>
     <script>
     var app = new Vue({
         el: "#app",
@@ -293,21 +292,21 @@
                 })
             }
                 })
-    var app2 = new Vue({
-        el: "#app2",
-        data: {
-            miembro: {}
-        },
-        created() {
-            const urlParams = new URLSearchParams(window.location.search);
 
-            fetch('http://localhost:8080/miembros/1')
+
+     var app2 = new Vue({
+        el: "#appVue",
+        data: {
+            miembros: []
+        },
+        created () {
+            fetch('http://localhost:8080/miembros')
                 .then(response => response.json())
-                .then(miembroObtenido => {
-                    this.miembro = miembroObtenido
+                .then(data => {
+                    this.miembros = data
                 })
-            }
-                })
+        }
+    })
 </script>
 </body>
 
