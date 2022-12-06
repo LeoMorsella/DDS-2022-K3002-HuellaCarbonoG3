@@ -39,15 +39,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/miembro/crear").permitAll()
                 .antMatchers("/orgMiembros").permitAll()
                 .antMatchers("/orgRecomendaciones").permitAll()
-
                 .anyRequest().authenticated()
                 .and()
-               /* .formLogin()
+                .formLogin()
                 .loginPage("/login")
                 .permitAll()
-                .defaultSuccessUrl("/menuUsuario")
+                .defaultSuccessUrl("/miembroDatosPersonales")
                 .failureUrl("/login?error=true")
-                .and()*/
+                .and()
                 .logout()
                 .permitAll()
                 .logoutSuccessUrl("/login?logout");

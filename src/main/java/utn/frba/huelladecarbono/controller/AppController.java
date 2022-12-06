@@ -30,6 +30,8 @@ public class AppController {
 
     //Rutas de vistas de miembro
 
+
+
     @GetMapping({"/miembro/calcularHuella", "/miembro/calcularHuella.html"})
     public String calcularHuellaM() {
         return "MiembroCalculadora";

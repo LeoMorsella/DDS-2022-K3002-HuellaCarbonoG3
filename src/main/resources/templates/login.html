@@ -28,7 +28,12 @@
 <body class="bg-gradient-primary">
 
     <div class="container">
-
+        <div th:if="${param.error}" class="alert alert-danger" role="alert">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success" role="alert">
+            You have been logged out.
+        </div>
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
@@ -59,20 +64,20 @@
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Ingreso miembros</h1>
                                         </div>
-                                        <form class="user">
+                                        <form class="user" th:action="@{/login}" method="post">
                                             <div class="form-group">
                                                 <input type="email" class="form-control form-control-user"
-                                                    id="mail-miembro" aria-describedby="emailHelp"
+                                                    id="mail-miembro" name="username" aria-describedby="emailHelp"
                                                     placeholder="Ingrese su usuario">
                                             </div>
                                             <div class="form-group">
                                                 <input type="password" class="form-control form-control-user"
-                                                    id="contraseña-miembro" placeholder="Ingrese su contraseña">
+                                                    id="contraseña-miembro" name="password" placeholder="Ingrese su contraseña">
                                             </div>
-                                            <a href="MiembroDatosPersonales.html"
+                                            <button href="#"
                                                 class="btn btn-primary btn-user btn-block">
                                                 Iniciar sesión
-                                            </a>
+                                            </button>
                                         </form>
                                     </div>
                                     <!--FIN FORMULARIO MIEMBRO-->
