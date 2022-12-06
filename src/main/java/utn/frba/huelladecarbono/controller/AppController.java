@@ -107,7 +107,7 @@ public class AppController {
     @GetMapping({"/organizacion/miembros", "/organizacion/miembros.html"})
     public String miembrosO(){return "OrgMiembros";}
 
-    @GetMapping({"/organizacion/recomendaciones", "/organizacion/recomendaciones.html"})
+    @GetMapping({"/organizacion/recomendaciones", "/organizacion/recomendaciones.html","/organizacion/orgRecomendaciones"})
     public String recomendacionesO(){return "OrgRecomendaciones";}
 
     @GetMapping({"/organizacion/recorridos", "/organizacion/recorridos.html"})
