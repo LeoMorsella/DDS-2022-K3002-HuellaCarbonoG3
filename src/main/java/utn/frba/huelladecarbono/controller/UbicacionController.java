@@ -14,42 +14,43 @@ import utn.frba.huelladecarbono.service.IUbicacionService;
 import utn.frba.huelladecarbono.service.UbicacionService;
 
 @RestController
+@RequestMapping("/ubicacion")
 public class UbicacionController {
 
     @Autowired
     private IUbicacionService interfazUbicacion;
 
-    @GetMapping("/ubicaciones")
+    @GetMapping({"/",""})
     public List<Ubicacion> getUbicacion() {return interfazUbicacion.getUbicacion();}
 
-    @DeleteMapping("ubicacion/eliminar/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public String deleteUbicacion(@PathVariable Integer id) {
         interfazUbicacion.deleteUbicacion(id);
         return "La ubicacion ha sido eliminada";
     }
 
-    @PostMapping("/ubicacion/crear")
+    @PostMapping("/crear")
     public String saveUbicacion(@RequestBody Ubicacion ubicacion) {
         interfazUbicacion.saveUbicacion(ubicacion);
         return "La ubicacion fue creada correctamente";
     }
 
-    @GetMapping("/ubicacion/paises")
+    @GetMapping("/paises")
     public Pais[] getPaises() throws IOException {
        return APIDistanciaService.buscarPaises();
     }
 
-    @GetMapping("/ubicacion/provincias/{idPais}")
+    @GetMapping("/provincias/{idPais}")
     public Provincia[] getProvincias(@PathVariable Integer idPais) throws IOException {
         return APIDistanciaService.buscarProvincias(idPais);
     }
 
-    @GetMapping("/ubicacion/municipios/{idProvincia}")
+    @GetMapping("/municipios/{idProvincia}")
     public Municipio[] getMunicipios(@PathVariable Integer idProvincia) throws IOException {
         return APIDistanciaService.buscarMunicipios(idProvincia);
     }
 
-    @GetMapping("/ubicacion/localidades/{idMunicipio}")
+    @GetMapping("/localidades/{idMunicipio}")
     public Localidad[] getLocalidades(@PathVariable Integer idMunicipio) throws IOException {
         return APIDistanciaService.buscarLocalidades(idMunicipio);
     }
