@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
@@ -24,6 +25,9 @@ public class OrganizacionController {
 
     @Autowired
     OrganizacionRepository organizacionRepository;
+
+    @Autowired
+    OrganizacionService organizacionService;
 
     @Autowired
     private  AreaService areaService;
@@ -57,6 +61,18 @@ public class OrganizacionController {
     @GetMapping("/organizaciones/huella/{id}")
     public Double getHuella(@PathVariable String id) {
         return interfazOrganizacion.getHuellaTotal(Integer.parseInt(id));
+    }
+
+    @GetMapping("/organizaciones/{id}/contactosWp")
+    public List<Miembro> getContactosWp(@PathVariable String id){
+        int idn = Integer.parseInt(id);
+        return organizacionService.findOrganizacion(idn).getContactosWP();
+    }
+
+    @GetMapping("/organizaciones/{id}/contactosMail")
+    public List<Miembro> getContactosMail(@PathVariable String id){
+        int idn = Integer.parseInt(id);
+        return organizacionService.findOrganizacion(idn).getContactosMail();
     }
 
     //Endpoint para dar de baja a una organizacion, la baja solamente es logica por lo tanto solo se cambia el estado

@@ -17,6 +17,7 @@ import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.*;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 import utn.frba.huelladecarbono.service.UbicacionService;
+import utn.frba.huelladecarbono.service.UsuarioService;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -25,7 +26,8 @@ import java.util.*;
 public class InitData implements CommandLineRunner {
 
 
-
+    @Autowired
+    UsuarioService usuarioService;
     @Autowired
     OrganizacionRepository repoOrganizacion;
 
@@ -86,7 +88,7 @@ public class InitData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        cargarMedioNoMotorizado();
+        /*cargarMedioNoMotorizado();
         cargarMedioMotorizado();
         cargarOrganizaciones();
         cargarMiembros();
@@ -99,7 +101,10 @@ public class InitData implements CommandLineRunner {
         cargarTrayectos();
         cargarTransportePublico();
         actualizarOrganizacion();
-        darDeBajaOrganizacion();
+        darDeBajaOrganizacion();*/
+
+       /* Usuario usuario = new Usuario("pablo@gmail.com","123",Arrays.asList(new Rol("ROLE_USER")));
+        usuarioService.saveUsuario(usuario);*/
 
 
     }
