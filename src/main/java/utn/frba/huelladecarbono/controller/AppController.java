@@ -118,7 +118,7 @@ public class AppController {
     @GetMapping({"/organizacion/reportes", "/organizacion/reportes.html"})
     public String reportesO(){return "OrgReportes";}
     @GetMapping({"orgRecomendaciones", "orgRecomendaciones.html"})
-    public String orgRecomendaciones(){return "orgRecomendaciones";}
+    public String orgRecomendaciones(){return "OrgRecomendaciones";}
 
     // rutas de vistas de Agente Sectorial
 
