@@ -30,3 +30,9 @@ function mostrarSelector() {
     document.getElementById('atras').style.display = 'none';
     document.getElementById('botones').style.display = '';
 }
+
+window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);

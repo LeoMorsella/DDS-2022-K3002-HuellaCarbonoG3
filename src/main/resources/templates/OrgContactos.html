@@ -12,7 +12,8 @@
     <title>Huella de Carbono</title>
 
     <!-- Custom fonts for this template-->
-    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" href="../static/vendor/fontawesome-free/css/all.min.css">
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet"
+        href="../static/vendor/fontawesome-free/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -23,6 +24,44 @@
 </head>
 
 <body id="page-top">
+
+    <!-- MODAL AGREGAR CONTACTO-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar nuevo</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <label for="m-nombre">Miembro</label>
+                        <select id="miembro" aria-controls="dataTable"
+                            class="custom-select custom-select-sm form-control form-control-sm form-control-user">
+                        </select>
+                        <br><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Whatsapp
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Mail
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--FIN MODAL AGREGAR CONTACTO-->
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -126,7 +165,8 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="login.html" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="login.html" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cerrar sesión
                                 </a>
@@ -138,13 +178,14 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <div style="text-align: center;">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
                             Agregar
                         </button>
                     </div>
                     <br>
                     <div class="card o-hidden border-0 shadow-lg col-lg-10" style="margin: 0 auto">
-                        <div id= appVue class="card-body">
+                        <div id=appVue class="card-body">
                             <h4>Whatsapp</h4>
                             <table class="table table-bordered dataTable" width="100%" cellspacing="0" role="grid"
                                 aria-describedby="dataTable_info" style="margin: 0 auto;">
@@ -191,7 +232,7 @@
                     </div>
                     <br>
                     <div class="card o-hidden border-0 shadow-lg col-lg-10" style="margin: 0 auto">
-                        <div id= "appVue2" class="card-body">
+                        <div id="appVue2" class="card-body">
                             <h4>Mail</h4>
                             <table class="table table-bordered dataTable" width="100%" cellspacing="0" role="grid"
                                 aria-describedby="dataTable_info" style="margin: 0 auto;">
@@ -261,48 +302,50 @@
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
-<script th:src="@{/vendor/jquery/jquery.min.js}" src="../static/vendor/jquery/jquery.min.js"></script>
-<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}" src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/vendor/jquery/jquery.min.js}" src="../static/vendor/jquery/jquery.min.js"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"
+        src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}" src="../static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"
+        src="../static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script th:src="@{/js/sb-admin-2.min.js}" src="../static/js/sb-admin-2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-    crossorigin="anonymous"></script>
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{/js/sb-admin-2.min.js}" src="../static/js/sb-admin-2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
 
     <script>
-    var app = new Vue({
-        el: "#appVue",
-        data: {
-            contactos: []
-        },
-        created () {
-            fetch('http://localhost:8080/organizaciones/2/contactosWp')
-                .then(response => response.json())
-                .then(data => {
-                    this.contactos = data
-                })
-        }
-    })
+        var app = new Vue({
+            el: "#appVue",
+            data: {
+                contactos: []
+            },
+            created() {
+                fetch('http://localhost:8080/organizaciones/2/contactosWp')
+                    .then(response => response.json())
+                    .then(data => {
+                        this.contactos = data
+                    })
+            }
+        })
 
 
-     var app2 = new Vue({
-        el: "#appVue2",
-        data: {
-            contactos: []
-        },
-        created () {
-            fetch('http://localhost:8080/organizaciones/2/contactosMail')
-                .then(response => response.json())
-                .then(data => {
-                    this.contactos = data
-                })
-        }
-    })
-</script>
+        var app2 = new Vue({
+            el: "#appVue2",
+            data: {
+                contactos: []
+            },
+            created() {
+                fetch('http://localhost:8080/organizaciones/2/contactosMail')
+                    .then(response => response.json())
+                    .then(data => {
+                        this.contactos = data
+                    })
+            }
+        })
+    </script>
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,30 +11,25 @@
 
     <title>Huella de Carbono</title>
 
-    
-    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" href="../static/vendor/fontawesome-free/css/all.min.css">
-    
+
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet"
+        href="../static/vendor/fontawesome-free/css/all.min.css">
+
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    
-        <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet" href="../static/css/sb-admin-2.min.css">
-    
+
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet" href="../static/css/sb-admin-2.min.css">
+
 
 </head>
 
 <body class="bg-gradient-primary">
 
     <div class="container">
-        <div th:if="${param.error}" class="alert alert-danger" role="alert">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}" class="alert alert-success" role="alert">
-            You have been logged out.
-        </div>
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
@@ -64,7 +60,7 @@
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Ingreso miembros</h1>
                                         </div>
-                                        <form class="user" th:action="@{/login}" method="post">
+                                        <form class="user" th:action="@{/login}" method="post" name="form_miembro">
                                             <div class="form-group">
                                                 <input type="email" class="form-control form-control-user"
                                                     id="mail-miembro" name="username" aria-describedby="emailHelp"
@@ -72,12 +68,12 @@
                                             </div>
                                             <div class="form-group">
                                                 <input type="password" class="form-control form-control-user"
-                                                    id="contraseña-miembro" name="password" placeholder="Ingrese su contraseña">
+                                                    id="contraseña-miembro" name="password"
+                                                    placeholder="Ingrese su contraseña">
                                             </div>
-                                            <button href="#"
-                                                class="btn btn-primary btn-user btn-block">
+                                            <a href="MiembroDatosPersonales.html" class="btn btn-primary btn-user btn-block" onclick="document.forms_miembro.submit()">
                                                 Iniciar sesión
-                                            </button>
+                                            </a>
                                         </form>
                                     </div>
                                     <!--FIN FORMULARIO MIEMBRO-->
@@ -86,7 +82,7 @@
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Ingreso organizaciones</h1>
                                         </div>
-                                        <form class="user">
+                                        <form class="user" name="form_org">
                                             <div class="form-group">
                                                 <input type="email" class="form-control form-control-user"
                                                     id="mail-organizacion" aria-describedby="emailHelp"
@@ -97,7 +93,7 @@
                                                     id="constraseña-organizacion" placeholder="Ingrese su contraseña">
                                             </div>
                                             <a href="OrgRecomendaciones.html"
-                                                class="btn btn-primary btn-user btn-block">
+                                                class="btn btn-primary btn-user btn-block" onclick="document.forms_org.submit()">
                                                 Iniciar sesión
                                             </a>
                                         </form>
@@ -108,7 +104,7 @@
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Ingreso agentes sectoriales</h1>
                                         </div>
-                                        <form class="user">
+                                        <form class="user" name="form_agente">
                                             <div class="form-group">
                                                 <input type="email" class="form-control form-control-user"
                                                     id="mail-agente-sectorial" aria-describedby="emailHelp"
@@ -120,7 +116,7 @@
                                                     placeholder="Ingrese su contraseña">
                                             </div>
                                             <a href="AgenteRecomendaciones.html"
-                                                class="btn btn-primary btn-user btn-block">
+                                                class="btn btn-primary btn-user btn-block" onclick="document.forms_agente.submit()">
                                                 Iniciar sesión
                                             </a>
                                         </form>
@@ -128,7 +124,8 @@
                                     <!--FIN FORMULARIO AGENTE-->
                                     <br>
                                     <div id="atras" style=" text-align:center; display:none">
-                                        <a href="#" class="btn btn-primary btn-user btn-circle" onclick="mostrarSelector()">
+                                        <a href="#" class="btn btn-primary btn-user btn-circle"
+                                            onclick="mostrarSelector()">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd"
@@ -144,6 +141,18 @@
 
             </div>
 
+        </div>
+        <div th:if="${param.error}" class="alert alert-danger" role="alert"
+            style="width: 350px; margin: 20px auto; text-align: center">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            Usuario o contraseña incorrecta
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success" role="alert"
+            style="width: 350px; margin: 20px auto; text-align: center;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+            Sesión cerrada
         </div>
 
     </div>
