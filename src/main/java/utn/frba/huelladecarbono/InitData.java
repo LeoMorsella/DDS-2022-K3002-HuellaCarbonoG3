@@ -88,7 +88,7 @@ public class InitData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        /*cargarMedioNoMotorizado();
+        cargarMedioNoMotorizado();
         cargarMedioMotorizado();
         cargarOrganizaciones();
         cargarMiembros();
@@ -101,9 +101,9 @@ public class InitData implements CommandLineRunner {
         cargarTrayectos();
         cargarTransportePublico();
         actualizarOrganizacion();
-        darDeBajaOrganizacion();*/
+        darDeBajaOrganizacion();
 
-       /* Usuario usuario = new Usuario("pablo@gmail.com","123",Arrays.asList(new Rol("ROLE_USER")));
+        /*Usuario usuario = new Usuario("pablo@gmail.com","123",Arrays.asList(new Rol("ROLE_USER")));
         usuarioService.saveUsuario(usuario);*/
 
 

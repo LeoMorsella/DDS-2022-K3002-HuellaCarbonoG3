@@ -21,9 +21,9 @@
     <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet" href="../static/css/sb-admin-2.min.css">
 
     <!-- importacion de vue-->
-    <!--
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    -->
+
 </head>
 
 <body id="page-top">
@@ -145,7 +145,7 @@
                     <div class="card o-hidden border-0 shadow-lg col-lg-6" style="margin: 0 auto">
                         <div class="card-body">
                             <form action="PUT" href="/organizacion/editar/1">
-                                <label for="razon-social">Razon Social</label>
+                                <label for="razon-social">Razón Social</label>
                                 <input type="text" name="" id="razon-social" class="form-control form-control-user" :placeholder="datosOrga.razonSocial">
                                 <br>
                                 <label for="tipo">Tipo de organizacion</label>
@@ -177,37 +177,34 @@
                                         <div>
                                             <label for="">País</label>
                                             <select id="" name="dataTable_length" aria-controls="dataTable"
-                                                class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                                <option value="" selected disabled></option>
+                                                    class="custom-select custom-select-sm form-control form-control-sm form-control-user">
+                                                <option v-for="pais in paises" :value="pais.nombre" >{{pais.nombre}}</option>
                                             </select>
                                         </div>
                                         <div>
                                             <label for="">Provincia</label>
                                             <select id="" name="dataTable_length" aria-controls="dataTable"
-                                                class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                                <option value="" selected disabled></option>
+                                                    class="custom-select custom-select-sm form-control form-control-sm form-control-user">
+                                                <option v-for="provincia in provincias" :value="provincia.nombre" > {{provincia.nombre}}</option>
                                             </select>
                                         </div>
                                         <div>
                                             <label for="">Municipio</label>
                                             <select id="" name="dataTable_length" aria-controls="dataTable"
-                                                class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                                <option value="" selected disabled></option>
+                                                    class="custom-select custom-select-sm form-control form-control-sm form-control-user">
+                                                <option v-for = "municipio in municipios" :value="municipio.nombre"> {{municipio.nombre}}</option>
                                             </select>
                                         </div>
                                         <div>
                                             <label for="">Localidad</label>
                                             <select id="" name="dataTable_length" aria-controls="dataTable"
-                                                class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                                <option value="" selected disabled></option>
+                                                    class="custom-select custom-select-sm form-control form-control-sm form-control-user">
+                                                <option v-for = "localidad in localidades" :value="localidad.nombre" >{{localidad.nombre}}</option>
                                             </select>
                                         </div>
                                         <div>
-                                            <label for="">Calle</label>
-                                            <select id="" name="dataTable_length" aria-controls="dataTable"
-                                                class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                                <option value="" selected disabled></option>
-                                            </select>
+                                            <label for="calle">Calle</label>
+                                            <input type="text" name="" id="calle" class="form-control form-control-user">
                                         </div>
                                         <div>
                                             <label for="">Altura</label>
@@ -268,8 +265,33 @@
     let app = new Vue({
         el: "#wrapper",
         data:{
-            datosOrga: null
+            prueb: "prueba",
+            datosOrga: null,
+            paises: [{
+                nombre: "argentina"
+            }],
+            provincias: [{
+                nombre: "buenos aires"
             },
+                {
+                    nombre: "san luis"
+                }],
+            municipios: [{
+                nombre: "mun1"
+            },
+                {
+                    nombre: "mun2"
+                }],
+            localidades: [{
+                nombre: "loc1"
+            },
+                {
+                    nombre: "loc2"
+                }]
+            },
+        methods: {
+
+        },
         created () {
             fetch('http://localhost:8080/organizaciones/1')
                 .then(response => response.json())
