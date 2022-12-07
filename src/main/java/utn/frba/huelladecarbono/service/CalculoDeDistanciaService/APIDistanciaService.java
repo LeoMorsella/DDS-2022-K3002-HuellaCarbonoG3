@@ -1,5 +1,7 @@
 package utn.frba.huelladecarbono.service.CalculoDeDistanciaService;
 
+import jdk.dynalink.linker.LinkerServices;
+import org.apache.tomcat.jni.Local;
 import utn.frba.huelladecarbono.model.CalculoDeDistancias.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Ubicacion;
 import utn.frba.huelladecarbono.model.UserExceptions.BadResponseException;
@@ -11,6 +13,8 @@ import javax.ws.rs.core.Response;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -144,15 +148,100 @@ public class APIDistanciaService {
 
     }
 
-
-
-
-    public String token() throws IOException {
+    public static String token() throws IOException {
        String CONFIGTOKEN = "src\\main\\resources\\application.properties";
 
         Properties property = new Properties();
 		property.load(new FileReader(CONFIGTOKEN));
         String valorToken = property.getProperty("token");
 		return valorToken;
-}
+    }
+
+    public static Pais[] buscarPaises() throws IOException {
+        WebClient client = null;
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        client = WebClient.create("https://ddstpa.com.ar/api/paises?offset=1");
+        assert client != null;
+        Response response = client
+                .header("Content-Type", "application/json")
+                .authorization(APIDistanciaService.token())
+                .get();
+
+        Integer status = response.getStatus();
+        String responseBody = response.readEntity(String.class);
+
+        if (status == 200) {
+            return mapper.readValue(responseBody, Pais[].class);
+        } else {
+            System.out.println("Error response = " + responseBody);
+            throw new BadResponseException("Error en la llamada de búsqueda de paises");
+        }
+    }
+
+    public static Provincia[] buscarProvincias(Integer idPais) throws IOException {
+        WebClient client = null;
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        client = WebClient.create("https://ddstpa.com.ar/api/provincias?offset=1&paisId=" + idPais);
+        assert client != null;
+        Response response = client
+                .header("Content-Type", "application/json")
+                .authorization(APIDistanciaService.token())
+                .get();
+
+        Integer status = response.getStatus();
+        String responseBody = response.readEntity(String.class);
+
+        if (status == 200) {
+            return mapper.readValue(responseBody, Provincia[].class);
+        } else {
+            System.out.println("Error response = " + responseBody);
+            throw new BadResponseException("Error en la llamada de búsqueda de provincias");
+        }
+    }
+
+    public static Municipio[] buscarMunicipios(Integer idProvincia) throws IOException {
+        WebClient client = null;
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        client = WebClient.create("https://ddstpa.com.ar/api/municipios?offset=1&provinciaId=" + idProvincia);
+        assert client != null;
+        Response response = client
+                .header("Content-Type", "application/json")
+                .authorization(APIDistanciaService.token())
+                .get();
+
+        Integer status = response.getStatus();
+        String responseBody = response.readEntity(String.class);
+
+        if (status == 200) {
+            return mapper.readValue(responseBody, Municipio[].class);
+        } else {
+            System.out.println("Error response = " + responseBody);
+            throw new BadResponseException("Error en la llamada de búsqueda de municipios");
+        }
+    }
+
+    public static Localidad[] buscarLocalidades(Integer idMunicipio) throws IOException {
+        WebClient client = null;
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        client = WebClient.create("https://ddstpa.com.ar/api/localidades?offset=1&municipioId=" + idMunicipio);
+        assert client != null;
+        Response response = client
+                .header("Content-Type", "application/json")
+                .authorization(APIDistanciaService.token())
+                .get();
+
+        Integer status = response.getStatus();
+        String responseBody = response.readEntity(String.class);
+
+        if (status == 200) {
+            return mapper.readValue(responseBody, Localidad[].class);
+        } else {
+            System.out.println("Error response = " + responseBody);
+            throw new BadResponseException("Error en la llamada de búsqueda de localidades");
+        }
+    }
 }
