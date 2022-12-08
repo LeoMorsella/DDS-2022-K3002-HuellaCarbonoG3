@@ -12,6 +12,9 @@ public class AppController {
     @GetMapping({"/login", "/", "/index", "/login.html"})
     public String login() {return "login";}
 
+    @GetMapping({"/loginOrganizacion"})
+    public String loginOrganizacion() {return "login";}
+
     //Rutas de vistas de miembro
 
 
@@ -112,6 +115,4 @@ public class AppController {
     @GetMapping({"/AS/recomendaciones", "/AS/recomendaciones.html"})
     public String recomendacionesAS(){return "AgenteRecomendaciones";}
 
-    @GetMapping({"miembroDatosPersonales","miembroDatosPersonales.html"})
-    public String miembroDatosPersonales(){return "miembroDatosPersonales";}
 }

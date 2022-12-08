@@ -1,6 +1,7 @@
 package utn.frba.huelladecarbono.config;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,9 +14,9 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import utn.frba.huelladecarbono.service.IUsuarioService;
 
 @Configuration
-@Order(1)
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+@Order(2)
+public class WebSecurityConfigOrg extends WebSecurityConfigurerAdapter{
 
     String[] resources = new String[]{
             "/include/**","/css/**","/icons/**","/img/**","/js/**","/layer/**","/static/**"
@@ -24,26 +25,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .anyRequest().authenticated()
                 .antMatchers(resources).permitAll()
                 .antMatchers("/static/css/**").permitAll()
-                .antMatchers("/","/index").permitAll()
-                .antMatchers("/{id}/areas").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/miembro/**").permitAll()
-                .antMatchers("/ubicacion/**").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/organizacion/recomendaciones").permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/loginOrganizacion")
                 .permitAll()
-                .defaultSuccessUrl("/miembro/datosPersonales")
+                .defaultSuccessUrl("/organizacion/recomendaciones")
                 .failureUrl("/login?error=true")
                 .and()
                 .logout()
                 .permitAll()
                 .logoutSuccessUrl("/login?logout");
     }
-
 
     @Autowired
     IUsuarioService userDetailsService;

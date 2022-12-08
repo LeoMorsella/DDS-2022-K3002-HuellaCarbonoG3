@@ -32,9 +32,13 @@ public class UsuarioService implements IUsuarioService{
 
     @Override
     public void saveUsuario(Usuario usuario) {
-        Usuario usuarioGuardar = new Usuario(usuario.getUsername(),
-                usuario.getPassword(), Arrays.asList(new Rol("ROLE_USER")));
-        usuarioRepository.save(usuarioGuardar);
+        Usuario appUser = usuarioRepository.findByUsername(usuario.getUsername());
+        if (appUser==null){
+            Usuario usuarioGuardar = new Usuario(usuario.getUsername(),
+                    usuario.getPassword(), usuario.getRoles());
+            usuarioRepository.save(usuarioGuardar);
+        }
+
     }
 
     @Override
