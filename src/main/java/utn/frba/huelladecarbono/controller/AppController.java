@@ -1,25 +1,9 @@
 package utn.frba.huelladecarbono.controller;
 
 import com.github.jknack.handlebars.Handlebars;
-import com.github.jknack.handlebars.Template;
-import org.apache.poi.ss.formula.functions.Areas;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import utn.frba.huelladecarbono.model.CreadorDeObjetos.CreadorDeObjetos;
-import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
-import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
-import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
-import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 import utn.frba.huelladecarbono.service.HandleBars;
-
-import javax.swing.text.html.parser.Entity;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class AppController {

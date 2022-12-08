@@ -100,8 +100,8 @@ public class InitData implements CommandLineRunner {
         cargarAreas();
         cargarTrayectos();
         cargarTransportePublico();
-        actualizarOrganizacion();
-        darDeBajaOrganizacion();*/
+        /*actualizarOrganizacion();*/
+        darDeBajaOrganizacion();
 
 
         Usuario usuarioMiembro = new Usuario("pablo@gmail.com","123",Arrays.asList(new Rol("USER")));
@@ -303,17 +303,17 @@ public class InitData implements CommandLineRunner {
             RepositorioOrganizaciones.getRepositorio().getOrganizaciones().add(organizacion1);
         }
         else{
-            System.out.println("Ya existen Organizaciones creados anteriormente");
+            System.out.println("Ya existen Organizaciones creadas anteriormente");
         }
     }
-
+/*
     public void actualizarOrganizacion() throws Exception
     {
         Organizacion nuevaOrganizacion = repoOrganizacion.findById(1).get();
         nuevaOrganizacion.setRazonSocial("OrganizacionPableken!");
         organizacionController.actualizarOrganizacion(1,nuevaOrganizacion);
     }
-
+*/
     public void darDeBajaOrganizacion() throws Exception
     {
         organizacionController.deleteOrganizacion(3);

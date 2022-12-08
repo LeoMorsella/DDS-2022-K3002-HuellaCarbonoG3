@@ -18,6 +18,8 @@ public class Area {
     private String nombre;
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private  List<Miembro> miembros = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private  List<Miembro> miembrosEnEspera = new ArrayList<>();
     @ManyToOne
     private  Organizacion organizacion;
     @OneToMany
@@ -30,8 +32,10 @@ public class Area {
     private Double huellaCarbono;
     @Column
     private Double hcPromedio;
+
     @Column
     private boolean estaActivo;
+
 
     public Area() {
     }
@@ -69,10 +73,26 @@ public class Area {
         miembros.add(miembro);
     }
 
-    public void addMiembro(ArrayList<Miembro> miembros){
-        this.miembros.addAll(miembros);
+    public void rechazarMiembro(Miembro miembro) {
+        miembrosEnEspera.remove(miembro);
     }
 
+    public void aceptarMiembro(Miembro miembro) throws Exception {
+        Miembro unMiembro = miembrosEnEspera.get(miembrosEnEspera.indexOf(miembro));
+        if (unMiembro != null) {
+            miembrosEnEspera.remove(unMiembro);
+            miembros.add(unMiembro);
+        } else {
+            throw new Exception("El miembro no estaba en espera");
+        }
+    }
+
+    public void solicitarSerParte(Miembro miembro) {
+        this.miembrosEnEspera.add(miembro);
+    }
+    public List<Miembro> getMiembrosEnEspera() {
+        return miembrosEnEspera;
+    }
     public void setEstaActivo(boolean estaActivo) {
         this.estaActivo = estaActivo;
     }
