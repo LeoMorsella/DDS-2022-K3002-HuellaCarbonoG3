@@ -112,20 +112,20 @@ public class OrganizacionController {
     public List<Miembro> miembros(@PathVariable Integer organizacionId) {
         return organizacionRepository.getById(organizacionId).getMiembros();
     }
-    @GetMapping("{organizacionId}/miembros")
+    @GetMapping("{organizacionId}/miembrosEnEspera")
     public HashMap<Miembro, Area> miembrosEnEspera(@PathVariable Integer organizacionId) {
         return organizacionRepository.getById(organizacionId).getMiembrosEnEspera();
     }
-
-    @PatchMapping("{organizacionId}/aceptarMiembro/")
+    @PatchMapping("{organizacionId}/aceptarMiembro")
     public void aceptarMiembro(@PathVariable Integer organizacionId, @RequestParam Integer areaId, @RequestParam Integer miembroId) throws Exception {
         Miembro miembro = RepositorioMiembros.getRepositorio().findMiembro(miembroId);
         organizacionRepository.getById(organizacionId).getArea(areaId).aceptarMiembro(miembro);
     }
 
-    @PatchMapping("{organizacionId}/rechazarMiembro/")
+    @PatchMapping("{organizacionId}/rechazarMiembro")
     public void rechazarMiembro(@PathVariable Integer organizacionId, @RequestParam Integer areaId, @RequestParam Integer miembroId) throws Exception {
         Miembro miembro = RepositorioMiembros.getRepositorio().findMiembro(miembroId);
         organizacionRepository.getById(organizacionId).getArea(areaId).rechazarMiembro(miembro);
     }
+
 }

@@ -103,9 +103,10 @@ public class InitData implements CommandLineRunner {
         /*actualizarOrganizacion();*/
         darDeBajaOrganizacion();
 
-        /*Usuario usuario = new Usuario("pablo@gmail.com","123",Arrays.asList(new Rol("ROLE_USER")));
-        usuarioService.saveUsuario(usuario);*/
-
+        /*
+        Usuario usuario = new Usuario("pablo@gmail.com","123",Arrays.asList(new Rol("ROLE_USER")));
+        usuarioService.saveUsuario(usuario);
+*/
 
     }
 
