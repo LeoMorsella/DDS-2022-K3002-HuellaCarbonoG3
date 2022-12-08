@@ -65,8 +65,6 @@ public class OrganizacionService implements IOrganizacionService{
         organizacionActualizada.setRazonSocial(organizacion.getRazonSocial());
         organizacionActualizada.setTipo(organizacion.getTipo());
         organizacionActualizada.setClasificacion(organizacion.getClasificacion());
-        organizacionActualizada.setContactosMail(organizacion.getContactosMail());
-        organizacionActualizada.setContactosWP(organizacion.getContactosWP());
         organizacionActualizada.setEstaActivo(organizacion.getEstaActivo());
         this.saveOrganizacion(organizacionActualizada);
         return organizacionActualizada;
