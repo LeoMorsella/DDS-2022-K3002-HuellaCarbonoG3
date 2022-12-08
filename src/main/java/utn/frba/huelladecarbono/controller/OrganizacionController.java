@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
+import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 import utn.frba.huelladecarbono.service.AreaService;
@@ -13,6 +14,7 @@ import utn.frba.huelladecarbono.service.IAreaService;
 import utn.frba.huelladecarbono.service.IOrganizacionService;
 import utn.frba.huelladecarbono.service.OrganizacionService;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -106,5 +108,24 @@ public class OrganizacionController {
                 .findOrganizacion(Integer.parseInt(organizacionID))
                 .borrarArea(areaID);
     }
+    @GetMapping("{organizacionId}/miembros")
+    public List<Miembro> miembros(@PathVariable Integer organizacionId) {
+        return organizacionRepository.getById(organizacionId).getMiembros();
+    }
+    @GetMapping("{organizacionId}/miembros")
+    public HashMap<Miembro, Area> miembrosEnEspera(@PathVariable Integer organizacionId) {
+        return organizacionRepository.getById(organizacionId).getMiembrosEnEspera();
+    }
 
+    @PatchMapping("{organizacionId}/aceptarMiembro/")
+    public void aceptarMiembro(@PathVariable Integer organizacionId, @RequestParam Integer areaId, @RequestParam Integer miembroId) throws Exception {
+        Miembro miembro = RepositorioMiembros.getRepositorio().findMiembro(miembroId);
+        organizacionRepository.getById(organizacionId).getArea(areaId).aceptarMiembro(miembro);
+    }
+
+    @PatchMapping("{organizacionId}/rechazarMiembro/")
+    public void rechazarMiembro(@PathVariable Integer organizacionId, @RequestParam Integer areaId, @RequestParam Integer miembroId) throws Exception {
+        Miembro miembro = RepositorioMiembros.getRepositorio().findMiembro(miembroId);
+        organizacionRepository.getById(organizacionId).getArea(areaId).rechazarMiembro(miembro);
+    }
 }

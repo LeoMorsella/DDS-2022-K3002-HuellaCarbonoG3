@@ -14,6 +14,7 @@ import utn.frba.huelladecarbono.service.AreaService;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -211,11 +212,25 @@ public class Organizacion {
         this.estaActivo = estaActivo;
     }
 
+    public Area getArea(Integer areaId) {
+        return areas.get(areas.indexOf(areaId));
+    }
+
     public List<Miembro> getMiembros(){
         List<Miembro> miembros = new ArrayList<>();
         for (Area area: areas){
             for (Miembro miembro: area.getMiembros()){
                 miembros.add(miembro);
+            }
+        }
+        return miembros;
+    }
+
+    public HashMap<Miembro, Area> getMiembrosEnEspera(){
+        HashMap<Miembro, Area> miembros = new HashMap<>();
+        for (Area area: areas){
+            for (Miembro miembro: area.getMiembrosEnEspera()){
+                miembros.put(miembro, area);
             }
         }
         return miembros;
@@ -284,4 +299,6 @@ public class Organizacion {
     public void setID(int i) {
         this.id = i;
     }
+
+
 }

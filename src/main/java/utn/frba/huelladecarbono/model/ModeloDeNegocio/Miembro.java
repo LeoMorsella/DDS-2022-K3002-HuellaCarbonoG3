@@ -121,8 +121,11 @@ public class Miembro {
     }
 
     public Integer getID() {return this.id;}
-    public void registrarseA(Area area) {
-        areas.add(area);
+    public void solicitarSerParte(Area area) {
+        area.solicitarSerParte(this);
+    }
+    public void recibirAceptacion(Area area) {
+        this.areas.add(area);
     }
 
     public void setHC(Double valor){
@@ -144,7 +147,6 @@ public class Miembro {
     public void agregarHuella(HuellaCarbono huella){
         this.huellasCarbono.add(huella);
     }
-
 
     public Boolean getEstaActivo() {
         return estaActivo;
