@@ -91,9 +91,9 @@ public class InitData implements CommandLineRunner {
         cargarMedioNoMotorizado();
         cargarMedioMotorizado();
         cargarOrganizaciones();
-        cargarMiembros();
+       // cargarMiembros();
         cargarUsuarios();
-        cargarRecorridos();
+      /*  cargarRecorridos();
         cargarSectores();
         cargarParadas();
         cargarUbicaciones();
@@ -101,11 +101,13 @@ public class InitData implements CommandLineRunner {
         cargarTrayectos();
         cargarTransportePublico();
         actualizarOrganizacion();
-        darDeBajaOrganizacion();
+        darDeBajaOrganizacion();*/
 
-        /*Usuario usuario = new Usuario("pablo@gmail.com","123",Arrays.asList(new Rol("ROLE_USER")));
-        usuarioService.saveUsuario(usuario);*/
 
+        Usuario usuarioMiembro = new Usuario("pablo@gmail.com","123",Arrays.asList(new Rol("USER")));
+        usuarioService.saveUsuario(usuarioMiembro);
+        Usuario usuarioOrga = new Usuario("pabloOrga@gmail.com","123",Arrays.asList(new Rol("ORG")));
+        usuarioService.saveUsuario(usuarioOrga);
 
     }
 
