@@ -75,13 +75,15 @@ public class MiembroController {
         return interfazMiembro.modificarMiembro(id,miembro);
     }
 
-    @GetMapping("miembro/huella/{miembroId}")
+    @GetMapping("miembro/calcularHuella/{miembroId}")
     public HashMap<Double, Double> calcularHuella(@PathVariable Integer miembroId, @RequestBody LocalDate fechaInicio, @RequestBody LocalDate fechaFin, @RequestBody Integer orgId) throws Exception {
         Double huella = CalculadoraHCMiembro.calcularHC(interfazMiembro.findMiembro(miembroId), fechaInicio, fechaFin, RepositorioOrganizaciones.getRepositorio().findOrganizacion(orgId));
         Double impacto = CalculadoraHCMiembro.calcularImpactoIndividual(interfazMiembro.findMiembro(miembroId),RepositorioOrganizaciones.getRepositorio().findOrganizacion(orgId), fechaInicio, fechaFin );
         HashMap<Double, Double> resultado = new HashMap<>();
         resultado.put(huella, impacto);
         return resultado;
+
+        //Verificar si usar handlebars o no, ya que es carga a BD y visualizacion
     }
 
 }
