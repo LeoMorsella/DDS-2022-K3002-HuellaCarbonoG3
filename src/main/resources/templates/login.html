@@ -82,7 +82,7 @@
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Ingreso organizaciones</h1>
                                         </div>
-                                        <form class="user" th:action="@{/loginOrganizacion}" method="post" name="form_org">
+                                        <form class="user" th:action="@{/organizacion/recomendaciones}" method="get" name="form_org">
                                             <div class="form-group">
                                                 <input type="email" class="form-control form-control-user"
                                                     id="mail-organizacion" aria-describedby="emailHelp"
@@ -115,7 +115,7 @@
                                                     id="contraseña-agente-sectorial"
                                                     placeholder="Ingrese su contraseña">
                                             </div>
-                                            <a href="AgenteRecomendaciones.html"
+                                            <a href="AS/recomendaciones"
                                                 class="btn btn-primary btn-user btn-block" onclick="document.forms_agente.submit()">
                                                 Iniciar sesión
                                             </a>

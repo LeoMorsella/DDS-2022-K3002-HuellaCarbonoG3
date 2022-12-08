@@ -9,7 +9,7 @@ import utn.frba.huelladecarbono.service.HandleBars;
 public class AppController {
 
     private Handlebars handlebars = HandleBars.getHandleBars();
-    @GetMapping({"/login", "/", "/index", "/login.html"})
+    @GetMapping({"/login", "/", "/index", "/login"})
     public String login() {return "login";}
 
     @GetMapping({"/loginOrganizacion"})
@@ -19,18 +19,18 @@ public class AppController {
 
 
 
-    @GetMapping({"/miembro/calcularHuella", "/miembro/calcularHuella.html"})
+    @GetMapping({"calcularHuella", "calcularHuella.html"})
     public String calcularHuellaM() {
         return "MiembroCalculadora";
     }
 
-    @GetMapping({"/miembro/datosPersonales", "/miembro/datos-personales.html"})
+    @GetMapping({"/datosPersonales", "/miembro/datos-personales.html"})
     public String datosPersonalesM(){return "MiembroDatosPersonales";}
 
-    @GetMapping({"/miembro/organizaciones", "/miembro/organizaciones.html"})
+    @GetMapping({"/organizaciones", "/organizaciones.html"})
     public String organizacionesM(){return "MiembroOrganizaciones";}
 
-    @GetMapping({"/miembro/recorridos", "/miembro/recorridos.html"})
+    @GetMapping({"/recorridos", "/recorridos.html"})
     public String recorridosM(){return "MiembroRecorridos";}
 
     @GetMapping({"/orgMiembros", "/orgMiembros.html"})

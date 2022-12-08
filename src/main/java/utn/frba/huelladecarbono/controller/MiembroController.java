@@ -1,14 +1,20 @@
 package utn.frba.huelladecarbono.controller;
 
 
+import org.apache.poi.hpsf.Decimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
+import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.repository.MiembroRepository;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCMiembro;
 import utn.frba.huelladecarbono.service.IMiembroService;
 
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -67,6 +73,15 @@ public class MiembroController {
     @PutMapping("/miembro/editar/{id}")
     public Miembro actualizarMiembro(@PathVariable Integer id, @RequestBody Miembro miembro) throws Exception {
         return interfazMiembro.modificarMiembro(id,miembro);
+    }
+
+    @GetMapping("miembro/huella/{miembroId}")
+    public HashMap<Double, Double> calcularHuella(@PathVariable Integer miembroId, @RequestBody LocalDate fechaInicio, @RequestBody LocalDate fechaFin, @RequestBody Integer orgId) throws Exception {
+        Double huella = CalculadoraHCMiembro.calcularHC(interfazMiembro.findMiembro(miembroId), fechaInicio, fechaFin, RepositorioOrganizaciones.getRepositorio().findOrganizacion(orgId));
+        Double impacto = CalculadoraHCMiembro.calcularImpactoIndividual(interfazMiembro.findMiembro(miembroId),RepositorioOrganizaciones.getRepositorio().findOrganizacion(orgId), fechaInicio, fechaFin );
+        HashMap<Double, Double> resultado = new HashMap<>();
+        resultado.put(huella, impacto);
+        return resultado;
     }
 
 }
