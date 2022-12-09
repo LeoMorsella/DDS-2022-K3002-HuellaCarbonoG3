@@ -175,16 +175,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <tr class="odd">
-                            <td class="sorting_1">borrardsp</td>
-                            <td>borrardsp</td>
-                            <td>
-                                <a href="#" class="btn btn-danger btn-circle">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </td>
+
                             <tr v-for= "area in areas" class="odd">
-                                <td class="sorting_1">{{area.organizacion.nombre}}</td>
+                                <td class="sorting_1">{{area.organizacion.tipo}}</td>
                                 <td>{{area.nombre}}</td>
                                 <td>
                                     <a href="/area/eliminar/{id}" class="btn btn-danger btn-circle">
@@ -245,7 +238,7 @@
                 areas: null
             },
             created () {
-                fetch('http://localhost:8080/miembros/1')
+                fetch('http://localhost:8080/miembro/25')
                     .then(response => response.json())
                     .then(data => {
                         this.areas = data.areas;
