@@ -9,28 +9,43 @@ import utn.frba.huelladecarbono.service.HandleBars;
 public class AppController {
 
     private Handlebars handlebars = HandleBars.getHandleBars();
+<<<<<<< HEAD
     @GetMapping({"/login", "/", "/index"})
     public String login() {return "login";}
 
     //Rutas de vistas de miembro
+=======
+    @GetMapping({"/login", ""})
+    public String login() {return "login";}
 
+    @GetMapping({"/loginOrganizacion"})
+    public String loginOrganizacion() {return "login";}
 
+>>>>>>> a407babbae8d965fe7d10505ddfc8fbced400e7e
+
+    // MIEMBRO
+
+<<<<<<< HEAD
     @GetMapping({"calcularHuella", "calcularHuella.html"})
     public String calcularHuellaM() {
         return "MiembroCalculadora";
     }
 
     @GetMapping({"/datosPersonales", "/miembro/datos-personales.html"})
+=======
+    @GetMapping("/miembro/calcularHuella")
+    public String calcularHuellaM() {return "MiembroCalculadora";}
+    @GetMapping("/miembro/datosPersonales")
+>>>>>>> a407babbae8d965fe7d10505ddfc8fbced400e7e
     public String datosPersonalesM(){return "MiembroDatosPersonales";}
 
-    @GetMapping({"/organizaciones", "/organizaciones.html"})
+    @GetMapping("/miembro/organizaciones")
     public String organizacionesM(){return "MiembroOrganizaciones";}
 
-    @GetMapping({"/recorridos", "/recorridos.html"})
+    @GetMapping("/miembro/recorridos")
     public String recorridosM(){return "MiembroRecorridos";}
 
-    @GetMapping({"/orgMiembros", "/orgMiembros.html"})
-    public String orgMiembros(){return "orgMiembros";}
+
 
 
     //Rutas de vistas de organizacion
@@ -77,38 +92,41 @@ public class AppController {
         return ResponseEntity.status(200).body(html);
     }*/
 
-    @GetMapping({"/organizacion/calcularHuella", "/organizacion/calcular-huella.html"})
+    // ORGANIZACIÓN
+    @GetMapping("organizacion/miembros")
+    public String orgMiembros(){return "orgMiembros";}
+
+    @GetMapping("/organizacion/calcularHuella")
     public String calcularHuellaO(){return "OrgCalculadora";}
 
-    @GetMapping({"/organizacion/contactos", "/organizacion/contactos.html"})
+    @GetMapping("/organizacion/contactos")
     public String contactosO(){return "OrgContactos";}
 
-    @GetMapping({"/organizacion/datosDeActividad", "/organizacion/datos-de-actividad.html"})
+    @GetMapping("/organizacion/datosDeActividad")
     public String datosDeActividadO(){return "OrgDatosDeActividad";}
 
-    @GetMapping({"/organizacion/datosInternos", "/organizacion/datos-internos.html"})
+    @GetMapping("/organizacion/datosInternos")
     public String datosInternosO(){return "OrgDatosInternos";}
 
-    @GetMapping({"/organizacion/miembros", "/organizacion/miembros.html"})
-    public String miembrosO(){return "OrgMiembros";}
-
-    @GetMapping({"/organizacion/recomendaciones", "/organizacion/recomendaciones.html","/organizacion/orgRecomendaciones"})
+    @GetMapping("/organizacion/recomendaciones")
     public String recomendacionesO(){return "OrgRecomendaciones";}
 
-    @GetMapping({"/organizacion/recorridos", "/organizacion/recorridos.html"})
+    @GetMapping("/organizacion/recorridos")
     public String recorridosO(){return "OrgRecorridos";}
 
-    @GetMapping({"/organizacion/reportes", "/organizacion/reportes.html"})
+    @GetMapping("/organizacion/reportes")
     public String reportesO(){return "OrgReportes";}
-    @GetMapping({"orgRecomendaciones", "orgRecomendaciones.html"})
-    public String orgRecomendaciones(){return "OrgRecomendaciones";}
 
-    // rutas de vistas de Agente Sectorial
+    @GetMapping({"/organizacion/areas"})
+    public String orgAreas(){return "OrgAreas";}
 
-    @GetMapping({"/AS/reportes", "/AS/reportes.html"})
+
+    // AGENTE SECTORIAL
+
+    @GetMapping("/AS/reportes")
     public String reportesAS(){return "AgenteReportes";}
 
-    @GetMapping({"/AS/recomendaciones", "/AS/recomendaciones.html"})
+    @GetMapping("/AS/recomendaciones")
     public String recomendacionesAS(){return "AgenteRecomendaciones";}
 
 }

@@ -21,6 +21,7 @@
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     
         <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet" href="../static/css/sb-admin-2.min.css">
+    <!--script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
 
 </head>
 
@@ -45,7 +46,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="OrgRecomendaciones.html">
+                <a class="nav-link" href="recomendaciones">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Recomendaciones</span></a>
             </li>
@@ -65,10 +66,10 @@
                 </a>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="OrgDatosInternos.html">Datos internos</a>
-                        <a class="collapse-item" href="OrgAreas.html">Areas</a>
-                        <a class="collapse-item" href="OrgMiembros.html">Miembros</a>
-                        <a class="collapse-item" href="OrgContactos.html">Contactos</a>
+                        <a class="collapse-item" href="/organizacion/datosInternos">Datos internos</a>
+                        <a class="collapse-item" href="/organizacion/areas">Areas</a>
+                        <a class="collapse-item" href="/organizacion/miembros">Miembros</a>
+                        <a class="collapse-item" href="/organizacion/contactos">Contactos</a>
                     </div>
                 </div>
             </li>
@@ -86,10 +87,10 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="OrgDatosDeActividad.html">Datos de actividad</a>
-                        <a class="collapse-item" href="OrgRecorridos.html">Recorridos</a>
-                        <a class="collapse-item" href="OrgReportes.html">Reportes</a>
-                        <a class="collapse-item" href="OrgCalculadora.html">Calcular huella</a>
+                        <a class="collapse-item" href="/organizacion/datosDeActividad">Datos de actividad</a>
+                        <a class="collapse-item" href="/organizacion/recorridos">Recorridos</a>
+                        <a class="collapse-item" href="/organizacion/reportes">Reportes</a>
+                        <a class="collapse-item" href="/organizacion/calcularHuella">Calcular huella</a>
                     </div>
                 </div>
             </li>
@@ -114,7 +115,7 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <div style="display:flex; justify-content: center;align-items: center">
-                        <h2 style="margin: 0 auto;">Recorridos</h2>
+                        <h2 style="margin: 0 auto;">Recorridoss</h2>
                     </div>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -128,7 +129,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="login">
+                                <a class="dropdown-item" href="/login">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cerrar sesión
                                 </a>
