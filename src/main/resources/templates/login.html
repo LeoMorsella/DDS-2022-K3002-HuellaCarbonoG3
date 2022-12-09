@@ -106,9 +106,7 @@
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Ingreso agentes sectoriales</h1>
                                         </div>
-
-                                        <form class="user"  th:action="@{/AS/recomendaciones}" method="get" name="form_agente">
-
+                                        <form class="user"  th:action="@{/loginAgente}" method="post" name="form_agente">
                                             <div class="form-group">
                                                 <input type="email" class="form-control form-control-user"
                                                     id="mail-agente-sectorial"   aria-describedby="emailHelp"
@@ -119,10 +117,8 @@
                                                     id="contraseña-agente-sectorial"  name="password"
                                                     placeholder="Ingrese su contraseña">
                                             </div>
-
                                             <button href="#"
                                                 class="btn btn-primary btn-user btn-block">
-
                                                 Iniciar sesión
                                             </button>
                                         </form>

@@ -22,11 +22,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
                 .antMatcher("/login")
                 .authorizeRequests()
                 .antMatchers("/miembro/**").permitAll()
-                .antMatchers("/datosPersonas").permitAll()
+                .antMatchers("/miembro/datosPersonales").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -49,8 +49,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.
-                    antMatcher("/loginOrganizacion").authorizeRequests()
+            http.csrf().disable()
+                    .antMatcher("/loginOrganizacion").authorizeRequests()
                     .antMatchers(resources).permitAll()
                     .antMatchers("/organizacion/recomendaciones").permitAll()
                     .and()
@@ -69,8 +69,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         }
 
     @Configuration
-    @Order(100)
-    public static class WebSecurityConfigAgente extends WebSecurityConfigurerAdapter {
+    @Order(3)
+    public  class WebSecurityConfigAgente extends WebSecurityConfigurerAdapter {
 
         String[] resources = new String[]{
                 "/include/**", "/css/**", "/icons/**", "/img/**", "/js/**", "/layer/**", "/static/**"
@@ -78,8 +78,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.
-                    antMatcher("/loginAgente").authorizeRequests()
+            http.csrf().disable()
+                    .antMatcher("/loginAgente").authorizeRequests()
                     .antMatchers(resources).permitAll()
                     .antMatchers("/AS/recomendaciones").permitAll()
                     .and()
