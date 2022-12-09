@@ -14,24 +14,19 @@ import utn.frba.huelladecarbono.service.IUsuarioService;
 
 @Configuration
 @Order(1)
-@EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     String[] resources = new String[]{
-            "/include/**","/css/**","/icons/**","/img/**","/js/**","/layer/**","/static/**"
+            "/include/**", "/css/**", "/icons/**", "/img/**", "/js/**", "/layer/**", "/static/**"
     };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers(resources).permitAll()
-                .antMatchers("/static/css/**").permitAll()
-                .antMatchers("/","/index").permitAll()
-                .antMatchers("/{id}/areas").permitAll()
-                .antMatchers("/login").permitAll()
+        http
+                .antMatcher("/login")
+                .authorizeRequests()
                 .antMatchers("/miembro/**").permitAll()
-                .antMatchers("/ubicacion/**").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/datosPersonas").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -44,17 +39,73 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .logoutSuccessUrl("/login?logout");
     }
 
+    @Configuration
+    @Order(2)
+    public class WebSecurityConfigOrg extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    IUsuarioService userDetailsService;
+        String[] resources = new String[]{
+                "/include/**", "/css/**", "/icons/**", "/img/**", "/js/**", "/layer/**", "/static/**"
+        };
 
-    //Registra el service para usuarios y el encriptador de contrasenaº
-    @Autowired
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http.
+                    antMatcher("/loginOrganizacion").authorizeRequests()
+                    .antMatchers(resources).permitAll()
+                    .antMatchers("/organizacion/recomendaciones").permitAll()
+                    .and()
+                    .formLogin()
+                    .loginPage("/loginOrganizacion")
+                    .permitAll()
+                    .defaultSuccessUrl("/organizacion/recomendaciones")
+                    .failureUrl("/login?error=true")
+                    .and()
+                    .logout()
+                    .permitAll()
+                    .logoutSuccessUrl("/login?logout");
+        }
 
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(NoOpPasswordEncoder.getInstance());
-    }
+
+        }
+
+    @Configuration
+    @Order(100)
+    public static class WebSecurityConfigAgente extends WebSecurityConfigurerAdapter {
+
+        String[] resources = new String[]{
+                "/include/**", "/css/**", "/icons/**", "/img/**", "/js/**", "/layer/**", "/static/**"
+        };
+
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http.
+                    antMatcher("/loginAgente").authorizeRequests()
+                    .antMatchers(resources).permitAll()
+                    .antMatchers("/AS/recomendaciones").permitAll()
+                    .and()
+                    .formLogin()
+                    .loginPage("/loginAgente")
+                    .permitAll()
+                    .defaultSuccessUrl("/AS/recomendaciones")
+                    .failureUrl("/login?error=true")
+                    .and()
+                    .logout()
+                    .permitAll()
+                    .logoutSuccessUrl("/login?logout");
+        }
+
+
+        }
+        @Autowired
+        IUsuarioService userDetailsService;
+
+        //Registra el service para usuarios y el encriptador de contrasenaº
+        @Autowired
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+            auth
+                    .userDetailsService(userDetailsService)
+                    .passwordEncoder(NoOpPasswordEncoder.getInstance());
+        }
 
 }
