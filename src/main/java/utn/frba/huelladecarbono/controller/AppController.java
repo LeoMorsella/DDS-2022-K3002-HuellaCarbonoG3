@@ -9,34 +9,22 @@ import utn.frba.huelladecarbono.service.HandleBars;
 public class AppController {
 
     private Handlebars handlebars = HandleBars.getHandleBars();
-<<<<<<< HEAD
     @GetMapping({"/login", "/", "/index"})
     public String login() {return "login";}
 
     //Rutas de vistas de miembro
-=======
-    @GetMapping({"/login", ""})
-    public String login() {return "login";}
 
     @GetMapping({"/loginOrganizacion"})
     public String loginOrganizacion() {return "login";}
 
->>>>>>> a407babbae8d965fe7d10505ddfc8fbced400e7e
 
     // MIEMBRO
 
-<<<<<<< HEAD
     @GetMapping({"calcularHuella", "calcularHuella.html"})
     public String calcularHuellaM() {
         return "MiembroCalculadora";
     }
-
-    @GetMapping({"/datosPersonales", "/miembro/datos-personales.html"})
-=======
-    @GetMapping("/miembro/calcularHuella")
-    public String calcularHuellaM() {return "MiembroCalculadora";}
     @GetMapping("/miembro/datosPersonales")
->>>>>>> a407babbae8d965fe7d10505ddfc8fbced400e7e
     public String datosPersonalesM(){return "MiembroDatosPersonales";}
 
     @GetMapping("/miembro/organizaciones")
