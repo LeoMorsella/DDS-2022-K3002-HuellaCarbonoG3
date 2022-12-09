@@ -285,7 +285,7 @@
         created() {
             const urlParams = new URLSearchParams(window.location.search);
 
-            fetch('http://localhost:8080/miembros/1')
+            fetch('http://localhost:8080/miembro/1')
                 .then(response => response.json())
                 .then(miembroObtenido => {
                     this.miembro = miembroObtenido
@@ -300,7 +300,7 @@
             miembros: []
         },
         created () {
-            fetch('http://localhost:8080/miembros')
+            fetch('http://localhost:8080/miembro/')
                 .then(response => response.json())
                 .then(data => {
                     this.miembros = data

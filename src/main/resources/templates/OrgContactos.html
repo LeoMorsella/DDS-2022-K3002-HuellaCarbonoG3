@@ -286,7 +286,7 @@
                 contactos: []
             },
             created() {
-                fetch('http://localhost:8080/organizaciones/2/contactosWp')
+                fetch('http://localhost:8080/organizaciones/1/contactosWp')
                     .then(response => response.json())
                     .then(data => {
                         this.contactos = data
@@ -301,7 +301,7 @@
                 contactos: []
             },
             created() {
-                fetch('http://localhost:8080/organizaciones/2/contactosMail')
+                fetch('http://localhost:8080/organizaciones/1/contactosMail')
                     .then(response => response.json())
                     .then(data => {
                         this.contactos = data
