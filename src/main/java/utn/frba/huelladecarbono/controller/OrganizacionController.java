@@ -1,5 +1,6 @@
 package utn.frba.huelladecarbono.controller;
 
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -10,10 +11,13 @@ import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 import utn.frba.huelladecarbono.service.AreaService;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCOrganizacion;
 import utn.frba.huelladecarbono.service.IAreaService;
 import utn.frba.huelladecarbono.service.IOrganizacionService;
 import utn.frba.huelladecarbono.service.OrganizacionService;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
@@ -128,4 +132,11 @@ public class OrganizacionController {
         organizacionRepository.getById(organizacionId).getArea(areaId).rechazarMiembro(miembro);
     }
 
+    @GetMapping("huellaAreas/{org}/{diaI}/{mesI}/{anioI}/{diaF}/{mesF}/{anioF}/")
+    public Double calcularHuella(@PathVariable Integer org, @PathVariable Integer diaI, @PathVariable Integer mesI, @PathVariable Integer anioI, @PathVariable Integer diaF, @PathVariable Integer mesF, @PathVariable Integer anioF) {
+        LocalDate fechaI = LocalDate.of(anioI, mesI, diaI);
+        LocalDate fechaF = LocalDate.of(anioF, mesF, diaF);
+        Organizacion organizacion = interfazOrganizacion.findOrganizacion(org);
+        return CalculadoraHCOrganizacion.calcularHC(organizacion, fechaI, fechaF);
+    }
 }
