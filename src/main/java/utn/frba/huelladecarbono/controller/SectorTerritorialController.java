@@ -14,7 +14,6 @@ import utn.frba.huelladecarbono.service.ISectorTerritorialService;
 import java.util.List;
 
 @RestController
-//@RequestMapping(path="/api")
 public class SectorTerritorialController {
 
     @Autowired
