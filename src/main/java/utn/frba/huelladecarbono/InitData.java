@@ -89,19 +89,19 @@ public class InitData implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         cargarOrganizaciones();
-        //cargarMiembros();
-    /*    cargarMedioNoMotorizado();
+        cargarMiembros();
+        cargarMedioNoMotorizado();
         cargarMedioMotorizado();
         cargarUsuarios();
-      /*  cargarRecorridos();
+        cargarRecorridos();
         cargarSectores();
         cargarParadas();
         cargarUbicaciones();
         cargarAreas();
         cargarTrayectos();
         cargarTransportePublico();
-        actualizarOrganizacion();
-        darDeBajaOrganizacion();*/
+        //actualizarOrganizacion();
+        darDeBajaOrganizacion();
 
 
 
