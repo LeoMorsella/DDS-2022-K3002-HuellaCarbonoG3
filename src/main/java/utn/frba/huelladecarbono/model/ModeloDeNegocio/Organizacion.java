@@ -305,4 +305,8 @@ public class Organizacion {
     public void aceptarMiembro() {
 
     }
+
+    public void ponerOrgDentroDeAreasEnNull() {
+        areas.stream().forEach(area -> area.setOrganizacion(null));
+    }
 }

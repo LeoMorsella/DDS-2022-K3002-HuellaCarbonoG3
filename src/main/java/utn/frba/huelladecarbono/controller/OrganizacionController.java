@@ -51,7 +51,12 @@ public class OrganizacionController {
     //Endpoint para obtener a todos las organizaciones
     @GetMapping({"/", ""})
     public List<Organizacion> getOrganizaciones(){
-        return interfazOrganizacion.getOrganizaciones();
+       //obtener organizaciones, modificar las areas y setear la organizacion en null
+        List<Organizacion> organizaciones = interfazOrganizacion.getOrganizaciones();
+        for (Organizacion organizacion : organizaciones) {
+            organizacion.ponerOrgDentroDeAreasEnNull();
+        }
+        return organizaciones;
     }
 
     @GetMapping("/{id}")
