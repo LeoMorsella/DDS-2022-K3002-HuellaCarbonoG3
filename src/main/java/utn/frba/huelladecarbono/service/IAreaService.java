@@ -2,8 +2,6 @@ package utn.frba.huelladecarbono.service;
 
 import net.minidev.json.parser.ParseException;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
-import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
-
 import java.util.List;
 
 public interface IAreaService {

@@ -35,7 +35,6 @@ public class AreaController {
     public List<Area> getAreas(){
         return interfazArea.getAreas();
     }
-
     @GetMapping("/areas/byOrg/{idOrg}")
     public List<Area> getAreasByOrg(@PathVariable String idOrg) {
         return interfazArea.findByOrganizacion(idOrg);
