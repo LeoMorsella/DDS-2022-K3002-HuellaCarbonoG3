@@ -1,7 +1,14 @@
 package utn.frba.huelladecarbono.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
+import net.minidev.json.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import utn.frba.huelladecarbono.model.CalculoDeDistancias.Localidad;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
@@ -40,15 +47,16 @@ public class MiembroService implements IMiembroService {
         return miembro;
     }
 
-    public Miembro modificarMiembro(Integer id, Miembro miembro){
+    public Miembro modificarMiembro(Integer id, String miembroJson) throws JsonProcessingException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONObject jObject  = (JSONObject) parser.parse(miembroJson);// json
         Miembro miembroActualizado = this.findMiembro(id);
-        miembroActualizado.setNombre(miembro.getNombre());
-        miembroActualizado.setApellido(miembro.getApellido());
-        miembroActualizado.setTipoDoc(miembro.getTipoDoc());
-        miembroActualizado.setAreas(miembro.getAreas());
-        miembroActualizado.setMail(miembro.getMail());
-        miembroActualizado.setTelefono(miembro.getTelefono());
-        miembroActualizado.setEstaActivo(miembro.getEstaActivo());
+        miembroActualizado.setNombre((String) jObject.get("nombre"));
+        miembroActualizado.setApellido((String) jObject.get("apellido"));
+        miembroActualizado.setTipoDoc((String) jObject.get("tipoDoc"));
+        miembroActualizado.setNumDoc(Integer.parseInt((String) jObject.get("numDoc")));
+        miembroActualizado.setMail((String) jObject.get("email"));
+        miembroActualizado.setTelefono((String) jObject.get("telefono"));
         this.saveMiembro(miembroActualizado);
         return miembroActualizado;
 

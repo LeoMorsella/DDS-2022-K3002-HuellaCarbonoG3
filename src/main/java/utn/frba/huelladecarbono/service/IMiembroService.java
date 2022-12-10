@@ -1,6 +1,8 @@
 package utn.frba.huelladecarbono.service;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import net.minidev.json.parser.ParseException;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 
@@ -22,7 +24,7 @@ public interface IMiembroService {
     public Miembro findMiembro(Integer id);
 
     //Metodo para actualizar la informacion de un miembro
-    public Miembro modificarMiembro(Integer id, Miembro miembro);
+    public Miembro modificarMiembro(Integer id, String miembroJson) throws JsonProcessingException, ParseException;
 
     void cambiarEstadoMiembro(Integer id);
 

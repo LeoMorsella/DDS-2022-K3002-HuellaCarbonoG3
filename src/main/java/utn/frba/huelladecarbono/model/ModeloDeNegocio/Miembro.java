@@ -72,13 +72,13 @@ public class Miembro {
         this.estaActivo = estaActivo;
     }
 
-    public Miembro(Integer id, Area area, String nombre, String apellido, String mail, String telefono,Boolean estaActivo) {
-        this.id = id;
+    public Miembro( Area area, String nombre, String apellido, String mail, String telefono,Boolean estaActivo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
         this.telefono = telefono;
         this.estaActivo = estaActivo;
+        this.areas = new ArrayList<>();
         this.areas.add(area);
     }
 

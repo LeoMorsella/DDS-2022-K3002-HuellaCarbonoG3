@@ -108,8 +108,8 @@ public class CreadorDeObjetos {
         return miembro;
     }
 
-    public  Miembro crearMiembro(int id,Area area, String nombre, String apellido, String mail, String telefono, Boolean estaActivo) {
-        Miembro miembro = new Miembro(id,area, nombre,apellido,mail,telefono,estaActivo);
+    public  Miembro crearMiembro(Area area, String nombre, String apellido, String mail, String telefono, Boolean estaActivo) {
+        Miembro miembro = new Miembro(area, nombre,apellido,mail,telefono,estaActivo);
         repoMiembros.save(miembro);
         repositorioMiembrosEnMemoria.agregarMiembro(miembro);
         return miembro;

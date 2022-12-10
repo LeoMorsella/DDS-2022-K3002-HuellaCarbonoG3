@@ -121,48 +121,48 @@
                     <!-- Page Heading -->
                     <div class="card o-hidden border-0 shadow-lg my-5 col-lg-6" style="margin: 0 auto">
                         <div class="card-body">
-                            <form>
+                            <form id="datosMiembro" action="" method="">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label for="nombre">Nombre</label>
                                         <input type="text" class="form-control form-control-user" id="nombre"
-                                            placeholder="Nombre" value="Elon">
+                                            :placeholder="nombre" v-model="nombre">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="apellido">Apellido</label>
                                         <input type="text" class="form-control form-control-user" id="apellido"
-                                            placeholder="Apellido" value="Musk">
+                                            placeholder="Apellido" v-model="apellido">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-2 mb-3 mb-sm-0">
                                         <label for="tipo">Tipo</label>
-                                        <select id="tipo" name="dataTable_length" aria-controls="dataTable"
+                                        <select v-model="tipoDoc" id="tipo" name="dataTable_length" aria-controls="dataTable"
                                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                                             <option value="DNI" selected>DNI</option>
                                             <option value="LC">LC</option>
                                             <option value="LE">LE</option>
-                                            <option value="DNI">CI</option>
+                                            <option value="CI">CI</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-10">
                                         <label for="documento">Documento</label>
                                         <input type="text" class="form-control form-control-user" id="documento"
-                                            placeholder="Número de documento" value="45975625">
+                                            placeholder="Número de documento" v-model="numDoc">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="mail">Mail</label>
                                     <input type="email" class="form-control form-control-user" id="mail"
-                                        placeholder="Mail" value="elonmusk@gmail.com">
+                                        placeholder="Mail" v-model="email">
                                 </div>
                                 <div class="form-group">
                                     <label for="telefono">Teléfono</label>
                                     <input type="tel" class="form-control form-control-user" id="telefono"
-                                        placeholder="Teléfono" value="1156487521">
+                                        placeholder="Teléfono" v-model="telefono">
                                 </div>
                                 <br>
-                                <div style="text-align: center;">
+                                <div @click="actualizarDatos()" style="text-align: center;">
                                     <a href="#" class="btn btn-primary btn-user">
                                         Guardar
                                     </a>
@@ -211,13 +211,43 @@
     let app = new Vue({
         el: "#wrapper",
         data:{
-            datosMiembro: null
+            nombre: null,
+            apellido: null,
+            tipoDoc: null,
+            numDoc: null,
+            email: null,
+            telefono: null
             },
+        methods:{
+            actualizarDatos: function() {
+                let nuevosDatosMiembro = {
+                    nombre: this.nombre,
+                    apellido: this.apellido,
+                    tipoDoc: this.tipoDoc,
+                    numDoc: this.numDoc,
+                    email: this.email,
+                    telefono: this.telefono
+                }
+                let response = fetch('http://localhost:8080/miembro/editar/1', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(nuevosDatosMiembro)
+                });
+               alert("Datos actualizados.");
+            }
+        },
         created () {
-            fetch('http://localhost:8080/miembros/1')
+            fetch('http://localhost:8080/miembro/1')
                 .then(response => response.json())
                 .then(data => {
-                    this.datosMiembro = data;
+                    this.nombre = data.nombre;
+                    this.apellido = data.apellido;
+                    this.tipoDoc = data.tipoDoc;
+                    this.numDoc = data.numDoc;
+                    this.email = data.mail;
+                    this.telefono = data.telefono;
                 })
             }
         })

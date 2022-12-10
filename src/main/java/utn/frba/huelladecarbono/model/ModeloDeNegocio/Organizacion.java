@@ -300,5 +300,7 @@ public class Organizacion {
         this.id = i;
     }
 
+    public void aceptarMiembro() {
 
+    }
 }

@@ -245,7 +245,7 @@
                 areas: []
             },
             created() {
-                fetch('http://localhost:8080/organizaciones/1')
+                fetch('http://localhost:8080/organizaciones/1/')
                     .then(response => response.json())
                     .then(data => {
                         this.areas = data.areas

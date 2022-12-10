@@ -23,6 +23,14 @@ public class RepositorioMiembros {
     this.miembros = new ArrayList<>();
   }
 
+  public static RepositorioMiembros getRepositorio() {
+    if(instance == null) {
+      instance = new RepositorioMiembros();
+      instance.setMiembros(new ArrayList<>());
+    }
+    return instance;
+  }
+
   public List<Miembro> getMiembros() {
     return miembros;
   }
@@ -31,12 +39,9 @@ public class RepositorioMiembros {
     this.miembros = miembros;
   }
 
-  public static RepositorioMiembros getRepositorio() {
-    return instance;
-  }
 
   public void agregarMiembro(Miembro miem){
-    this.miembros.add(miem);
+    this.getRepositorio().getMiembros().add(miem);
   }
 
   public Miembro findMiembro(Integer id){

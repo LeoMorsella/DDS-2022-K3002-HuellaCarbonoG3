@@ -37,7 +37,7 @@ public class RepositorioOrganizaciones {
   }
 
   public void agregarOrganizacion(Organizacion org){
-    this.organizaciones.add(org);
+    this.getRepositorio().organizaciones.add(org);
   }
 
 
@@ -59,7 +59,7 @@ public class RepositorioOrganizaciones {
    }
 
   public Organizacion findOrganizacion(Integer id){
-    return this.getOrganizaciones().stream()
+    return this.organizacionesActivas().stream()
             .filter(organizacion -> organizacion.getId() == id)
             .collect(Collectors.toList())
             .get(0);

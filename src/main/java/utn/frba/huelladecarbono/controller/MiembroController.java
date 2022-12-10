@@ -43,7 +43,7 @@ public class MiembroController {
         return "El miembro fue creado correctamente";
     }
 
-    @PatchMapping("/editar/{id}")
+    @PatchMapping("/editarEstado/{id}")
     public Miembro cambiarEstadoMiembro(@PathVariable Integer id){
         interfazMiembro.cambiarEstadoMiembro(id);
         Miembro miembro = interfazMiembro.findMiembro(id);
@@ -51,7 +51,7 @@ public class MiembroController {
     }
     //Endpoint para modificar a un usuario
     @PutMapping("/editar/{id}")
-    public Miembro actualizarMiembro(@PathVariable Integer id, @RequestBody Miembro miembro) throws Exception {
+    public Miembro actualizarMiembro(@PathVariable Integer id, @RequestBody String miembro) throws Exception {
         return interfazMiembro.modificarMiembro(id,miembro);
     }
 

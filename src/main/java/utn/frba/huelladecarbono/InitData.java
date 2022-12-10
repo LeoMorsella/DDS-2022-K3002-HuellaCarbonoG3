@@ -88,10 +88,10 @@ public class InitData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        //cargarMiembros();
     /*    cargarMedioNoMotorizado();
         cargarMedioMotorizado();
         cargarOrganizaciones();
-       // cargarMiembros();
         cargarUsuarios();
       /*  cargarRecorridos();
         cargarSectores();
@@ -267,11 +267,12 @@ public class InitData implements CommandLineRunner {
     public void cargarMiembros() throws Exception
     {
         config.exposeIdsFor(Miembro.class);
-        if(repoMiembros.count() == 0) {
+        //repoMiembros.count() == 0
+        if(true) {
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
             Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
-            Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro(20, area1,"Pablo","Ortiz","pablo@prueba","2323",true);
-            Miembro miembroPruebaDos = creadorDeObjetos.crearMiembro(25, area1,"Juan","Ortiz","juan@prueba","2353",true);
+            Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro( area1,"Pablo","Ortiz","pablo@prueba","2323",true);
+            Miembro miembroPruebaDos = creadorDeObjetos.crearMiembro(area1,"Juan","Ortiz","juan@prueba","2353",true);
         }
         else{
             System.out.println("Ya existen Miembros creados anteriormente");
