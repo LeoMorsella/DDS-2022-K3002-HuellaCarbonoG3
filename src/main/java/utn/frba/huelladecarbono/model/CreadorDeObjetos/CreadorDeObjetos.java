@@ -180,4 +180,9 @@ public class CreadorDeObjetos {
         return medio;
     }
 
+    public SectorTerritorial crearSectorTerritorial(SectorTerritorial sector) {
+        repoSectorTerritorial.save(sector);
+        return sector;
+    }
+
 }

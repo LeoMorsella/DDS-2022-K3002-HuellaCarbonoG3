@@ -26,8 +26,11 @@ public class SectorTerritorial {
     @OneToOne
     private AgenteSectorial agenteSectorial;
 
-    public SectorTerritorial(AgenteSectorial agenteSectorial) {
+    public SectorTerritorial(AgenteSectorial agenteSectorial, String municipio, String provincia) {
         this.agenteSectorial = agenteSectorial;
+        this.municipio = municipio;
+        this.provincia = provincia;
+        this.huellaCarbono = 0.0;
     }
 
     private List<Organizacion> generarOrganizacionesPorCriterio(List<Organizacion> organizacionesTotales, Object criterioUbicacion) {

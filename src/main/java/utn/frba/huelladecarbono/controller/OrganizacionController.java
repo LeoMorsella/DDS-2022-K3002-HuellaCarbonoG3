@@ -156,6 +156,7 @@ public class OrganizacionController {
     }
 
     //PARA HANDLEBAR - REPORTES
+    @GetMapping("/HCSectores")
     public List<HCInforme> HCSectores() {
         List<HCInforme> res = new ArrayList<>();
         List<SectorTerritorial> sectores = stc.getSectorTerritorial();
@@ -166,6 +167,7 @@ public class OrganizacionController {
         return res;
     }
 
+    @GetMapping("/HCTipoOrg")
     public List<HCInforme> HCTipoOrg() {
         List<TipoOrg> tipos = Arrays.stream(TipoOrg.values()).toList();
         List<HCInforme> res = new ArrayList<>();

@@ -77,6 +77,9 @@ public class InitData implements CommandLineRunner {
     TrayectoRepository repoTrayectos;
 
     @Autowired
+    SectorTerritorialRepository repoSectorTerritorial;
+
+    @Autowired
     RepositoryRestConfiguration config;
 
     @Autowired
@@ -87,21 +90,22 @@ public class InitData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-//        cargarOrganizaciones();
-  //      cargarMiembros();
-    //    cargarMedioNoMotorizado();
-      //  cargarMedioMotorizado();
-       // cargarUsuarios();
-        //cargarRecorridos();
-        //cargarSectores();
-       // cargarParadas();
-       // cargarUbicaciones();
-        //cargarAreas();
-        //cargarTrayectos();
-        //cargarTransportePublico();
-        //actualizarOrganizacion();
-        //darDeBajaOrganizacion();
+        /*
+        cargarOrganizaciones();
+        cargarMiembros();
+        cargarMedioNoMotorizado();
+        cargarMedioMotorizado();
+        cargarUsuarios();
+        cargarRecorridos();
+        cargarSectores();
+        cargarParadas();
+        cargarUbicaciones();
+        cargarAreas();
+        cargarTrayectos();
+        cargarTransportePublico();
+        darDeBajaOrganizacion();
+         */
+        cargarSectoresTerritoriales();
 
 
 
@@ -319,6 +323,15 @@ public class InitData implements CommandLineRunner {
         organizacionController.deleteOrganizacion(3);
     }
 
+    public void cargarSectoresTerritoriales() {
+        if(true) {
+           creadorDeObjetos.crearSectorTerritorial(new SectorTerritorial(null, null, "BUENOS AIRES"));
+           creadorDeObjetos.crearSectorTerritorial(new SectorTerritorial(null, null, "FORMOSA"));
+           creadorDeObjetos.crearSectorTerritorial(new SectorTerritorial(null, null, "CHACO"));
+           creadorDeObjetos.crearSectorTerritorial(new SectorTerritorial(null, null, "SALTA"));
+           creadorDeObjetos.crearSectorTerritorial(new SectorTerritorial(null, "MONTECARLO", "MISIONES"));
+        }
+    }
 
 }
 
