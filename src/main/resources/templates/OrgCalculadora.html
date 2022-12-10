@@ -144,12 +144,12 @@
                         <div class="card-body">
                             <form action="">
                                 <label for="m-fecha-inicio">Fecha de inicio</label>
-                                <input type="date" name="" id="m-fecha-inicio" class="form-control form-control-user">
+                                <input v-model="fechaInit" type="date" name="" id="m-fecha-inicio" class="form-control form-control-user">
                                 <br>
                                 <label for="m-fecha-fin">Fecha de fin</label>
-                                <input type="date" name="" id="m-fecha-fin" class="form-control form-control-user">
+                                <input v-model="fechaFin" type="date" name="" id="m-fecha-fin" class="form-control form-control-user">
                                 <br>
-                                <div style="text-align: center;">
+                                <div @click="calcularHuella()" style="text-align: center;">
                                     <button type="button" class="btn btn-primary">
                                         Calcular
                                     </button>
@@ -157,12 +157,11 @@
                             </form>
                             <br>
                             <div>
-                                <p>La huella de carbono total:</p>
+                                <p>La huella de carbono total: {{huellaTotal}}</p>
                                 <p>La huella de carbono por áreas es:</p>
-                                <p class="res-area">- Dirección:</p>
-                                <p class="res-area">- Administración:</p>
-                                <p class="res-area">- Recursos Humanos:</p>
-                                <p class="res-area">- Marketing:</p>
+                                <p v-for="area in huellaPorAreas" class="res-area">
+                                    {{area.nombre}}: {{area.hc}}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -206,41 +205,49 @@
 
     <script>
         var app = new Vue({
-            el: "#appVue",
+            el: "#wrapper",
             data: {
                 areas: null,
-                nombreNuevo: null
+                fechaInit: null,
+                fechaFin: null,
+                diaInit: null,
+                mesInit: null,
+                anioInit: null,
+                diaFin: null,
+                mesFin: null,
+                anioFin: null,
+                huellaTotal: 1,
+                huellaPorAreas: [
+                    {
+                        nombre: "direccion",
+                        hc: 50
+                    },
+                    {
+                        nombre: "sistemas",
+                        hc: 150
+                    }
+                ]
             },
             methods:{
-                agregarArea: function() {
-                    console.log("hola");
-                    let nuevosDatosArea = {
-                        nombre: this.nombreNuevo,
-                        //aca iría el id de la organizacion logueada
-                        id: "1",
-                    };
-                    let response = fetch('http://localhost:8080/area/crear', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json;charset=utf-8'
-                        },
-                        body: JSON.stringify(nuevosDatosArea)
-                    });
-                    alert("Area creada.");
+                calcularHuella: function() {
+                    let fechainit = this.fechaInit.value();
+                    let fechafin = this.fechaFin.value();
+                    let diaInit = fechainit.substring(0,1);
+                    let mesInit= fechainit.substring(3,4);
+                    let anioInit= fechainit.substring(6,9);
+                    let diaFin = fechafin.substring(0,1);
+                    let mesFin= fechafin.substring(3,4);
+                    let anioFin= fechafin.substring(6,9);
+
+                    fetch('/calcularHuella/1/'+diaInit+'/'+mesInit+'/'+anioInit+'/'+diaFin+'/'+mesInit+'/'+anioInit+'/')
+                        .then(response => response.json())
+                        .then(data => this.huellaTotal = data.huella);
+                   // fetch('/calcularHuella/1/'+fechaInit+'/'+fechaFin).
+                   // then(response => response.json())
+                     //   .then(data => this.huellaPorAreas = data)
                 },
-                borrarArea: function(idArea) {
-                    fetch('http://localhost:8080/area/eliminar/'+idArea, {
-                        method: 'GET',
-                    });
-                    alert("Area Eliminada.");
-                }
             },
             created() {
-                fetch('http://localhost:8080/areas/byOrg/1')
-                    .then(response => response.json())
-                    .then(data => {
-                        this.areas = data
-                    })
             }
         })
     </script>

@@ -281,7 +281,7 @@ public class InitData implements CommandLineRunner {
     public void cargarOrganizaciones() throws Exception
     {
         config.exposeIdsFor(Organizacion.class);
-        if(repoOrganizacion.count()==0){
+        if(true){
 
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
             Organizacion organizacion2 = creadorDeObjetos.crearOrganizacion("SRA", TipoOrg.GUBERNAMENTAL, Clasificacion.EMPRESA_SECTOR_PRIMARIO, null, null, false);
@@ -290,7 +290,6 @@ public class InitData implements CommandLineRunner {
             Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
             ArrayList<Double> listaHCPrueba = new ArrayList<>();
             Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
-            organizacion1.setArea(area1);
             organizacion1.setUbicacion(ubicacionPruebaUno);
             listaHCPrueba.add(100.00);
             HuellaCarbono huellaPrueba = new HuellaCarbono(Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021), 250.00);

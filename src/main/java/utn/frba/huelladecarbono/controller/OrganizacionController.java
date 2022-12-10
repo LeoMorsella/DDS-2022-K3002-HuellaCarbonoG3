@@ -10,10 +10,13 @@ import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 import utn.frba.huelladecarbono.service.AreaService;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCMiembro;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCOrganizacion;
 import utn.frba.huelladecarbono.service.IAreaService;
 import utn.frba.huelladecarbono.service.IOrganizacionService;
 import utn.frba.huelladecarbono.service.OrganizacionService;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
@@ -128,4 +131,15 @@ public class OrganizacionController {
         organizacionRepository.getById(organizacionId).getArea(areaId).rechazarMiembro(miembro);
     }
 
+    @GetMapping("/calcularHuella/{orgId}")
+    public Double calcularHuella(@PathVariable Integer orgId, @RequestBody LocalDate fechaInicio, @RequestBody LocalDate fechaFin) throws Exception {
+        Double huella = CalculadoraHCOrganizacion.calcularHC(interfazOrganizacion.findOrganizacion(orgId), fechaInicio, fechaFin);
+        return huella;
+    }
+
+    //@GetMapping("/calcularHuellaPorOrg/{orgId}/{diaInit}/{mesInit}/{anioInit}/{diaFin}/'+mesInit+'/'+anioInit+'/'")
+    //public Double calcularHuellaPorOrg(@PathVariable Integer orgId, @PathVariable LocalDate fechaInicio, @PathVariable LocalDate fechaFin) throws Exception {
+      //  Double huella = CalculadoraHCOrganizacion.calcularHC(interfazOrganizacion.findOrganizacion(orgId), fechaInicio, fechaFin);
+       // return huella;
+    // }
 }

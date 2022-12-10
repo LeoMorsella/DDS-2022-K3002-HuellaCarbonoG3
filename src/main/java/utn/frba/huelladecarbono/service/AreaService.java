@@ -58,6 +58,7 @@ public class AreaService implements IAreaService {
         Integer organizacionID = Integer.parseInt((String) jObject.get("id"));
         Organizacion orgTemp = organizacionRepository.findById(organizacionID).get();
         Area areaMapeado = new Area(nombre, orgTemp);
+        orgTemp.setAreas(null);
         areaRepository.save(areaMapeado);
     }
 
