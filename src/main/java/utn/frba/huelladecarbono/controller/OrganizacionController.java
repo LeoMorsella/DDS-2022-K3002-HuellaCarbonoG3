@@ -41,6 +41,12 @@ public class OrganizacionController {
     @Autowired
     private  AreaService areaService;
 
+    @Autowired
+    private SectorTerritorialController stc;
+
+    @Autowired
+    private UbicacionController uc;
+
 
     //Endpoint para obtener a todos las organizaciones
     @GetMapping({"/", ""})
@@ -147,7 +153,6 @@ public class OrganizacionController {
     //PARA HANDLEBAR - REPORTES
     public List<HCInforme> HCSectores() {
         List<HCInforme> res = new ArrayList<>();
-        SectorTerritorialController stc = new SectorTerritorialController();
         List<SectorTerritorial> sectores = stc.getSectorTerritorial();
         for (SectorTerritorial sector : sectores) {
             Double hc = CalculadoraHCService.getCalculadoraHC().calcularHCSectorTerritorial(sector, LocalDate.of(LocalDate.EPOCH.getYear(), 1,1), LocalDate.of(LocalDate.EPOCH.getYear(), 12,31));
@@ -171,7 +176,6 @@ public class OrganizacionController {
     }
 
     public List<HCInforme> HCProvincia() throws IOException {
-        UbicacionController uc = new UbicacionController();
         List<Provincia> provincias = Arrays.stream(uc.getProvincias(9)).toList();
         List<HCInforme> res = new ArrayList<>();
         //get the total hc of the province and add it to the list

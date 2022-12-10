@@ -88,20 +88,20 @@ public class InitData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        cargarOrganizaciones();
-        cargarMiembros();
-        cargarMedioNoMotorizado();
-        cargarMedioMotorizado();
-        cargarUsuarios();
-        cargarRecorridos();
-        cargarSectores();
-        cargarParadas();
-        cargarUbicaciones();
-        cargarAreas();
-        cargarTrayectos();
-        cargarTransportePublico();
+//        cargarOrganizaciones();
+  //      cargarMiembros();
+    //    cargarMedioNoMotorizado();
+      //  cargarMedioMotorizado();
+       // cargarUsuarios();
+        //cargarRecorridos();
+        //cargarSectores();
+       // cargarParadas();
+       // cargarUbicaciones();
+        //cargarAreas();
+        //cargarTrayectos();
+        //cargarTransportePublico();
         //actualizarOrganizacion();
-        darDeBajaOrganizacion();
+        //darDeBajaOrganizacion();
 
 
 

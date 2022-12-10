@@ -1,12 +1,24 @@
 package utn.frba.huelladecarbono.controller;
 
 import com.github.jknack.handlebars.Handlebars;
+import com.github.jknack.handlebars.Template;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.HCInforme;
 import utn.frba.huelladecarbono.service.HandleBars;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AppController {
+
+    @Autowired
+     private OrganizacionController orgaCont;
 
     private Handlebars handlebars = HandleBars.getHandleBars();
 
@@ -94,11 +106,28 @@ public class AppController {
     @GetMapping("/organizacion/recomendaciones")
     public String recomendacionesO(){return "OrgRecomendaciones";}
 
+    @GetMapping(value="/organizacion/reportes", produces = MediaType.TEXT_HTML_VALUE)
+    public ResponseEntity<String> reportesO() throws Exception{
+        Template template = handlebars.compile("/templates/OrgReportes");
+
+        List<Object> hcporst = null;
+        List<Object> hcportipoorg = null;
+        List<Object> hcporprovincias = null;
+        List<Object> hcporareas = null;
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("HCporST", hcporst);
+        model.put("HCporTipoOrg", hcportipoorg);
+        model.put("HCporProvincias", hcporprovincias);
+        model.put("HCporAreas", hcporareas);
+
+        String html = template.apply(model);
+
+        return ResponseEntity.status(200).body(html);
+
+    }
     @GetMapping("/organizacion/recorridos")
     public String recorridosO(){return "OrgRecorridos";}
-
-    @GetMapping("/organizacion/reportes")
-    public String reportesO(){return "OrgReportes";}
 
     @GetMapping({"/organizacion/areas"})
     public String orgAreas(){return "OrgAreas";}
@@ -106,8 +135,24 @@ public class AppController {
 
     // AGENTE SECTORIAL
 
-    @GetMapping("/AS/reportes")
-    public String reportesAS(){return "AgenteReportes";}
+    @GetMapping(value="/AS/reportes", produces = MediaType.TEXT_HTML_VALUE)
+    public ResponseEntity<String> reportesAS() throws Exception{
+        Template template = handlebars.compile("/templates/AgenteReportes");
+
+        List<HCInforme> hcporst = orgaCont.HCSectores();
+        List<HCInforme> hcportipoorg = orgaCont.HCTipoOrg();
+        List<HCInforme> hcporprovincias = orgaCont.HCProvincia();
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("HCporST", hcporst);
+        model.put("HCporTipoOrg", hcportipoorg);
+        model.put("HCporProvincias", hcporprovincias);
+
+        String html = template.apply(model);
+
+        return ResponseEntity.status(200).body(html);
+
+    }
 
     @GetMapping("/AS/recomendaciones")
     public String recomendacionesAS(){return "AgenteRecomendaciones";}
