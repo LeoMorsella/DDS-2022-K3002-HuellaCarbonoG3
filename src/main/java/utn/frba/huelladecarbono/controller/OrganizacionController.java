@@ -180,16 +180,19 @@ public class OrganizacionController {
         return res;
     }
 
+    @GetMapping("/HCProvincia")
     public List<HCInforme> HCProvincia() throws IOException {
         List<Provincia> provincias = Arrays.stream(uc.getProvincias(9)).toList();
         List<HCInforme> res = new ArrayList<>();
-        //get the total hc of the province and add it to the list
+
         for (Provincia provincia : provincias) {
             Double hc = 0.0;
             List<Organizacion> organizaciones = interfazOrganizacion.getOrganizaciones().stream().filter(org -> org.getUbicacion().getProvincia().equals(provincia)).toList();
             for (Organizacion org : organizaciones) {
                 hc += CalculadoraHCService.getCalculadoraHC().calcularHCOrganizacion(org,LocalDate.of(LocalDate.EPOCH.getYear(), 1,1), LocalDate.of(LocalDate.EPOCH.getYear(), 12,31));
             }
+            System.out.println(provincia.getNombre());
+            System.out.println(hc);
             res.add(new HCInforme(provincia.getNombre(), hc));
         }
         return res;
