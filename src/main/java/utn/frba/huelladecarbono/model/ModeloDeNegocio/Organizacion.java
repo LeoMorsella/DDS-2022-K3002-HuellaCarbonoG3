@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Getter @Setter
 @Entity
-
+@Table(name="organizacion")
 public class Organizacion {
     @Transient
     CreadorDeObjetos creadorDeObjetos;
@@ -35,7 +35,7 @@ public class Organizacion {
     private TipoOrg tipo;
     @ManyToOne(cascade = {CascadeType.ALL})
     private Ubicacion ubicacion;
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "organizacion")
     private List<Area> areas = new ArrayList<>();
     @Enumerated(EnumType.STRING)
     private Clasificacion clasificacion;
@@ -48,14 +48,14 @@ public class Organizacion {
     @Column
     private Double hcPromedio;
 
-  /*  @ManyToMany(fetch = FetchType.LAZY,
-         cascade = {
-                 CascadeType.PERSIST,
-                 CascadeType.MERGE
-         })
-    @JoinTable(name = "organizacion_huellaCarbono",
-         joinColumns = { @JoinColumn(name = "organizacion_id") },
-         inverseJoinColumns = { @JoinColumn(name = "huellaCarbono_id") })**/
+    /*  @ManyToMany(fetch = FetchType.LAZY,
+           cascade = {
+                   CascadeType.PERSIST,
+                   CascadeType.MERGE
+           })
+      @JoinTable(name = "organizacion_huellaCarbono",
+           joinColumns = { @JoinColumn(name = "organizacion_id") },
+           inverseJoinColumns = { @JoinColumn(name = "huellaCarbono_id") })**/
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<HuellaCarbono> huellasCarbono = new ArrayList<>();
 
@@ -88,8 +88,8 @@ public class Organizacion {
 
     }
 
-    public Area crearArea(String nombre, Organizacion organizacion, List<ListaDeDatosDeMedicion> mediciones){
-        Area area = creadorDeObjetos.crearArea(nombre, organizacion, mediciones);
+    public Area crearArea(String nombre, List<ListaDeDatosDeMedicion> mediciones){
+        Area area = creadorDeObjetos.crearArea(nombre, this);
         this.areas.add(area);
         return area;
     }
@@ -263,10 +263,10 @@ public class Organizacion {
 
     public double getHuellaTotal(){
         if(this.huellaCarbono == null){
-        Double huellaCTotal = this.huellasCarbono.stream()
-                .map(huellaCarbono -> huellaCarbono.getHuella())
-                .collect(Collectors.summingDouble(Double::doubleValue));
-        this.huellaCarbono = huellaCTotal;
+            Double huellaCTotal = this.huellasCarbono.stream()
+                    .map(huellaCarbono -> huellaCarbono.getHuella())
+                    .collect(Collectors.summingDouble(Double::doubleValue));
+            this.huellaCarbono = huellaCTotal;
         }
         return this.huellaCarbono;
     }
@@ -309,4 +309,6 @@ public class Organizacion {
     public void ponerOrgDentroDeAreasEnNull() {
         areas.stream().forEach(area -> area.setOrganizacion(null));
     }
+
 }
+

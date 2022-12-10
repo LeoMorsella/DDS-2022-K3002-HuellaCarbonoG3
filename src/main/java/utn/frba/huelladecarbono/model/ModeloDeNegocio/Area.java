@@ -11,6 +11,7 @@ import java.util.List;
 
 @Getter @Setter
 @Entity
+@Table(name="area")
 public class Area {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -21,8 +22,9 @@ public class Area {
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private  List<Miembro> miembrosEnEspera = new ArrayList<>();
     @ManyToOne
-    private  Organizacion organizacion;
-    @OneToMany
+    @JoinColumn (name="organizacion_id",referencedColumnName = "id")
+    Organizacion organizacion;
+    @Transient
     private  List<ListaDeDatosDeMedicion> mediciones = new ArrayList<>();
 
     //Hay que replicar esto en todos los arraylist para el many to many

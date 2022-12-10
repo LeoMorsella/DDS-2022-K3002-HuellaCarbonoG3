@@ -270,16 +270,11 @@ public class InitData implements CommandLineRunner {
 
     public void cargarMiembros() throws Exception
     {
-        config.exposeIdsFor(Miembro.class);
-        if(repoMiembros.count() == 0) {
+
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
-            Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
-            Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro( area1,"Pablo","Ortiz","pablo@prueba","2323",true);
-            Miembro miembroPruebaDos = creadorDeObjetos.crearMiembro(area1,"Juan","Ortiz","juan@prueba","2353",true);
-        }
-        else{
-            System.out.println("Ya existen Miembros creados anteriormente");
-        }
+            Area area1 = creadorDeObjetos.crearArea("AreaPrueba",organizacion1);
+            Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro(area1,"Pablo","Ortiz","pablo@prueba","2323",true);
+            //Miembro miembroPruebaDos = creadorDeObjetos.crearMiembro(area1,"Juan","Ortiz","juan@prueba","23523",true);
     }
 
     public void cargarOrganizaciones() throws Exception
@@ -300,8 +295,8 @@ public class InitData implements CommandLineRunner {
             List<HuellaCarbono> hashMapPrueba = new ArrayList<>();
             hashMapPrueba.add(huellaPrueba);
             Organizacion organizacionConHC = creadorDeObjetos.crearOrganizacionConHC("SA",TipoOrg.INSTITUCION,ubicacionPruebaUno,Clasificacion.EMPRESA_SECTOR_SECUNDARIO,null,null,listaHCPrueba,250.00,hashMapPrueba,500.00,false);
-            Miembro miembroPruebaMail = creadorDeObjetos.crearMiembro(50,"Gonza","D","mail@prueba","5511",true);
-            Miembro miembroPruebaWP = creadorDeObjetos.crearMiembro(50,"Gonza2","D","mail2@prueba","221",true);
+            Miembro miembroPruebaMail = creadorDeObjetos.crearMiembro(null,"Gonza","D","mail@prueba","5511",true);
+            Miembro miembroPruebaWP = creadorDeObjetos.crearMiembro(null,"Gonza2","D","mail2@prueba","221",true);
             organizacion1.agregarContactoWP(miembroPruebaWP);
             organizacion1.agregarContactoMail(miembroPruebaMail);
             RepositorioOrganizaciones.getRepositorio().getOrganizaciones().add(organizacion1);
