@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.HCInforme;
 import utn.frba.huelladecarbono.service.HandleBars;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -115,6 +116,8 @@ public class AppController {
         List<Object> hcporprovincias = null;
         List<Object> hcporareas = null;
 
+
+
         Map<String, Object> model = new HashMap<>();
         model.put("HCporST", hcporst);
         model.put("HCporTipoOrg", hcportipoorg);
@@ -142,6 +145,14 @@ public class AppController {
         List<HCInforme> hcporst = orgaCont.HCSectores();
         List<HCInforme> hcportipoorg = orgaCont.HCTipoOrg();
         List<HCInforme> hcporprovincias = orgaCont.HCProvincia();
+
+        List<HCInforme> listaPruebaST = new ArrayList<>();
+        listaPruebaST.add(new HCInforme("laPampa", 89.88));
+        List<HCInforme> listaPruebaProv = new ArrayList<>();
+        listaPruebaProv.add(new HCInforme("BuenosAires", 922.44));
+
+        hcporst = listaPruebaST;
+        hcporprovincias = listaPruebaProv;
 
         Map<String, Object> model = new HashMap<>();
         model.put("HCporST", hcporst);
