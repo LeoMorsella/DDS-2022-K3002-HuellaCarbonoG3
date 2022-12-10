@@ -105,6 +105,7 @@ public class InitData implements CommandLineRunner {
 
 
 
+
         Usuario usuarioMiembro = new Usuario("pablo@gmail.com","123",Arrays.asList(new Rol("ROLE_USER")));
         usuarioService.saveUsuario(usuarioMiembro);
         Usuario usuarioOrga = new Usuario("pabloOrga@gmail.com","123",Arrays.asList(new Rol("ROLE_ADM")));
@@ -270,13 +271,13 @@ public class InitData implements CommandLineRunner {
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
             Area area1 = creadorDeObjetos.crearArea("AreaPrueba",organizacion1);
             Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro(area1,"Pablo","Ortiz","pablo@prueba","2323",true);
-            Miembro miembroPruebaDos = creadorDeObjetos.crearMiembro(area1,"Juan","Ortiz","juan@prueba","23523",true);
+            //Miembro miembroPruebaDos = creadorDeObjetos.crearMiembro(area1,"Juan","Ortiz","juan@prueba","23523",true);
     }
 
     public void cargarOrganizaciones() throws Exception
     {
         config.exposeIdsFor(Organizacion.class);
-        if(repoOrganizacion.count()==0){
+        if(true){
 
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
             Organizacion organizacion2 = creadorDeObjetos.crearOrganizacion("SRA", TipoOrg.GUBERNAMENTAL, Clasificacion.EMPRESA_SECTOR_PRIMARIO, null, null, false);
@@ -285,7 +286,6 @@ public class InitData implements CommandLineRunner {
             Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
             ArrayList<Double> listaHCPrueba = new ArrayList<>();
             Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
-            organizacion1.setArea(area1);
             organizacion1.setUbicacion(ubicacionPruebaUno);
             listaHCPrueba.add(100.00);
             HuellaCarbono huellaPrueba = new HuellaCarbono(Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021), 250.00);

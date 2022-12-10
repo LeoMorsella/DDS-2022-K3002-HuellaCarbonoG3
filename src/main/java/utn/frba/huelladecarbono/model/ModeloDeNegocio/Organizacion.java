@@ -309,4 +309,6 @@ public class Organizacion {
     public void ponerOrgDentroDeAreasEnNull() {
         areas.stream().forEach(area -> area.setOrganizacion(null));
     }
+
 }
+

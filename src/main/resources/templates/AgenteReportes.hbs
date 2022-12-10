@@ -129,18 +129,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    {{#each HCporST}}
                                         <tr class="odd">
-                                            <td class="sorting_1">Pampeano</td>
-                                            <td>15.6</td>
+                                            <td class="sorting_1">{{nombre}}</td>
+                                            <td>{{valor}}</td>
                                         </tr>
-                                        <tr class="odd">
-                                            <td class="sorting_1">AMBA</td>
-                                            <td>58.4</td>
-                                        <tr class="odd">
-                                            <td class="sorting_1">...</td>
-                                            <td>...</td>
-                                        </tr>
-                                        </tr>
+                                    {{/each}}
                                     </tbody>
                                 </table>
                             </div>
@@ -161,22 +155,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    {{#each HCporTipoOrg}}
                                         <tr class="odd">
-                                            <td class="sorting_1">Gubernamental</td>
-                                            <td>15.6</td>
+                                            <td class="sorting_1">{{nombre}}</td>
+                                            <td>{{valor}}</td>
                                         </tr>
-                                        <tr class="odd">
-                                            <td class="sorting_1">ONG</td>
-                                            <td>58.4</td>
-                                        </tr>
-                                        <tr class="odd">
-                                            <td class="sorting_1">Empresa</td>
-                                            <td>84.4</td>
-                                        </tr>
-                                        <tr class="odd">
-                                            <td class="sorting_1">Institución</td>
-                                            <td>15.4</td>
-                                        </tr>
+                                    {{/each}}
                                     </tbody>
                                 </table>
                             </div>
@@ -197,22 +181,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    {{#each HCporProvincias}}
                                         <tr class="odd">
-                                            <td class="sorting_1">Buenos Aires</td>
-                                            <td>15%</td>
+                                            <td class="sorting_1">{{nombre}}</td>
+                                            <td>{{valor}}</td>
                                         </tr>
-                                        <tr class="odd">
-                                            <td class="sorting_1">CABA</td>
-                                            <td>36%</td>
-                                        </tr>
-                                        <tr class="odd">
-                                            <td class="sorting_1">Catamarca</td>
-                                            <td>12%</td>
-                                        </tr>
-                                        <tr class="odd">
-                                            <td class="sorting_1">...</td>
-                                            <td>...</td>
-                                        </tr>
+                                    {{/each}}
                                     </tbody>
                                 </table>
                             </div>
