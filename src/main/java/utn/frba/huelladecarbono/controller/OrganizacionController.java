@@ -6,6 +6,7 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import utn.frba.huelladecarbono.model.CalculoDeDistancias.Provincia;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
@@ -13,15 +14,16 @@ import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 import utn.frba.huelladecarbono.service.AreaService;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCMiembro;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCOrganizacion;
+import utn.frba.huelladecarbono.repository.SectorTerritorialRepository;
+import utn.frba.huelladecarbono.service.*;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCOrganizacion;
-import utn.frba.huelladecarbono.service.IAreaService;
-import utn.frba.huelladecarbono.service.IOrganizacionService;
-import utn.frba.huelladecarbono.service.OrganizacionService;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCService;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.HCInforme;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("organizaciones/")
@@ -140,5 +142,58 @@ public class OrganizacionController {
         LocalDate fechaF = LocalDate.of(anioF, mesF, diaF);
         Organizacion organizacion = interfazOrganizacion.findOrganizacion(org);
         return CalculadoraHCOrganizacion.calcularHC(organizacion, fechaI, fechaF);
+    }
+
+    //PARA HANDLEBAR - REPORTES
+    public List<HCInforme> HCSectores() {
+        List<HCInforme> res = new ArrayList<>();
+        SectorTerritorialController stc = new SectorTerritorialController();
+        List<SectorTerritorial> sectores = stc.getSectorTerritorial();
+        for (SectorTerritorial sector : sectores) {
+            Double hc = CalculadoraHCService.getCalculadoraHC().calcularHCSectorTerritorial(sector, LocalDate.of(LocalDate.EPOCH.getYear(), 1,1), LocalDate.of(LocalDate.EPOCH.getYear(), 12,31));
+            res.add(new HCInforme(sector.getId().toString(), hc));
+        }
+        return res;
+    }
+
+    public List<HCInforme> HCTipoOrg() {
+        List<TipoOrg> tipos = Arrays.stream(TipoOrg.values()).toList();
+        List<HCInforme> res = new ArrayList<>();
+        for (TipoOrg tipo : tipos) {
+            List<Organizacion> organizaciones = interfazOrganizacion.getOrganizaciones().stream().filter(org -> org.getTipo().equals(tipo)).toList();
+            Double hc = 0.0;
+            for (Organizacion org : organizaciones) {
+                hc += CalculadoraHCService.getCalculadoraHC().calcularHCOrganizacion(org,LocalDate.of(LocalDate.EPOCH.getYear(), 1,1), LocalDate.of(LocalDate.EPOCH.getYear(), 12,31));
+            }
+            res.add(new HCInforme(tipo.toString(),hc));
+        }
+        return res;
+    }
+
+    public List<HCInforme> HCProvincia() throws IOException {
+        UbicacionController uc = new UbicacionController();
+        List<Provincia> provincias = Arrays.stream(uc.getProvincias(9)).toList();
+        List<HCInforme> res = new ArrayList<>();
+        //get the total hc of the province and add it to the list
+        for (Provincia provincia : provincias) {
+            Double hc = 0.0;
+            List<Organizacion> organizaciones = interfazOrganizacion.getOrganizaciones().stream().filter(org -> org.getUbicacion().getProvincia().equals(provincia)).toList();
+            for (Organizacion org : organizaciones) {
+                hc += CalculadoraHCService.getCalculadoraHC().calcularHCOrganizacion(org,LocalDate.of(LocalDate.EPOCH.getYear(), 1,1), LocalDate.of(LocalDate.EPOCH.getYear(), 12,31));
+            }
+            res.add(new HCInforme(provincia.getNombre(), hc));
+        }
+        return res;
+    }
+
+    public List<HCInforme> HCPropia(Integer orgId) {
+        Organizacion org = interfazOrganizacion.findOrganizacion(orgId);
+        List<HCInforme> res = new ArrayList<>();
+        List<Area> areas = org.getAreas();
+        for (Area area : areas) {
+            Double hc = CalculadoraHCService.getCalculadoraHC().calcularHCArea(area,LocalDate.of(LocalDate.EPOCH.getYear(), 1,1), LocalDate.of(LocalDate.EPOCH.getYear(), 12,31));
+            res.add(new HCInforme(area.getNombre(), hc));
+        }
+        return res;
     }
 }
