@@ -101,12 +101,12 @@ public class CreadorDeObjetos {
         return organizacion;
     }
 
-    public  Miembro crearMiembro(int id, String nombre, String apellido, String mail, String telefono, Boolean estaActivo) {
+   /* public  Miembro crearMiembro(int id, String nombre, String apellido, String mail, String telefono, Boolean estaActivo) {
         Miembro miembro = new Miembro(id,nombre,apellido,mail,telefono,estaActivo);
         repoMiembros.save(miembro);
         repositorioMiembrosEnMemoria.agregarMiembro(miembro);
         return miembro;
-    }
+    }*/
 
     public  Miembro crearMiembro(Area area, String nombre, String apellido, String mail, String telefono, Boolean estaActivo) {
         Miembro miembro = new Miembro(area, nombre,apellido,mail,telefono,estaActivo);
@@ -151,17 +151,16 @@ public class CreadorDeObjetos {
         return trayecto;
     }
 
-    public Area crearArea(String nombre, Organizacion organizacion, List<ListaDeDatosDeMedicion> mediciones){
+ /*  public Area crearArea(String nombre, Organizacion organizacion, List<ListaDeDatosDeMedicion> mediciones){
         Area area = new Area(nombre,organizacion,mediciones);
         area.setEstaActivo(true);
         repoArea.save(area);
         return area;
-    }
+    }*/
 
     public Area crearArea(String nombre, Organizacion organizacion){
         Area area = new Area(nombre,organizacion);
-        area.setEstaActivo(true);
-        repoArea.save(area);
+        //repoArea.save(area);
         return area;
     }
 

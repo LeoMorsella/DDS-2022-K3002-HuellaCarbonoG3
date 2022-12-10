@@ -28,7 +28,7 @@ public class Miembro {
     @Column
     private Integer numDoc;
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<Area> areas;
+    private List<Area> areas = new ArrayList<>();
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Recorrido> recorridos;
     @Column
