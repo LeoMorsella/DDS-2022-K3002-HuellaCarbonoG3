@@ -38,9 +38,7 @@ public class AreaController {
 
     @GetMapping("/areas/byOrg/{idOrg}")
     public List<Area> getAreasByOrg(@PathVariable String idOrg) {
-        return interfazArea.findByOrganizacion(idOrg).stream()
-                .filter(area -> area.isEstaActivo())
-                .collect(Collectors.toList());
+        return interfazArea.findByOrganizacion(idOrg);
     }
 
     //Endpoint para obtener solo a las organizaciones que estan activas en la bd

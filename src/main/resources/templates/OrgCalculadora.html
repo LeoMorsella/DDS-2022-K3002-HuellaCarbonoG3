@@ -204,6 +204,47 @@
     integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
     crossorigin="anonymous"></script>
 
+    <script>
+        var app = new Vue({
+            el: "#appVue",
+            data: {
+                areas: null,
+                nombreNuevo: null
+            },
+            methods:{
+                agregarArea: function() {
+                    console.log("hola");
+                    let nuevosDatosArea = {
+                        nombre: this.nombreNuevo,
+                        //aca iría el id de la organizacion logueada
+                        id: "1",
+                    };
+                    let response = fetch('http://localhost:8080/area/crear', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8'
+                        },
+                        body: JSON.stringify(nuevosDatosArea)
+                    });
+                    alert("Area creada.");
+                },
+                borrarArea: function(idArea) {
+                    fetch('http://localhost:8080/area/eliminar/'+idArea, {
+                        method: 'GET',
+                    });
+                    alert("Area Eliminada.");
+                }
+            },
+            created() {
+                fetch('http://localhost:8080/areas/byOrg/1')
+                    .then(response => response.json())
+                    .then(data => {
+                        this.areas = data
+                    })
+            }
+        })
+    </script>
+
 </body>
 
 </html>

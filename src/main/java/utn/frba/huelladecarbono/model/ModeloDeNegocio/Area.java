@@ -49,6 +49,7 @@ public class Area {
     public Area(String nombre, Organizacion organizacion) {
         this.nombre = nombre;
         this.organizacion = organizacion;
+        this.estaActivo = true;
         organizacion.setArea(this);
     }
 
@@ -100,4 +101,6 @@ public class Area {
     public boolean isEstaActivo() {
         return estaActivo;
     }
+
+    public void nullearOrg(){this.organizacion = null;}
 }

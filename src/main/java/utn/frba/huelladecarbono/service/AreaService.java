@@ -11,6 +11,8 @@ import utn.frba.huelladecarbono.repository.AreaRepository;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class AreaService implements IAreaService {
 
@@ -67,7 +69,9 @@ public class AreaService implements IAreaService {
 
 
     public List<Area> findByOrganizacion(String idOrganizacion) {
-        return areaRepository.findByOrganizacion_Id(Integer.parseInt(idOrganizacion));
+        return areaRepository.findByEstaActivo(true).stream()
+                .filter(area -> area.getOrganizacion().getId()==Integer.parseInt(idOrganizacion))
+                .collect(Collectors.toList());
     }
 
 
