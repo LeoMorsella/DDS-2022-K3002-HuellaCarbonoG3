@@ -88,10 +88,10 @@ public class InitData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        cargarOrganizaciones();
         //cargarMiembros();
     /*    cargarMedioNoMotorizado();
         cargarMedioMotorizado();
-        cargarOrganizaciones();
         cargarUsuarios();
       /*  cargarRecorridos();
         cargarSectores();
@@ -267,8 +267,7 @@ public class InitData implements CommandLineRunner {
     public void cargarMiembros() throws Exception
     {
         config.exposeIdsFor(Miembro.class);
-        //repoMiembros.count() == 0
-        if(true) {
+        if(repoMiembros.count() == 0) {
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
             Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
             Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro( area1,"Pablo","Ortiz","pablo@prueba","2323",true);
@@ -282,7 +281,7 @@ public class InitData implements CommandLineRunner {
     public void cargarOrganizaciones() throws Exception
     {
         config.exposeIdsFor(Organizacion.class);
-        if(repoOrganizacion.count() == 0) {
+        if(repoOrganizacion.count()==0){
 
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
             Organizacion organizacion2 = creadorDeObjetos.crearOrganizacion("SRA", TipoOrg.GUBERNAMENTAL, Clasificacion.EMPRESA_SECTOR_PRIMARIO, null, null, false);

@@ -155,14 +155,17 @@
                                 <div class="modal-body">
                                     <form action="">
                                         <label for="m-nombre">Nombre del área</label>
-                                        <input type="text" name="" id="m-nombre" class="form-control form-control-user">
-                                    </form>
+                                        <input v-model="nombreNuevo" type="text" name="" id="m-nombre" class="form-control form-control-user">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary">Agregar</button>
+                                        <a @click="agregarArea()" href="">
+                                        Agregar
+                                        </a>
+                                    </button>
                                 </div>
+                                    </form>
                             </div>
                         </div>
                     </div>
@@ -186,11 +189,11 @@
                                                 rowspan="1" colspan="1" aria-sort="ascending">Eliminar</th>
                                         </tr>
                                     </thead>
-                                    <tbody v-for="area in areas">
-                                        <tr class="odd">
+                                    <tbody>
+                                        <tr v-for="area in areas" class="odd">
                                             <td class="sorting_1">{{area.nombre}}</td>
                                             <td>
-                                                <a href="/{{organizacionID}}/areas/borrar/{{{id}}}" class="btn btn-danger btn-circle">
+                                                <a @click="borrarArea(area.id)" href="" class="btn btn-danger btn-circle">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
@@ -242,13 +245,38 @@
         var app = new Vue({
             el: "#appVue",
             data: {
-                areas: []
+                areas: null,
+                nombreNuevo: null
+            },
+            methods:{
+                agregarArea: function() {
+                    console.log("hola");
+                    let nuevosDatosArea = {
+                        nombre: this.nombreNuevo,
+                        //aca iría el id de la organizacion logueada
+                        id: "1",
+                    };
+                    let response = fetch('http://localhost:8080/area/crear', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8'
+                        },
+                        body: JSON.stringify(nuevosDatosArea)
+                    });
+                    alert("Area creada.");
+                },
+                borrarArea: function(idArea) {
+                    fetch('http://localhost:8080/area/eliminar/'+idArea, {
+                        method: 'GET',
+                    });
+                    alert("Area Eliminada.");
+                }
             },
             created() {
-                fetch('http://localhost:8080/organizaciones/1/')
+                fetch('http://localhost:8080/areas/byOrg/1')
                     .then(response => response.json())
                     .then(data => {
-                        this.areas = data.areas
+                        this.areas = data
                     })
             }
         })

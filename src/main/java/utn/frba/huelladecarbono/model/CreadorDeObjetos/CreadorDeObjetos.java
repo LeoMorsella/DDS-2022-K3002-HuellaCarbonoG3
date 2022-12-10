@@ -153,12 +153,14 @@ public class CreadorDeObjetos {
 
     public Area crearArea(String nombre, Organizacion organizacion, List<ListaDeDatosDeMedicion> mediciones){
         Area area = new Area(nombre,organizacion,mediciones);
+        area.setEstaActivo(true);
         repoArea.save(area);
         return area;
     }
 
     public Area crearArea(String nombre, Organizacion organizacion){
         Area area = new Area(nombre,organizacion);
+        area.setEstaActivo(true);
         repoArea.save(area);
         return area;
     }

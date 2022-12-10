@@ -1,5 +1,6 @@
 package utn.frba.huelladecarbono.service;
 
+import net.minidev.json.parser.ParseException;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 
@@ -15,6 +16,8 @@ public interface IAreaService {
 
     //Metodo para dar de alta a una organizacion
     public void saveArea(Area area);
+
+    public void crearArea(String jsonArea) throws ParseException;
 
     //Metodo para eliminar una organizacion
     public void deleteArea(Integer id);

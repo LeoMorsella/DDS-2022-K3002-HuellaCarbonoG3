@@ -1,11 +1,15 @@
 package utn.frba.huelladecarbono.controller;
 
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
+import net.minidev.json.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.repository.AreaRepository;
@@ -14,6 +18,7 @@ import utn.frba.huelladecarbono.service.IAreaService;
 import utn.frba.huelladecarbono.service.IOrganizacionService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class AreaController {
@@ -31,6 +36,13 @@ public class AreaController {
         return interfazArea.getAreas();
     }
 
+    @GetMapping("/areas/byOrg/{idOrg}")
+    public List<Area> getAreasByOrg(@PathVariable String idOrg) {
+        return interfazArea.findByOrganizacion(idOrg).stream()
+                .filter(area -> area.isEstaActivo())
+                .collect(Collectors.toList());
+    }
+
     //Endpoint para obtener solo a las organizaciones que estan activas en la bd
     @GetMapping("/areas/estado")
     public List<Area> getOrganizacionesActivas() {
@@ -38,7 +50,7 @@ public class AreaController {
     }
 
     //Endpoint para dar de baja a una organizacion, la baja solamente es logica por lo tanto solo se cambia el estado
-    @DeleteMapping("/area/eliminar/{id}")
+    @GetMapping("/area/eliminar/{id}")
     public String deleteOrganizacion(@PathVariable Integer id) {
         interfazArea.deleteArea(id);
         return "La Area fue dada de baja correctamente";
@@ -46,13 +58,13 @@ public class AreaController {
 
     //Endpoint para crear una nueva organizacion
     @PostMapping("/area/crear")
-    public String saveOrganizacion(@RequestBody Area area){
-        interfazArea.saveArea(area);
+    public String saveArea(@RequestBody String areaJson) throws ParseException {
+        interfazArea.crearArea(areaJson);
         return "La organización fue creada correctamente";
     }
 
     @PatchMapping("/area/editar/{id}")
-    public Area cambiarEstadoOrganizacion(@PathVariable Integer id){
+    public Area cambiarEstadoArea(@PathVariable Integer id){
         interfazArea.cambiarEstadoArea(id);
         Area area = interfazArea.findArea(id);
         return area;

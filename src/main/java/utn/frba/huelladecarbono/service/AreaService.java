@@ -1,5 +1,8 @@
 package utn.frba.huelladecarbono.service;
 
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
+import net.minidev.json.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
@@ -13,6 +16,9 @@ public class AreaService implements IAreaService {
 
     @Autowired
     private AreaRepository areaRepository;
+
+    @Autowired
+    private OrganizacionRepository organizacionRepository;
 
     @Override
     public Area findById(Integer id) throws Exception {
@@ -42,6 +48,16 @@ public class AreaService implements IAreaService {
         return area;
     }
 
+    @Override
+    public void crearArea(String areaJson) throws ParseException {
+        JSONParser parser = new JSONParser();
+        JSONObject jObject  = (JSONObject) parser.parse(areaJson);// json
+        String nombre = (String) jObject.get("nombre");
+        Integer organizacionID = Integer.parseInt((String) jObject.get("id"));
+        Organizacion orgTemp = organizacionRepository.findById(organizacionID).get();
+        Area areaMapeado = new Area(nombre, orgTemp);
+        areaRepository.save(areaMapeado);
+    }
 
     @Override
     public List<Area> findAreaByEstadoActivo() {

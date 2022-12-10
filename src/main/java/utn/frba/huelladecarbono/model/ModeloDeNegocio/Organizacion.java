@@ -35,7 +35,7 @@ public class Organizacion {
     private TipoOrg tipo;
     @ManyToOne(cascade = {CascadeType.ALL})
     private Ubicacion ubicacion;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<Area> areas = new ArrayList<>();
     @Enumerated(EnumType.STRING)
     private Clasificacion clasificacion;
@@ -169,10 +169,12 @@ public class Organizacion {
         this.contactosMail = contactos;
     }
     public void agregarContactoMail(Miembro Contacto){
+        if(contactosMail == null) contactosMail = new ArrayList<>();
         contactosMail.add(Contacto);
     }
 
     public void agregarContactoWP(Miembro Contacto){
+        if(contactosWP == null) contactosWP = new ArrayList<>();
         contactosWP.add(Contacto);
     }
 
