@@ -5,9 +5,11 @@ import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.repository.MiembroRepository;
+import utn.frba.huelladecarbono.respuestaEndpoint.ResMiembro;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCMiembro;
 import utn.frba.huelladecarbono.service.IMiembroService;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,15 +23,16 @@ public class MiembroController {
     MiembroRepository miembroRepository;
 
     @GetMapping("/{id}")
-    public Miembro getMiembroPorID(@PathVariable String id) throws Exception {
-        return interfazMiembro.findMiembro(Integer.parseInt(id));
+    public ResMiembro getMiembroPorID(@PathVariable Integer id) throws Exception {
+        return new ResMiembro(interfazMiembro.findMiembro(id));
     }
     @GetMapping("/")
-    public List<Miembro> getMiembros(){
-        return interfazMiembro.getMiembros();
+    public List<ResMiembro> getMiembros(){
+        List<ResMiembro> miembros = new ArrayList<>();
+        interfazMiembro.getMiembros().forEach(miembro -> miembros.add(new ResMiembro(miembro)));
+        return miembros;
     }
 
-    //Endpoint para dar de baja a un miembro
     @DeleteMapping("/eliminar/{id}")
     public String deleteMiembro(@PathVariable Integer id) {
         interfazMiembro.cambiarEstadoMiembro(id);
@@ -44,15 +47,14 @@ public class MiembroController {
     }
 
     @PatchMapping("/editarEstado/{id}")
-    public Miembro cambiarEstadoMiembro(@PathVariable Integer id){
+    public void cambiarEstadoMiembro(@PathVariable Integer id){
         interfazMiembro.cambiarEstadoMiembro(id);
         Miembro miembro = interfazMiembro.findMiembro(id);
-        return miembro;
     }
     //Endpoint para modificar a un usuario
     @PutMapping("/editar/{id}")
-    public Miembro actualizarMiembro(@PathVariable Integer id, @RequestBody String miembro) throws Exception {
-        return interfazMiembro.modificarMiembro(id,miembro);
+    public void actualizarMiembro(@PathVariable Integer id, @RequestBody String miembro) throws Exception {
+        interfazMiembro.modificarMiembro(id,miembro);
     }
 
     @PostMapping("/calcularHuella/{miembroId}")
