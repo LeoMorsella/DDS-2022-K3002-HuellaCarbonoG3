@@ -201,9 +201,8 @@ public class OrganizacionController {
     }
 
     public List<HCInforme> HCPropia(Integer orgId) {
-        Organizacion org = interfazOrganizacion.findOrganizacion(orgId);
         List<HCInforme> res = new ArrayList<>();
-        List<Area> areas = org.getAreas();
+        List<Area> areas = areaService.findByOrganizacion(String.valueOf(orgId));
         for (Area area : areas) {
             Double hc = CalculadoraHCService.getCalculadoraHC().calcularHCArea(area,LocalDate.of(LocalDate.EPOCH.getYear(), 1,1), LocalDate.of(LocalDate.EPOCH.getYear(), 12,31));
             res.add(new HCInforme(area.getNombre(), hc));
