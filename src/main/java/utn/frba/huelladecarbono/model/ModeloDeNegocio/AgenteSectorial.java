@@ -29,4 +29,12 @@ public class AgenteSectorial {
         this.id = id;
         this.sectorTerritorial = sectorTerritorial;
     }
+
+    public AgenteSectorial(Integer id) {
+        this.id = id;
+    }
+
+    public AgenteSectorial(SectorTerritorial sectorTerritorial) {
+        this.sectorTerritorial = sectorTerritorial;
+    }
 }

@@ -93,4 +93,23 @@ public class SectorTerritorial {
         this.agenteSectorial = agenteSectorial;
     }
 
+    public SectorTerritorial(Integer id) {
+        this.id = id;
+    }
+
+    public SectorTerritorial(String municipio) {
+        this.municipio = municipio;
+    }
+
+    public SectorTerritorial(Double huellaCarbono) {
+        this.huellaCarbono = huellaCarbono;
+    }
+
+    public SectorTerritorial(List<HuellaCarbono> huellasCarbono) {
+        this.huellasCarbono = huellasCarbono;
+    }
+
+    public SectorTerritorial(AgenteSectorial agenteSectorial) {
+        this.agenteSectorial = agenteSectorial;
+    }
 }
