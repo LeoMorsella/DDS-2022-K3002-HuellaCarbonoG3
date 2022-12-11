@@ -138,35 +138,30 @@
                                         <label for="m-organizacion">Organizacion</label>
                                         <select id="m-organizacion" name="dataTable_length" aria-controls="dataTable"
                                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                            <option value="" selected disabled></option>
-                                            <option value="Google">Google</option>
-                                            <option value="Apple">Apple</option>
-                                            <option value="Tesla">Tesla</option>
-                                            <option value="Ford">Ford</option>
+                                            <option v-for="organizacion in selectOrg" v-model="organizacion.nombre"> {{organizacion.nombre}}</option>
                                         </select>
                                         <br><br>
                                         <label for="m-recorridos">Recorrido</label>
                                         <select name="recorridos" id="m-recorridos" aria-controls="dataTable"
                                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                            <option value="" selected disabled></option>
-                                            <option value="no se">no se</option>
+                                            <option v-for="recorrido in selectRecorrido" v-model="recorrido.nombre"> {{recorrido.nombre}}</option>
                                         </select>
                                         <br><br>
                                         <label for="pesoRecorrido">Peso</label>
-                                        <input type="number" class="form-control form-control-user"
+                                        <input v-model="selectPeso" type="number" class="form-control form-control-user"
                                             id="pesoRecorrido" placeholder="Ingrese el peso del recorrido">
                                         <br>
                                         <label for="FI">Fecha de inicio</label>
-                                        <input type="date" name="" id="FI" class="form-control form-control-user">
+                                        <input v-model="selectFechaIni" type="text" name="" id="FI" class="form-control form-control-user">
                                         <br>
                                         <label for="FF">Fecha de fin</label>
-                                        <input type="date" name="" id="FF" class="form-control form-control-user">
+                                        <input v-model="selectFechaIni" type="text" name="" id="FF" class="form-control form-control-user">
                                     </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary">Agregar</button>
+                                    <button @click="agregarRecorrido()" type="button" class="btn btn-primary">Agregar</button>
                                 </div>
                             </div>
                         </div>
@@ -188,58 +183,23 @@
                                 <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
                                     colspan="1" style="width: 100px;">Trayectos</th>
                                 <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                    colspan="1" style="width: 100px;">Estado</th>
-                                <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
                                     colspan="1" aria-sort="ascending">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="odd">
-                                <td class="sorting_1">Tesla</td>
-                                <td>0.5</td>
-                                <td>11/08/2020</td>
-                                <td>20/10/2021</td>
-                                <td>5</td>
-                                <td>Inactivo</td>
+                            <tr v-for="recorrido in recorridos" v-if="recorrido.estaActivo" class="odd">
+                                <td class="sorting_1">{{recorrido.organizacion.nombre}}</td>
+                                <td>{{recorrido.peso}}</td>
+                                <td>{{recorrido.fechaDeInicio}}</td>
+                                <td>{{recorrido.fechaDeFin}}</td>
+                                <td>{{recorrido.trayectos.length}}</td>
                                 <td>
-                                    <a href="#" class="btn btn-danger btn-circle">
+                                    <a @click="borrarRecorrido(recorrido.id)" class="btn btn-danger btn-circle">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
-                            </tr>
-                            <tr class="odd">
-                                <td class="sorting_1">SpaceX</td>
-                                <td>0.3</td>
-                                <td>1/02/2022</td>
-                                <td></td>
-                                <td>1</td>
-                                <td>Activo</td>
-                                <td>
-                                    <a href="#" class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="odd">
-                                <td class="sorting_1">Neuralink</td>
-                                <td>0.2</td>
-                                <td>11/08/2020</td>
-                                <td></td>
-                                <td>3</td>
-                                <td>Activo</td>
-                                <td>
-                                    <a href="#" class="btn btn-danger btn-circle">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
-                    <div style="text-align: center;">
-                        <button type="button" class="btn btn-primary">
-                            Guardar
-                        </button>
-                    </div>
 
 
                 </div>
@@ -289,12 +249,36 @@
         let app = new Vue({
             el: "#wrapper",
             data:{
-                recorridos: null,
+                recorridos: [{
+                    organizacion:{
+                        nombre: "orgaPrueba"
+                    },
+                    peso: 5,
+                    fechaDeInicio: "22/02/22",
+                    fechaDeFin: "23/03/23",
+                    estaActivo: true,
+                    trayectos: [1,2,3,4,5]
+                },
+                    {
+                        organizacion:{
+                            nombre: "orgaPrueba"
+                        },
+                        peso: 5,
+                        fechaDeInicio: "22/02/22",
+                        fechaDeFin: "23/03/23",
+                        estaActivo: true,
+                        trayectos: [1,2,3,4,5]
+                    }],
                 selectOrg: null,
-                selectRecorrido: null,
-                selectPeso: null,
-                selectFechaIni: null,
-                selectFechaFin: null,
+                selectRecorrido: [
+                    {
+                        nombre: "nombre1"
+                    },
+                    {nombre: "nombre2"}
+                ],
+                selectPeso: 5,
+                selectFechaIni: "02/02/2022",
+                selectFechaFin: "02/03/2023",
                 organizaciones: null,
                 areas: null
             },
@@ -311,11 +295,11 @@
                         idOrg: this.selectOrg,
                         idRecorrido: this.selectRecorrido,
                         peso: this.selectPeso,
-                        fechaIni: this.selectFechaIni,
-                        fechaFin: this.selectFechaFin
+                        fechaIni: this.selectFechaIni.value(),
+                        fechaFin: this.selectFechaFin.value()
                     };
                     //cambiar a recorrido para miembro
-                    let response = fetch('http://localhost:8080/area/crear', {
+                    let response = fetch('http://localhost:8080/recorrido/crear', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json;charset=utf-8'
@@ -338,18 +322,26 @@
                     .then(data => {
                         this.recorridos = data.recorridos;
                     });
-                //aca irian las organizaciones de los miembros
-                //fetch('http://localhost:8080/organizaciones/')
-                  //  .then(response => response.json())
-                 //   .then(data => {
-                 //       this.organizaciones = data;
-               //     })
-                //aca irian las areas de los miembros
-                //fetch('http://localhost:8080/organizaciones/')
-                //  .then(response => response.json())
-                //   .then(data => {
-                //       this.areas = data;
-                //     })
+                fetch('http://localhost:8080/miembro/1')
+                    .then(response => response.json())
+                    .then(data => {
+                        this.areas = data.areas;
+                        this.areas.forEach(
+                            area => {fetch('http://localhost:8080/organizaciones/' + area.organizacionId)
+                                .then(response => response.json())
+                                .then(data => {
+                                    this.areasyorg.push({
+                                        area: {nombre: area.nombre,
+                                            id: area.id},
+                                        nombreOrga: data.nombre
+                                    })
+                                })})
+                    });
+                fetch("http://localhost:8080/organizaciones/")
+                    .then(response => response.json())
+                    .then(data => {
+                        this.selectOrg = data;
+                    })
             }
         })
 

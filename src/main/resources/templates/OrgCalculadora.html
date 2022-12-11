@@ -239,12 +239,9 @@
                     let mesFin= fechafin.substring(3,4);
                     let anioFin= fechafin.substring(6,9);
 
-                    fetch('/calcularHuella/1/'+diaInit+'/'+mesInit+'/'+anioInit+'/'+diaFin+'/'+mesInit+'/'+anioInit+'/')
+                    fetch('http://localhost:8080/organizacion/calcularHuella/1/'+diaInit+'/'+mesInit+'/'+anioInit+'/'+diaFin+'/'+mesFin+'/'+anioFin+'/')
                         .then(response => response.json())
                         .then(data => this.huellaTotal = data.huella);
-                   // fetch('/calcularHuella/1/'+fechaInit+'/'+fechaFin).
-                   // then(response => response.json())
-                     //   .then(data => this.huellaPorAreas = data)
                 },
             },
             created() {

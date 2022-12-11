@@ -50,14 +50,4 @@ public class RepositorioMiembros {
             .collect(Collectors.toList())
             .get(0);
   }
-
-  //TODO probar
-  /*
-  public void cargarDeMiembrosDeBdAlSistema() {
-    for(Miembro miembroclase : miembrobd.getMiembros()) {
-      Miembro miembro = new Miembro(miembroclase.getID(),miembroclase.getNombre(),miembroclase.getApellido(),miembroclase.getTipoDoc(),miembroclase.getNumDoc(),miembroclase.getAreas(),miembroclase.getRecorridos(),miembroclase.getMail(),miembroclase.getTelefono());
-      this.agregarMiembro(miembro);
-    }
-  }
-  */
 }
