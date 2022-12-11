@@ -2,11 +2,15 @@ package utn.frba.huelladecarbono.model.CalculoDeDistancias;
 
 import lombok.Getter;
 import lombok.Setter;
+import utn.frba.huelladecarbono.model.MedioDeTransporte.Parada;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter @Setter
 @Entity
+@Table(name="distancia")
 public class Distancia {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,6 +19,9 @@ public class Distancia {
     private Double valor;
     @Column
     private String unidad;
+
+    @OneToMany(mappedBy = "distancia",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Parada> paradas = new ArrayList<>();
 
     public Double getValor() {return valor;}
     public String getUnidad() {return unidad;}

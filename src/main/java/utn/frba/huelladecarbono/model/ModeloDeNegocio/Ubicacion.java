@@ -3,13 +3,17 @@ package utn.frba.huelladecarbono.model.ModeloDeNegocio;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import utn.frba.huelladecarbono.model.MedioDeTransporte.Parada;
+import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.service.CalculoDeDistanciaService.APIDistanciaService;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter @Setter
 @Entity
-@NoArgsConstructor
+@Table(name="ubicacion")
 public class Ubicacion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,6 +38,13 @@ public class Ubicacion {
     private String calle;
     @Column
     private String altura;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
+    private Organizacion organizacion;
+
+    @OneToMany(mappedBy = "ubicacion",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Parada> paradas = new ArrayList<>();
 
     public Ubicacion(String pais, String provincia, String municipio, String localidad, String calle, String altura) throws Exception {
         APIDistanciaService API = new APIDistanciaService();
@@ -62,6 +73,10 @@ public class Ubicacion {
         this.idProvincia = API.buscarId("provincia", idPais, this);
         this.idMunicipio = API.buscarId("municipio", idProvincia, this);
         this.idLocalidad = API.buscarId("localidad", idMunicipio, this);
+    }
+
+    public Ubicacion() {
+
     }
 
     public Integer getId() {

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import utn.frba.huelladecarbono.controller.AreaController;
 import utn.frba.huelladecarbono.model.CreadorDeObjetos.CreadorDeObjetos;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Medio;
+import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioTrayectos;
 import lombok.Getter;
@@ -33,10 +34,13 @@ public class Organizacion {
     private Double huellaCarbono;
     @Enumerated(EnumType.STRING)
     private TipoOrg tipo;
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @OneToOne(mappedBy = "organizacion")
     private Ubicacion ubicacion;
-    @OneToMany(mappedBy = "organizacion")
+    @OneToMany(mappedBy = "organizacion",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Area> areas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "organizacion",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Recorrido> recorridos = new ArrayList<>();
     @Enumerated(EnumType.STRING)
     private Clasificacion clasificacion;
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
@@ -47,6 +51,9 @@ public class Organizacion {
     private List<Double> hcMensual = new ArrayList<>();
     @Column
     private Double hcPromedio;
+
+    @Column
+    private Boolean estaActivo;
 
     /*  @ManyToMany(fetch = FetchType.LAZY,
            cascade = {
@@ -59,8 +66,8 @@ public class Organizacion {
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<HuellaCarbono> huellasCarbono = new ArrayList<>();
 
-    @Column
-    private Boolean estaActivo;
+
+
 
 
 

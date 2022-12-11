@@ -93,16 +93,16 @@ public class InitData implements CommandLineRunner {
 
         cargarMiembros();
         cargarOrganizaciones();
-        /*cargarMedioNoMotorizado();
+        cargarRecorridos();
+        cargarMedioNoMotorizado();
         cargarMedioMotorizado();
         cargarUsuarios();
-        cargarRecorridos();
         cargarSectores();
         cargarParadas();
         cargarUbicaciones();
         cargarAreas();
         cargarTrayectos();
-        cargarTransportePublico();
+        /*cargarTransportePublico();
         darDeBajaOrganizacion();
          */
         cargarSectoresTerritoriales();
@@ -120,44 +120,30 @@ public class InitData implements CommandLineRunner {
 
    public void cargarRecorridos() throws Exception
     {
-        config.exposeIdsFor(Recorrido.class);
-        if(repoRecorrido.count() == 0) {
-            Organizacion organizacion1 = new Organizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
+
+            Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
             creadorDeObjetos.crearRecorrido(organizacion1,0.50, Calendario.crearFecha(1, 2020), Calendario.crearFecha(9, 2022));
-            //De esta manera se carga el recorrido
-            Organizacion organizacion3 = new Organizacion("SRL", TipoOrg.ONG, Clasificacion.ESCUELA, null, null, true);
-            Recorrido recorridoPruebaDos =creadorDeObjetos.crearRecorrido(organizacion3,0.8,Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021));
-        }
-        else{
-            System.out.println("Ya existen Recorridos creados anteriormente");
-        }
+           // //De esta manera se carga el recorrido
+           // Organizacion organizacion3 = new Organizacion("SRL", TipoOrg.ONG, Clasificacion.ESCUELA, null, null, true);
+           // Recorrido recorridoPruebaDos =creadorDeObjetos.crearRecorrido(organizacion3,0.8,Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021));
     }
 
     public void cargarParadas() throws Exception
     {
-        config.exposeIdsFor(Usuario.class);
-        if(repoParadas.count() == 0) {
 
-            Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
-            Parada paradaPruebaUno = creadorDeObjetos.crearParada("120", ubicacionPruebaUno);
-            Parada paradaPruebaDos = creadorDeObjetos.crearParada("50",ubicacionPruebaUno);
-        }
-        else{
-            System.out.println("Ya existen Paradas creados anteriormente");
-        }
+            Ubicacion ubicacionPruebaUno = creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
+           // Parada paradaPruebaUno = creadorDeObjetos.crearParada("120", ubicacionPruebaUno);
+            //Parada paradaPruebaDos = creadorDeObjetos.crearParada("50",ubicacionPruebaUno);
+
     }
 
     public void cargarUbicaciones() throws Exception
     {
-            config.exposeIdsFor(Ubicacion.class);
-            if(repoUbicaciones.count()==0) {
-                Ubicacion ubicacion1 = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
+
+                Ubicacion ubicacion1 = creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
                 List<Ubicacion> ubicaciones = List.of(ubicacion1);
-                ubicaciones.stream().forEach(ubicacion -> {repoUbicaciones.save(ubicacion);});
-            }
-            else {
-                System.out.println("Ya existen ubicaciones creadas anteriormente");
-            }
+
+
     }
 
     public void cargarSectores() {
@@ -248,11 +234,13 @@ public class InitData implements CommandLineRunner {
         config.exposeIdsFor(Area.class);
         cargarMedioMotorizado();
         if(repoTrayectos.count() == 0) {
-            Trayecto trayecto1 = new Trayecto();
-            Ubicacion ubicacion1 = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
-            Ubicacion ubicacion2 = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
-            List<Ubicacion> ubicaciones = List.of(ubicacion1);
-            ubicaciones.stream().forEach(ubicacion -> {repoUbicaciones.save(ubicacion);});
+
+            Ubicacion ubicacion1 = creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
+            Ubicacion ubicacion2 = creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
+            MedioMotorizado medio1 = creadorDeObjetos.crearMedioMotorizado(TipoVehiculoMotorizado.MOTO,TipoCombustible.NAFTA,"FRX123",Boolean.FALSE,"Particular");
+            Trayecto trayecto1 = creadorDeObjetos.crearTrayecto(ubicacion1,ubicacion2,medio1);
+            /* List<Ubicacion> ubicaciones = List.of(ubicacion1);
+           ubicaciones.stream().forEach(ubicacion -> {repoUbicaciones.save(ubicacion);});
             MedioMotorizado medio1 = new MedioMotorizado(TipoVehiculoMotorizado.MOTO,TipoCombustible.NAFTA,"FRX123",Boolean.FALSE,"Particular");
             trayecto1.setId(12);
             trayecto1.setMedioTransporte(medio1);
@@ -261,7 +249,7 @@ public class InitData implements CommandLineRunner {
             List<Trayecto> trayectos = List.of(trayecto1);
             List<MedioMotorizado> medios = List.of(medio1);
             medios.stream().forEach(medio -> repoMedioMotorizado.save(medio));
-            trayectos.stream().forEach(trayecto -> repoTrayectos.save(trayecto));
+            trayectos.stream().forEach(trayecto -> repoTrayectos.save(trayecto));*/
 
         }
     }
@@ -279,16 +267,13 @@ public class InitData implements CommandLineRunner {
 
     public void cargarOrganizaciones() throws Exception
     {
-        config.exposeIdsFor(Organizacion.class);
-        if(true){
-
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
             Organizacion organizacion2 = creadorDeObjetos.crearOrganizacion("SRA", TipoOrg.GUBERNAMENTAL, Clasificacion.EMPRESA_SECTOR_PRIMARIO, null, null, false);
             Organizacion organizacion3 = creadorDeObjetos.crearOrganizacion("SRL", TipoOrg.ONG, Clasificacion.ESCUELA, null, null, true);
             Organizacion organizacion4 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.INSTITUCION, Clasificacion.EMPRESA_SECTOR_SECUNDARIO, null, null, false);
-            Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
+            /*Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
             ArrayList<Double> listaHCPrueba = new ArrayList<>();
-            Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
+            //Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
             organizacion1.setUbicacion(ubicacionPruebaUno);
             listaHCPrueba.add(100.00);
             HuellaCarbono huellaPrueba = new HuellaCarbono(Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021), 250.00);
@@ -299,11 +284,8 @@ public class InitData implements CommandLineRunner {
             Miembro miembroPruebaWP = creadorDeObjetos.crearMiembro(null,"Gonza2","D","mail2@prueba","221",true);
             organizacion1.agregarContactoWP(miembroPruebaWP);
             organizacion1.agregarContactoMail(miembroPruebaMail);
-            RepositorioOrganizaciones.getRepositorio().getOrganizaciones().add(organizacion1);
-        }
-        else{
-            System.out.println("Ya existen Organizaciones creadas anteriormente");
-        }
+           // RepositorioOrganizaciones.getRepositorio().getOrganizaciones().add(organizacion1);*/
+
     }
 /*
     public void actualizarOrganizacion() throws Exception

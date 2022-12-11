@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import utn.frba.huelladecarbono.controller.ParadaController;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Parada;
-import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +38,7 @@ public class RepositorioParadas {
 
   public void cargarDeParadaDeBdAlSistema() {
     for(Parada paradaclase : paradabd.getParadas()) {
-      Parada parada = new Parada(paradaclase.getNombre(),paradaclase.getUbicacion(),paradaclase.getDistanciaAProximaParada());
+      Parada parada = new Parada(paradaclase.getNombre(),paradaclase.getUbicacion(),paradaclase.getDistancia());
       this.agregarParada(parada);
     }
   }

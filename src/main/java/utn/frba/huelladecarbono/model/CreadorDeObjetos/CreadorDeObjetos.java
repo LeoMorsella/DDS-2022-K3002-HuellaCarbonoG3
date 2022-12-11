@@ -79,6 +79,10 @@ public class CreadorDeObjetos {
     @Autowired
     RepositorioMedioNoMotorizado repositorioMedioNoMotorizado;
 
+    @Autowired
+    UbicacionRepository repoUbicacion;
+
+
 
     public Organizacion crearOrganizacion(String razonSocial, TipoOrg tipo, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, Boolean estaActivo) {
         Organizacion organizacion = new Organizacion(razonSocial,tipo,clasificacion,contactosMail,contactosWP,estaActivo);
@@ -127,7 +131,7 @@ public class CreadorDeObjetos {
         Recorrido recorrido = new Recorrido(organizacion,peso,mesInicio,mesFin);
         repoRecorridos.save(recorrido);
         repositorioRecorridoEnMemoria.agregarRecorrido(recorrido);
-        return recorrido;
+        return null;
     }
 
     /*public  Usuario crearUsuario(String username, String password, List<Rol> rol){
@@ -182,6 +186,12 @@ public class CreadorDeObjetos {
     public SectorTerritorial crearSectorTerritorial(SectorTerritorial sector) {
         repoSectorTerritorial.save(sector);
         return sector;
+    }
+
+    public Ubicacion crearUbicacion(String pais, String provincia, String municipio, String localidad, String calle, String altura) throws Exception {
+        Ubicacion ubicacion = new Ubicacion(pais, provincia, municipio, localidad, calle, altura);
+        repoUbicacion.save(ubicacion);
+        return ubicacion;
     }
 
 }

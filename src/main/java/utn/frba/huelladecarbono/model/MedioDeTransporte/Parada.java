@@ -4,12 +4,12 @@ import utn.frba.huelladecarbono.model.CalculoDeDistancias.Distancia;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Ubicacion;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Getter @Setter
 @Entity
+@Table (name="parada")
 public class Parada {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,9 +17,11 @@ public class Parada {
     @Column
     private String nombre;
     @ManyToOne
+    @JoinColumn (name="ubicacion_id",referencedColumnName = "id")
     private Ubicacion ubicacion;
     @ManyToOne
-    private Distancia distanciaAProximaParada;
+    @JoinColumn (name="distancia",referencedColumnName = "id")
+    private Distancia distancia;
 
     public Integer getId() {
         return id;
@@ -40,12 +42,12 @@ public class Parada {
     public Parada(String nombre, Ubicacion ubicacion, Distancia distanciaAProximaParada) {
         this.nombre = nombre;
         this.ubicacion = ubicacion;
-        this.distanciaAProximaParada = distanciaAProximaParada;
+        this.distancia = distanciaAProximaParada;
     }
 
     public Double distancaAProximaParada() {
-        if (distanciaAProximaParada.getValor()!= 0) {
-            return distanciaAProximaParada.getValor();
+        if (distancia.getValor()!= 0) {
+            return distancia.getValor();
         }
         else{
             throw new RuntimeException("No hay siguiente parada (Parada Terminal)");
@@ -58,7 +60,7 @@ public class Parada {
                 "ID='" + id + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", ubicacion=" + ubicacion +
-                ", distanciaAProximaParada=" + distanciaAProximaParada +
+                ", distanciaAProximaParada=" + distancia +
                 '}';
     }
 }

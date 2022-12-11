@@ -15,13 +15,15 @@ import java.util.List;
 
 @Getter @Setter
 @Entity
+@Table (name="recorrido")
 public class Recorrido {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     public List<Trayecto> trayectos = new ArrayList<>();
-    @OneToOne
+    @ManyToOne
+    @JoinColumn (name="organizacion_id",referencedColumnName = "id")
     private Organizacion organizacion;
     @Column
     private Double peso;
@@ -40,7 +42,7 @@ public class Recorrido {
         this.estaActivo = estaActivo;
     }
 
-    public Recorrido(Integer id, ArrayList<Trayecto> trayectos, Organizacion organizacion, Double peso, LocalDate mesInicio, LocalDate mesFin) {
+    public Recorrido(Integer id, List<Trayecto> trayectos, Organizacion organizacion, Double peso, LocalDate mesInicio, LocalDate mesFin) {
         this.id = id;
         this.trayectos = trayectos;
         this.organizacion = organizacion;
