@@ -111,10 +111,10 @@ public class AppController {
     public ResponseEntity<String> reportesO() throws Exception{
         Template template = handlebars.compile("/templates/OrgReportes");
 
-        List<Object> hcporst = null;
-        List<Object> hcportipoorg = null;
-        List<Object> hcporprovincias = null;
-        List<Object> hcporareas = null;
+        List<HCInforme> hcporst = orgaCont.HCSectores();
+        List<HCInforme> hcportipoorg = orgaCont.HCTipoOrg();
+        List<HCInforme> hcporprovincias = orgaCont.HCProvincia();
+        List<HCInforme> hcporareas = orgaCont.HCPropia(1);
 
 
 
@@ -146,13 +146,14 @@ public class AppController {
         List<HCInforme> hcportipoorg = orgaCont.HCTipoOrg();
         List<HCInforme> hcporprovincias = orgaCont.HCProvincia();
 
-        List<HCInforme> listaPruebaST = new ArrayList<>();
+        /*List<HCInforme> listaPruebaST = new ArrayList<>();
         listaPruebaST.add(new HCInforme("laPampa", 89.88));
         List<HCInforme> listaPruebaProv = new ArrayList<>();
         listaPruebaProv.add(new HCInforme("BuenosAires", 922.44));
+        listaPruebaProv.add(new HCInforme("cordoba", 94.2));
 
         hcporst = listaPruebaST;
-        hcporprovincias = listaPruebaProv;
+        hcporprovincias = listaPruebaProv;*/
 
         Map<String, Object> model = new HashMap<>();
         model.put("HCporST", hcporst);

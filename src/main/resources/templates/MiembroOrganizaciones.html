@@ -138,22 +138,22 @@
                                 <div class="modal-body">
                                     <form action="">
                                         <label for="m-organizacion">Organizacion</label>
-                                        <select id="m-organizacion" name="dataTable_length" aria-controls="dataTable"
+                                        <select v-model="selectOrganizacion" id="m-organizacion" name="dataTable_length" aria-controls="dataTable"
                                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                            <option value="" selected disabled></option>
+                                            <option @click="cargarAreas()" v-for="organizacion in organizaciones" :value="organizacion.razonSocial">{{organizacion.razonSocial}}</option>
                                         </select>
                                         <br><br>
                                         <label for="m-area">Area</label>
-                                        <select id="m-area" name="dataTable_length" aria-controls="dataTable"
+                                        <select v-model="selectArea" id="m-area" name="dataTable_length" aria-controls="dataTable"
                                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                            <option value="" selected disabled></option>
+                                            <option v-for="area in opcionesAreas" :value="area.nombre">{{area.nombre}}</option>
                                         </select>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary">Agregar</button>
+                                    <button @click="agregarArea()" type="button" class="btn btn-primary">Agregar</button>
                                 </div>
                             </div>
                         </div>
@@ -175,12 +175,11 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             <tr v-for= "area in areas" class="odd">
-                                <td class="sorting_1">{{area.organizacion.tipo}}</td>
+                                <td class="sorting_1">{{area.organizacion.razonSocial}}</td>
                                 <td>{{area.nombre}}</td>
                                 <td>
-                                    <a href="/area/eliminar/{id}" class="btn btn-danger btn-circle">
+                                    <a @click="borrarArea(area.id)" class="btn btn-danger btn-circle">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -235,13 +234,50 @@
         let app = new Vue({
             el: "#wrapper",
             data:{
-                areas: null
+                areas: null,
+                selectOrganizacion: null,
+                selectArea: null,
+                organizaciones: null,
+                opcionesAreas: null
+            },
+            methods: {
+                cargarAreas: function() {
+                    fetch('http://localhost:8080/areas/byOrg/1')
+                        .then(response => response.json())
+                        .then(data => {
+                            this.opcionesAreas = data.areas;
+                        })
+                },
+                agregarArea: function() {
+                    let nuevosDatosArea = {
+                        nombre: this.selectArea,
+                    };
+                    let response = fetch('http://localhost:8080/area/crear', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8'
+                        },
+                        body: JSON.stringify(nuevosDatosArea)
+                    });
+                    alert("Solicitud Enviada.");
+                },
+                borrarArea: function(idArea) {
+                    fetch('http://localhost:8080/area/eliminar/'+idArea, {
+                        method: 'GET',
+                    });
+                    alert("Area Eliminada.");
+                }
             },
             created () {
                 fetch('http://localhost:8080/miembro/1')
                     .then(response => response.json())
                     .then(data => {
                         this.areas = data.areas;
+                    });
+                fetch('http://localhost:8080/organizaciones/')
+                    .then(response => response.json())
+                    .then(data => {
+                        this.organizaciones = data;
                     })
             }
         })

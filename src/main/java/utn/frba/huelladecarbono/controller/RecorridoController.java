@@ -19,7 +19,7 @@ public class RecorridoController {
         return interfazRecorrido.getRecorridos();
     }
 
-    @DeleteMapping("recorrido/eliminar/{id}")
+    @GetMapping("recorrido/eliminar/{id}")
     public String deleteRecorrido(@PathVariable Integer id) {
         interfazRecorrido.deleteRecorrido(id);
         return "El recorrido fue eliminado correctamente";

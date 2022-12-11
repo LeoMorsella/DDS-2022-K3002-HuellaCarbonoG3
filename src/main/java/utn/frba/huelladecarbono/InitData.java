@@ -90,10 +90,10 @@ public class InitData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        /*
-        cargarOrganizaciones();
+
         cargarMiembros();
-        cargarMedioNoMotorizado();
+        cargarOrganizaciones();
+        /*cargarMedioNoMotorizado();
         cargarMedioMotorizado();
         cargarUsuarios();
         cargarRecorridos();
