@@ -3,7 +3,6 @@ package utn.frba.huelladecarbono.model.Repositorios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import utn.frba.huelladecarbono.controller.RecorridoController;
-import utn.frba.huelladecarbono.model.MedioDeTransporte.Parada;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ public class RepositorioRecorrido {
 
     public void cargarDeRecorridoDeBdAlSistema() {
         for(Recorrido recorridoclase : recorridobd.getRecorridos()) {
-            Recorrido recorrido = new Recorrido(recorridoclase.getOrganizacion(),recorridoclase.getPeso(),recorridoclase.getMesInicio(),recorridoclase.getMesFin());
+            Recorrido recorrido = new Recorrido(recorridoclase.getOrganizacion(),recorridoclase.getPeso(),recorridoclase.getFechaInicio(),recorridoclase.getFechaFin());
             this.agregarRecorrido(recorrido);
         }
     }

@@ -32,5 +32,5 @@ public interface IAreaService {
 
     public Area crearArea(Area area);
 
-    public List<Area> findByOrganizacion(String id);
+    public List<Area> findByOrganizacion(Integer id);
 }

@@ -14,6 +14,7 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.repository.AreaRepository;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
+import utn.frba.huelladecarbono.respuestaEndpoint.ResArea;
 import utn.frba.huelladecarbono.service.IAreaService;
 import utn.frba.huelladecarbono.service.IOrganizacionService;
 
@@ -32,12 +33,14 @@ public class AreaController {
 
     //Endpoint para obtener a todos las organizaciones
     @GetMapping("/areas")
-    public List<Area> getAreas(){
-        return interfazArea.getAreas();
+    public List<ResArea> getAreas(){
+        List<Area> areas = interfazArea.getAreas();
+        return areas.stream().map(ResArea::new).collect(Collectors.toList());
     }
     @GetMapping("/areas/byOrg/{idOrg}")
-    public List<Area> getAreasByOrg(@PathVariable String idOrg) {
-        return interfazArea.findByOrganizacion(idOrg);
+    public List<ResArea> getAreasByOrg(@PathVariable Integer idOrg) {
+        List<Area> areas = interfazArea.findByOrganizacion(idOrg);
+        return areas.stream().map(ResArea::new).collect(Collectors.toList());
     }
 
     //Endpoint para obtener solo a las organizaciones que estan activas en la bd

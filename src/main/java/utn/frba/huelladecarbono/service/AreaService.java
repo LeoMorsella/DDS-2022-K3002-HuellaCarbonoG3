@@ -69,9 +69,9 @@ public class AreaService implements IAreaService {
     }
 
 
-    public List<Area> findByOrganizacion(String idOrganizacion) {
+    public List<Area> findByOrganizacion(Integer idOrganizacion) {
         return areaRepository.findByEstaActivo(true).stream()
-                .filter(area -> area.getOrganizacion().getId()==Integer.parseInt(idOrganizacion))
+                .filter(area -> area.getOrganizacion().getId()==idOrganizacion)
                 .collect(Collectors.toList());
     }
 

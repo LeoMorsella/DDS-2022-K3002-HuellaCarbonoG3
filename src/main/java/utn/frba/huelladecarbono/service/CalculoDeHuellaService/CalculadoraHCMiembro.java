@@ -6,7 +6,6 @@ import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 
 import java.time.LocalDate;
-import java.util.Calendar;
 
 public class CalculadoraHCMiembro {
 
@@ -15,7 +14,7 @@ public class CalculadoraHCMiembro {
         int mesesRecorridos;
         for(Recorrido recorrido : miembro.getRecorridos()) {
             if(recorrido.getOrganizacion() == organizacion) {
-                mesesRecorridos = Calendario.mesesEntreMedio(mesInicio, mesFin, recorrido.getMesInicio(), recorrido.getMesFin());
+                mesesRecorridos = Calendario.mesesEntreMedio(mesInicio, mesFin, recorrido.getFechaInicio(), recorrido.getFechaFin());
                 HC += calcularHCRecorrido(recorrido) * 4.5 * mesesRecorridos;
             }
         }

@@ -3,9 +3,10 @@ package utn.frba.huelladecarbono.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
+import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
-import utn.frba.huelladecarbono.repository.MiembroRepository;
 import utn.frba.huelladecarbono.respuestaEndpoint.ResMiembro;
+import utn.frba.huelladecarbono.respuestaEndpoint.ResRecorrido;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCMiembro;
 import utn.frba.huelladecarbono.service.IMiembroService;
 import java.time.LocalDate;
@@ -20,7 +21,8 @@ public class MiembroController {
     @Autowired
     private IMiembroService interfazMiembro;
 
-    MiembroRepository miembroRepository;
+    @Autowired
+    OrganizacionController orgController;
 
     @GetMapping("/{id}")
     public ResMiembro getMiembroPorID(@PathVariable Integer id) throws Exception {
@@ -69,8 +71,15 @@ public class MiembroController {
 
     @PostMapping("/solicitarSerParte/{orgId}/{areaId}/{miembroId}")
     public void solicitarSerParte(@PathVariable Integer orgId, @PathVariable Integer areaId, @PathVariable Integer miembroId) throws Exception {
-        OrganizacionController orgController = new OrganizacionController();
         orgController.solicitarSerParte(orgId, areaId, miembroId);
+    }
+
+    @GetMapping("{miembroId}/recorridos")
+    public List<ResRecorrido> getRecorridos(@PathVariable Integer miembroId) {
+        List<Recorrido> recorridos = interfazMiembro.findMiembro(miembroId).getRecorridos();
+        List<ResRecorrido> resRecorridos = new ArrayList<>();
+        recorridos.forEach(recorrido -> resRecorridos.add(new ResRecorrido(recorrido)));
+        return resRecorridos;
     }
 
 }

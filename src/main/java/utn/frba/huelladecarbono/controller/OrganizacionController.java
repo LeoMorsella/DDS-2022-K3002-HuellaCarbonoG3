@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.CalculoDeDistancias.Provincia;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
-import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
+import utn.frba.huelladecarbono.repository.MiembroRepository;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 import utn.frba.huelladecarbono.respuestaEndpoint.*;
 import utn.frba.huelladecarbono.service.AreaService;
@@ -38,6 +38,11 @@ public class OrganizacionController {
 
     @Autowired
     private UbicacionController uc;
+    @Autowired
+    private MiembroRepository miembroRepository;
+
+    @Autowired
+    private IMiembroService interfazMiembro;
 
     @GetMapping({"/", ""})
     public List<ResOrganizacion> getOrganizaciones(){
@@ -59,8 +64,8 @@ public class OrganizacionController {
     }
 
     @GetMapping("/areas/{id}")
-    public List<ResArea> getAreas(@PathVariable String id) {
-List<ResArea> res = new ArrayList<>();
+    public List<ResArea> getAreas(@PathVariable Integer id) {
+        List<ResArea> res = new ArrayList<>();
         List<Area> areas = areaService.findByOrganizacion(id);
         for (Area area : areas) {
             res.add(new ResArea(area));
@@ -74,7 +79,7 @@ List<ResArea> res = new ArrayList<>();
     }
 
     @GetMapping("/{id}/contactosWp")
-    public List<ResMiembro> getContactosWp(@PathVariable Integer id){
+    public List<ResMiembro> getContactosWp(@PathVariable Integer id) {
         List<ResMiembro> res = new ArrayList<>();
         List<Miembro> miembros = organizacionService.findOrganizacion(id).getContactosWP();
         for (Miembro miembro : miembros) {
@@ -119,7 +124,7 @@ List<ResArea> res = new ArrayList<>();
 
     @PutMapping("/{organizacionID}/areas/borrar/{areaID}")
     public void borrarArea(@PathVariable String areaID, @PathVariable String organizacionID){
-        RepositorioOrganizaciones.getRepositorio()
+        interfazOrganizacion
                 .findOrganizacion(Integer.parseInt(organizacionID))
                 .borrarArea(areaID);
     }
@@ -152,7 +157,7 @@ List<ResArea> res = new ArrayList<>();
 
     @PatchMapping("rechazarMiembro/{organizacionId}/{areaId}/{miembroId}")
     public void rechazarMiembro(@PathVariable Integer organizacionId, @PathVariable Integer areaId, @PathVariable Integer miembroId) {
-        Miembro miembro = RepositorioMiembros.getRepositorio().findMiembro(miembroId);
+        Miembro miembro = interfazMiembro.findMiembro(miembroId);
         organizacionRepository.getById(organizacionId).getArea(areaId).rechazarMiembro(miembro);
     }
 
@@ -209,7 +214,7 @@ List<ResArea> res = new ArrayList<>();
 
     public List<HCInforme> HCPropia(Integer orgId) {
         List<HCInforme> res = new ArrayList<>();
-        List<Area> areas = areaService.findByOrganizacion(String.valueOf(orgId));
+        List<Area> areas = areaService.findByOrganizacion(orgId);
         for (Area area : areas) {
             Double hc = CalculadoraHCService.getCalculadoraHC().calcularHCArea(area,LocalDate.of(LocalDate.EPOCH.getYear(), 1,1), LocalDate.of(LocalDate.EPOCH.getYear(), 12,31));
             res.add(new HCInforme(area.getNombre(), hc));

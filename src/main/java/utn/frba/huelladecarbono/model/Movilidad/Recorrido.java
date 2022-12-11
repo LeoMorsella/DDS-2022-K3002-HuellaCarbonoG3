@@ -1,16 +1,12 @@
 package utn.frba.huelladecarbono.model.Movilidad;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
-import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Getter @Setter
@@ -28,34 +24,34 @@ public class Recorrido {
     @Column
     private Double peso;
     @Column(columnDefinition = "DATE")
-    private LocalDate mesInicio;
+    private LocalDate fechaInicio;
     @Column(columnDefinition = "DATE")
-    private LocalDate mesFin;
+    private LocalDate fechaFin;
     @Column
     private Boolean estaActivo;
 
-    public Recorrido(Organizacion organizacion, Double peso, LocalDate mesInicio, LocalDate mesFin,Boolean estaActivo) {
+    public Recorrido(Organizacion organizacion, Double peso, LocalDate fechaInicio, LocalDate fechaFin, Boolean estaActivo) {
         this.organizacion = organizacion;
-        this.mesInicio = mesInicio;
-        this.mesFin = mesFin;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
         this.peso = peso;
         this.estaActivo = estaActivo;
     }
 
-    public Recorrido(Integer id, List<Trayecto> trayectos, Organizacion organizacion, Double peso, LocalDate mesInicio, LocalDate mesFin) {
+    public Recorrido(Integer id, List<Trayecto> trayectos, Organizacion organizacion, Double peso, LocalDate fechaInicio, LocalDate fechaFin) {
         this.id = id;
         this.trayectos = trayectos;
         this.organizacion = organizacion;
         this.peso = peso;
-        this.mesInicio = mesInicio;
-        this.mesFin = mesFin;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
     }
 
-    public Recorrido(Organizacion organizacion, Double peso, LocalDate mesInicio, LocalDate mesFin) {
+    public Recorrido(Organizacion organizacion, Double peso, LocalDate fechaInicio, LocalDate fechaFin) {
         this.organizacion = organizacion;
         this.peso = peso;
-        this.mesInicio = mesInicio;
-        this.mesFin = mesFin;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
     }
 
     public Boolean getEstaActivo() {
@@ -101,8 +97,8 @@ public class Recorrido {
                 ", trayectos=" + trayectos +
                 ", organizacion=" + organizacion +
                 ", peso=" + peso +
-                ", mesInicio=" + mesInicio +
-                ", mesFin=" + mesFin +
+                ", mesInicio=" + fechaInicio +
+                ", mesFin=" + fechaFin +
                 '}';
     }
 }
