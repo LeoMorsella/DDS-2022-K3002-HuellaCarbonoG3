@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.CalculoDeDistancias.Provincia;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
+import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
 import utn.frba.huelladecarbono.repository.MiembroRepository;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
@@ -227,5 +228,15 @@ public class OrganizacionController {
         Organizacion org = interfazOrganizacion.findOrganizacion(orgId);
         Area area = org.getArea(areaId);
         area.solicitarSerParte(miembro);
+    }
+
+    @GetMapping("/recorridos/{orgId}")
+    public List<ResRecorrido> recorridos(@PathVariable Integer orgId) {
+        List<ResRecorrido> res = new ArrayList<>();
+        List<Recorrido> recorridos = interfazOrganizacion.findOrganizacion(orgId).getRecorridos();
+        for (Recorrido recorrido : recorridos) {
+            res.add(new ResRecorrido(recorrido));
+        }
+        return res;
     }
 }

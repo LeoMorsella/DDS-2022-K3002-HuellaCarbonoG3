@@ -43,20 +43,18 @@ public class AreaController {
         return areas.stream().map(ResArea::new).collect(Collectors.toList());
     }
 
-    //Endpoint para obtener solo a las organizaciones que estan activas en la bd
+    //Endpoint para obtener solo a las organizaciones que están activas en la bd
     @GetMapping("/areas/estado")
     public List<Area> getOrganizacionesActivas() {
         return interfazArea.findAreaByEstadoActivo();
     }
 
-    //Endpoint para dar de baja a una organizacion, la baja solamente es logica por lo tanto solo se cambia el estado
     @GetMapping("/area/eliminar/{id}")
     public String deleteOrganizacion(@PathVariable Integer id) {
         interfazArea.deleteArea(id);
-        return "La Area fue dada de baja correctamente";
+        return "El Area fue dada de baja correctamente";
     }
 
-    //Endpoint para crear una nueva organizacion
     @PostMapping("/area/crear")
     public String saveArea(@RequestBody String areaJson) throws ParseException {
         interfazArea.crearArea(areaJson);
@@ -64,14 +62,13 @@ public class AreaController {
     }
 
     @PatchMapping("/area/editar/{id}")
-    public Area cambiarEstadoArea(@PathVariable Integer id){
+    public void cambiarEstadoArea(@PathVariable Integer id){
         interfazArea.cambiarEstadoArea(id);
         Area area = interfazArea.findArea(id);
-        return area;
     }
 
     @PutMapping("/area/editar/{id}")
-    public Area actualizarOrganizacion(@PathVariable Integer id, @RequestBody Area area) throws Exception {
-        return interfazArea.modificarArea(id,area);
+    public void actualizarOrganizacion(@PathVariable Integer id, @RequestBody Area area) throws Exception {
+        interfazArea.modificarArea(id,area);
     }
 }
