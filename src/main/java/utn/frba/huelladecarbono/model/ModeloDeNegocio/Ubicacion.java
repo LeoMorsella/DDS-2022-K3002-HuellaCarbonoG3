@@ -39,13 +39,6 @@ public class Ubicacion {
     @Column
     private String altura;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
-    private Organizacion organizacion;
-
-    @OneToMany(mappedBy = "ubicacion",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<Parada> paradas = new ArrayList<>();
-
     public Ubicacion(String pais, String provincia, String municipio, String localidad, String calle, String altura) throws Exception {
         APIDistanciaService API = new APIDistanciaService();
         this.pais = pais;

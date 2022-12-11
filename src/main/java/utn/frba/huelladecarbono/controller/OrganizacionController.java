@@ -7,6 +7,7 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
+import utn.frba.huelladecarbono.respuestaEndpoint.*;
 import utn.frba.huelladecarbono.service.AreaService;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCOrganizacion;
 import utn.frba.huelladecarbono.service.*;
@@ -38,35 +39,33 @@ public class OrganizacionController {
     @Autowired
     private UbicacionController uc;
 
-
-    //Endpoint para obtener a todos las organizaciones
     @GetMapping({"/", ""})
-    public List<Organizacion> getOrganizaciones(){
-       //obtener organizaciones, modificar las areas y setear la organizacion en null
+    public List<ResOrganizacion> getOrganizaciones(){
+        List<ResOrganizacion> res = new ArrayList<>();
         List<Organizacion> organizaciones = interfazOrganizacion.getOrganizaciones();
         for (Organizacion organizacion : organizaciones) {
-            organizacion.ponerOrgDentroDeAreasEnNull();
+            res.add(new ResOrganizacion(organizacion));
         }
-        return organizaciones;
+        return res;
     }
 
     @GetMapping("/{id}")
-    public Organizacion getOrganizacionPorID(@PathVariable String id) {
-        return interfazOrganizacion.findOrganizacion(Integer.parseInt(id));
+    public ResOrganizacion getOrganizacionPorID(@PathVariable String id) {
+        return new ResOrganizacion(interfazOrganizacion.findOrganizacion(Integer.parseInt(id)));
     }
 
-    //Endpoint para obtener solo a las organizaciones que estan activas en la bd
-    @GetMapping("/estado")
     public List<Organizacion> getOrganizacionesActivas() {
-
             return interfazOrganizacion.findOrganizacionByEstadoActivo();
-
     }
 
-    //Obtener las areas de una organizacion en particular
     @GetMapping("/areas/{id}")
-    public List<Area> getAreas(@PathVariable String id) {
-        return areaService.findByOrganizacion(id);
+    public List<ResArea> getAreas(@PathVariable String id) {
+List<ResArea> res = new ArrayList<>();
+        List<Area> areas = areaService.findByOrganizacion(id);
+        for (Area area : areas) {
+            res.add(new ResArea(area));
+        }
+        return res;
     }
 
     @GetMapping("/huella/{id}")
@@ -75,15 +74,23 @@ public class OrganizacionController {
     }
 
     @GetMapping("/{id}/contactosWp")
-    public List<Miembro> getContactosWp(@PathVariable String id){
-        int idn = Integer.parseInt(id);
-        return organizacionService.findOrganizacion(idn).getContactosWP();
+    public List<ResMiembro> getContactosWp(@PathVariable Integer id){
+        List<ResMiembro> res = new ArrayList<>();
+        List<Miembro> miembros = organizacionService.findOrganizacion(id).getContactosWP();
+        for (Miembro miembro : miembros) {
+            res.add(new ResMiembro(miembro));
+        }
+        return res;
     }
 
     @GetMapping("/{id}/contactosMail")
-    public List<Miembro> getContactosMail(@PathVariable String id){
-        int idn = Integer.parseInt(id);
-        return organizacionService.findOrganizacion(idn).getContactosMail();
+    public List<ResMiembro> getContactosMail(@PathVariable Integer id){
+        List<ResMiembro> res = new ArrayList<>();
+        List<Miembro> miembros = organizacionService.findOrganizacion(id).getContactosMail();
+        for (Miembro miembro : miembros) {
+            res.add(new ResMiembro(miembro));
+        }
+        return res;
     }
 
     //Endpoint para dar de baja a una organizacion, la baja solamente es logica por lo tanto solo se cambia el estado
@@ -100,15 +107,14 @@ public class OrganizacionController {
     }
 
     @PatchMapping("/editarEstado/{id}")
-    public Organizacion cambiarEstadoOrganizacion(@PathVariable Integer id){
+    public void cambiarEstadoOrganizacion(@PathVariable Integer id){
         interfazOrganizacion.cambiarEstadoOrganizacion(id);
-        return interfazOrganizacion.findOrganizacion(id);
     }
 
     @PutMapping("/editar/{id}")
-    public Organizacion actualizarOrganizacion(@PathVariable Integer id, @RequestParam String razonSocial, @RequestParam String tipo, @RequestParam String clasificacion,  @RequestParam Boolean estaActivo) {
-        Organizacion org = new Organizacion(razonSocial, TipoOrg.valueOf(tipo), null, Clasificacion.valueOf(clasificacion), null, null, null, null, null, null, estaActivo);
-        return interfazOrganizacion.modificarOrganizacion(id,org);
+    public void actualizarOrganizacion(@PathVariable Integer id, @RequestParam String razonSocial, @RequestParam String tipo, @RequestParam String clasificacion,  @RequestParam Boolean estaActivo, @RequestParam String nombre) {
+        Organizacion org = new Organizacion(razonSocial, TipoOrg.valueOf(tipo), null, Clasificacion.valueOf(clasificacion), null, null, null, null, null, null, estaActivo, nombre);
+        interfazOrganizacion.modificarOrganizacion(id,org);
     }
 
     @PutMapping("/{organizacionID}/areas/borrar/{areaID}")
@@ -118,12 +124,25 @@ public class OrganizacionController {
                 .borrarArea(areaID);
     }
     @GetMapping("{organizacionId}/miembros")
-    public List<Miembro> miembros(@PathVariable Integer organizacionId) {
-        return organizacionRepository.getById(organizacionId).getMiembros();
+    public List<ResMiembro> miembros(@PathVariable Integer organizacionId) {
+
+        List<ResMiembro> res = new ArrayList<>();
+        List<Miembro> miembros = organizacionRepository.getById(organizacionId).getMiembros();
+        for (Miembro miembro : miembros) {
+            res.add(new ResMiembro(miembro));
+        }
+        return res;
     }
+
     @GetMapping("{organizacionId}/miembrosEnEspera")
-    public HashMap<Miembro, Area> miembrosEnEspera(@PathVariable Integer organizacionId) {
-        return organizacionRepository.getById(organizacionId).getMiembrosEnEspera();
+    public List<ResMiembroEnEspera> miembrosEnEspera(@PathVariable Integer organizacionId) {
+
+        List<ResMiembroEnEspera> res = new ArrayList<>();
+        List<MiembroEnEspera> miembros = organizacionRepository.getById(organizacionId).getMiembrosEnEspera();
+        for (MiembroEnEspera miembro : miembros) {
+            res.add(new ResMiembroEnEspera(miembro));
+        }
+        return res;
     }
     @PatchMapping("aceptarMiembro/{organizacionId}/{areaId}/{miembroId}")
     public void aceptarMiembro(@PathVariable Integer organizacionId, @PathVariable Integer areaId, @PathVariable Integer miembroId) throws Exception {

@@ -84,8 +84,8 @@ public class CreadorDeObjetos {
 
 
 
-    public Organizacion crearOrganizacion(String razonSocial, TipoOrg tipo, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, Boolean estaActivo) {
-        Organizacion organizacion = new Organizacion(razonSocial,tipo,clasificacion,contactosMail,contactosWP,estaActivo);
+    public Organizacion crearOrganizacion(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, ArrayList<Miembro> contactosMail, ArrayList<Miembro> contactosWP, Boolean estaActivo, String nombre) {
+        Organizacion organizacion = new Organizacion(razonSocial,tipo, ubicacion, clasificacion,contactosMail,contactosWP,null, null,null,null, estaActivo, nombre);
         repoOrganizaciones.save(organizacion);
         repositorioOrganizacionesEnMemoria.agregarOrganizacion(organizacion);
         return organizacion;
@@ -98,8 +98,8 @@ public class CreadorDeObjetos {
         return null;
     }
 
-    public Organizacion crearOrganizacionConHC(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, List<Miembro> contactosMail, List<Miembro> contactosWP, List<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Double huellaCarbono ,Boolean estaActivo) {
-        Organizacion organizacion = new Organizacion( razonSocial,  tipo,  ubicacion, clasificacion, contactosMail, contactosWP, hcMensual,  hcPromedio, huellasCarbono, huellaCarbono,  estaActivo);
+    public Organizacion crearOrganizacionConHC(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, List<Miembro> contactosMail, List<Miembro> contactosWP, List<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Double huellaCarbono ,Boolean estaActivo, String nombre) {
+        Organizacion organizacion = new Organizacion( razonSocial,  tipo,  ubicacion, clasificacion, contactosMail, contactosWP, hcMensual,  hcPromedio, huellasCarbono, huellaCarbono,  estaActivo, nombre);
         repoOrganizaciones.save(organizacion);
         repositorioOrganizacionesEnMemoria.agregarOrganizacion(organizacion);
         return organizacion;

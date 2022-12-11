@@ -1,21 +1,15 @@
 package utn.frba.huelladecarbono.model.ModeloDeNegocio;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import utn.frba.huelladecarbono.controller.AreaController;
 import utn.frba.huelladecarbono.model.CreadorDeObjetos.CreadorDeObjetos;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.Medio;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioTrayectos;
+import utn.frba.huelladecarbono.respuestaEndpoint.MiembroEnEspera;
 import lombok.Getter;
 import lombok.Setter;
-import utn.frba.huelladecarbono.repository.OrganizacionRepository;
-import utn.frba.huelladecarbono.service.AreaService;
-
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,13 +22,17 @@ public class Organizacion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @Column
+    private String nombre;
     @Column
     private String razonSocial;
     @Column
     private Double huellaCarbono;
     @Enumerated(EnumType.STRING)
     private TipoOrg tipo;
-    @OneToOne(mappedBy = "organizacion")
+
+    @ManyToOne
     private Ubicacion ubicacion;
     @OneToMany(mappedBy = "organizacion",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Area> areas = new ArrayList<>();
@@ -68,15 +66,7 @@ public class Organizacion {
 
 
 
-
-
-
-    public Organizacion(Organizacion organizacionclase) {
-    }
-
-
-
-    public Organizacion(String razonSocial, TipoOrg tipo,Ubicacion ubicacion, Clasificacion clasificacion,List<Miembro> contactosMail, List<Miembro> contactosWP,List<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Double huellaCarbono,Boolean estaActivo) {
+    public Organizacion(String razonSocial, TipoOrg tipo,Ubicacion ubicacion, Clasificacion clasificacion,List<Miembro> contactosMail, List<Miembro> contactosWP,List<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Double huellaCarbono,Boolean estaActivo, String nombre) {
 
         this.razonSocial = razonSocial;
         this.tipo = tipo;
@@ -89,6 +79,7 @@ public class Organizacion {
         this.hcPromedio = hcPromedio;
         this.huellasCarbono = huellasCarbono;
         this.estaActivo = estaActivo;
+        this.nombre = nombre;
     }
 
     public Organizacion() {
@@ -235,11 +226,11 @@ public class Organizacion {
         return miembros;
     }
 
-    public HashMap<Miembro, Area> getMiembrosEnEspera(){
-        HashMap<Miembro, Area> miembros = new HashMap<>();
+    public List<MiembroEnEspera> getMiembrosEnEspera(){
+        List<MiembroEnEspera> miembros = new ArrayList<>();
         for (Area area: areas){
             for (Miembro miembro: area.getMiembrosEnEspera()){
-                miembros.put(miembro, area);
+                miembros.add(new MiembroEnEspera(miembro, area));
             }
         }
         return miembros;

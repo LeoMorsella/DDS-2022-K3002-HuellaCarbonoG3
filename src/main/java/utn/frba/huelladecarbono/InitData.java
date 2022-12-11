@@ -5,21 +5,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.stereotype.Component;
 import utn.frba.huelladecarbono.controller.OrganizacionController;
-import utn.frba.huelladecarbono.model.CalculoDeDistancias.Distancia;
 import utn.frba.huelladecarbono.model.CreadorDeObjetos.CreadorDeObjetos;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
-import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
-import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.model.Seguridad.Rol;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.*;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
-import utn.frba.huelladecarbono.service.UbicacionService;
 import utn.frba.huelladecarbono.service.UsuarioService;
-
-import java.time.LocalDate;
 import java.util.*;
 
 @Component
@@ -30,9 +24,6 @@ public class InitData implements CommandLineRunner {
     UsuarioService usuarioService;
     @Autowired
     OrganizacionRepository repoOrganizacion;
-
-    @Autowired
-    RepositorioOrganizaciones repositorioOrganizaciones;
 
     @Autowired
     OrganizacionController organizacionController;
@@ -118,32 +109,29 @@ public class InitData implements CommandLineRunner {
 
     //TODO Falla de recorridos
 
-   public void cargarRecorridos() throws Exception
-    {
-
-            Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
-            creadorDeObjetos.crearRecorrido(organizacion1,0.50, Calendario.crearFecha(1, 2020), Calendario.crearFecha(9, 2022));
-           // //De esta manera se carga el recorrido
-           // Organizacion organizacion3 = new Organizacion("SRL", TipoOrg.ONG, Clasificacion.ESCUELA, null, null, true);
-           // Recorrido recorridoPruebaDos =creadorDeObjetos.crearRecorrido(organizacion3,0.8,Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021));
+   public void cargarRecorridos() throws Exception {
+        if (repoRecorrido.count() == 0) {
+            Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.MINISTERIO, null, null, true, "Gugle");
+            creadorDeObjetos.crearRecorrido(organizacion1, 0.50, Calendario.crearFecha(1, 2020), Calendario.crearFecha(9, 2022));
+            // //De esta manera se carga el recorrido
+            // Organizacion organizacion3 = new Organizacion("SRL", TipoOrg.ONG, Clasificacion.ESCUELA, null, null, true);
+            // Recorrido recorridoPruebaDos =creadorDeObjetos.crearRecorrido(organizacion3,0.8,Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021));
+        }
     }
 
-    public void cargarParadas() throws Exception
-    {
-
+    public void cargarParadas() throws Exception {
+        if(repoParadas.count() == 0) {
             Ubicacion ubicacionPruebaUno = creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
-           // Parada paradaPruebaUno = creadorDeObjetos.crearParada("120", ubicacionPruebaUno);
+            // Parada paradaPruebaUno = creadorDeObjetos.crearParada("120", ubicacionPruebaUno);
             //Parada paradaPruebaDos = creadorDeObjetos.crearParada("50",ubicacionPruebaUno);
-
+        }
     }
 
-    public void cargarUbicaciones() throws Exception
-    {
-
-                Ubicacion ubicacion1 = creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
-                List<Ubicacion> ubicaciones = List.of(ubicacion1);
-
-
+    public void cargarUbicaciones() throws Exception {
+        if (repoUbicaciones.count() == 0) {
+            Ubicacion ubicacion1 = creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
+            List<Ubicacion> ubicaciones = List.of(ubicacion1);
+        }
     }
 
     public void cargarSectores() {
@@ -188,7 +176,7 @@ public class InitData implements CommandLineRunner {
 
     public void cargarTransportePublico() throws Exception {
         config.exposeIdsFor(TransportePublico.class);
-        if(repoTransportes.count()==0) {
+        if(repoTransportes.count() == 0) {
             List<Parada> paradas = new ArrayList<>();
             Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
             Parada paradaPrueba3 = creadorDeObjetos.crearParada("120", ubicacionPruebaUno);
@@ -205,7 +193,7 @@ public class InitData implements CommandLineRunner {
     public void cargarMedioMotorizado() throws Exception
     {
         config.exposeIdsFor(MedioMotorizado.class);
-        if(repoMedioMotorizado.count()==0) {
+        if(repoMedioMotorizado.count() == 0) {
 
             MedioMotorizado medio1 = new MedioMotorizado(TipoVehiculoMotorizado.MOTO,TipoCombustible.NAFTA,"FRX123",Boolean.FALSE,"Particular");
             List<MedioMotorizado> mediosMotorizados = List.of(medio1);
@@ -219,7 +207,7 @@ public class InitData implements CommandLineRunner {
         config.exposeIdsFor(Area.class);
         if(repoAreas.count() == 0) {
             Area area1 = new Area("Gonzalez Catan",null,null);
-            Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
+            Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.MINISTERIO, null, null, true, "Micorosof");
             area1.setOrganizacion(organizacion1);
             List<Area> areas = List.of(area1);
             areas.stream().forEach(area -> {
@@ -256,21 +244,21 @@ public class InitData implements CommandLineRunner {
 
     //Solo a modo prueba es esto
 
-    public void cargarMiembros() throws Exception
-    {
-
-            Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
-            Area area1 = creadorDeObjetos.crearArea("AreaPrueba",organizacion1);
-            Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro(area1,"Pablo","Ortiz","pablo@prueba","2323",true);
+    public void cargarMiembros() throws Exception {
+        if (repoMiembros.count() == 0) {
+            Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.MINISTERIO, null, null, true, "Caralibro");
+            Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
+            Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro(area1, "Pablo", "Ortiz", "pablo@prueba", "2323", true);
             //Miembro miembroPruebaDos = creadorDeObjetos.crearMiembro(area1,"Juan","Ortiz","juan@prueba","23523",true);
+        }
     }
 
-    public void cargarOrganizaciones() throws Exception
-    {
-            Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, Clasificacion.MINISTERIO, null, null, true);
-            Organizacion organizacion2 = creadorDeObjetos.crearOrganizacion("SRA", TipoOrg.GUBERNAMENTAL, Clasificacion.EMPRESA_SECTOR_PRIMARIO, null, null, false);
-            Organizacion organizacion3 = creadorDeObjetos.crearOrganizacion("SRL", TipoOrg.ONG, Clasificacion.ESCUELA, null, null, true);
-            Organizacion organizacion4 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.INSTITUCION, Clasificacion.EMPRESA_SECTOR_SECUNDARIO, null, null, false);
+    public void cargarOrganizaciones() throws Exception {
+        if (repoOrganizacion.count() == 0) {
+            Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.MINISTERIO, null, null, true, "Amason");
+            Organizacion organizacion2 = creadorDeObjetos.crearOrganizacion("SRA", TipoOrg.GUBERNAMENTAL, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.EMPRESA_SECTOR_PRIMARIO, null, null, false, "MMM");
+            Organizacion organizacion3 = creadorDeObjetos.crearOrganizacion("SRL", TipoOrg.ONG, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.ESCUELA, null, null, true, "Coto");
+            Organizacion organizacion4 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.INSTITUCION, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.EMPRESA_SECTOR_SECUNDARIO, null, null, false, "VVBA");
             /*Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
             ArrayList<Double> listaHCPrueba = new ArrayList<>();
             //Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
@@ -285,7 +273,7 @@ public class InitData implements CommandLineRunner {
             organizacion1.agregarContactoWP(miembroPruebaWP);
             organizacion1.agregarContactoMail(miembroPruebaMail);
            // RepositorioOrganizaciones.getRepositorio().getOrganizaciones().add(organizacion1);*/
-
+        }
     }
 /*
     public void actualizarOrganizacion() throws Exception
@@ -301,7 +289,7 @@ public class InitData implements CommandLineRunner {
     }
 
     public void cargarSectoresTerritoriales() {
-        if(true) {
+        if(repoSectorTerritorial.count() == 0) {
            creadorDeObjetos.crearSectorTerritorial(new SectorTerritorial(null, null, "BUENOS AIRES"));
            creadorDeObjetos.crearSectorTerritorial(new SectorTerritorial(null, null, "FORMOSA"));
            creadorDeObjetos.crearSectorTerritorial(new SectorTerritorial(null, null, "CHACO"));
