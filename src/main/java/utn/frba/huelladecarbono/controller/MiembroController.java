@@ -9,6 +9,8 @@ import utn.frba.huelladecarbono.respuestaEndpoint.ResMiembro;
 import utn.frba.huelladecarbono.respuestaEndpoint.ResRecorrido;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCMiembro;
 import utn.frba.huelladecarbono.service.IMiembroService;
+import utn.frba.huelladecarbono.service.IOrganizacionService;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +25,9 @@ public class MiembroController {
 
     @Autowired
     OrganizacionController orgController;
+
+    @Autowired
+    IOrganizacionService interfazOrganizacion;
 
     @GetMapping("/{id}")
     public ResMiembro getMiembroPorID(@PathVariable Integer id) throws Exception {
@@ -59,14 +64,16 @@ public class MiembroController {
         interfazMiembro.modificarMiembro(id,miembro);
     }
 
-    @PostMapping("/calcularHuella/{miembroId}")
-    public HashMap<Double, Double> calcularHuella(@PathVariable Integer miembroId, @RequestBody LocalDate fechaInicio, @RequestBody LocalDate fechaFin, @RequestBody Integer orgId) throws Exception {
-        Double huella = CalculadoraHCMiembro.calcularHC(interfazMiembro.findMiembro(miembroId), fechaInicio, fechaFin, RepositorioOrganizaciones.getRepositorio().findOrganizacion(orgId));
-        Double impacto = CalculadoraHCMiembro.calcularImpactoIndividual(interfazMiembro.findMiembro(miembroId),RepositorioOrganizaciones.getRepositorio().findOrganizacion(orgId), fechaInicio, fechaFin );
-        HashMap<Double, Double> resultado = new HashMap<>();
-        resultado.put(huella, impacto);
+    @GetMapping("/calcularHuella/{miembroId}/{diaI}/{mesI}/{anioI}/{diaF}/{mesF}/{anioF}/{orgId}")
+    public List<Double> calcularHuella(@PathVariable Integer miembroId, @PathVariable Integer diaI, @PathVariable Integer mesI, @PathVariable Integer anioI, @PathVariable Integer diaF, @PathVariable Integer mesF, @PathVariable Integer anioF, @PathVariable Integer orgId) throws Exception {
+        LocalDate fechaI = LocalDate.of(anioI, mesI, diaI);
+        LocalDate fechaF = LocalDate.of(anioF, mesF, diaF);
+        Double huella = CalculadoraHCMiembro.calcularHC(interfazMiembro.findMiembro(miembroId), fechaI, fechaF, interfazOrganizacion.findOrganizacion(orgId));
+        Double impacto = CalculadoraHCMiembro.calcularImpactoIndividual(interfazMiembro.findMiembro(miembroId),interfazOrganizacion.findOrganizacion(orgId), fechaI, fechaF);
+        List<Double> resultado = new ArrayList<>();
+        resultado.add(huella);
+        resultado.add(impacto);
         return resultado;
-        //Verificar si usar handlebars o no, ya que es carga a BD y visualizacion
     }
 
     @PostMapping("/solicitarSerParte/{orgId}/{areaId}/{miembroId}")

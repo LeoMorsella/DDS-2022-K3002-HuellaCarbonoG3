@@ -56,8 +56,8 @@ public class OrganizacionController {
     }
 
     @GetMapping("/{id}")
-    public ResOrganizacion getOrganizacionPorID(@PathVariable String id) {
-        return new ResOrganizacion(interfazOrganizacion.findOrganizacion(Integer.parseInt(id)));
+    public ResOrganizacion getOrganizacionPorID(@PathVariable Integer id) {
+        return new ResOrganizacion(interfazOrganizacion.findOrganizacion(id));
     }
 
     public List<Organizacion> getOrganizacionesActivas() {
