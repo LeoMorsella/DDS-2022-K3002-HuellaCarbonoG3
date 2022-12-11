@@ -101,7 +101,7 @@ public class InitData implements CommandLineRunner {
         cargarParadas();
         cargarUbicaciones();
         cargarAreas();
-        cargarTrayectos();
+        //cargarTrayectos();
         /*cargarTransportePublico();
         darDeBajaOrganizacion();
          */
