@@ -1,10 +1,12 @@
 package utn.frba.huelladecarbono.respuestaEndpoint;
 
+import lombok.Getter;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class ResMiembro {
     private String nombre;
     private String apellido;
