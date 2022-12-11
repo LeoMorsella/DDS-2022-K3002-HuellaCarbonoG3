@@ -65,4 +65,10 @@ public class MiembroController {
         //Verificar si usar handlebars o no, ya que es carga a BD y visualizacion
     }
 
+    @PostMapping("/solicitarSerParte/{orgId}/{areaId}/{miembroId}")
+    public void solicitarSerParte(@PathVariable Integer orgId, @PathVariable Integer areaId, @PathVariable Integer miembroId) throws Exception {
+        OrganizacionController orgController = new OrganizacionController();
+        orgController.solicitarSerParte(orgId, areaId, miembroId);
+    }
+
 }

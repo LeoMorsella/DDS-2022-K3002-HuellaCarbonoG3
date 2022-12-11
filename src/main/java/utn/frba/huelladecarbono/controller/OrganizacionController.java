@@ -1,10 +1,6 @@
 package utn.frba.huelladecarbono.controller;
 
-import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.CalculoDeDistancias.Provincia;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
@@ -12,15 +8,10 @@ import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 import utn.frba.huelladecarbono.service.AreaService;
-import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCMiembro;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCOrganizacion;
-import utn.frba.huelladecarbono.repository.SectorTerritorialRepository;
 import utn.frba.huelladecarbono.service.*;
-import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCOrganizacion;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCService;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.HCInforme;
-
-import javax.persistence.criteria.CriteriaBuilder;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
@@ -60,7 +51,7 @@ public class OrganizacionController {
     }
 
     @GetMapping("/{id}")
-    public Organizacion getOrganizacionPorID(@PathVariable String id) throws Exception {
+    public Organizacion getOrganizacionPorID(@PathVariable String id) {
         return interfazOrganizacion.findOrganizacion(Integer.parseInt(id));
     }
 
@@ -111,12 +102,11 @@ public class OrganizacionController {
     @PatchMapping("/editarEstado/{id}")
     public Organizacion cambiarEstadoOrganizacion(@PathVariable Integer id){
         interfazOrganizacion.cambiarEstadoOrganizacion(id);
-        Organizacion orga = interfazOrganizacion.findOrganizacion(id);
-        return orga;
+        return interfazOrganizacion.findOrganizacion(id);
     }
 
     @PutMapping("/editar/{id}")
-    public Organizacion actualizarOrganizacion(@PathVariable Integer id, @RequestParam String razonSocial, @RequestParam String tipo, @RequestParam String clasificacion,  @RequestParam Boolean estaActivo) throws Exception {
+    public Organizacion actualizarOrganizacion(@PathVariable Integer id, @RequestParam String razonSocial, @RequestParam String tipo, @RequestParam String clasificacion,  @RequestParam Boolean estaActivo) {
         Organizacion org = new Organizacion(razonSocial, TipoOrg.valueOf(tipo), null, Clasificacion.valueOf(clasificacion), null, null, null, null, null, null, estaActivo);
         return interfazOrganizacion.modificarOrganizacion(id,org);
     }
@@ -141,8 +131,8 @@ public class OrganizacionController {
         organizacionRepository.getById(organizacionId).getArea(areaId).aceptarMiembro(miembro);
     }
 
-    @PatchMapping("rechazarMiembro/{organizacionId}/{areaID}/{miembroId}")
-    public void rechazarMiembro(@PathVariable Integer organizacionId, @PathVariable Integer areaId, @PathVariable Integer miembroId) throws Exception {
+    @PatchMapping("rechazarMiembro/{organizacionId}/{areaId}/{miembroId}")
+    public void rechazarMiembro(@PathVariable Integer organizacionId, @PathVariable Integer areaId, @PathVariable Integer miembroId) {
         Miembro miembro = RepositorioMiembros.getRepositorio().findMiembro(miembroId);
         organizacionRepository.getById(organizacionId).getArea(areaId).rechazarMiembro(miembro);
     }
@@ -189,12 +179,10 @@ public class OrganizacionController {
 
         for (Provincia provincia : provincias) {
             Double hc = 0.0;
-            List<Organizacion> organizaciones = interfazOrganizacion.getOrganizaciones().stream().filter(org -> org.getUbicacion().getProvincia().equals(provincia)).toList();
+            List<Organizacion> organizaciones = interfazOrganizacion.getOrganizaciones().stream().filter(org -> org.getUbicacion().getProvincia().equals(provincia.getNombre())).toList();
             for (Organizacion org : organizaciones) {
                 hc += CalculadoraHCService.getCalculadoraHC().calcularHCOrganizacion(org,LocalDate.of(LocalDate.EPOCH.getYear(), 1,1), LocalDate.of(LocalDate.EPOCH.getYear(), 12,31));
             }
-            System.out.println(provincia.getNombre());
-            System.out.println(hc);
             res.add(new HCInforme(provincia.getNombre(), hc));
         }
         return res;
@@ -209,5 +197,12 @@ public class OrganizacionController {
             res.add(new HCInforme(area.getNombre(), hc));
         }
         return res;
+    }
+
+    public void solicitarSerParte(Integer orgId, Integer areaId, Integer miembroId) {
+        Miembro miembro = RepositorioMiembros.getRepositorio().findMiembro(miembroId);
+        Organizacion org = interfazOrganizacion.findOrganizacion(orgId);
+        Area area = org.getArea(areaId);
+        area.solicitarSerParte(miembro);
     }
 }
