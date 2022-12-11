@@ -163,4 +163,12 @@ public class Miembro {
         return new ArrayList<>(new HashSet<>(organizaciones));
 
     }
+
+    public void eliminarArea(Integer areaId) {
+        Area areaF = areas.stream()
+                .filter(area -> area.getId().equals(areaId))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Area no encontrada"));
+        areas.remove(areaF);
+    }
 }

@@ -28,4 +28,5 @@ public interface IMiembroService {
 
     void cambiarEstadoMiembro(Integer id);
 
+    void eliminarArea(Integer miembroId, Integer areaId);
 }

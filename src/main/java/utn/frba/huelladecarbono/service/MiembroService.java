@@ -69,4 +69,11 @@ public class MiembroService implements IMiembroService {
 
         this.saveMiembro(miembro);
     }
+
+    @Override
+    public void eliminarArea(Integer miembroId, Integer areaId) {
+        Miembro miembro = findMiembro(miembroId);
+        miembro.eliminarArea(areaId);
+        this.saveMiembro(miembro);
+    }
 }

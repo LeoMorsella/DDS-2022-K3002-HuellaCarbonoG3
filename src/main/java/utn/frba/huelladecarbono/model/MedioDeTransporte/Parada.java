@@ -17,6 +17,7 @@ public class Parada {
     @Column
     private String nombre;
     @ManyToOne
+    @JoinColumn (name="ubicacion_id",referencedColumnName = "id")
     private Ubicacion ubicacion;
     @ManyToOne
     @JoinColumn (name="distancia",referencedColumnName = "id")

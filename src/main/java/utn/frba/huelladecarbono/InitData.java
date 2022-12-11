@@ -88,7 +88,7 @@ public class InitData implements CommandLineRunner {
         cargarMedioNoMotorizado();
         cargarMedioMotorizado();
         cargarUsuarios();
-       // cargarParadas();
+        //cargarParadas();
         cargarUbicaciones();
         cargarAreas();
         //cargarTrayectos();
