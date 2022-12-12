@@ -17,6 +17,7 @@ import utn.frba.huelladecarbono.respuestaEndpoint.ResInforme;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("organizaciones/")
@@ -39,11 +40,12 @@ public class OrganizacionController {
 
     @Autowired
     private UbicacionController uc;
-    @Autowired
-    private MiembroRepository miembroRepository;
 
     @Autowired
     private IMiembroService interfazMiembro;
+
+    @Autowired
+    private MiembroRepository miembroRepository;
 
     @GetMapping({"/", ""})
     public List<ResOrganizacion> getOrganizaciones(){
@@ -133,7 +135,7 @@ public class OrganizacionController {
     public List<ResMiembro> miembros(@PathVariable Integer organizacionId) {
 
         List<ResMiembro> res = new ArrayList<>();
-        List<Miembro> miembros = organizacionRepository.getById(organizacionId).getMiembros();
+        List<Miembro> miembros = interfazMiembro.getMiembros().stream().filter(m -> m.esDeUnaOrganizacion(organizacionId)).collect(Collectors.toList());
         for (Miembro miembro : miembros) {
             res.add(new ResMiembro(miembro));
         }

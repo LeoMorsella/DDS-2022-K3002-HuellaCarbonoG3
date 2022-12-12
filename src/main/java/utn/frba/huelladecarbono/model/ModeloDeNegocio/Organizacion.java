@@ -201,6 +201,7 @@ public class Organizacion {
         this.clasificacion = clasificacion;
         this.contactosMail = contactosMail;
         this.contactosWP = contactosWP;
+        this.estaActivo = true;
     }
 
     public Organizacion(String razonSocial, TipoOrg tipo, Clasificacion clasificacion, List<Miembro> contactosMail, List<Miembro> contactosWP, Boolean estaActivo) {
@@ -209,7 +210,7 @@ public class Organizacion {
         this.clasificacion = clasificacion;
         this.contactosMail = contactosMail;
         this.contactosWP = contactosWP;
-        this.estaActivo = estaActivo;
+        this.estaActivo = true;
     }
 
     public Area getArea(Integer areaId) {

@@ -106,6 +106,8 @@ public class InitData implements CommandLineRunner {
         Usuario usuarioOrga = new Usuario("pabloOrga@gmail.com","123",Arrays.asList(new Rol("ROLE_ADM")));
         usuarioService.saveUsuario(usuarioOrga);
 
+        System.out.println("INIT TERMINADO");
+
     }
 
     //TODO Falla de recorridos

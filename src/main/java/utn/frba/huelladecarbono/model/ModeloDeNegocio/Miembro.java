@@ -175,4 +175,18 @@ public class Miembro {
     public void eliminarRecorrido(Recorrido recorrido) {
         recorridos.remove(recorrido);
     }
+
+    public Boolean esDeUnaOrganizacion(Integer organizacionId) {
+        return areas.stream()
+                .anyMatch(area -> area.getOrganizacion().getId().equals(organizacionId));
+    }
+
+    public Boolean estaEnEspera(Integer organizacionId) {
+        return areas.stream().anyMatch(area -> area.getOrganizacion().getId().equals(organizacionId) && area.getMiembrosEnEspera().stream().anyMatch(miembro -> miembro.getId().equals(this.id)));
+    }
+
+    private Integer getId() {
+        return id;
+    }
+
 }
