@@ -124,7 +124,7 @@
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label for="nombre">Nombre</label>
                                         <input type="text" class="form-control form-control-user" id="nombre"
-                                            :placeholder="nombre" v-model="nombre">
+                                            placeholder="nombre" v-model="nombre">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="apellido">Apellido</label>
@@ -226,7 +226,7 @@
                     email: this.email,
                     telefono: this.telefono
                 }
-                let response = fetch('http://localhost:8080/miembro/editar/1', {
+                fetch('http://localhost:8080/miembro/editar/1', {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'

@@ -127,10 +127,10 @@
                                 </select>
                                 <br><br>
                                 <label for="m-fecha-inicio">Fecha de inicio</label>
-                                <input v-model="fechaIni" type="text" name="" id="m-fecha-inicio" class="form-control form-control-user">
+                                <input v-model="fechaIni" type="date" name="" id="m-fecha-inicio" class="form-control form-control-user">
                                 <br>
                                 <label for="m-fecha-fin">Fecha de fin</label>
-                                <input v-model="fechaFin"type="text" name="" id="m-fecha-fin" class="form-control form-control-user">
+                                <input v-model="fechaFin"type="date" name="" id="m-fecha-fin" class="form-control form-control-user">
                                 <br>
                                 <div style="text-align: center;">
                                     <button @click="calcularHuella()" type="button" class="btn btn-primary">
@@ -212,12 +212,12 @@
             calcularHuella: function() {
                 let fechainit = this.fechaIni;
                 let fechafin = this.fechaFin;
-                let diaInit = fechainit.substring(0,2);
-                let mesInit= fechainit.substring(3,5);
-                let anioInit= fechainit.substring(6,10);
-                let diaFin = fechafin.substring(0,2);
-                let mesFin= fechafin.substring(3,5);
-                let anioFin= fechafin.substring(6,10);
+                let diaInit = fechainit.substring(8,10);
+                let mesInit= fechainit.substring(5,7);
+                let anioInit= fechainit.substring(0,4);
+                let diaFin = fechafin.substring(8,10);
+                let mesFin= fechafin.substring(5,7);
+                let anioFin= fechafin.substring(0,3);
                 fetch('http://localhost:8080/miembro/calcularHuella/1/'+diaInit+'/'+mesInit+'/'+anioInit+'/'+diaFin+'/'+mesFin+'/'+anioFin+'/1')
                     .then(response => response.json())
                     .then(data => {

@@ -141,7 +141,7 @@ public class AppController {
     // AGENTE SECTORIAL
 
     @GetMapping("/AS/reportes")
-    public String reportesAS(){return "OrgAreas";}
+    public String reportesAS(){return "AgenteReportes";}
 
     @GetMapping(value="/AS/reportesTablas", produces = MediaType.TEXT_HTML_VALUE)
     public ResponseEntity<String> reportesASTablas() throws Exception{
