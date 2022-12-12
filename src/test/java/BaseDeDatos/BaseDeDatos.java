@@ -65,12 +65,13 @@ public class BaseDeDatos {
         areas2.add(areas.get(1));
         areas2.add(areas.get(2));
         // TRAYECTOS
+        /*
         trayectos.add(new Trayecto(ubicaciones.get(0), ubicaciones.get(1), new MedioMotorizado(TipoVehiculoMotorizado.AUTO, TipoCombustible.GASOIL, "AUG324", false, "Particular")));
         trayectos.add(new Trayecto(ubicaciones.get(1), ubicaciones.get(2), new MedioMotorizado(TipoVehiculoMotorizado.MOTO, TipoCombustible.ELECTRICO, "KGD567", false, "Particular")));
         trayectos.add(new Trayecto(ubicaciones.get(2), ubicaciones.get(3), new MedioNoMotorizado(TipoMedioNoMotorizado.BICI)));
         trayectos.add(new Trayecto(ubicaciones.get(0), ubicaciones.get(3), new MedioNoMotorizado(TipoMedioNoMotorizado.MONOPATIN)));
         trayectos.add(new Trayecto(ubicaciones.get(1), ubicaciones.get(3), new MedioMotorizado(TipoVehiculoMotorizado.CAMIONETA, TipoCombustible.GASOIL, "AUG324", true, "Taxi")));
-
+*/
         // RECORRIDOS
         recorridos.add(new Recorrido(organizaciones.get(0),0.5, Calendario.crearFecha(1, 2020), Calendario.crearFecha(9, 2022)));
         recorridos.get(0).addTrayecto(trayectos.get(0));

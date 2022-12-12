@@ -50,7 +50,7 @@ public class MiembroService implements IMiembroService {
         return miembro;
     }
 
-    public Miembro modificarMiembro(Integer id, String miembroJson) throws JsonProcessingException, ParseException {
+    public Miembro modificarMiembro(Integer id, String miembroJson) throws ParseException {
         JSONParser parser = new JSONParser();
         JSONObject jObject  = (JSONObject) parser.parse(miembroJson);// json
         Miembro miembroActualizado = this.findMiembro(id);

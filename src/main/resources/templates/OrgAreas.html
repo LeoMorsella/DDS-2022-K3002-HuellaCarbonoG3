@@ -271,7 +271,7 @@
                 }
             },
             created() {
-                fetch('http://localhost:8080/areas/byOrg/1')
+                fetch('http://localhost:8080/areas/1')
                     .then(response => response.json())
                     .then(data => {
                         this.areas = data

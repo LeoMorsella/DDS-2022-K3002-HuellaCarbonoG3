@@ -138,7 +138,7 @@
                                         <label for="m-organizacion">Organizacion</label>
                                         <select id="m-organizacion" name="dataTable_length" aria-controls="dataTable"  v-model="selectOrganizacion"
                                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                            <option v-for="organizacion in organizaciones" @click="cargarAreas()" :value="organizacion.id">{{organizacion.nombre}}</option>
+                                            <option v-for="organizacion in organizaciones" @click="cargarAreas(organizacion.id)" :value="organizacion.id">{{organizacion.nombre}}</option>
                                         </select>
                                         <br><br>
                                         <label for="m-area">Area</label>
@@ -177,7 +177,7 @@
                                 <td class="sorting_1">{{areai.nombreOrga}}</td>
                                 <td>{{areai.area.nombre}}</td>
                                 <td>
-                                    <a @click="borrarArea()" class="btn btn-danger btn-circle">
+                                    <a @click="borrarArea(areai.id)" class="btn btn-danger btn-circle">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -240,21 +240,21 @@
                 opcionesAreas: null
             },
             methods: {
-                cargarAreas: function() {
-                    fetch('http://localhost:8080/areas/byOrg/1')
+                cargarAreas: function(orgId) {
+                    fetch('http://localhost:8080/areas/'+orgId)
                         .then(response => response.json())
                         .then(data => {
                             this.opcionesAreas = data;
                         })
                 },
                 agregarArea: function() {
-                    let response = fetch('/solicitarSerParte/'+this.selectOrganizacion+'/'+this.selectArea+'/1' ,{
+                    let response = fetch('http://localhost:8080/miembro/solicitarSerParte/'+this.selectOrganizacion+'/'+this.selectArea+'/1' ,{
                         method: 'POST'
                     });
                     alert("Solicitud Enviada.");
                 },
-                borrarArea: function() {
-                    fetch('http://localhost:8080/eliminarArea/1/1', {
+                borrarArea: function(areaId) {
+                    fetch('http://localhost:8080/miembro/eliminarArea/1/'+areaId, {
                         method: 'GET',
                     });
                     this.areasyorg.shift();
