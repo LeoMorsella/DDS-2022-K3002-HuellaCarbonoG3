@@ -143,15 +143,15 @@
                         <div class="card-body">
                             <form action="" href="">
                                 <label for="nombre">nombre</label>
-                                <input v-model="nombreSelect" type="text" name="" :value="datosOrga.nombre" id="nombre" class="form-control form-control-user">
+                                <input v-model="nombreSelect" type="text" name="" id="nombre" class="form-control form-control-user">
                                 <br>
                                 <label for="razon-social">Razón Social</label>
-                                <input v-model="razonSocialSelect" type="text" name="" :value="datosOrga.razonSocial" id="razon-social" class="form-control form-control-user">
+                                <input v-model="razonSocialSelect" type="text" name="" id="razon-social" class="form-control form-control-user">
                                 <br>
                                 <label for="tipo">Tipo de organizacion</label>
                                 <select v-model="tipoSelect" name="" id="tipo"
                                     class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                    <option :value="datosOrga.tipo" disabled selected>{{datosOrga.tipo}}</option>
+                                    <option value="" disabled selected>{{tipoSelect}}</option>
                                     <option value="Gubernamental">Gubernamental</option>
                                     <option value="ONG">ONG</option>
                                     <option value="Empresa">Empresa</option>
@@ -161,7 +161,7 @@
                                 <label for="clasificacion">Clasificación</label>
                                 <select v-model="clasificacionSelect" name="" id="clasificacion"
                                     class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                    <option :value="datosOrga.clasificacion" disabled selected>{{datosOrga.clasificacion}}</option>
+                                    <option value="" disabled selected>{{clasificacionSelect}}</option>
                                     <option value="MINISTERIO">Ministerio</option>
                                     <option value="UNIVERSIDAD">Universidad</option>
                                     <option value="ESCUELA">Escuela</option>
@@ -185,7 +185,7 @@
                                             <label for="">Provincia</label>
                                             <select v-model="provinciaSelect" id="" name="dataTable_length" aria-controls="dataTable"
                                                     class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                                <option v-for="provincia in provincias" @click="cargarMunicipio(provincia.id)" :value="provincia.nombre" > {{provincia.nombre}}</option>
+                                                <option v-for="provincia in provincias" @click="cargarMunicipios(provincia.id)" :value="provincia.nombre" > {{provincia.nombre}}</option>
                                             </select>
                                         </div>
                                         <div>
@@ -203,12 +203,12 @@
                                             </select>
                                         </div>
                                         <div>
-                                            <label v-model="calleSelect" for="calle">Calle</label>
-                                            <input type="text" name="" id="calle" class="form-control form-control-user">
+                                            <label for="calle">Calle</label>
+                                            <input v-model="calleSelect" type="text" name="" id="calle" class="form-control form-control-user">
                                         </div>
                                         <div>
-                                            <label v-model="alturaSelect" for="">Altura</label>
-                                            <input type="number" name="" id="" class="form-control form-control-user">
+                                            <label for="">Altura</label>
+                                            <input v-model="alturaSelect" type="number" name="" id="" class="form-control form-control-user">
                                         </div>
                                         <br>
                                         <div style="text-align: center;">
@@ -275,7 +275,6 @@
             localidadSelect: null,
             calleSelect: null,
             alturaSelect: null,
-            datosOrga: null,
             paises: [],
             provincias: [],
             municipios: [],
@@ -297,7 +296,7 @@
                     })
             },
             cargarLocalidades: function(localidadId) {
-                fetch('http://localhost:8080/ubicacion/provincias/'+localidadId)
+                fetch('http://localhost:8080/ubicacion/localidades/'+localidadId)
                     .then(response => response.json())
                     .then(data => {
                         this.localidades = data;
@@ -331,8 +330,16 @@
             fetch('http://localhost:8080/organizaciones/1')
                 .then(response => response.json())
                 .then(data => {
-                    this.datosOrga = data;
-                }),
+                    this.nombreSelect = data.nombre;
+                    this.razonSocialSelect = data.razonSocial;
+                    this.tipoSelect = data.tipo;
+                    this.clasificacionSelect = null;
+                    this.paisSelect = data.pais;
+                    this.provinciaSelect = data.provincia;
+                    this.localidadSelect = data.localidad;
+                    this.calleSelect = data.calle;
+                    this.alturaSelect = data.altura;
+                });
                 fetch('http://localhost:8080/ubicacion/paises')
                     .then(response => response.json())
                     .then(data => {
