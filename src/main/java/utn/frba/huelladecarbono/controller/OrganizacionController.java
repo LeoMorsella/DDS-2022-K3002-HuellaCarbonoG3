@@ -144,11 +144,13 @@ public class OrganizacionController {
 
     @GetMapping("{organizacionId}/miembrosEnEspera")
     public List<ResMiembroEnEspera> miembrosEnEspera(@PathVariable Integer organizacionId) {
-
         List<ResMiembroEnEspera> res = new ArrayList<>();
-        List<MiembroEnEspera> miembros = organizacionRepository.getById(organizacionId).getMiembrosEnEspera();
-        for (MiembroEnEspera miembro : miembros) {
-            res.add(new ResMiembroEnEspera(miembro));
+        List<Area> areas = areaService.findByOrganizacion(organizacionId);
+        for (Area area : areas) {
+             for (Miembro miembro : area.getMiembrosEnEspera()) {
+                 MiembroEnEspera resMiembro = new MiembroEnEspera(miembro, area);
+                 res.add(new ResMiembroEnEspera(resMiembro));
+             }
         }
         return res;
     }
@@ -223,7 +225,7 @@ public class OrganizacionController {
     }
 
     public void solicitarSerParte(Integer orgId, Integer areaId, Integer miembroId) {
-        Miembro miembro = interfazMiembro.findMiembro(miembroId);
+        Miembro miembro = RepositorioMiembros.getRepositorio().findMiembro(miembroId);
         Organizacion org = interfazOrganizacion.findOrganizacion(orgId);
         Area area = org.getArea(areaId);
         area.solicitarSerParte(miembro);
