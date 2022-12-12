@@ -80,4 +80,11 @@ public class OrganizacionService implements IOrganizacionService{
     public Double getHuellaTotal(Integer id){
         return organizacionRepository.findById(id).get().getHuellaTotal();
     }
+
+    @Override
+    public void eliminarRecorrido(Integer orgId, Integer recorridoId) {
+        Organizacion organizacion = this.findOrganizacion(orgId);
+        organizacion.getRecorridos().removeIf(recorrido -> recorrido.getId().equals(recorridoId));
+        this.saveOrganizacion(organizacion);
+    }
 }

@@ -34,9 +34,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="OrgRecomendaciones.html">
-                <div class="sidebar-brand-icon">
-                    <img class="logo" src="../static/img/leaf-and-flames-logo.png" alt="">
-                </div>
+                
                 <div class="sidebar-brand-text mx-3">Huella de Carbono</div>
             </a>
 
@@ -123,7 +121,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Tesla</span>
-                                <img class="img-profile rounded-circle" src="../static/img/undraw_profile.svg">
+                                
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -143,110 +141,12 @@
                 <div class="container-fluid">
                     <div style="">
                         <div class="card o-hidden border-0 shadow-lg col-lg-5" style="margin: 0 auto">
-                            <div class="card-body">
-                                <h5>HC por sector territorial</h5>
-                                <table class="table table-bordered dataTable" width="100%" cellspacing="0" role="grid"
-                                    aria-describedby="dataTable_info" style="margin: 0 auto;">
-                                    <thead>
-                                        <tr role="row">
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending">
-                                                Sector
-                                            </th>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending"
-                                                style="width: 100px; text-align: center;">
-                                                HC</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {{#each HCporST}}
-                                        <tr class="odd">
-                                            <td class="sorting_1">{{nombre}}</td>
-                                            <td>{{valor}}</td>
-                                        </tr>
-                                    {{/each}}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="card-body">
-                                <h5>HC por tipo de organizacion</h5>
-                                <table class="table table-bordered dataTable" width="100%" cellspacing="0" role="grid"
-                                    aria-describedby="dataTable_info" style="margin: 0 auto;;">
-                                    <thead>
-                                        <tr role="row">
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending">
-                                                Tipo
-                                            </th>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending"
-                                                style="width: 100px;  text-align: center">
-                                                HC</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {{#each HCporTipoOrg}}
-                                        <tr class="odd">
-                                            <td class="sorting_1">{{nombre}}</td>
-                                            <td>{{valor}}</td>
-                                        </tr>
-                                    {{/each}}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="card-body">
-                                <h5>Composición del HC por provincias</h5>
-                                <table class="table table-bordered dataTable" width="100%" cellspacing="0" role="grid"
-                                    aria-describedby="dataTable_info" style="margin: 0 auto;;">
-                                    <thead>
-                                        <tr role="row">
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending">
-                                                Provincia
-                                            </th>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending"
-                                                style="width: 100px;  text-align: center">
-                                                HC</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {{#each HCporProvincias}}
-                                        <tr class="odd">
-                                            <td class="sorting_1">{{nombre}}</td>
-                                            <td>{{valor}}</td>
-                                        </tr>
-                                    {{/each}}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="card-body">
-                                <h5>Composición del HC propia</h5>
-                                <table class="table table-bordered dataTable" width="100%" cellspacing="0" role="grid"
-                                    aria-describedby="dataTable_info" style="margin: 0 auto;;">
-                                    <thead>
-                                        <tr role="row">
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending">
-                                                Area
-                                            </th>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending"
-                                                style="width: 100px;  text-align: center">
-                                                HC</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {{#each HCporAreas}}
-                                        <tr class="odd">
-                                            <td class="sorting_1">{{nombre}}</td>
-                                            <td>{{valor}}</td>
-                                        </tr>
-                                    {{/each}}
-                                    </tbody>
-                                </table>
-                            </div>
+                            
+                             <!-- acá van las tablas hbs -->
+                            
+
+                            <!-- acpa finalizan las tablas hbs-->
+
                         </div>
                     </div>
 

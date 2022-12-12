@@ -33,4 +33,6 @@ public interface IOrganizacionService {
     public Organizacion crearOrganizacion(Organizacion organizacion);
 
     public Double getHuellaTotal(Integer id);
+
+    void eliminarRecorrido(Integer orgId, Integer recorridoId);
 }

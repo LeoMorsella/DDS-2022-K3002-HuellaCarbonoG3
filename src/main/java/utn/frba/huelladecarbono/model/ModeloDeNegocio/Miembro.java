@@ -171,4 +171,8 @@ public class Miembro {
                 .orElseThrow(() -> new RuntimeException("Area no encontrada"));
         areas.remove(areaF);
     }
+
+    public void eliminarRecorrido(Recorrido recorrido) {
+        recorridos.remove(recorrido);
+    }
 }

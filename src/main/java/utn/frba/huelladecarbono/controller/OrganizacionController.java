@@ -13,7 +13,7 @@ import utn.frba.huelladecarbono.service.AreaService;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCOrganizacion;
 import utn.frba.huelladecarbono.service.*;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCService;
-import utn.frba.huelladecarbono.service.CalculoDeHuellaService.HCInforme;
+import utn.frba.huelladecarbono.respuestaEndpoint.ResInforme;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
@@ -171,36 +171,33 @@ public class OrganizacionController {
     }
 
     //PARA HANDLEBAR - REPORTES
-    @GetMapping("/HCSectores")
-    public List<HCInforme> HCSectores() {
-        List<HCInforme> res = new ArrayList<>();
+    public List<ResInforme> HCSectores() {
+        List<ResInforme> res = new ArrayList<>();
         List<SectorTerritorial> sectores = stc.getSectorTerritorial();
         for (SectorTerritorial sector : sectores) {
             Double hc = CalculadoraHCService.getCalculadoraHC().calcularHCSectorTerritorial(sector, LocalDate.of(LocalDate.EPOCH.getYear(), 1,1), LocalDate.of(LocalDate.EPOCH.getYear(), 12,31));
-            res.add(new HCInforme(sector.getId().toString(), hc));
+            res.add(new ResInforme(sector.getId().toString(), hc));
         }
         return res;
     }
 
-    @GetMapping("/HCTipoOrg")
-    public List<HCInforme> HCTipoOrg() {
+    public List<ResInforme> HCTipoOrg() {
         List<TipoOrg> tipos = Arrays.stream(TipoOrg.values()).toList();
-        List<HCInforme> res = new ArrayList<>();
+        List<ResInforme> res = new ArrayList<>();
         for (TipoOrg tipo : tipos) {
             List<Organizacion> organizaciones = interfazOrganizacion.getOrganizaciones().stream().filter(org -> org.getTipo().equals(tipo)).toList();
             Double hc = 0.0;
             for (Organizacion org : organizaciones) {
                 hc += CalculadoraHCService.getCalculadoraHC().calcularHCOrganizacion(org,LocalDate.of(LocalDate.EPOCH.getYear(), 1,1), LocalDate.of(LocalDate.EPOCH.getYear(), 12,31));
             }
-            res.add(new HCInforme(tipo.toString(),hc));
+            res.add(new ResInforme(tipo.toString(),hc));
         }
         return res;
     }
 
-    @GetMapping("/HCProvincia")
-    public List<HCInforme> HCProvincia() throws IOException {
+    public List<ResInforme> HCProvincia() throws IOException {
         List<Provincia> provincias = Arrays.stream(uc.getProvincias(9)).toList();
-        List<HCInforme> res = new ArrayList<>();
+        List<ResInforme> res = new ArrayList<>();
 
         for (Provincia provincia : provincias) {
             Double hc = 0.0;
@@ -208,17 +205,17 @@ public class OrganizacionController {
             for (Organizacion org : organizaciones) {
                 hc += CalculadoraHCService.getCalculadoraHC().calcularHCOrganizacion(org,LocalDate.of(LocalDate.EPOCH.getYear(), 1,1), LocalDate.of(LocalDate.EPOCH.getYear(), 12,31));
             }
-            res.add(new HCInforme(provincia.getNombre(), hc));
+            res.add(new ResInforme(provincia.getNombre(), hc));
         }
         return res;
     }
 
-    public List<HCInforme> HCPropia(Integer orgId) {
-        List<HCInforme> res = new ArrayList<>();
+    public List<ResInforme> HCPropia(Integer orgId) {
+        List<ResInforme> res = new ArrayList<>();
         List<Area> areas = areaService.findByOrganizacion(orgId);
         for (Area area : areas) {
             Double hc = CalculadoraHCService.getCalculadoraHC().calcularHCArea(area,LocalDate.of(LocalDate.EPOCH.getYear(), 1,1), LocalDate.of(LocalDate.EPOCH.getYear(), 12,31));
-            res.add(new HCInforme(area.getNombre(), hc));
+            res.add(new ResInforme(area.getNombre(), hc));
         }
         return res;
     }
@@ -238,5 +235,10 @@ public class OrganizacionController {
             res.add(new ResRecorrido(recorrido));
         }
         return res;
+    }
+
+    @DeleteMapping("/eliminarRecorrido/{orgId}/{recorridoId}")
+    public void eliminarRecorrido(@PathVariable Integer orgId, @PathVariable Integer recorridoId) {
+        interfazOrganizacion.eliminarRecorrido(orgId, recorridoId);
     }
 }

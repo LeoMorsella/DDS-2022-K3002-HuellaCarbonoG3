@@ -14,6 +14,7 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.repository.MiembroRepository;
+import utn.frba.huelladecarbono.repository.RecorridoRepository;
 
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class MiembroService implements IMiembroService {
 
     @Autowired
     private MiembroRepository miembroRepository;
+    @Autowired
+    private RecorridoRepository recorridoRepository;
 
 
     @Override
@@ -74,6 +77,14 @@ public class MiembroService implements IMiembroService {
     public void eliminarArea(Integer miembroId, Integer areaId) {
         Miembro miembro = findMiembro(miembroId);
         miembro.eliminarArea(areaId);
+        this.saveMiembro(miembro);
+    }
+
+    @Override
+    public void eliminarRecorrido(Integer miembroId, Integer recorridoId) {
+        Miembro miembro = findMiembro(miembroId);
+        Recorrido recorrido = recorridoRepository.getById(recorridoId);
+        miembro.eliminarRecorrido(recorrido);
         this.saveMiembro(miembro);
     }
 }

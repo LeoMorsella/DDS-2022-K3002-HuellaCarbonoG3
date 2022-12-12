@@ -1,10 +1,10 @@
-package utn.frba.huelladecarbono.service.CalculoDeHuellaService;
+package utn.frba.huelladecarbono.respuestaEndpoint;
 
-public class HCInforme {
+public class ResInforme {
     public String nombre;
     public Double valor;
 
-    public HCInforme(String nombre, Double valor) {
+    public ResInforme(String nombre, Double valor) {
         this.nombre = nombre;
         this.valor = valor;
     }

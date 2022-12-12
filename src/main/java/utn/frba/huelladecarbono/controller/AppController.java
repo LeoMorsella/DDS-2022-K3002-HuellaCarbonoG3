@@ -7,10 +7,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import utn.frba.huelladecarbono.service.CalculoDeHuellaService.HCInforme;
+import utn.frba.huelladecarbono.respuestaEndpoint.ResInforme;
 import utn.frba.huelladecarbono.service.HandleBars;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -111,10 +110,10 @@ public class AppController {
     public ResponseEntity<String> reportesO() throws Exception{
         Template template = handlebars.compile("/templates/OrgReportes");
 
-        List<HCInforme> hcporst = orgaCont.HCSectores();
-        List<HCInforme> hcportipoorg = orgaCont.HCTipoOrg();
-        List<HCInforme> hcporprovincias = orgaCont.HCProvincia();
-        List<HCInforme> hcporareas = orgaCont.HCPropia(1);
+        List<ResInforme> hcporst = orgaCont.HCSectores();
+        List<ResInforme> hcportipoorg = orgaCont.HCTipoOrg();
+        List<ResInforme> hcporprovincias = orgaCont.HCProvincia();
+        List<ResInforme> hcporareas = orgaCont.HCPropia(1);
 
 
 
@@ -142,9 +141,9 @@ public class AppController {
     public ResponseEntity<String> reportesAS() throws Exception{
         Template template = handlebars.compile("/templates/AgenteReportes");
 
-        List<HCInforme> hcporst = orgaCont.HCSectores();
-        List<HCInforme> hcportipoorg = orgaCont.HCTipoOrg();
-        List<HCInforme> hcporprovincias = orgaCont.HCProvincia();
+        List<ResInforme> hcporst = orgaCont.HCSectores();
+        List<ResInforme> hcportipoorg = orgaCont.HCTipoOrg();
+        List<ResInforme> hcporprovincias = orgaCont.HCProvincia();
 
         /*List<HCInforme> listaPruebaST = new ArrayList<>();
         listaPruebaST.add(new HCInforme("laPampa", 89.88));

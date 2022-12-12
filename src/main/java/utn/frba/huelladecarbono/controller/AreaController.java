@@ -43,7 +43,8 @@ public class AreaController {
         return areas.stream().map(ResArea::new).collect(Collectors.toList());
     }
 
-    //Endpoint para obtener solo a las organizaciones que están activas en la bd
+    //qobtener solo a las organizaciones que están activas en la bd
+    // No funciona como endpoint por ser recursivo
     @GetMapping("/areas/estado")
     public List<Area> getOrganizacionesActivas() {
         return interfazArea.findAreaByEstadoActivo();
