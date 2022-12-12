@@ -124,13 +124,6 @@ public class OrganizacionController {
         Organizacion org = new Organizacion(razonSocial, TipoOrg.valueOf(tipo), null, Clasificacion.valueOf(clasificacion), null, null, null, null, null, null, estaActivo, nombre);
         interfazOrganizacion.modificarOrganizacion(id,org);
     }
-
-    @PutMapping("/{organizacionID}/areas/borrar/{areaID}")
-    public void borrarArea(@PathVariable String areaID, @PathVariable String organizacionID){
-        interfazOrganizacion
-                .findOrganizacion(Integer.parseInt(organizacionID))
-                .borrarArea(areaID);
-    }
     @GetMapping("{organizacionId}/miembros")
     public List<ResMiembro> miembros(@PathVariable Integer organizacionId) {
 
@@ -240,7 +233,7 @@ public class OrganizacionController {
     }
 
     @PutMapping("/actualizar")
-    public void actualizar(@RequestBody String organizacion) {
+    public void actualizar(@RequestBody String organizacion) throws Exception {
         interfazOrganizacion.actualizarOrganizacion(organizacion);
     }
 }

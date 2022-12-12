@@ -52,12 +52,6 @@ public class AreaController {
         return interfazArea.findAreaByEstadoActivo();
     }
 
-    @GetMapping("/area/eliminar/{id}")
-    public String deleteOrganizacion(@PathVariable Integer id) {
-        interfazArea.deleteArea(id);
-        return "El Area fue dada de baja correctamente";
-    }
-
     @PostMapping("/area/crear")
     public String saveArea(@RequestBody String areaJson) throws ParseException {
         interfazArea.crearArea(areaJson);
@@ -74,4 +68,34 @@ public class AreaController {
     public void actualizarOrganizacion(@PathVariable Integer id, @RequestBody Area area) throws Exception {
         interfazArea.modificarArea(id,area);
     }
+
+    @DeleteMapping("borrarArea/{idArea}")
+    public void borrarArea(@PathVariable Integer idArea) {
+        interfazArea.deleteArea(idArea);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
