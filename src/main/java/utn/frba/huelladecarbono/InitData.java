@@ -103,8 +103,13 @@ public class InitData implements CommandLineRunner {
 
         Usuario usuarioMiembro = new Usuario("pablo@gmail.com","123",Arrays.asList(new Rol("ROLE_USER")));
         usuarioService.saveUsuario(usuarioMiembro);
-        Usuario usuarioOrga = new Usuario("pabloOrga@gmail.com","123",Arrays.asList(new Rol("ROLE_ADM")));
+
+        Usuario usuarioOrga = new Usuario("luca@gmail.com","123",Arrays.asList(new Rol("ROLE_ADM")));
         usuarioService.saveUsuario(usuarioOrga);
+
+        Usuario usuarioAS = new Usuario("gonza@gmail.com","123",Arrays.asList(new Rol("ROLE_ADM")));
+        usuarioService.saveUsuario(usuarioOrga);
+
 
         System.out.println("INIT TERMINADO");
 
