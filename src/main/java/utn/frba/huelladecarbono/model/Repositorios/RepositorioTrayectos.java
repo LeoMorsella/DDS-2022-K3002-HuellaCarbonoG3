@@ -40,7 +40,7 @@ public class RepositorioTrayectos {
   //TODO probar
   public void cargarDeTrayectoDeBdAlSistema() {
     for(Trayecto trayectoclase : trayectobd.getTrayectos()) {
-      Trayecto trayecto = new Trayecto(trayectoclase.getPuntoPartida(),trayectoclase.getPuntoLlegada(),trayectoclase.getMedioTransporte());
+      Trayecto trayecto = new Trayecto(trayectoclase.getUbicaciones(),trayectoclase.getMedioTransporte());
       this.agregarTrayecto(trayecto);
     }
   }

@@ -236,8 +236,8 @@ public class Organizacion {
         return miembros;
     }
 
-    public void generarTrayecto(Ubicacion salida, Ubicacion llegada, Medio medio){
-        Trayecto nuevoTrayecto = new Trayecto(salida, llegada, medio);
+    public void generarTrayecto(List<Ubicacion> ubicaciones, Medio medio){
+        Trayecto nuevoTrayecto = new Trayecto(ubicaciones, medio);
         RepositorioTrayectos.getRepositorio().agregarTrayecto(nuevoTrayecto);
     }
 

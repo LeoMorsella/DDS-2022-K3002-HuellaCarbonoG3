@@ -88,14 +88,16 @@ public class InitData implements CommandLineRunner {
         cargarMedioNoMotorizado();
         cargarMedioMotorizado();
         cargarUsuarios();
-        //cargarParadas();
+        cargarParadas();
         cargarUbicaciones();
         cargarAreas();
-        //cargarTrayectos();
-        /*cargarTransportePublico();
-        darDeBajaOrganizacion();
-         */
         cargarSectoresTerritoriales();
+        cargarTransportePublico();
+        darDeBajaOrganizacion();
+        cargarTrayectos();
+
+
+
 
 
 
@@ -121,7 +123,7 @@ public class InitData implements CommandLineRunner {
     public void cargarParadas() throws Exception {
         if(repoParadas.count() == 0) {
             Ubicacion ubicacionPruebaUno = creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
-            // Parada paradaPruebaUno = creadorDeObjetos.crearParada("120", ubicacionPruebaUno);
+            Parada paradaPruebaUno = creadorDeObjetos.crearParada("120", ubicacionPruebaUno);
             //Parada paradaPruebaDos = creadorDeObjetos.crearParada("50",ubicacionPruebaUno);
         }
     }
@@ -174,19 +176,18 @@ public class InitData implements CommandLineRunner {
     }
 
     public void cargarTransportePublico() throws Exception {
-        config.exposeIdsFor(TransportePublico.class);
-        if(repoTransportes.count() == 0) {
+
             List<Parada> paradas = new ArrayList<>();
-            Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
+            Ubicacion ubicacionPruebaUno = creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
             Parada paradaPrueba3 = creadorDeObjetos.crearParada("120", ubicacionPruebaUno);
             paradas.add(paradaPrueba3);
-            TransportePublico transporte1 = new TransportePublico(TipoTransportePublico.COLECTIVO,"88", paradas,"123456");
+            TransportePublico transporte1 = creadorDeObjetos.crearTransportePublico(TipoTransportePublico.COLECTIVO,"88", paradas,"123456");
             List<TransportePublico> transportePublicos = List.of(transporte1);
             transportePublicos.stream().forEach(transporte -> {
                 repoTransportes.save(transporte);
             });
 
-        }
+
     }
 
     public void cargarMedioMotorizado() throws Exception
@@ -218,14 +219,12 @@ public class InitData implements CommandLineRunner {
 
     //TODO evaluar si el formato JSON devuelto es valido
     public void cargarTrayectos() throws Exception {
-        config.exposeIdsFor(Area.class);
-        cargarMedioMotorizado();
-        if(repoTrayectos.count() == 0) {
 
             Ubicacion ubicacion1 = creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
-            Ubicacion ubicacion2 = creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
+            //Ubicacion ubicacion2 = creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "150");
+            List<Ubicacion> ubicaciones = List.of(ubicacion1);
             MedioMotorizado medio1 = creadorDeObjetos.crearMedioMotorizado(TipoVehiculoMotorizado.MOTO,TipoCombustible.NAFTA,"FRX123",Boolean.FALSE,"Particular");
-            Trayecto trayecto1 = creadorDeObjetos.crearTrayecto(ubicacion1,ubicacion2,medio1);
+            Trayecto trayecto1 = creadorDeObjetos.crearTrayecto(ubicaciones,medio1);
             /* List<Ubicacion> ubicaciones = List.of(ubicacion1);
            ubicaciones.stream().forEach(ubicacion -> {repoUbicaciones.save(ubicacion);});
             MedioMotorizado medio1 = new MedioMotorizado(TipoVehiculoMotorizado.MOTO,TipoCombustible.NAFTA,"FRX123",Boolean.FALSE,"Particular");
@@ -237,8 +236,6 @@ public class InitData implements CommandLineRunner {
             List<MedioMotorizado> medios = List.of(medio1);
             medios.stream().forEach(medio -> repoMedioMotorizado.save(medio));
             trayectos.stream().forEach(trayecto -> repoTrayectos.save(trayecto));*/
-
-        }
     }
 
     //Solo a modo prueba es esto
@@ -284,7 +281,7 @@ public class InitData implements CommandLineRunner {
 */
     public void darDeBajaOrganizacion() throws Exception
     {
-        organizacionController.deleteOrganizacion(3);
+        organizacionController.deleteOrganizacion(1);
     }
 
     public void cargarSectoresTerritoriales() {

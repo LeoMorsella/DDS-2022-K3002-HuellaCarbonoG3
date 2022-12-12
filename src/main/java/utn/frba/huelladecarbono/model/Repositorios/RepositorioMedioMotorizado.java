@@ -16,7 +16,7 @@ public class RepositorioMedioMotorizado {
     MedioMotorizadoController motorizadodb;
 
     private static RepositorioMedioMotorizado instance = new RepositorioMedioMotorizado();
-    private List<MedioMotorizado> medios;
+    private List<MedioMotorizado> medios = new ArrayList<>();
 
     public void agregarMedioMotorizado(MedioMotorizado medio) {
         this.medios.add(medio);

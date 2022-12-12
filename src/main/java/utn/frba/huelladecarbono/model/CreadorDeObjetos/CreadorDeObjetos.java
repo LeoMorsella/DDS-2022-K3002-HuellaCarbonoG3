@@ -141,17 +141,17 @@ public class CreadorDeObjetos {
         return usuario;
     }*/
 
-    public TransportePublico crearTransportePublico(TipoTransportePublico tipoTransportePublico, String linea, ArrayList<Parada> paradas, String ID){
+    public TransportePublico crearTransportePublico(TipoTransportePublico tipoTransportePublico, String linea, List<Parada> paradas, String ID){
         TransportePublico transportePublico = new TransportePublico(tipoTransportePublico,linea,paradas,ID);
         repoTransportesPublico.save(transportePublico);
         repositorioTransportesPublicosEnMemoria.agregarLinea(transportePublico);
         return transportePublico;
     }
 
-    public Trayecto crearTrayecto(Ubicacion salida, Ubicacion llegada, Medio medio){
-        Trayecto trayecto = new Trayecto(salida,llegada,medio);
+    public Trayecto crearTrayecto(List<Ubicacion> ubicaciones, Medio medio){
+        Trayecto trayecto = new Trayecto(ubicaciones,medio);
         repoTrayectos.save(trayecto);
-        repositorioTrayectosEnMemoria.agregarTrayecto(trayecto);
+       // repositorioTrayectosEnMemoria.agregarTrayecto(trayecto);
         return trayecto;
     }
 
