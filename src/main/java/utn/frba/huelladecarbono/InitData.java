@@ -97,10 +97,6 @@ public class InitData implements CommandLineRunner {
         cargarTrayectos();
 
 
-
-
-
-
         Usuario usuarioMiembro = new Usuario("pablo@gmail.com","123",Arrays.asList(new Rol("ROLE_USER")));
         usuarioService.saveUsuario(usuarioMiembro);
 

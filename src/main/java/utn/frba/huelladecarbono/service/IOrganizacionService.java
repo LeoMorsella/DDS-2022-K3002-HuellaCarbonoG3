@@ -1,5 +1,6 @@
 package utn.frba.huelladecarbono.service;
 
+import net.minidev.json.parser.ParseException;
 import org.apache.poi.ss.extractor.ExcelExtractor;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
@@ -35,4 +36,6 @@ public interface IOrganizacionService {
     public Double getHuellaTotal(Integer id);
 
     void eliminarRecorrido(Integer orgId, Integer recorridoId);
+
+    void actualizarOrganizacion(String organizacion) throws Exception;
 }

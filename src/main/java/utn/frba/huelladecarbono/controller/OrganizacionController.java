@@ -109,13 +109,13 @@ public class OrganizacionController {
     }
 
     @PostMapping("/crear")
-    public String saveOrganizacion(@RequestBody Organizacion organizacion){
+    public String saveOrganizacion(@RequestBody Organizacion organizacion) {
         interfazOrganizacion.saveOrganizacion(organizacion);
         return "La organización fue creada correctamente";
     }
 
     @PatchMapping("/editarEstado/{id}")
-    public void cambiarEstadoOrganizacion(@PathVariable Integer id){
+    public void cambiarEstadoOrganizacion(@PathVariable Integer id) {
         interfazOrganizacion.cambiarEstadoOrganizacion(id);
     }
 
@@ -237,5 +237,10 @@ public class OrganizacionController {
     @DeleteMapping("/eliminarRecorrido/{orgId}/{recorridoId}")
     public void eliminarRecorrido(@PathVariable Integer orgId, @PathVariable Integer recorridoId) {
         interfazOrganizacion.eliminarRecorrido(orgId, recorridoId);
+    }
+
+    @PutMapping("/actualizar")
+    public void actualizar(@RequestBody String organizacion) {
+        interfazOrganizacion.actualizarOrganizacion(organizacion);
     }
 }

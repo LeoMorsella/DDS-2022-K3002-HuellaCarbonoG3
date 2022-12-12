@@ -86,7 +86,6 @@ public class AreaService implements IAreaService {
         areaRepository.save(area);
     }
 
-
     @Override
     public void cambiarEstadoArea(Integer id) {
         Area area = findArea(id);

@@ -62,7 +62,6 @@ public class MiembroService implements IMiembroService {
         miembroActualizado.setTelefono((String) jObject.get("telefono"));
         this.saveMiembro(miembroActualizado);
         return miembroActualizado;
-
         }
 
     @Override

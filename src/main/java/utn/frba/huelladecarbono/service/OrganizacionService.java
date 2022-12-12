@@ -1,9 +1,10 @@
 package utn.frba.huelladecarbono.service;
 
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
-import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 
 import java.util.List;
@@ -86,5 +87,19 @@ public class OrganizacionService implements IOrganizacionService{
         Organizacion organizacion = this.findOrganizacion(orgId);
         organizacion.getRecorridos().removeIf(recorrido -> recorrido.getId().equals(recorridoId));
         this.saveOrganizacion(organizacion);
+    }
+
+    @Override
+    public void actualizarOrganizacion(String orgJson) throws Exception {
+        JSONParser parser = new JSONParser();
+        JSONObject jObject  = (JSONObject) parser.parse(orgJson);// json
+        Organizacion orgA = findOrganizacion((Integer) jObject.get("idOrgaNuevo"));
+        orgA.setNombre((String) jObject.get("nombreNuevo"));
+        orgA.setRazonSocial((String) jObject.get("razonSocialNuevo"));
+        orgA.setTipo((TipoOrg) jObject.get("tipoNuevo"));
+        orgA.setClasificacion((Clasificacion) jObject.get("clasificacionNuevo"));
+        orgA.setUbicacion(new Ubicacion((String) jObject.get("paisNuevo"), (String) jObject.get("provinciaNuevo"), (String) jObject.get("municipioNuevo"), (String) jObject.get("localidadNuevo"), (String) jObject.get("calleNuevo"), (String) jObject.get("alturaNuevo")));
+
+        this.saveOrganizacion(orgA);
     }
 }
