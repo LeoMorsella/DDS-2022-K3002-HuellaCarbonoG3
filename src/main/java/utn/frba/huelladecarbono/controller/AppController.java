@@ -106,9 +106,12 @@ public class AppController {
     @GetMapping("/organizacion/recomendaciones")
     public String recomendacionesO(){return "OrgRecomendaciones";}
 
-    @GetMapping(value="/organizacion/reportes", produces = MediaType.TEXT_HTML_VALUE)
-    public ResponseEntity<String> reportesO() throws Exception{
-        Template template = handlebars.compile("/templates/OrgReportes");
+    @GetMapping("/organizacion/reportes")
+    public String reportesOrg(){return "OrgReportes";}
+
+    @GetMapping(value="/organizacion/reportesTablas", produces = MediaType.TEXT_HTML_VALUE)
+    public ResponseEntity<String> reportesOrgTablas() throws Exception{
+        Template template = handlebars.compile("/templates/tablaReportesOrg");
 
         List<ResInforme> hcporst = orgaCont.HCSectores();
         List<ResInforme> hcportipoorg = orgaCont.HCTipoOrg();
@@ -137,9 +140,12 @@ public class AppController {
 
     // AGENTE SECTORIAL
 
-    @GetMapping(value="/AS/reportes", produces = MediaType.TEXT_HTML_VALUE)
-    public ResponseEntity<String> reportesAS() throws Exception{
-        Template template = handlebars.compile("/templates/AgenteReportes");
+    @GetMapping("/AS/reportes")
+    public String reportesAS(){return "OrgAreas";}
+
+    @GetMapping(value="/AS/reportesTablas", produces = MediaType.TEXT_HTML_VALUE)
+    public ResponseEntity<String> reportesASTablas() throws Exception{
+        Template template = handlebars.compile("/templates/tablaReportesAS");
 
         List<ResInforme> hcporst = orgaCont.HCSectores();
         List<ResInforme> hcportipoorg = orgaCont.HCTipoOrg();
