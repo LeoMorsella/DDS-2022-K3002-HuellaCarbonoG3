@@ -224,13 +224,6 @@ public class OrganizacionController {
         return res;
     }
 
-    public void solicitarSerParte(Integer orgId, Integer areaId, Integer miembroId) {
-        Miembro miembro = interfazMiembro.findMiembro(miembroId);
-        Organizacion org = interfazOrganizacion.findOrganizacion(orgId);
-        Area area = org.getArea(areaId);
-        area.solicitarSerParte(miembro);
-    }
-
     @GetMapping("/recorridos/{orgId}")
     public List<ResRecorrido> recorridos(@PathVariable Integer orgId) {
         List<ResRecorrido> res = new ArrayList<>();

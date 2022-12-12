@@ -7,6 +7,7 @@ import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.respuestaEndpoint.ResMiembro;
 import utn.frba.huelladecarbono.respuestaEndpoint.ResRecorrido;
+import utn.frba.huelladecarbono.service.AreaService;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCMiembro;
 import utn.frba.huelladecarbono.service.IMiembroService;
 import utn.frba.huelladecarbono.service.IOrganizacionService;
@@ -27,6 +28,9 @@ public class MiembroController {
 
     @Autowired
     IOrganizacionService interfazOrganizacion;
+
+    @Autowired
+    private AreaService areaService;
 
     @GetMapping("/{id}")
     public ResMiembro getMiembroPorID(@PathVariable Integer id) throws Exception {
@@ -77,7 +81,7 @@ public class MiembroController {
 
     @PostMapping("/solicitarSerParte/{orgId}/{areaId}/{miembroId}")
     public void solicitarSerParte(@PathVariable Integer orgId, @PathVariable Integer areaId, @PathVariable Integer miembroId) {
-        orgController.solicitarSerParte(orgId, areaId, miembroId);
+        areaService.solicitarSerParte(areaId, miembroId);
     }
 
     @GetMapping("{miembroId}/recorridos")

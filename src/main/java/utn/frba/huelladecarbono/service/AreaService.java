@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.repository.AreaRepository;
+import utn.frba.huelladecarbono.repository.MiembroRepository;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,6 +23,8 @@ public class AreaService implements IAreaService {
 
     @Autowired
     private OrganizacionRepository organizacionRepository;
+    @Autowired
+    private MiembroRepository miembroRepository;
 
     @Override
     public Area findById(Integer id) throws Exception {
@@ -75,6 +79,12 @@ public class AreaService implements IAreaService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void solicitarSerParte(Integer areaId, Integer miembroId) {
+        Area area = areaRepository.findById(areaId).get();
+        area.solicitarSerParte(miembroRepository.findById(miembroId).get());
+        areaRepository.save(area);
+    }
 
 
     @Override
