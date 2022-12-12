@@ -13,7 +13,6 @@ import utn.frba.huelladecarbono.service.IOrganizacionService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @RestController

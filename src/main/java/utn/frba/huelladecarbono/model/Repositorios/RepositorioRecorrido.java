@@ -38,11 +38,4 @@ public class RepositorioRecorrido {
             recorridos.add(recorrido);
     }
 
-    public void cargarDeRecorridoDeBdAlSistema() {
-        for(Recorrido recorridoclase : recorridobd.getRecorridos()) {
-            Recorrido recorrido = new Recorrido(recorridoclase.getOrganizacion(),recorridoclase.getPeso(),recorridoclase.getFechaInicio(),recorridoclase.getFechaFin());
-            this.agregarRecorrido(recorrido);
-        }
-    }
-
 }

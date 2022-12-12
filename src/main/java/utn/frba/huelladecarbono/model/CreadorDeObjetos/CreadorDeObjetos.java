@@ -1,6 +1,5 @@
 package utn.frba.huelladecarbono.model.CreadorDeObjetos;
 
-import org.aspectj.weaver.loadtime.Agent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.*;
@@ -8,10 +7,7 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 import utn.frba.huelladecarbono.model.Repositorios.*;
-import utn.frba.huelladecarbono.model.Seguridad.Rol;
-import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.*;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -155,12 +151,12 @@ public class CreadorDeObjetos {
         return trayecto;
     }
 
- /*  public Area crearArea(String nombre, Organizacion organizacion, List<ListaDeDatosDeMedicion> mediciones){
+   public Area crearArea(String nombre, Organizacion organizacion, List<ListaDeDatosDeMedicion> mediciones){
         Area area = new Area(nombre,organizacion,mediciones);
         area.setEstaActivo(true);
         repoArea.save(area);
         return area;
-    }*/
+    }
 
     public Area crearArea(String nombre, Organizacion organizacion){
         Area area = new Area(nombre,organizacion);
