@@ -139,7 +139,7 @@
                 <!-- Begin Page Content -->
 
 
-                <div class="container-fluid">
+                <div id ="appVue" class="container-fluid">
                     <div style="text-align: center;">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#">
                             Agregar
@@ -164,9 +164,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd">
-                                            <td class="sorting_1">15/09/2020</td>
-                                            <td>Soporte</td>
+                                        <tr v-for="datoActividad in datosActividad" class="odd">
+                                            <td class="sorting_1">{{datoActividad.fecha}}</td>
+                                            <td>{{datoActividad.area}}</td>
                                             <td>
                                                 <a href="#" class="btn btn-warning btn-circle">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -226,6 +226,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
         crossorigin="anonymous"></script>
+
+    <script>
+        var app = new Vue({
+            el: "#appVue",
+            data: {
+                datosActividad:null
+            },
+            created() {
+                /*fetch('http://localhost:8080/organizaciones/datosActividad')
+                    .then(response => response.json())
+                    .then(data => {
+                        this.datosActividad = data
+                    })*/
+            }
+        })
+    </script>
 </body>
 
 </html>
