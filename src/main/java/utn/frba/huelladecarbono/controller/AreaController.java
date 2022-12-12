@@ -15,6 +15,7 @@ import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.repository.AreaRepository;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 import utn.frba.huelladecarbono.respuestaEndpoint.ResArea;
+import utn.frba.huelladecarbono.service.AreaService;
 import utn.frba.huelladecarbono.service.IAreaService;
 import utn.frba.huelladecarbono.service.IOrganizacionService;
 
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 public class AreaController {
 
     @Autowired
-    private IAreaService interfazArea;
+    private AreaService interfazArea;
 
     @Autowired
     private AreaRepository areaRepository;

@@ -225,7 +225,7 @@ public class OrganizacionController {
     }
 
     public void solicitarSerParte(Integer orgId, Integer areaId, Integer miembroId) {
-        Miembro miembro = RepositorioMiembros.getRepositorio().findMiembro(miembroId);
+        Miembro miembro = interfazMiembro.findMiembro(miembroId);
         Organizacion org = interfazOrganizacion.findOrganizacion(orgId);
         Area area = org.getArea(areaId);
         area.solicitarSerParte(miembro);
