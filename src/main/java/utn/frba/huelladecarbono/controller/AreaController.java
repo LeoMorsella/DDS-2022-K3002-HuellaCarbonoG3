@@ -37,10 +37,11 @@ public class AreaController {
         List<Area> areas = interfazArea.getAreas();
         return areas.stream().map(ResArea::new).collect(Collectors.toList());
     }
-    @GetMapping("/areas/byOrg/{idOrg}")
+    @GetMapping("/areas/{idOrg}")
     public List<ResArea> getAreasByOrg(@PathVariable Integer idOrg) {
-        List<Area> areas = interfazArea.findByOrganizacion(idOrg);
-        return areas.stream().map(ResArea::new).collect(Collectors.toList());
+        List<Area> areas = interfazArea.getAreas();
+        return areas.stream().filter(area -> area.getOrganizacion().getId() == idOrg).map(ResArea::new).collect(Collectors.toList());
+
     }
 
     //qobtener solo a las organizaciones que están activas en la bd
