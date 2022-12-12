@@ -76,7 +76,7 @@ public class MiembroController {
     }
 
     @PostMapping("/solicitarSerParte/{orgId}/{areaId}/{miembroId}")
-    public void solicitarSerParte(@PathVariable Integer orgId, @PathVariable Integer areaId, @PathVariable Integer miembroId) throws Exception {
+    public void solicitarSerParte(@PathVariable Integer orgId, @PathVariable Integer areaId, @PathVariable Integer miembroId) {
         orgController.solicitarSerParte(orgId, areaId, miembroId);
     }
 
