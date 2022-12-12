@@ -165,7 +165,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="odd">
+                                    <tr v-for="miembro in miembrosPendientes" class="odd">
                                         <td class="sorting_1">{{miembro.nombre}}</td>
                                         <td class="sorting_1">{{miembro.apellido}}</td>
                                         <td class="sorting_1">{{miembro.tipoDoc}}</td>
@@ -218,8 +218,8 @@
                                             rowspan="1" colspan="1" aria-sort="ascending">Desvincular</th>
                                     </tr>
                                 </thead>
-                                <tbody  v-for="miembro in miembros">
-                                    <tr class="odd">
+                                <tbody >
+                                    <tr v-for="miembro in miembros" class="odd">
                                         <td class="sorting_1">{{miembro.nombre}}</td>
                                         <td class="sorting_1">{{miembro.apellido}}</td>
                                         <td class="sorting_1">{{miembro.tipoDoc}}</td>
@@ -278,35 +278,24 @@
             crossorigin="anonymous"></script>
     <script>
     var app = new Vue({
-        el: "#app",
+        el: "#wrapper",
         data: {
-            miembro: {}
-        },
-        created() {
-            const urlParams = new URLSearchParams(window.location.search);
-
-            fetch('http://localhost:8080/miembro/1')
-                .then(response => response.json())
-                .then(miembroObtenido => {
-                    this.miembro = miembroObtenido
-                })
-            }
-                })
-
-
-     var app2 = new Vue({
-        el: "#appVue",
-        data: {
+            miembrosPendientes: null,
             miembros: []
         },
-        created () {
-            fetch('http://localhost:8080/miembro/')
+        created() {
+            fetch('http://localhost:8080/organizaciones/1/miembrosEnEspera')
                 .then(response => response.json())
-                .then(data => {
-                    this.miembros = data
+                .then(miembroObtenido => {
+                    this.miembrosPendientes = miembroObtenido
+                }),
+                fetch('http://localhost:8080/organizaciones/1/miembros')
+                    .then(response => response.json())
+                    .then(data => {
+                        this.miembros = data
+                    })
+            }
                 })
-        }
-    })
 </script>
 </body>
 

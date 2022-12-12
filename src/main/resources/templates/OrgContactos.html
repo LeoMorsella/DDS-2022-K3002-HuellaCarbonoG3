@@ -175,8 +175,8 @@
                                             rowspan="1" colspan="1" aria-sort="ascending">Eliminar</th>
                                     </tr>
                                 </thead>
-                                <tbody v-for="contacto in contactos">
-                                    <tr class="odd">
+                                <tbody>
+                                    <tr v-for="contacto in contactosWp" class="odd">
                                         <td class="sorting_1">{{contacto.nombre}}</td>
                                         <td class="sorting_1">{{contacto.apellido}}</td>
                                         <td class="sorting_1">{{contacto.tipoDoc}}</td>
@@ -184,7 +184,7 @@
                                         <td class="sorting_1">{{contacto.areas}}</td>
                                         <td class="sorting_1">{{contacto.telefono}}</td>
                                         <td>
-                                            <a href="#" class="btn btn-danger btn-circle">
+                                            <a @click="eliminarContactoWp()" href="#" class="btn btn-danger btn-circle">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </td>
@@ -222,8 +222,8 @@
                                             rowspan="1" colspan="1" aria-sort="ascending">Eliminar</th>
                                     </tr>
                                 </thead>
-                                <tbody v-for="contacto in contactos">
-                                    <tr class="odd">
+                                <tbody>
+                                    <tr v-for="contacto in contactosMail" class="odd">
                                         <td class="sorting_1">{{contacto.nombre}}</td>
                                         <td class="sorting_1">{{contacto.apellido}}</td>
                                         <td class="sorting_1">{{contacto.tipoDoc}}</td>
@@ -231,7 +231,7 @@
                                         <td class="sorting_1">{{contacto.areas}}</td>
                                         <td class="sorting_1">{{contacto.mail}}@live.com</td>
                                         <td>
-                                            <a href="#" class="btn btn-danger btn-circle">
+                                            <a @click="eliminarContactoMail()" href="#" class="btn btn-danger btn-circle">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </td>
@@ -281,30 +281,37 @@
 
     <script>
         var app = new Vue({
-            el: "#appVue",
+            el: "#wrapper",
             data: {
-                contactos: []
+                contactosWp: [],
+                contactosMail: []
+            },
+            methods:{
+                borrarContactoWP: function() {
+                    /*fetch('http://localhost:8080/conctacto/eliminar/' + IDCONTACTO, {
+                        method: 'GET',
+                    });*/
+                    this.contactosWp.shift();
+                    alert("Contacto Eliminado.");
+                },
+                borrarContactoMail: function() {
+                    /*fetch('http://localhost:8080/conctacto/eliminar/' + IDCONTACTO, {
+                        method: 'GET',
+                    });*/
+                    this.contactosMail.shift();
+                    alert("Contacto Eliminado.");
+                }
             },
             created() {
                 fetch('http://localhost:8080/organizaciones/1/contactosWp')
                     .then(response => response.json())
                     .then(data => {
-                        this.contactos = data
-                    })
-            }
-        })
-
-
-        var app2 = new Vue({
-            el: "#appVue2",
-            data: {
-                contactos: []
-            },
-            created() {
+                        this.contactosWp = data
+                    });
                 fetch('http://localhost:8080/organizaciones/1/contactosMail')
                     .then(response => response.json())
                     .then(data => {
-                        this.contactos = data
+                        this.contactosMail = data
                     })
             }
         })

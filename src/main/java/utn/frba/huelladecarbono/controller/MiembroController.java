@@ -89,7 +89,7 @@ public class MiembroController {
         return resRecorridos;
     }
 
-    @DeleteMapping("/eliminarArea/{miembroId}/{areaId}")
+    @GetMapping("/eliminarArea/{miembroId}/{areaId}")
     public void eliminarArea(@PathVariable Integer miembroId, @PathVariable Integer areaId) {
         interfazMiembro.eliminarArea(miembroId, areaId);
     }

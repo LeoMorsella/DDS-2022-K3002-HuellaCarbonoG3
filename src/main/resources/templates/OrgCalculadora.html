@@ -144,10 +144,10 @@
                         <div class="card-body">
                             <form action="">
                                 <label for="m-fecha-inicio">Fecha de inicio</label>
-                                <input v-model="fechaInit" type="date" name="" id="m-fecha-inicio" class="form-control form-control-user">
+                                <input v-model="fechaInit" type="text" name="" id="m-fecha-inicio" class="form-control form-control-user">
                                 <br>
                                 <label for="m-fecha-fin">Fecha de fin</label>
-                                <input v-model="fechaFin" type="date" name="" id="m-fecha-fin" class="form-control form-control-user">
+                                <input v-model="fechaFin" type="text" name="" id="m-fecha-fin" class="form-control form-control-user">
                                 <br>
                                 <div @click="calcularHuella()" style="text-align: center;">
                                     <button type="button" class="btn btn-primary">
@@ -216,7 +216,7 @@
                 diaFin: null,
                 mesFin: null,
                 anioFin: null,
-                huellaTotal: 1,
+                huellaTotal: null,
                 huellaPorAreas: [
                     {
                         nombre: "direccion",
@@ -230,18 +230,18 @@
             },
             methods:{
                 calcularHuella: function() {
-                    let fechainit = this.fechaInit.value();
-                    let fechafin = this.fechaFin.value();
-                    let diaInit = fechainit.substring(0,1);
-                    let mesInit= fechainit.substring(3,4);
-                    let anioInit= fechainit.substring(6,9);
-                    let diaFin = fechafin.substring(0,1);
-                    let mesFin= fechafin.substring(3,4);
-                    let anioFin= fechafin.substring(6,9);
+                    let fechainit = this.fechaInit;
+                    let fechafin = this.fechaFin;
+                    let diaInit = fechainit.substring(0,2);
+                    let mesInit= fechainit.substring(3,5);
+                    let anioInit= fechainit.substring(6,10);
+                    let diaFin = fechafin.substring(0,2);
+                    let mesFin= fechafin.substring(3,5);
+                    let anioFin= fechafin.substring(6,10);
 
-                    fetch('http://localhost:8080/organizacion/calcularHuella/1/'+diaInit+'/'+mesInit+'/'+anioInit+'/'+diaFin+'/'+mesFin+'/'+anioFin+'/')
+                    fetch('http://localhost:8080/organizaciones/calcularHuella/1/'+diaInit+'/'+mesInit+'/'+anioInit+'/'+diaFin+'/'+mesFin+'/'+anioFin+'/')
                         .then(response => response.json())
-                        .then(data => this.huellaTotal = data.huella);
+                        .then(data => this.huellaTotal = data);
                 },
             },
             created() {
