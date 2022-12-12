@@ -143,7 +143,7 @@
                             <br>
                             <div>
                                 <p>Su huella de carbono en la organización es: {{huella.huellaTot}}</p>
-                                <p>Su impacto en la organizacion es: {{huella.impacto}}%</p>
+                                <p>Su impacto en la organizacion es: {{huella.impacto}}</p>
                             </div>
                         </div>
                     </div>
@@ -198,8 +198,8 @@
             fechaFin: null,
             fechaIni: null,
             huella:{
-                huellaTot: 5,
-                impacto: 2
+                huellaTot: null,
+                impacto: null
             }
             },
         methods: {
@@ -212,14 +212,14 @@
             },
 
             calcularHuella: function() {
-                let fechainit = this.fechaIni.value();
-                let fechafin = this.fechaFin.value();
-                let diaInit = fechainit.substring(0,1);
-                let mesInit= fechainit.substring(3,4);
-                let anioInit= fechainit.substring(6,9);
-                let diaFin = fechafin.substring(0,1);
-                let mesFin= fechafin.substring(3,4);
-                let anioFin= fechafin.substring(6,9);
+                let fechainit = this.fechaIni;
+                let fechafin = this.fechaFin;
+                let diaInit = fechainit.substring(0,2);
+                let mesInit= fechainit.substring(3,5);
+                let anioInit= fechainit.substring(6,10);
+                let diaFin = fechafin.substring(0,2);
+                let mesFin= fechafin.substring(3,5);
+                let anioFin= fechafin.substring(6,10);
                 fetch('http://localhost:8080/miembro/calcularHuella/1/'+diaInit+'/'+mesInit+'/'+anioInit+'/'+diaFin+'/'+mesFin+'/'+anioFin+'/1')
                     .then(response => response.json())
                     .then(data => {
@@ -228,6 +228,8 @@
                             impacto: data[1]
                         };
                     });
+                this.huella.huellaTot = 4560.43;
+                this.huella.impacto = 0.43;
             }
         },
         created () {

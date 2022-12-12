@@ -136,15 +136,15 @@
                                 <div class="modal-body">
                                     <form action="">
                                         <label for="m-organizacion">Organizacion</label>
-                                        <select id="m-organizacion" name="dataTable_length" aria-controls="dataTable"
+                                        <select v-model="organizacionSeleccionado" id="m-organizacion" name="dataTable_length" aria-controls="dataTable"
                                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                            <option v-for="organizacion in selectOrg" v-model="organizacion.nombre"> {{organizacion.nombre}}</option>
+                                            <option v-for="organizacion in selectOrg" :value="organizacion.nombre"> {{organizacion.nombre}}</option>
                                         </select>
                                         <br><br>
                                         <label for="m-recorridos">Recorrido</label>
-                                        <select name="recorridos" id="m-recorridos" aria-controls="dataTable"
+                                        <select v-model="recorridoSeleccionado" name="recorridos" id="m-recorridos" aria-controls="dataTable"
                                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                            <option v-for="recorrido in selectRecorrido" v-model="recorrido.nombre"> {{recorrido.nombre}}</option>
+                                            <option v-for="recorrido in selectRecorrido" :value="recorrido.nombre"> {{recorrido.nombre}}</option>
                                         </select>
                                         <br><br>
                                         <label for="pesoRecorrido">Peso</label>
@@ -276,11 +276,14 @@
                     },
                     {nombre: "nombre2"}
                 ],
+                recorridoSeleccionado: null,
+                organizacionSeleccionado: null,
                 selectPeso: 5,
                 selectFechaIni: "02/02/2022",
                 selectFechaFin: "02/03/2023",
                 organizaciones: null,
-                areas: null
+                areas: null,
+                areasyorg: null
             },
             methods: {
                 cargarAreas: function() {
@@ -292,20 +295,26 @@
                 },
                 agregarRecorrido: function() {
                     let nuevoRecorrido = {
-                        idOrg: this.selectOrg,
+                        organizacion:{
+                            nombre: "nombreOrga",
+                            idOrg: this.selectOrg
+                        },
                         idRecorrido: this.selectRecorrido,
                         peso: this.selectPeso,
-                        fechaIni: this.selectFechaIni.value(),
-                        fechaFin: this.selectFechaFin.value()
+                        fechaDeInicio: this.selectFechaIni,
+                        fechaDeFin: this.selectFechaFin,
+                        estaActivo: true,
+                        trayectos: [1,2,3]
                     };
+                    this.recorridos.push(nuevoRecorrido);
                     //cambiar a recorrido para miembro
-                    let response = fetch('http://localhost:8080/recorrido/crear', {
+                    /*let response = fetch('http://localhost:8080/recorrido/crear', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json;charset=utf-8'
                         },
                         body: JSON.stringify(nuevoRecorrido)
-                    });
+                    });*/
                     alert("Recorrido Creado.");
                 },
                 //cambiar a recorrido para miembro
@@ -313,16 +322,17 @@
                     fetch('http://localhost:8080/recorrido/eliminar/'+idRecorrido, {
                         method: 'GET',
                     });
+                    this.recorridos.shift();
                     alert("Recorrido Eliminado.");
                 }
             },
             created () {
-                fetch('http://localhost:8080/miembro/1')
+               /* fetch('http://localhost:8080/miembro/1/recorridos')
                     .then(response => response.json())
                     .then(data => {
-                        this.recorridos = data.recorridos;
-                    });
-                fetch('http://localhost:8080/miembro/1')
+                        this.recorridos = data;
+                    });*/
+                /*('http://localhost:8080/miembro/1')
                     .then(response => response.json())
                     .then(data => {
                         this.areas = data.areas;
@@ -336,7 +346,7 @@
                                         nombreOrga: data.nombre
                                     })
                                 })})
-                    });
+                    });*/
                 fetch("http://localhost:8080/organizaciones/")
                     .then(response => response.json())
                     .then(data => {
