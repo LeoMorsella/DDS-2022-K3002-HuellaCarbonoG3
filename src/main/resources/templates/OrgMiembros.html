@@ -168,16 +168,16 @@
                                         <td class="sorting_1">{{miembro.apellido}}</td>
                                         <td class="sorting_1">{{miembro.tipoDoc}}</td>
                                         <td class="sorting_1">{{miembro.numDoc}}</td>
-                                        <td class="sorting_1">{{miembro.areas.nombre}}</td>
+                                        <td class="sorting_1">{{miembro.area.nombre}}</td>
                                         <td>
-                                            <a href="#" class="btn btn-success btn-circle">
+                                            <a @click="aceptarMiembro(miembro.miembroId, miembro.area.id)" href="#" class="btn btn-success btn-circle">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                                                     <path
                                                         d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
                                                 </svg>
                                             </a>
-                                            <a href="#" class="btn btn-danger btn-circle">
+                                            <a @click="rechazarMiembro(miembro.miembroId, miembro.area.id)" href="#" class="btn btn-danger btn-circle">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                                                     <path
@@ -224,7 +224,7 @@
                                         <td class="sorting_1">{{miembro.numDoc}}</td>
                                         <td class="sorting_1">{{miembro.areaNombre}}</td>
                                         <td>
-                                            <a @click="desvincularMiembro(miembro.id, miembro.areaId)" href="#" class="btn btn-danger btn-circle">
+                                            <a @click="desvincularMiembro(miembro.miembroId, miembro.areaId)" href="#" class="btn btn-danger btn-circle">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                                                     <path
@@ -284,9 +284,17 @@
         },
         methods: {
           desvincularMiembro(miembroId, areaId) {
-              fetch('http://localhost:8080/miembro/desvincular/1/'+areaId +'/' + miembroId);
+              fetch('http://localhost:8080/miembro/desvincular/'+areaId +'/' + miembroId);
               alert("Miembro desvinculado de la organizacion");
           },
+            aceptarMiembro(miembroId, areaId){
+              fetch('http://localhost:8080/miembro/aceptarMiembro/1/'+areaId+'/'+miembroId);
+              alert('Miembro aceptado');
+            },
+            rechazarMiembro(miembroId, areaId){
+                fetch('http://localhost:8080/miembro/rechazarMiembro/1/'+areaId+'/'+miembroId);
+                alert('Miembro rechazado');
+            }
         },
         created() {
             fetch('http://localhost:8080/organizaciones/1/miembrosEnEspera')
