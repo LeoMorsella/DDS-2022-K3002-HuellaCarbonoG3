@@ -105,4 +105,8 @@ public class Area {
     }
 
     public void nullearOrg(){this.organizacion = null;}
+
+    public boolean getEstaActivo() {
+        return this.estaActivo;
+    }
 }
