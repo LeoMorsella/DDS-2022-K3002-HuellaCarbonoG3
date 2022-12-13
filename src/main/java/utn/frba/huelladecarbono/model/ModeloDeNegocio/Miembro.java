@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Table(name = "miembro")
 public class Miembro {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
     private String nombre;
