@@ -72,6 +72,16 @@ public class RecorridoController {
         miembro.addRecorrido(recorrido);
         miembroRepository.save(miembro);
     }
+
+    @GetMapping("recorrido/miembro/{miembroId}")
+    public List<ResRecorrido> getRecorridosMiembro(@PathVariable Integer miembroId) {
+        List<Recorrido> recorridos = miembroRepository.getById(miembroId).getRecorridos();
+        List<ResRecorrido> res = new ArrayList<>();
+        for (Recorrido recorrido : recorridos) {
+            res.add(new ResRecorrido(recorrido));
+        }
+        return res;
+    }
 }
 
 
