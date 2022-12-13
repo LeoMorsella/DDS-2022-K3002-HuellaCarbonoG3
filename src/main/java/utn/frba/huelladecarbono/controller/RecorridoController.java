@@ -4,6 +4,7 @@ import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
@@ -81,6 +82,13 @@ public class RecorridoController {
             res.add(new ResRecorrido(recorrido));
         }
         return res;
+    }
+
+    @GetMapping("recorrido/miembro/eliminar/{miembroId}/{recorridoId}")
+    public void eliminarRecorridoMiembro(@PathVariable Integer miembroId, @PathVariable Integer recorridoId) {
+        Miembro miembro = miembroRepository.getById(miembroId);
+        miembro.eliminarRecorrido(recorridoRepository.getById(recorridoId));
+        miembroRepository.save(miembro);
     }
 }
 
