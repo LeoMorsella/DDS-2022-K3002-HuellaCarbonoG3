@@ -86,6 +86,11 @@ public class AreaController {
         }
         return res;
     }
+
+    @GetMapping("cargarDatosDeActividad/{areaId}")
+    public void cargarDatosDeActividad(@PathVariable Integer areaId) {
+        interfazArea.cargarDatoDeActividad(areaId);
+    }
 }
 
 

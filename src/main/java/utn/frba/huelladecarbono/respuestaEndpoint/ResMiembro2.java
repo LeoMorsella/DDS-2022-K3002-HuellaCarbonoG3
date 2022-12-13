@@ -6,6 +6,7 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 
 @Getter
 public class ResMiembro2 {
+    private Integer miembroId;
     private String nombre;
     private String apellido;
     private String tipoDoc;
@@ -16,6 +17,7 @@ public class ResMiembro2 {
     private Integer areaId;
 
     public ResMiembro2(Miembro miembro, Area area) {
+        this.miembroId = miembro.getID();
         this.nombre = miembro.getNombre();
         this.apellido = miembro.getApellido();
         this.tipoDoc = miembro.getTipoDoc();

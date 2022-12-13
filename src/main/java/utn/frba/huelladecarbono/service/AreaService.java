@@ -86,6 +86,13 @@ public class AreaService implements IAreaService {
     }
 
     @Override
+    public void cargarDatoDeActividad(Integer areaId) {
+        Area area = areaRepository.findById(areaId).get();
+        area.cargarDatosDeActividad();
+        areaRepository.save(area);
+    }
+
+    @Override
     public void cambiarEstadoArea(Integer id) {
         Area area = areaRepository.findById(id).get();
         System.out.println("Area: " + area.getNombre());

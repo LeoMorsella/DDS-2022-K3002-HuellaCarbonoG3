@@ -18,6 +18,8 @@ public class ListaDeDatosDeMedicion {
     @OneToMany
     private List<DatoDeMedicion> datosDeMedicion = new ArrayList<>();
 
-
+    public ListaDeDatosDeMedicion() {
+        this.fecha = LocalDate.now();
+    }
 
 }

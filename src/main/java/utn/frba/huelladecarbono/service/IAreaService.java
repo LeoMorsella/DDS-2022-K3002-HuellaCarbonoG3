@@ -35,4 +35,6 @@ public interface IAreaService {
     public List<Area> findByOrganizacion(Integer id);
 
     void solicitarSerParte(Integer areaId, Integer miembroId);
+
+    void cargarDatoDeActividad(Integer areaId);
 }

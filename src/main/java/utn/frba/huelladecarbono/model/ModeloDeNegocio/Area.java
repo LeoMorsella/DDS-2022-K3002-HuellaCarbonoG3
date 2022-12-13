@@ -115,4 +115,8 @@ public class Area {
                .orElseThrow(() -> new RuntimeException("Miembro no encontrado"));
        miembros.remove(miembroF);
     }
+
+    public void cargarDatosDeActividad() {
+        this.mediciones.add(new ListaDeDatosDeMedicion());
+    }
 }
