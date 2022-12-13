@@ -164,13 +164,13 @@
                                     </thead>
                                     <tbody>
                                     <tr v-for="miembro in miembrosPendientes" class="odd">
-                                        <td class="sorting_1">{{miembro.nombre}}</td>
-                                        <td class="sorting_1">{{miembro.apellido}}</td>
-                                        <td class="sorting_1">{{miembro.tipoDoc}}</td>
-                                        <td class="sorting_1">{{miembro.numDoc}}</td>
+                                        <td class="sorting_1">{{miembro.miembro.nombre}}</td>
+                                        <td class="sorting_1">{{miembro.miembro.apellido}}</td>
+                                        <td class="sorting_1">{{miembro.miembro.tipoDoc}}</td>
+                                        <td class="sorting_1">{{miembro.miembro.numDoc}}</td>
                                         <td class="sorting_1">{{miembro.area.nombre}}</td>
                                         <td>
-                                            <a @click="aceptarMiembro(miembro.miembroId, miembro.area.id)" href="#" class="btn btn-success btn-circle">
+                                            <a @click="aceptarMiembro(miembro.miembro.id, miembro.area.id)" href="#" class="btn btn-success btn-circle">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                                                     <path
@@ -284,11 +284,11 @@
         },
         methods: {
           desvincularMiembro(miembroId, areaId) {
-              fetch('http://localhost:8080/miembro/desvincular/'+areaId +'/' + miembroId);
+              fetch('http://localhost:8080/organizaciones/desvincular/'+areaId+'/'+miembroId);
               alert("Miembro desvinculado de la organizacion");
           },
             aceptarMiembro(miembroId, areaId){
-              fetch('http://localhost:8080/miembro/aceptarMiembro/1/'+areaId+'/'+miembroId);
+              fetch('http://localhost:8080/organizaciones/aceptarMiembro/1/'+areaId+'/'+miembroId);
               alert('Miembro aceptado');
             },
             rechazarMiembro(miembroId, areaId){
