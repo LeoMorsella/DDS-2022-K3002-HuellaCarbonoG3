@@ -55,7 +55,7 @@ public class MiembroService implements IMiembroService {
 
     public Miembro modificarMiembro(Integer id, String miembroJson) throws ParseException {
         JSONParser parser = new JSONParser();
-        JSONObject jObject  = (JSONObject) parser.parse(miembroJson);// json
+        JSONObject jObject  = (JSONObject) parser.parse(miembroJson);
         Miembro miembroActualizado = this.findMiembro(id);
         miembroActualizado.setNombre((String) jObject.get("nombre"));
         miembroActualizado.setApellido((String) jObject.get("apellido"));

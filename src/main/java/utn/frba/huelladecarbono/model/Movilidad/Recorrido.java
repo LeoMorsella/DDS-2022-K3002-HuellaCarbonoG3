@@ -16,6 +16,9 @@ public class Recorrido {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @Column
+    private String nombre;
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     public List<Trayecto> trayectos = new ArrayList<>();
     @ManyToOne
@@ -29,6 +32,9 @@ public class Recorrido {
     private LocalDate fechaFin;
     @Column
     private Boolean estaActivo;
+
+    @Column
+    private Integer cantidadDeTrayectos;
 
     public Recorrido(Organizacion organizacion, Double peso, LocalDate fechaInicio, LocalDate fechaFin, Boolean estaActivo) {
         this.organizacion = organizacion;
@@ -101,5 +107,6 @@ public class Recorrido {
                 ", mesFin=" + fechaFin +
                 '}';
     }
+
 }
 

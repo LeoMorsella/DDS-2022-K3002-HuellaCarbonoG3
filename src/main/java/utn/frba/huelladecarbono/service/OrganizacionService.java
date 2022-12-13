@@ -92,7 +92,7 @@ public class OrganizacionService implements IOrganizacionService{
     @Override
     public void actualizarOrganizacion(String orgJson) throws Exception {
         JSONParser parser = new JSONParser();
-        JSONObject jObject  = (JSONObject) parser.parse(orgJson);// json
+        JSONObject jObject  = (JSONObject) parser.parse(orgJson);
         Organizacion orgA = findOrganizacion((Integer) jObject.get("idOrgaNuevo"));
         orgA.setNombre((String) jObject.get("nombreNuevo"));
         orgA.setRazonSocial((String) jObject.get("razonSocialNuevo"));
