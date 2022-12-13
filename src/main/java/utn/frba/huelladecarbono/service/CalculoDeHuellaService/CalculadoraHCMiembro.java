@@ -14,7 +14,7 @@ public class CalculadoraHCMiembro {
         int mesesRecorridos;
         for(Recorrido recorrido : miembro.getRecorridos()) {
             if(recorrido.getOrganizacion() == organizacion) {
-                mesesRecorridos = Calendario.mesesEntreMedio(mesInicio, mesFin, recorrido.getFechaInicio(), recorrido.getFechaFin());
+                mesesRecorridos = Calendario.mesesEntreMedio(mesInicio, mesFin, LocalDate.parse(recorrido.getFechaInicio()), LocalDate.parse(recorrido.getFechaFin()));
                 HC += calcularHCRecorrido(recorrido) * 4.5 * mesesRecorridos;
             }
         }

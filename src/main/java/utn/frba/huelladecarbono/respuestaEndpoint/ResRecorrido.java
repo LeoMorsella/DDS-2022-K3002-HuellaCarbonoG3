@@ -11,8 +11,8 @@ public class ResRecorrido {
     ResOrganizacion organizacion;
     String nombre;
     Double peso;
-    LocalDate fechaI;
-    LocalDate fechaF;
+    String fechaI;
+    String fechaF;
     Boolean estaActivo;
     Integer cantTrayectos;
 

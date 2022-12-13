@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
+import utn.frba.huelladecarbono.repository.MiembroRepository;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 import utn.frba.huelladecarbono.repository.RecorridoRepository;
 import utn.frba.huelladecarbono.respuestaEndpoint.ResRecorrido;
 import utn.frba.huelladecarbono.service.IRecorridoService;
 import utn.frba.huelladecarbono.service.RecorridoService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +28,8 @@ public class RecorridoController {
     private OrganizacionRepository organizacionRepository;
     @Autowired
     private RecorridoRepository recorridoRepository;
+    @Autowired
+    private MiembroRepository miembroRepository;
 
     @GetMapping("/recorridos/{orgId}")
     public List<ResRecorrido> getRecorridos(@PathVariable Integer orgId) {
@@ -54,6 +58,20 @@ public class RecorridoController {
         recorridoRepository.save(recorrido);
     }
 
+    @PostMapping("recorrido/agregarMiembro/{miembroId}")
+    public void agregarRecorridoMiembro(@PathVariable Integer miembroId, @RequestBody String recorridoStr) throws ParseException {
+        JSONParser parser = new JSONParser();
+        JSONObject jObject  = (JSONObject) parser.parse(recorridoStr);
+        Recorrido recorrido = recorridoRepository.getById((Integer) jObject.get("idRecorrido"));
+        recorrido.setPeso((Double) jObject.get("peso"));
+        recorrido.setFechaInicio((String) jObject.get("fechaInicio"));
+        recorrido.setFechaFin((String) jObject.get("fechaFin"));
+        recorridoRepository.save(recorrido);
+
+        Miembro miembro = miembroRepository.getById(miembroId);
+        miembro.addRecorrido(recorrido);
+        miembroRepository.save(miembro);
+    }
 }
 
 

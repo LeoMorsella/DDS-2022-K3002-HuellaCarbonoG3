@@ -27,9 +27,9 @@ public class Recorrido {
     @Column
     private Double peso;
     @Column(columnDefinition = "DATE")
-    private LocalDate fechaInicio;
+    private String fechaInicio;
     @Column(columnDefinition = "DATE")
-    private LocalDate fechaFin;
+    private String fechaFin;
     @Column
     private Boolean estaActivo;
 
@@ -38,10 +38,10 @@ public class Recorrido {
 
     public Recorrido(Organizacion organizacion, Double peso, LocalDate fechaInicio, LocalDate fechaFin, Boolean estaActivo) {
         this.organizacion = organizacion;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+        this.fechaInicio = fechaInicio.toString();
+        this.fechaFin = fechaFin.toString();
         this.peso = peso;
-        this.estaActivo = estaActivo;
+        this.estaActivo = true;
     }
 
     public Recorrido(Integer id, List<Trayecto> trayectos, Organizacion organizacion, Double peso, LocalDate fechaInicio, LocalDate fechaFin) {
@@ -49,15 +49,17 @@ public class Recorrido {
         this.trayectos = trayectos;
         this.organizacion = organizacion;
         this.peso = peso;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+        this.fechaInicio = fechaInicio.toString();
+        this.fechaFin = fechaFin.toString();
+        this.estaActivo = true;
     }
 
     public Recorrido(Organizacion organizacion, Double peso, LocalDate fechaInicio, LocalDate fechaFin) {
         this.organizacion = organizacion;
         this.peso = peso;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+        this.fechaInicio = fechaInicio.toString();
+        this.fechaFin = fechaFin.toString();
+        this.estaActivo = true;
     }
 
     public Boolean getEstaActivo() {
