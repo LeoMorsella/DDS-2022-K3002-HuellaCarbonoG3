@@ -1,11 +1,10 @@
 package utn.frba.huelladecarbono.respuestaEndpoint;
 
+import lombok.Getter;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@Getter
 public class ResMiembro2 {
     private String nombre;
     private String apellido;
@@ -13,7 +12,8 @@ public class ResMiembro2 {
     private Integer numDoc;
     private String mail;
     private String telefono;
-    private Area area;
+    private String areaNombre;
+    private Integer areaId;
 
     public ResMiembro2(Miembro miembro, Area area) {
         this.nombre = miembro.getNombre();
@@ -22,6 +22,7 @@ public class ResMiembro2 {
         this.numDoc = miembro.getNumDoc();
         this.mail = miembro.getMail();
         this.telefono = miembro.getTelefono();
-        this.area = area;
+        this.areaNombre = area.getNombre();
+        this.areaId = area.getId();
     }
 }
