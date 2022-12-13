@@ -3,10 +3,8 @@ package utn.frba.huelladecarbono.model.ModeloDeNegocio;
 import lombok.Getter;
 import lombok.Setter;
 import utn.frba.huelladecarbono.service.CargaDeMedicionesService.CargaDeMediciones;
-
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Getter @Setter
@@ -46,6 +44,7 @@ public class Area {
         this.nombre = nombre;
         this.organizacion = organizacion;
         this.mediciones = mediciones;
+        this.estaActivo = true;
     }
 
     public Area(String nombre, Organizacion organizacion) {

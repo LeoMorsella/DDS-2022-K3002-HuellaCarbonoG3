@@ -20,7 +20,6 @@ public class AreaService implements IAreaService {
 
     @Autowired
     private AreaRepository areaRepository;
-
     @Autowired
     private OrganizacionRepository organizacionRepository;
     @Autowired
@@ -34,7 +33,7 @@ public class AreaService implements IAreaService {
     @Override
     public List<Area> getAreas() {
         List <Area> listaAreas = areaRepository.findAll();
-        return listaAreas;
+        return listaAreas.stream().filter(area -> area.getEstaActivo()).toList();
     }
 
     @Override
@@ -88,10 +87,10 @@ public class AreaService implements IAreaService {
 
     @Override
     public void cambiarEstadoArea(Integer id) {
-        Area area = findArea(id);
+        Area area = areaRepository.findById(id).get();
+        System.out.println("Area: " + area.getNombre());
         area.setEstaActivo(false);
-
-        this.saveArea(area);
+        areaRepository.save(area);
     }
 
     @Override

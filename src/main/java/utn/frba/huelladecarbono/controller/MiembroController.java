@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
-import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.respuestaEndpoint.ResMiembro;
 import utn.frba.huelladecarbono.respuestaEndpoint.ResRecorrido;
 import utn.frba.huelladecarbono.service.AreaService;
