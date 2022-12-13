@@ -101,4 +101,9 @@ public class MiembroController {
         interfazMiembro.eliminarRecorrido(miembroId, recorridoId);
     }
 
+    @GetMapping("/devincular/{areaId}/{miembroId}")
+    public void desvincularMiembro(@PathVariable Integer areaId, @PathVariable Integer miembroId) {
+        interfazMiembro.desvincular(miembroId, areaId);
+    }
+
 }

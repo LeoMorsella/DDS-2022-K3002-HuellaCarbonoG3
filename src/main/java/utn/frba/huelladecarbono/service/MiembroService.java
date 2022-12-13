@@ -13,6 +13,7 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
+import utn.frba.huelladecarbono.repository.AreaRepository;
 import utn.frba.huelladecarbono.repository.MiembroRepository;
 import utn.frba.huelladecarbono.repository.RecorridoRepository;
 
@@ -25,6 +26,8 @@ public class MiembroService implements IMiembroService {
     private MiembroRepository miembroRepository;
     @Autowired
     private RecorridoRepository recorridoRepository;
+    @Autowired
+    private AreaRepository areaRepository;
 
 
     @Override
@@ -85,5 +88,15 @@ public class MiembroService implements IMiembroService {
         Recorrido recorrido = recorridoRepository.getById(recorridoId);
         miembro.eliminarRecorrido(recorrido);
         this.saveMiembro(miembro);
+    }
+
+    @Override
+    public void desvincular(Integer miembroId, Integer areaId) {
+        Miembro miembro = findMiembro(miembroId);
+        Area area = areaRepository.getById(areaId);
+        miembro.eliminarArea(areaId);
+        area.desvincularMiembro(miembroId);
+        miembroRepository.save(miembro);
+        areaRepository.save(area);
     }
 }

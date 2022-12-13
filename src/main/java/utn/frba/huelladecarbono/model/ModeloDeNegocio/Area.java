@@ -108,4 +108,12 @@ public class Area {
     public boolean getEstaActivo() {
         return this.estaActivo;
     }
+
+    public void desvincularMiembro(Integer miembroId) {
+       Miembro miembroF = miembros.stream()
+               .filter(miembro -> miembro.getID() == miembroId)
+               .findFirst()
+               .orElseThrow(() -> new RuntimeException("Miembro no encontrado"));
+       miembros.remove(miembroF);
+    }
 }

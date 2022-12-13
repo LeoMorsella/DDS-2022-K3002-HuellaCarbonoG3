@@ -32,4 +32,5 @@ public interface IMiembroService {
 
     void eliminarRecorrido(Integer miembroId, Integer recorridoId);
 
+    void desvincular(Integer miembroId, Integer areaId);
 }

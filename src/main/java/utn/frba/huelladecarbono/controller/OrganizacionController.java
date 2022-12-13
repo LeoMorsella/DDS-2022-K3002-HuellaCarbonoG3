@@ -236,4 +236,17 @@ public class OrganizacionController {
     public void actualizar(@RequestBody String organizacion) throws Exception {
         interfazOrganizacion.actualizarOrganizacion(organizacion);
     }
+
+    @GetMapping("{organizacionId}/miembros2")
+    public List<ResMiembro2> miembros2(@PathVariable Integer organizacionId) {
+
+        List<ResMiembro2> res = new ArrayList<>();
+        List<Miembro> miembros = interfazMiembro.getMiembros().stream().filter(m -> m.esDeUnaOrganizacion(organizacionId)).collect(Collectors.toList());
+        for (Miembro miembro : miembros) {
+            for (Area area : miembro.getAreas()) {
+                res.add(new ResMiembro2(miembro, area));
+            }
+        }
+        return res;
+    }
 }
