@@ -178,28 +178,28 @@
                                             <label for="">País</label>
                                             <select v-model="paisSelect" id="" name="dataTable_length" aria-controls="dataTable"
                                                     class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                                <option v-for="pais in paises" @click="cargarProvincias(pais.id)" :value="pais.nombre" >{{pais.nombre}}</option>
+                                                <option v-for="pais in paises" @click="cargarProvincias(pais.id)" >{{pais.nombre}}</option>
                                             </select>
                                         </div>
                                         <div>
                                             <label for="">Provincia</label>
                                             <select v-model="provinciaSelect" id="" name="dataTable_length" aria-controls="dataTable"
                                                     class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                                <option v-for="provincia in provincias" @click="cargarMunicipios(provincia.id)" :value="provincia.nombre" > {{provincia.nombre}}</option>
+                                                <option v-for="provincia in provincias" @click="cargarMunicipios(provincia.id)" > {{provincia.nombre}}</option>
                                             </select>
                                         </div>
                                         <div>
                                             <label for="">Municipio</label>
                                             <select v-model="municipioSelect" id="" name="dataTable_length" aria-controls="dataTable"
                                                     class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                                <option v-for = "municipio in municipios" @click="cargarLocalidades(municipio.id)" :value="municipio.nombre"> {{municipio.nombre}}</option>
+                                                <option v-for = "municipio in municipios" @click="cargarLocalidades(municipio.id)"> {{municipio.nombre}}</option>
                                             </select>
                                         </div>
                                         <div>
                                             <label for="">Localidad</label>
                                             <select v-model="localidadSelect" id="" name="dataTable_length" aria-controls="dataTable"
                                                     class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                                <option v-for = "localidad in localidades" :value="localidad.nombre" >{{localidad.nombre}}</option>
+                                                <option v-for = "localidad in localidades">{{localidad.nombre}}</option>
                                             </select>
                                         </div>
                                         <div>
@@ -304,6 +304,7 @@
             },
             actualizarDatos: function() {
                 let nuevosDatosOrga = {
+                    idOrgaNuevo: 1,
                     nombreNuevo: this.nombreSelect,
                     razonSocialNuevo: this.razonSocialSelect,
                     tipoNuevo: this.tipoSelect,
