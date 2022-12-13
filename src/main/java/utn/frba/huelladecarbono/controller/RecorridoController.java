@@ -45,10 +45,10 @@ public class RecorridoController {
 
     @PostMapping("/recorrido/agregar/{orgId}")
     public void createRecorrido(@RequestBody String recorridoJson, @PathVariable Integer orgId) throws ParseException {
-        JSONParser parser = new JSONParser();
+       JSONParser parser = new JSONParser();
         JSONObject jObject  = (JSONObject) parser.parse(recorridoJson);
         Recorrido recorrido = new Recorrido();
-        recorrido.setNombre((String) jObject.get("nombre"));
+         recorrido.setNombre((String) jObject.get("nombre"));
         recorrido.setOrganizacion(organizacionRepository.getById(orgId));
         recorrido.setCantidadDeTrayectos((Integer) jObject.get("trayectos"));
         recorridoRepository.save(recorrido);

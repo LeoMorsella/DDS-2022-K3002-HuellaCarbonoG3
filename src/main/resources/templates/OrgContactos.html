@@ -158,6 +158,7 @@
                                         <label for="">Seleccion de miembro: </label>
                                         <select id="" name="dataTable_length" aria-controls="dataTable"
                                                 class="custom-select custom-select-sm form-control form-control-sm form-control-user">
+                                            <option selected disabled ></option>
                                             <option v-for="miembro in miembros" @click="asignarID(miembro.id)" >{{miembro.nombre}}</option>
                                         </select>
                                         <br><br>
