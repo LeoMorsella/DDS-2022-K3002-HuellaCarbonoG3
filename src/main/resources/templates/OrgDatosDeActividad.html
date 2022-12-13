@@ -161,14 +161,14 @@
                                             <input type="file" id="myfile" name="myfile" />
                                             <br><br>
                                             <label for="m-area">Area</label>
-                                            <select id="m-area" name="dataTable_length" aria-controls="dataTable" v-model="selectArea"
+                                            <select v-model="areaSelect "id="m-area" name="dataTable_length" aria-controls="dataTable"
                                                     class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                                <option v-for="area in areas" @click="cargarAreas(1)" :value="organizacion.id">{{organizacion.nombre}}</option>
+                                                <option v-for="area in areas">{{area.nombre}}</option>
                                             </select>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button @click="agregarArea()" type="button" class="btn btn-primary">Agregar</button>
+                                        <button @click="agregarXls(area.id)" type="button" class="btn btn-primary">Agregar</button>
                                     </div>
                                 </div>
                             </div>
@@ -197,14 +197,6 @@
                                             <td class="sorting_1">{{datoActividad.fecha}}</td>
                                             <td>{{datoActividad.area}}</td>
                                             <td>
-                                                <a href="#" class="btn btn-warning btn-circle">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                                                        <path
-                                                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                                                    </svg>
-                                                </a>
                                                 <a href="#" class="btn btn-danger btn-circle">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
@@ -258,32 +250,32 @@
 
     <script>
         var app = new Vue({
-            el: "#appVue",
+            el: "#wrapper",
             data: {
                 areas: null,
-                datosActividad:[{fecha:"12/03/2022",area:"G.Catan"},{fecha:"12/05/2022",area:"G.Catan"}]
+                datosActividad:[]
             },
             methods: {
-                  cargarAreas: function(orgId) {
-                    fetch('http://localhost:8080/areas/1')
-                        .then(response => response.json())
-                        .then(data => {
-                            this.opcionesAreas = data;
-                        })
+                  agregarXls: function(idArea) {
+                      nuevosDatosDA = {
+                          idAreaDA: idArea
+                      }
+                      let response = fetch('http://localhost:8080/datoDeActividad/'+idArea, {
+                          method: 'POST',
+                          headers: {
+                              'Content-Type': 'application/json;charset=utf-8'
+                          },
+                          body: JSON.stringify(nuevosDatosDA)
+                      });
+                    alert("Dato envíado.");
                 },
-                agregarArea: function() {
-                    let response = fetch('http://localhost:8080/areas/1',{
-                        method: 'POST'
-                    });
-                    alert("Solicitud Enviada.");
-                }
             },
             created() {
-                /*fetch('http://localhost:8080/organizaciones/datosActividad')
+                fetch('http://localhost:8080/areas/1')
                     .then(response => response.json())
                     .then(data => {
-                        this.datosActividad = data
-                    })*/
+                        this.areas = data
+                    })
             }
         })
     </script>
