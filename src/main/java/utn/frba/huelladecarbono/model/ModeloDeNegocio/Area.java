@@ -109,10 +109,7 @@ public class Area {
     }
 
     public void desvincularMiembro(Integer miembroId) {
-       Miembro miembroF = miembros.stream()
-               .filter(miembro -> miembro.getID() == miembroId)
-               .findFirst()
-               .orElseThrow(() -> new RuntimeException("Miembro no encontrado"));
+       Miembro miembroF = miembros.stream().filter(m -> m.getID().equals(miembroId)).findFirst().orElse(null);
        miembros.remove(miembroF);
     }
 
