@@ -247,38 +247,14 @@
         let app = new Vue({
             el: "#wrapper",
             data:{
-                recorridos: [{
-                    organizacion:{
-                        nombre: "orgaPrueba"
-                    },
-                    peso: 5,
-                    fechaDeInicio: "22/02/22",
-                    fechaDeFin: "23/03/23",
-                    estaActivo: true,
-                    trayectos: [1,2,3,4,5]
-                },
-                    {
-                        organizacion:{
-                            nombre: "orgaPrueba"
-                        },
-                        peso: 5,
-                        fechaDeInicio: "22/02/22",
-                        fechaDeFin: "23/03/23",
-                        estaActivo: true,
-                        trayectos: [1,2,3,4,5]
-                    }],
+                recorridos: [],
                 selectOrg: null,
-                selectRecorrido: [
-                    {
-                        nombre: "nombre1"
-                    },
-                    {nombre: "nombre2"}
-                ],
+                selectRecorrido: [],
                 recorridoSeleccionado: null,
                 organizacionSeleccionado: null,
-                selectPeso: 5,
-                selectFechaIni: "02/02/2022",
-                selectFechaFin: "02/03/2023",
+                selectPeso: null,
+                selectFechaIni: null,
+                selectFechaFin: null,
                 organizaciones: null,
                 areas: null,
                 areasyorg: null
@@ -329,21 +305,6 @@
                     .then(response => response.json())
                     .then(data => {
                         this.recorridos = data;
-                    });*/
-                /*('http://localhost:8080/miembro/1')
-                    .then(response => response.json())
-                    .then(data => {
-                        this.areas = data.areas;
-                        this.areas.forEach(
-                            area => {fetch('http://localhost:8080/organizaciones/' + area.organizacionId)
-                                .then(response => response.json())
-                                .then(data => {
-                                    this.areasyorg.push({
-                                        area: {nombre: area.nombre,
-                                            id: area.id},
-                                        nombreOrga: data.nombre
-                                    })
-                                })})
                     });*/
                 fetch("http://localhost:8080/organizaciones/")
                     .then(response => response.json())

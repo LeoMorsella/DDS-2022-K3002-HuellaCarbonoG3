@@ -152,6 +152,9 @@
                                 <div class="modal-body">
                                     <form action="">
                                         <div>
+                                            <label for="">Nombre del Recorrido: </label>
+                                            <input v-model="nombreRecorrido" type="text" class="form-control form-control-user"
+                                                   name="" id="">
                                             <div class="card cm-4">
                                                 <div class="card-header">
                                                     <h3 class="modal-title fs-6">Trayecto 1</h3>
@@ -178,7 +181,7 @@
                                                     <div>
                                                         <label for="">Patente</label>
                                                         <input v-model="selectPatente" type="text" class="form-control form-control-user"
-                                                            name="" id="" placeholder="Ingrese la patente">
+                                                            name="" id="">
                                                     </div>
                                                     <br>
                                                     <div>
@@ -336,14 +339,8 @@
                                                 rowspan="1" colspan="1" aria-sort="ascending" style="width: 50px;">ID
                                             </th>
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending" style="width: 300px;">
-                                                Punto de partida</th>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending" style="width: 300px;">
-                                                Punto de llegada</th>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending">
-                                                Medio</th>
+                                                rowspan="1" colspan="1" aria-sort="ascending" style="width: 50px;">Nombre
+                                            </th>
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
                                                 rowspan="1" colspan="1" aria-sort="ascending">
                                                 Acciones</th>
@@ -352,11 +349,9 @@
                                     <tbody>
                                         <tr v-for="recorrido in recorridos" class="odd">
                                             <td class="sorting_1">1</td>
-                                            <td>{{recorrido.ubiIni.calle}} {{recorrido.ubiIni.altura}}, {{recorrido.ubiIni.localidad}}, {{recorrido.ubiIni.municipio}}, {{recorrido.ubiIni.provincia}}, {{recorrido.ubiIni.pais}}</td>
-                                            <td>{{recorrido.ubiFin.calle}} {{recorrido.ubiFin.altura}}, {{recorrido.ubiFin.localidad}}, {{recorrido.ubiFin.municipio}}, {{recorrido.ubiFin.provincia}}, {{recorrido.ubiFin.pais}}</td>
-                                            <td>{{recorrido.medio}}</td>
+                                            <td>{{recorrido.nombre}}</td>
                                             <td>
-                                                <a @click="eliminarRecorrido(recorrido.id)" href="#" class="btn btn-danger btn-circle">
+                                                <a @click="borrarRecorrido(recorrido.id)" href="#" class="btn btn-danger btn-circle">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
@@ -409,6 +404,7 @@
         var app = new Vue({
             el: "#wrapper",
             data: {
+                nombreRecorrido: null,
                 selectTransporte: null,
                 selectPatente: null,
                 selectTipoComb: null,
@@ -459,7 +455,7 @@
                         })
                 },
               borrarRecorrido: function (idRecorrido) {
-                  fetch('http://localhost:8080/organizaciones/eliminarRecorrido/1/'+idRecorrido);
+                  fetch('http://localhost:8080/recorrido/eliminar/'+idRecorrido);
                   alert("Recorrido eliminado.")
               },
               agregarTrayecto: function(){
@@ -471,13 +467,13 @@
                         ubicIni: this.selectIni,
                         ubiFin: this.selectFin
                     }
-                    this.trayectos.push(nuevoTrayecto)
+                  this.trayectos.push(nuevoTrayecto)
                   this.selectTransporte = null;
                   this.selectPatente = null;
                   this.selectTipoComb= null;
                   this.selectServicio= null;
                   this.selectIni.pais = this.selectFin.pais;
-                  this.selectIni.provincia = this.selectFin.pais;
+                  this.selectIni.provincia = this.selectFin.provincia;
                   this.selectIni.municipio = this.selectFin.municipio;
                   this.selectIni.localidad = this.selectFin.localidad;
                   this.selectIni.calle = this.selectFin.calle;
@@ -491,17 +487,21 @@
                   alert("Trayecto creado. Si desea, genere otro, si confirme el recorrido con Agregar")
               },
             agregarRecorrido: function(){
-                fetch('http://localhost:8080/recorrido/crear', {
+                    nuevoRecorrido = {
+                        nombre: this.nombreRecorrido,
+                        trayectos: this.trayectos.length
+                    }
+                fetch('http://localhost:8080/recorrido/agregar/1', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
                     },
-                    body: JSON.stringify(this.trayectos)
+                    body: JSON.stringify(nuevoRecorrido)
                 });
             }
             },
             created() {
-                fetch('http://localhost:8080/organizaciones/recorridos/1')
+                fetch('http://localhost:8080/recorridos/1')
                     .then(response => response.json())
                     .then(recorridos => {
                         this.recorridos = recorridos
