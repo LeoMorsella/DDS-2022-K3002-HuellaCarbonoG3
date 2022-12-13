@@ -310,5 +310,12 @@ public class Organizacion {
         areas.stream().forEach(area -> area.setOrganizacion(null));
     }
 
+    public void eliminarContactoWP(Miembro miembro) {
+        contactosWP.remove(miembro);
+    }
+
+    public void eliminarContactoMail(Miembro miembro) {
+        contactosMail.remove(miembro);
+    }
 }
 

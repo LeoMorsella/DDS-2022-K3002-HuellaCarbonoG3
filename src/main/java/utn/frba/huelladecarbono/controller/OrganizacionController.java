@@ -91,7 +91,7 @@ public class OrganizacionController {
     }
 
     @GetMapping("/{id}/contactosMail")
-    public List<ResMiembro> getContactosMail(@PathVariable Integer id){
+    public List<ResMiembro> getContactosMail(@PathVariable Integer id) {
         List<ResMiembro> res = new ArrayList<>();
         List<Miembro> miembros = organizacionService.findOrganizacion(id).getContactosMail();
         for (Miembro miembro : miembros) {
@@ -115,6 +115,23 @@ public class OrganizacionController {
         organizacion.agregarContactoMail(miembro);
         organizacionRepository.save(organizacion);
     }
+
+    @GetMapping("/{id}/eliminarContactoWpp/{miembroId}")
+    public void eliminarContactoWpp(@PathVariable Integer id, @PathVariable Integer miembroId) {
+        Organizacion organizacion = organizacionService.findOrganizacion(id);
+        Miembro miembro = interfazMiembro.findMiembro(miembroId);
+        organizacion.eliminarContactoWP(miembro);
+        organizacionRepository.save(organizacion);
+    }
+
+    @GetMapping("/{id}/eliminarContactoMail/{miembroId}")
+    public void eliminarContactoMail(@PathVariable Integer id, @PathVariable Integer miembroId) {
+        Organizacion organizacion = organizacionService.findOrganizacion(id);
+        Miembro miembro = interfazMiembro.findMiembro(miembroId);
+        organizacion.eliminarContactoMail(miembro);
+        organizacionRepository.save(organizacion);
+    }
+
 
     //Endpoint para dar de baja a una organizacion, la baja solamente es logica por lo tanto solo se cambia el estado
     @DeleteMapping("/{id}")

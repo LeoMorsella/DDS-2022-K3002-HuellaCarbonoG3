@@ -34,7 +34,7 @@ public class InitData implements CommandLineRunner {
 
     @Autowired
     RecorridoRepository repoRecorrido;
-    
+
 
     //Paradas
     @Autowired
