@@ -61,13 +61,13 @@ public class AreaService implements IAreaService {
         Integer organizacionID = Integer.parseInt((String) jObject.get("id"));
         Organizacion orgTemp = organizacionRepository.findById(organizacionID).get();
         Area areaMapeado = new Area(nombre, orgTemp);
+        areaMapeado.setEstaActivo(true);
         orgTemp.setAreas(null);
         areaRepository.save(areaMapeado);
     }
 
     @Override
     public List<Area> findAreaByEstadoActivo() {
-
         return areaRepository.findByEstaActivo(true);
     }
 

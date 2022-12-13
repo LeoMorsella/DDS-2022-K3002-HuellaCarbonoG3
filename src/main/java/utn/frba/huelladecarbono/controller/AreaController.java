@@ -69,7 +69,7 @@ public class AreaController {
         interfazArea.modificarArea(id,area);
     }
 
-    @DeleteMapping("borrarArea/{idArea}")
+    @GetMapping("borrarArea/{idArea}")
     public void borrarArea(@PathVariable Integer idArea) {
         interfazArea.deleteArea(idArea);
     }

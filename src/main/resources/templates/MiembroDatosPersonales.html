@@ -135,12 +135,12 @@
                                 <div class="form-group row">
                                     <div class="col-sm-2 mb-3 mb-sm-0">
                                         <label for="tipo">Tipo</label>
-                                        <select v-model="tipoDoc" id="tipo" name="dataTable_length" aria-controls="dataTable"
+                                        <select id="tipo" name="dataTable_length" aria-controls="dataTable"
                                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                            <option value="DNI" selected>DNI</option>
-                                            <option value="LC">LC</option>
-                                            <option value="LE">LE</option>
-                                            <option value="CI">CI</option>
+                                            <option @click="cargarTipo(DNI)">DNI</option>
+                                            <option @click="cargarTipo(LC)">LC</option>
+                                            <option @click="cargarTipo(LE)">LE</option>
+                                            <option @click="cargarTipo(CI)" value="CI">CI</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-10">
@@ -209,14 +209,22 @@
     let app = new Vue({
         el: "#wrapper",
         data:{
+            DNI: "DNI",
+            LC: "LC",
+            LE: "LE",
+            CI: "CI",
             nombre: null,
             apellido: null,
-            tipoDoc: null,
+            tipoDoc: "DNI",
             numDoc: null,
             email: null,
             telefono: null
             },
         methods:{
+            cargarTipo: function(tipoSelect) {
+                this.tipoDoc = tipoSelect;
+                console.log(this.tipoDoc);
+            },
             actualizarDatos: function() {
                 let nuevosDatosMiembro = {
                     nombre: this.nombre,
