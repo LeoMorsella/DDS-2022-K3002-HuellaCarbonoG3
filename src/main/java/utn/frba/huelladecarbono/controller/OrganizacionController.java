@@ -147,16 +147,23 @@ public class OrganizacionController {
         }
         return res;
     }
-    @GetMapping("aceptarMiembro/{organizacionId}/{areaId}/{miembroId}")
-    public void aceptarMiembro(@PathVariable Integer organizacionId, @PathVariable Integer areaId, @PathVariable Integer miembroId) throws Exception {
-        Miembro miembro = RepositorioMiembros.getRepositorio().findMiembro(miembroId);
-        organizacionRepository.getById(organizacionId).getArea(areaId).aceptarMiembro(miembro);
+    @GetMapping("aceptarMiembro/{areaId}/{miembroId}")
+    public void aceptarMiembro(, @PathVariable Integer areaId, @PathVariable Integer miembroId) throws Exception {
+        Miembro miembro = miembroRepository.findById(miembroId).orElseThrow(() -> new Exception("No existe el miembro"));
+        Area area = areaService.findById(areaId);
+        area.aceptarMiembro(miembro);
+        areaService.saveArea(area);
+
+        miembro.agregarArea(area);
+        miembroRepository.save(miembro);
     }
 
-    @GetMapping("rechazarMiembro/{organizacionId}/{areaId}/{miembroId}")
-    public void rechazarMiembro(@PathVariable Integer organizacionId, @PathVariable Integer areaId, @PathVariable Integer miembroId) {
-        Miembro miembro = interfazMiembro.findMiembro(miembroId);
-        organizacionRepository.getById(organizacionId).getArea(areaId).rechazarMiembro(miembro);
+    @GetMapping("rechazarMiembro/{areaId}/{miembroId}")
+    public void rechazarMiembro(@PathVariable Integer areaId, @PathVariable Integer miembroId) throws Exception {
+        Miembro miembro = miembroRepository.findById(miembroId).orElseThrow(() -> new Exception("No existe el miembro"));
+        Area area = areaService.findById(areaId);
+        area.rechazarMiembro(miembro);
+        areaService.saveArea(area);
     }
 
     @GetMapping("calcularHuella/{org}/{diaI}/{mesI}/{anioI}/{diaF}/{mesF}/{anioF}/")

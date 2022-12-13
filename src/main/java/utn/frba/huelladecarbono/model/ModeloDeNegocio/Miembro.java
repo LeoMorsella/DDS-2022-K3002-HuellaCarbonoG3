@@ -189,4 +189,7 @@ public class Miembro {
         return id;
     }
 
+    public void agregarArea(Area area) {
+        this.areas.add(area);
+    }
 }
