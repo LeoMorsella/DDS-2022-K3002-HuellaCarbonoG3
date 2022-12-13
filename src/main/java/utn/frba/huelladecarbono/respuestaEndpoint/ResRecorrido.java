@@ -7,7 +7,9 @@ import java.time.LocalDate;
 
 @Getter
 public class ResRecorrido {
+    Integer id;
     ResOrganizacion organizacion;
+    String nombre;
     Double peso;
     LocalDate fechaI;
     LocalDate fechaF;
@@ -15,7 +17,9 @@ public class ResRecorrido {
     Integer cantTrayectos;
 
     public ResRecorrido(Recorrido recorrido) {
+        this.id = recorrido.getId();
         this.organizacion = new ResOrganizacion(recorrido.getOrganizacion());
+        this.nombre = recorrido.getNombre();
         this.peso = recorrido.getPeso();
         this.fechaI = recorrido.getFechaInicio();
         this.fechaF = recorrido.getFechaFin();
