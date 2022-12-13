@@ -96,7 +96,7 @@ public class OrganizacionService implements IOrganizacionService{
         Organizacion orgA = findOrganizacion((Integer) jObject.get("idOrgaNuevo"));
         orgA.setNombre((String) jObject.get("nombreNuevo"));
         orgA.setRazonSocial((String) jObject.get("razonSocialNuevo"));
-        orgA.setTipo((TipoOrg) jObject.get("tipoNuevo"));
+        orgA.setTipo(TipoOrg.valueOf((String) jObject.get("tipoNuevo")));
         orgA.setClasificacion((Clasificacion) jObject.get("clasificacionNuevo"));
         orgA.setUbicacion(new Ubicacion((String) jObject.get("paisNuevo"), (String) jObject.get("provinciaNuevo"), (String) jObject.get("municipioNuevo"), (String) jObject.get("localidadNuevo"), (String) jObject.get("calleNuevo"), (String) jObject.get("alturaNuevo")));
 

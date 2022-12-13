@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.CalculoDeDistancias.Provincia;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
-import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
 import utn.frba.huelladecarbono.repository.MiembroRepository;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 import utn.frba.huelladecarbono.respuestaEndpoint.*;
@@ -101,6 +100,14 @@ public class OrganizacionController {
         return res;
     }
 
+    @PostMapping("{id}/agregarContactoWpp/{miembroId}")
+    public void agregarContactoWpp(@PathVariable Integer id, @PathVariable Integer miembroId) {
+        Organizacion organizacion = organizacionService.findOrganizacion(id);
+        Miembro miembro = interfazMiembro.findMiembro(miembroId);
+        organizacion.agregarContactoWpp(miembro);
+        organizacionRepository.save(organizacion);
+    }
+
     //Endpoint para dar de baja a una organizacion, la baja solamente es logica por lo tanto solo se cambia el estado
     @DeleteMapping("/{id}")
     public String deleteOrganizacion(@PathVariable Integer id) {
@@ -117,12 +124,6 @@ public class OrganizacionController {
     @PatchMapping("/editarEstado/{id}")
     public void cambiarEstadoOrganizacion(@PathVariable Integer id) {
         interfazOrganizacion.cambiarEstadoOrganizacion(id);
-    }
-
-    @PutMapping("/editar/{id}")
-    public void actualizarOrganizacion(@PathVariable Integer id, @RequestParam String razonSocial, @RequestParam String tipo, @RequestParam String clasificacion,  @RequestParam Boolean estaActivo, @RequestParam String nombre) {
-        Organizacion org = new Organizacion(razonSocial, TipoOrg.valueOf(tipo), null, Clasificacion.valueOf(clasificacion), null, null, null, null, null, null, estaActivo, nombre);
-        interfazOrganizacion.modificarOrganizacion(id,org);
     }
     @GetMapping("{organizacionId}/miembros")
     public List<ResMiembro> miembros(@PathVariable Integer organizacionId) {
