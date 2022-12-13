@@ -8,17 +8,18 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
-import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
-import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.repository.AreaRepository;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
 import utn.frba.huelladecarbono.respuestaEndpoint.ResArea;
+import utn.frba.huelladecarbono.respuestaEndpoint.ResDatoDeActividad;
 import utn.frba.huelladecarbono.service.AreaService;
 import utn.frba.huelladecarbono.service.IAreaService;
 import utn.frba.huelladecarbono.service.IOrganizacionService;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -72,6 +73,18 @@ public class AreaController {
     @GetMapping("borrarArea/{idArea}")
     public void borrarArea(@PathVariable Integer idArea) {
         interfazArea.deleteArea(idArea);
+    }
+
+    @GetMapping("datosDeActividad/{orgId}")
+    public List<ResDatoDeActividad> datosDeActividad(@PathVariable Integer orgId) {
+        List<ResDatoDeActividad> res = new ArrayList<>();
+        List<Area> areas = interfazArea.getAreas();
+        for (Area area : areas) {
+           for (ListaDeDatosDeMedicion dato : area.getMediciones()) {
+               res.add(new ResDatoDeActividad(area, dato.getFecha()));
+           }
+        }
+        return res;
     }
 }
 

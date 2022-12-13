@@ -32,7 +32,6 @@ public class Area {
     private Double huellaCarbono;
     @Column
     private Double hcPromedio;
-
     @Column
     private boolean estaActivo;
 
