@@ -352,8 +352,8 @@
                                     <tbody>
                                         <tr v-for="recorrido in recorridos" class="odd">
                                             <td class="sorting_1">1</td>
-                                            <td>Jujuy 115, Mariano Acosta, Merlo, Buenos Aires, Argentina</td>
-                                            <td>Corrientes 1500, CABA, CABA, CABA, Argentina</td>
+                                            <td>{{recorrido.ubiIni.calle}} {{recorrido.ubiIni.altura}}, {{recorrido.ubiIni.localidad}}, {{recorrido.ubiIni.municipio}}, {{recorrido.ubiIni.provincia}}, {{recorrido.ubiIni.pais}}</td>
+                                            <td>{{recorrido.ubiFin.calle}} {{recorrido.ubiFin.altura}}, {{recorrido.ubiFin.localidad}}, {{recorrido.ubiFin.municipio}}, {{recorrido.ubiFin.provincia}}, {{recorrido.ubiFin.pais}}</td>
                                             <td>{{recorrido.medio}}</td>
                                             <td>
                                                 <a @click="eliminarRecorrido(recorrido.id)" href="#" class="btn btn-danger btn-circle">
@@ -431,6 +431,7 @@
                 },
                 recorridos: null,
                 paises: null,
+                trayectos: [],
                 provincias: null,
                 municipios: null,
                 localidades: null,
@@ -470,14 +471,34 @@
                         ubicIni: this.selectIni,
                         ubiFin: this.selectFin
                     }
-                    fetch('', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json;charset=utf-8'
-                        },
-                        body: JSON.stringify(nuevoTrayecto)
-                    })
-              }
+                    this.trayectos.push(nuevoTrayecto)
+                  this.selectTransporte = null;
+                  this.selectPatente = null;
+                  this.selectTipoComb= null;
+                  this.selectServicio= null;
+                  this.selectIni.pais = this.selectFin.pais;
+                  this.selectIni.provincia = this.selectFin.pais;
+                  this.selectIni.municipio = this.selectFin.municipio;
+                  this.selectIni.localidad = this.selectFin.localidad;
+                  this.selectIni.calle = this.selectFin.calle;
+                  this.selectIni.altura = this.selectFin.altura;
+                  this.selectFin.pais = null;
+                  this.selectFin.provincia = null;
+                  this.selectFin.municipio = null;
+                  this.selectFin.localidad = null;
+                  this.selectFin.calle = null;
+                  this.selectFin.altura = null;
+                  alert("Trayecto creado. Si desea, genere otro, si confirme el recorrido con Agregar")
+              },
+            agregarRecorrido: function(){
+                fetch('http://localhost:8080/recorrido/crear', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(this.trayectos)
+                });
+            }
             },
             created() {
                 fetch('http://localhost:8080/organizaciones/recorridos/1')
