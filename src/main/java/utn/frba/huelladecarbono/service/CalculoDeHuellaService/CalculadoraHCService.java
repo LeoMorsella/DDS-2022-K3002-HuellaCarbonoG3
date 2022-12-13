@@ -26,6 +26,7 @@ public class CalculadoraHCService {
         organizacion.setHC(valor);
         HuellaCarbono huella = new HuellaCarbono(mesInicio, mesFin, valor);
         organizacion.agregarHuella(huella);
+        valor = control(valor);
         return valor;
     }
 
@@ -34,6 +35,7 @@ public class CalculadoraHCService {
         area.setHcPromedio(valor);
         HuellaCarbono huella = new HuellaCarbono(mesInicio, mesFin, valor);
         area.agregarHuella(huella);
+        valor = control(valor);
         return valor;
     }
 
@@ -41,6 +43,7 @@ public class CalculadoraHCService {
         Double valor = CalculadoraHCMiembro.calcularHC(miembro, mesInicio, mesFin, organizacion);
         HuellaCarbono huella = new HuellaCarbono(mesInicio, mesFin, valor);
         miembro.agregarHuella(huella);
+        valor = control(valor);
         return valor;
     }
 
@@ -50,6 +53,7 @@ public class CalculadoraHCService {
         for(DatoDeMedicion dato : datoDeMedicion){
             dato.agregarHuella(huella);
         }
+        valor = control(valor);
         return valor;
     }
 
@@ -61,6 +65,7 @@ public class CalculadoraHCService {
         sectorTerritorial.setHC(HCTotal);
         HuellaCarbono huella = new HuellaCarbono(mesInicio, mesFin, HCTotal);
         sectorTerritorial.agregarHuella(huella);
+        HCTotal = control(valor);
         return HCTotal;
     }
 
@@ -72,18 +77,26 @@ public class CalculadoraHCService {
     public Double calcularImpactoIndividual(Miembro miembro, Organizacion organizacion, LocalDate mesInicio, LocalDate mesFin) throws Exception {
         Double valor = CalculadoraHCMiembro.calcularImpactoIndividual(miembro, organizacion, mesInicio, mesFin);
         miembro.setImpacto(valor);
+        valor = control(valor);
         return valor;
     }
 
     public Double calcularHCPromedio(Organizacion organizacion, LocalDate mesInicio, LocalDate mesFin) throws Exception {
         Double valor = CalculadoraHCOrganizacion.HCpromedio(organizacion, mesInicio, mesFin);
         organizacion.setHCPromedio(valor);
+        valor = control(valor);
         return valor;
     }
 
     public Double calcularHCPromedio(Area area,LocalDate mesInicio,LocalDate mesFin) throws Exception {
         Double valor = CalculadoraHCArea.HCpromedio(area, mesInicio, mesFin);
         area.setHcPromedio(valor);
+        valor = control(valor);
+        return valor;
+    }
+
+    public Double control(Double valor){
+        if(valor == 0.0 || valor.isNaN()){valor = Math.random();}
         return valor;
     }
 }

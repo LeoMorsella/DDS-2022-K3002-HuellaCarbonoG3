@@ -20,6 +20,7 @@ public class ListaDeDatosDeMedicion {
 
     public ListaDeDatosDeMedicion() {
         this.fecha = LocalDate.now();
+        datosDeMedicion.add(new DatoDeMedicion("Actividad", "Unidad", "Tipo de consumo", "Valor", "Periodicidad", "Periodo de imputacion"));
     }
 
 }
