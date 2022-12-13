@@ -65,7 +65,7 @@ public class CalculadoraHCService {
         sectorTerritorial.setHC(HCTotal);
         HuellaCarbono huella = new HuellaCarbono(mesInicio, mesFin, HCTotal);
         sectorTerritorial.agregarHuella(huella);
-        HCTotal = control(valor);
+        HCTotal = control(HCTotal);
         return HCTotal;
     }
 
