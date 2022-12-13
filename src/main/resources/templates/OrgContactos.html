@@ -139,11 +139,43 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <div style="text-align: center;">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
                             Agregar
                         </button>
                     </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar nuevo</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="">
+                                        <label for="">Seleccion de miembro: </label>
+                                        <select id="" name="dataTable_length" aria-controls="dataTable"
+                                                class="custom-select custom-select-sm form-control form-control-sm form-control-user">
+                                            <option @click="asignarID(miembro)" v-for="miembro in miembros">{{miembro.nombre}}</option>
+                                        </select>
+                                        <br><br>
+                                        <label for="m-area">Tipo de Contacto</label>
+                                        <select v-model="tipoSelect" id="m-area" name="dataTable_length" aria-controls="dataTable"
+                                                class="custom-select custom-select-sm form-control form-control-sm form-control-user">
+                                            <option>Whatsapp</option>
+                                            <option>Mail</option>
+                                        </select>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button @click="agregarContacto()" type="button" class="btn btn-primary">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
                     <br>
                     <div class="card o-hidden border-0 shadow-lg col-lg-10" style="margin: 0 auto">
                         <div id=appVue class="card-body">
@@ -281,22 +313,50 @@
         var app = new Vue({
             el: "#wrapper",
             data: {
+                miembros: null,
+                selectMiembro: null,
+                tipoSelect: null,
                 contactosWp: [],
                 contactosMail: []
             },
             methods:{
+                asignarID: function(miembro) {
+                    this.selectMiembro = miembro.id;
+                },
+                agregarContacto: function() {
+                    nuevoContacto = {
+                        miembroId: this.selectMiembro,
+                    }
+                    if(this.tipoSelect == "Mail"){
+                        let response = fetch('http://localhost:8080/gerenarContactoMail', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json;charset=utf-8'
+                            },
+                            body: JSON.stringify(nuevosContacto)
+                        });
+                    }
+                    else {
+                        let response = fetch('http://localhost:8080/generarContactoWP', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json;charset=utf-8'
+                            },
+                            body: JSON.stringify(nuevoContacto)
+                        });
+                    }
+                    alert("solicitud enviada");
+                },
                 borrarContactoWP: function() {
                     /*fetch('http://localhost:8080/conctacto/eliminar/' + IDCONTACTO, {
                         method: 'GET',
                     });*/
-                    this.contactosWp.shift();
                     alert("Contacto Eliminado.");
                 },
                 borrarContactoMail: function() {
                     /*fetch('http://localhost:8080/conctacto/eliminar/' + IDCONTACTO, {
                         method: 'GET',
                     });*/
-                    this.contactosMail.shift();
                     alert("Contacto Eliminado.");
                 }
             },
@@ -310,7 +370,12 @@
                     .then(response => response.json())
                     .then(data => {
                         this.contactosMail = data
-                    })
+                    });
+                fetch('http://localhost:8080/organizaciones/1/miembros')
+                    .then(response => response.json())
+                    .then(data => {
+                        this.miembros = data
+                    });
             }
         })
     </script>

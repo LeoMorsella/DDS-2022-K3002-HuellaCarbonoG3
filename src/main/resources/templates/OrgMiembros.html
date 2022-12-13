@@ -222,9 +222,9 @@
                                         <td class="sorting_1">{{miembro.apellido}}</td>
                                         <td class="sorting_1">{{miembro.tipoDoc}}</td>
                                         <td class="sorting_1">{{miembro.numDoc}}</td>
-                                        <td class="sorting_1">{{imprimirAreas(miembro.areas)}}</td>
+                                        <td class="sorting_1">{{miembro.areaNombre}}</td>
                                         <td>
-                                            <a @click="desvincularMiembro(miembro.id)" href="#" class="btn btn-danger btn-circle">
+                                            <a @click="desvincularMiembro(miembro.id, miembro.areaId)" href="#" class="btn btn-danger btn-circle">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                                                     <path
@@ -283,14 +283,10 @@
             miembros: []
         },
         methods: {
-          desvincularMiembro(miembroId) {
-
+          desvincularMiembro(miembroId, areaId) {
+              fetch('http://localhost:8080/miembro/desvincular/1/'+areaId +'/' + miembroId);
+              alert("Miembro desvinculado de la organizacion");
           },
-         imprimirAreas(areas){
-              let respuesta = '';
-              areas.forEach(area => respuesta += area.nombre + '\n');
-              return respuesta;
-         }
         },
         created() {
             fetch('http://localhost:8080/organizaciones/1/miembrosEnEspera')
@@ -298,7 +294,7 @@
                 .then(miembroObtenido => {
                     this.miembrosPendientes = miembroObtenido
                 }),
-                fetch('http://localhost:8080/organizaciones/1/miembros')
+                fetch('http://localhost:8080/organizaciones/1/miembros2')
                     .then(response => response.json())
                     .then(data => {
                         this.miembros = data
