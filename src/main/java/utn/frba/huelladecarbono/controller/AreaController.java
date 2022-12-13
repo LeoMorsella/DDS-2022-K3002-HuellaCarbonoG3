@@ -36,7 +36,7 @@ public class AreaController {
     @GetMapping("/areas")
     public List<ResArea> getAreas(){
         List<Area> areas = interfazArea.getAreas();
-        return areas.stream().filter(area -> area.getEstaActivo()).map(ResArea::new).collect(Collectors.toList());
+        return areas.stream().map(ResArea::new).collect(Collectors.toList());
     }
     @GetMapping("/areas/{idOrg}")
     public List<ResArea> getAreasByOrg(@PathVariable Integer idOrg) {
