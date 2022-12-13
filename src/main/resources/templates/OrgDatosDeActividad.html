@@ -141,9 +141,38 @@
 
                 <div id ="appVue" class="container-fluid">
                     <div style="text-align: center;">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Agregar
                         </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar nuevo</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="">
+                                            <label for="myfile">Seleccion xls de Datos: </label>
+                                            <input type="file" id="myfile" name="myfile" />
+                                            <br><br>
+                                            <label for="m-area">Area</label>
+                                            <select id="m-area" name="dataTable_length" aria-controls="dataTable" v-model="selectArea"
+                                                    class="custom-select custom-select-sm form-control form-control-sm form-control-user">
+                                                <option v-for="area in areas" @click="cargarAreas(1)" :value="organizacion.id">{{organizacion.nombre}}</option>
+                                            </select>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button @click="agregarArea()" type="button" class="btn btn-primary">Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <br><br>
                         <div class="card o-hidden border-0 shadow-lg col-lg-7" style="margin: 0 auto">
                             <div class="card-body">
@@ -231,7 +260,23 @@
         var app = new Vue({
             el: "#appVue",
             data: {
-                datosActividad:null
+                areas: null,
+                datosActividad:[{fecha:"12/03/2022",area:"G.Catan"},{fecha:"12/05/2022",area:"G.Catan"}]
+            },
+            methods: {
+                  cargarAreas: function(orgId) {
+                    fetch('http://localhost:8080/areas/1')
+                        .then(response => response.json())
+                        .then(data => {
+                            this.opcionesAreas = data;
+                        })
+                },
+                agregarArea: function() {
+                    let response = fetch('http://localhost:8080/areas/1',{
+                        method: 'POST'
+                    });
+                    alert("Solicitud Enviada.");
+                }
             },
             created() {
                 /*fetch('http://localhost:8080/organizaciones/datosActividad')
