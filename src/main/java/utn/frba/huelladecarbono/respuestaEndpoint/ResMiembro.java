@@ -8,6 +8,7 @@ import java.util.List;
 
 @Getter
 public class ResMiembro {
+    private Integer id;
     private String nombre;
     private String apellido;
     private String tipoDoc;
@@ -17,6 +18,7 @@ public class ResMiembro {
     private List<ResArea> areas;
 
     public ResMiembro(Miembro miembro) {
+        this.id = miembro.getID();
         this.nombre = miembro.getNombre();
         this.apellido = miembro.getApellido();
         this.tipoDoc = miembro.getTipoDoc();
