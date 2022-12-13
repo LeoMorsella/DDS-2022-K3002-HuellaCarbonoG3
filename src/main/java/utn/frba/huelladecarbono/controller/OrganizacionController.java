@@ -148,7 +148,7 @@ public class OrganizacionController {
         return res;
     }
     @GetMapping("aceptarMiembro/{areaId}/{miembroId}")
-    public void aceptarMiembro(, @PathVariable Integer areaId, @PathVariable Integer miembroId) throws Exception {
+    public void aceptarMiembro(@PathVariable Integer areaId, @PathVariable Integer miembroId) throws Exception {
         Miembro miembro = miembroRepository.findById(miembroId).orElseThrow(() -> new Exception("No existe el miembro"));
         Area area = areaService.findById(areaId);
         area.aceptarMiembro(miembro);
