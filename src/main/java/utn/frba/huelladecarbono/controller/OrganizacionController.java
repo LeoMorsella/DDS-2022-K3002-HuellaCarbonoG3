@@ -104,7 +104,15 @@ public class OrganizacionController {
     public void agregarContactoWpp(@PathVariable Integer id, @PathVariable Integer miembroId) {
         Organizacion organizacion = organizacionService.findOrganizacion(id);
         Miembro miembro = interfazMiembro.findMiembro(miembroId);
-        organizacion.agregarContactoWpp(miembro);
+        organizacion.agregarContactoWP(miembro);
+        organizacionRepository.save(organizacion);
+    }
+
+    @PostMapping("{id}/agregarContactoWpp/{miembroId}")
+    public void agregarContactoMail(@PathVariable Integer id, @PathVariable Integer miembroId) {
+        Organizacion organizacion = organizacionService.findOrganizacion(id);
+        Miembro miembro = interfazMiembro.findMiembro(miembroId);
+        organizacion.agregarContactoMail(miembro);
         organizacionRepository.save(organizacion);
     }
 

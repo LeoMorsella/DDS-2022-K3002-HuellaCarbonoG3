@@ -166,6 +166,7 @@ public class Organizacion {
     public void setContactosMail(List<Miembro> contactos) {
         this.contactosMail = contactos;
     }
+
     public void agregarContactoMail(Miembro Contacto){
         if(contactosMail == null) contactosMail = new ArrayList<>();
         contactosMail.add(Contacto);
