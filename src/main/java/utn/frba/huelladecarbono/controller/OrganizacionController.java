@@ -147,13 +147,13 @@ public class OrganizacionController {
         }
         return res;
     }
-    @PatchMapping("aceptarMiembro/{organizacionId}/{areaId}/{miembroId}")
+    @GetMapping("aceptarMiembro/{organizacionId}/{areaId}/{miembroId}")
     public void aceptarMiembro(@PathVariable Integer organizacionId, @PathVariable Integer areaId, @PathVariable Integer miembroId) throws Exception {
         Miembro miembro = RepositorioMiembros.getRepositorio().findMiembro(miembroId);
         organizacionRepository.getById(organizacionId).getArea(areaId).aceptarMiembro(miembro);
     }
 
-    @PatchMapping("rechazarMiembro/{organizacionId}/{areaId}/{miembroId}")
+    @GetMapping("rechazarMiembro/{organizacionId}/{areaId}/{miembroId}")
     public void rechazarMiembro(@PathVariable Integer organizacionId, @PathVariable Integer areaId, @PathVariable Integer miembroId) {
         Miembro miembro = interfazMiembro.findMiembro(miembroId);
         organizacionRepository.getById(organizacionId).getArea(areaId).rechazarMiembro(miembro);
