@@ -159,7 +159,7 @@
                                                 <div class="card-body">
                                                     <div>
                                                         <label for="">Medio de transporte</label>
-                                                        <select name="" id=""
+                                                        <select v-model="selectTransporte" name="" id=""
                                                             aria-controls="dataTable"
                                                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                                                             <option value="" selected disabled></option>
@@ -177,13 +177,13 @@
                                                     <br>
                                                     <div>
                                                         <label for="">Patente</label>
-                                                        <input type="text" class="form-control form-control-user"
+                                                        <input v-model="selectPatente" type="text" class="form-control form-control-user"
                                                             name="" id="" placeholder="Ingrese la patente">
                                                     </div>
                                                     <br>
                                                     <div>
                                                         <label for="">Tipo de combustible</label>
-                                                        <select id="" name="dataTable_length"
+                                                        <select v-model="selectTipoComb" id="" name="dataTable_length"
                                                             aria-controls="dataTable"
                                                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                                                             <option value="" selected disabled></option>
@@ -196,7 +196,7 @@
                                                     <br>
                                                     <div>
                                                         <label for="">¿Es un servicio contratado?</label>
-                                                        <select id="" name="dataTable_length"
+                                                        <select v-model="selectServicio" id="" name="dataTable_length"
                                                             aria-controls="dataTable"
                                                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                                                             <option value="" selected disabled></option>
@@ -209,52 +209,48 @@
                                                         <label for="">Ubicación de origen</label>
                                                         <div>
                                                             <label for="">País</label>
-                                                            <select id="" name="dataTable_length"
+                                                            <select v-model="selectIni.pais" id="" name="dataTable_length"
                                                                 aria-controls="dataTable"
                                                                 class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                                                                 <option value="" selected disabled></option>
-                                                                <option value="Argentina">Argentina</option>
+                                                                <option v-for="pais in paises" @click="cargarProvincias(pais.id)" >{{pais.nombre}}</option>
                                                             </select>
                                                         </div>
                                                         <div>
                                                             <label for="">Provincia</label>
-                                                            <select id="" name="dataTable_length"
+                                                            <select v-model="selectIni.provincia" id="" name="dataTable_length"
                                                                 aria-controls="dataTable"
                                                                 class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                                                                 <option value="" selected disabled></option>
-                                                                <option value="Argentina">Argentina</option>
+                                                                <option v-for="provincia in provincias" @click="cargarMunicipios(provincia.id)" > {{provincia.nombre}}</option>
                                                             </select>
                                                         </div>
                                                         <div>
                                                             <label for="">Municipio</label>
-                                                            <select id="" name="dataTable_length"
+                                                            <select v-model="selectIni.municipio" id="" name="dataTable_length"
                                                                 aria-controls="dataTable"
                                                                 class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                                                                 <option value="" selected disabled></option>
-                                                                <option value="Argentina">Argentina</option>
+                                                                <option v-for = "municipio in municipios" @click="cargarLocalidades(municipio.id)"> {{municipio.nombre}}</option>
                                                             </select>
                                                         </div>
                                                         <div>
                                                             <label for="">Localidad</label>
-                                                            <select id="" name="dataTable_length"
+                                                            <select v-model="selectIni.localidad" id="" name="dataTable_length"
                                                                 aria-controls="dataTable"
                                                                 class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                                                                 <option value="" selected disabled></option>
-                                                                <option value="Argentina">Argentina</option>
+                                                                <option v-for = "localidad in localidades">{{localidad.nombre}}</option>
                                                             </select>
                                                         </div>
                                                         <div>
                                                             <label for="">Calle</label>
-                                                            <select id="" name="dataTable_length"
-                                                                aria-controls="dataTable"
-                                                                class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                                                <option value="" selected disabled></option>
-                                                                <option value="Argentina">Argentina</option>
-                                                            </select>
+                                                            <input v-model="selectIni.calle" type="number" name="" id=""
+                                                                   class="form-control form-control-user">
                                                         </div>
                                                         <div>
                                                             <label for="">Altura</label>
-                                                            <input type="number" name="" id=""
+                                                            <input v-model="selectIni.altura" type="number" name="" id=""
                                                                 class="form-control form-control-user">
                                                         </div>
                                                     </div>
@@ -263,66 +259,62 @@
                                                         <label for="">Ubicación de fin</label>
                                                         <div>
                                                             <label for="">País</label>
-                                                            <select id="" name="dataTable_length"
+                                                            <select v-model="selectFin.pais" id="" name="dataTable_length"
                                                                 aria-controls="dataTable"
                                                                 class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                                                                 <option value="" selected disabled></option>
-                                                                <option value="Argentina">Argentina</option>
+                                                                <option v-for="pais in paises" @click="cargarProvincias(pais.id)" >{{pais.nombre}}</option>
                                                             </select>
                                                         </div>
                                                         <div>
                                                             <label for="">Provincia</label>
-                                                            <select id="" name="dataTable_length"
+                                                            <select v-model="selectFin.provincia" id="" name="dataTable_length"
                                                                 aria-controls="dataTable"
                                                                 class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                                                                 <option value="" selected disabled></option>
-                                                                <option value="Argentina">Argentina</option>
+                                                                <option v-for="provincia in provincias" @click="cargarMunicipios(provincia.id)" > {{provincia.nombre}}</option>
                                                             </select>
                                                         </div>
                                                         <div>
                                                             <label for="">Municipio</label>
-                                                            <select id="" name="dataTable_length"
+                                                            <select v-model="selectFin.municipio" id="" name="dataTable_length"
                                                                 aria-controls="dataTable"
                                                                 class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                                                                 <option value="" selected disabled></option>
-                                                                <option value="Argentina">Argentina</option>
+                                                                <option v-for = "municipio in municipios" @click="cargarLocalidades(municipio.id)"> {{municipio.nombre}}</option>
                                                             </select>
                                                         </div>
                                                         <div>
                                                             <label for="">Localidad</label>
-                                                            <select id="" name="dataTable_length"
+                                                            <select v-model="selectFin.localidad" id="" name="dataTable_length"
                                                                 aria-controls="dataTable"
                                                                 class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                                                                 <option value="" selected disabled></option>
-                                                                <option value="Argentina">Argentina</option>
+                                                                <option v-for = "localidad in localidades">{{localidad.nombre}}</option>
                                                             </select>
                                                         </div>
                                                         <div>
                                                             <label for="">Calle</label>
-                                                            <select id="" name="dataTable_length"
-                                                                aria-controls="dataTable"
-                                                                class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                                                <option value="" selected disabled></option>
-                                                                <option value="Argentina">Argentina</option>
-                                                            </select>
+                                                            <input v-model="selectFin.calle" type="number" name="" id=""
+                                                                   class="form-control form-control-user">
                                                         </div>
                                                         <div>
                                                             <label for="">Altura</label>
-                                                            <input type="number" name="" id=""
+                                                            <input v-model="selectFin.altura" type="number" name="" id=""
                                                                 class="form-control form-control-user">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <br>
-                                            <button type="button" class="btn btn-primary">Agregar trayecto</button>
+                                            <button @click="agregarTrayecto()" type="button" class="btn btn-primary">Agregar trayecto</button>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary">Agregar</button>
+                                    <button @click="agregarRecorrido()" type="button" class="btn btn-primary">Agregar</button>
                                 </div>
                             </div>
                         </div>
@@ -417,12 +409,74 @@
         var app = new Vue({
             el: "#wrapper",
             data: {
+                selectTransporte: null,
+                selectPatente: null,
+                selectTipoComb: null,
+                selectServicio: null,
+                selectIni:{
+                    pais: null,
+                    provincia: null,
+                    municipio: null,
+                    localidad: null,
+                    calle: null,
+                    altura: null,
+                },
+                selectFin:{
+                    pais: null,
+                    provincia: null,
+                    municipio: null,
+                    localidad: null,
+                    calle: null,
+                    altura: null,
+                },
                 recorridos: null,
+                paises: null,
+                provincias: null,
+                municipios: null,
+                localidades: null,
             },
             methods:{
+                cargarProvincias: function(idPais) {
+                    fetch('http://localhost:8080/ubicacion/provincias/'+idPais)
+                        .then(response => response.json())
+                        .then(data => {
+                            this.provincias = data;
+                        })
+                },
+                cargarMunicipios: function(idProvincia) {
+                    fetch('http://localhost:8080/ubicacion/municipios/'+idProvincia)
+                        .then(response => response.json())
+                        .then(data => {
+                            this.municipios = data;
+                        })
+                },
+                cargarLocalidades: function(localidadId) {
+                    fetch('http://localhost:8080/ubicacion/localidades/'+localidadId)
+                        .then(response => response.json())
+                        .then(data => {
+                            this.localidades = data;
+                        })
+                },
               borrarRecorrido: function (idRecorrido) {
                   fetch('http://localhost:8080/organizaciones/eliminarRecorrido/1/'+idRecorrido);
                   alert("Recorrido eliminado.")
+              },
+              agregarTrayecto: function(){
+                    let nuevoTrayecto = {
+                        transporte: this.selectTransporte,
+                        patente: this.selectPatente,
+                        tipoComb: this.selectTipoComb,
+                        servicio: this.selectServicio,
+                        ubicIni: this.selectIni,
+                        ubiFin: this.selectFin
+                    }
+                    fetch('', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8'
+                        },
+                        body: JSON.stringify(nuevoTrayecto)
+                    })
               }
             },
             created() {
@@ -430,6 +484,11 @@
                     .then(response => response.json())
                     .then(recorridos => {
                         this.recorridos = recorridos
+                    });
+                fetch('http://localhost:8080/ubicacion/paises')
+                    .then(response => response.json())
+                    .then(data => {
+                        this.paises = data;
                     })
             }
         })

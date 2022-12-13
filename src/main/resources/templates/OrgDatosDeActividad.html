@@ -161,14 +161,14 @@
                                             <input type="file" id="myfile" name="myfile" />
                                             <br><br>
                                             <label for="m-area">Area</label>
-                                            <select v-model="areaSelect "id="m-area" name="dataTable_length" aria-controls="dataTable"
+                                            <select id="m-area" name="dataTable_length" aria-controls="dataTable"
                                                     class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                                <option v-for="area in areas">{{area.nombre}}</option>
+                                                <option @click="cargarAreaId(area.id)" v-for="area in areas">{{area.nombre}}</option>
                                             </select>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button @click="agregarXls(area.id)" type="button" class="btn btn-primary">Agregar</button>
+                                        <button @click="agregarXls(areaID)" type="button" class="btn btn-primary">Agregar</button>
                                     </div>
                                 </div>
                             </div>
@@ -187,20 +187,12 @@
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
                                                 rowspan="1" colspan="1" aria-sort="ascending" style="width: 400px;">
                                                 Area</th>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending">
-                                                Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-for="datoActividad in datosActividad" class="odd">
                                             <td class="sorting_1">{{datoActividad.fecha}}</td>
-                                            <td>{{datoActividad.area}}</td>
-                                            <td>
-                                                <a href="#" class="btn btn-danger btn-circle">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
+                                            <td>{{datoActividad.area.nombre}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -253,20 +245,15 @@
             el: "#wrapper",
             data: {
                 areas: null,
-                datosActividad:[]
+                datosActividad:[],
+                areaID: null
             },
             methods: {
-                  agregarXls: function(idArea) {
-                      nuevosDatosDA = {
-                          idAreaDA: idArea
-                      }
-                      let response = fetch('http://localhost:8080/datoDeActividad/'+idArea, {
-                          method: 'POST',
-                          headers: {
-                              'Content-Type': 'application/json;charset=utf-8'
-                          },
-                          body: JSON.stringify(nuevosDatosDA)
-                      });
+                    cargarAreaId: function(areaId){
+                        this.areaID = areaId;
+                    },
+                  agregarXls: function() {
+                    fetch('http://localhost:8080/cargarDatosDeActividad/'+this.areaID);
                     alert("Dato envíado.");
                 },
             },
@@ -275,6 +262,11 @@
                     .then(response => response.json())
                     .then(data => {
                         this.areas = data
+                    })
+                fetch('http://localhost:8080/datosDeActividad/1')
+                    .then(response => response.json())
+                    .then(data => {
+                        this.datosActividad = data
                     })
             }
         })

@@ -158,7 +158,7 @@
                                         <label for="">Seleccion de miembro: </label>
                                         <select id="" name="dataTable_length" aria-controls="dataTable"
                                                 class="custom-select custom-select-sm form-control form-control-sm form-control-user">
-                                            <option @click="asignarID(miembro)" v-for="miembro in miembros">{{miembro.nombre}}</option>
+                                            <option v-for="miembro in miembros" @click="asignarID(miembro.id)" >{{miembro.nombre}}</option>
                                         </select>
                                         <br><br>
                                         <label for="m-area">Tipo de Contacto</label>
@@ -211,10 +211,10 @@
                                         <td class="sorting_1">{{contacto.apellido}}</td>
                                         <td class="sorting_1">{{contacto.tipoDoc}}</td>
                                         <td class="sorting_1">{{contacto.numDoc}}</td>
-                                        <td class="sorting_1">{{contacto.areas}}</td>
+                                        <td class="sorting_1">{{contacto.areas[0].nombre}}</td>
                                         <td class="sorting_1">{{contacto.telefono}}</td>
                                         <td>
-                                            <a @click="eliminarContactoWp()" href="#" class="btn btn-danger btn-circle">
+                                            <a @click="borrarContactoWP(contacto.id)" href="#" class="btn btn-danger btn-circle">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </td>
@@ -258,10 +258,10 @@
                                         <td class="sorting_1">{{contacto.apellido}}</td>
                                         <td class="sorting_1">{{contacto.tipoDoc}}</td>
                                         <td class="sorting_1">{{contacto.numDoc}}</td>
-                                        <td class="sorting_1">{{contacto.areas}}</td>
+                                        <td class="sorting_1">{{contacto.areas[0].nombre}}</td>
                                         <td class="sorting_1">{{contacto.mail}}</td>
                                         <td>
-                                            <a @click="eliminarContactoMail()" href="#" class="btn btn-danger btn-circle">
+                                            <a @click="borrarContactoMail(contacto.id)" href="#" class="btn btn-danger btn-circle">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </td>
@@ -320,43 +320,22 @@
                 contactosMail: []
             },
             methods:{
-                asignarID: function(miembro) {
-                    this.selectMiembro = miembro.id;
+                asignarID: function(miembroId) {
+                    this.selectMiembro = miembroId;
                 },
                 agregarContacto: function() {
-                    nuevoContacto = {
-                        miembroId: this.selectMiembro,
+                    if(this.tipoSelect == "Mail"){ fetch('http://localhost:8080/organizaciones/1/agregarContactoMail/'+this.selectMiembro);
                     }
-                    if(this.tipoSelect == "Mail"){
-                        let response = fetch('http://localhost:8080/gerenarContactoMail', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json;charset=utf-8'
-                            },
-                            body: JSON.stringify(nuevosContacto)
-                        });
-                    }
-                    else {
-                        let response = fetch('http://localhost:8080/generarContactoWP', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json;charset=utf-8'
-                            },
-                            body: JSON.stringify(nuevoContacto)
-                        });
+                    else { fetch('http://localhost:8080/organizaciones/1/agregarContactoWpp/'+this.selectMiembro);
                     }
                     alert("solicitud enviada");
                 },
-                borrarContactoWP: function() {
-                    /*fetch('http://localhost:8080/conctacto/eliminar/' + IDCONTACTO, {
-                        method: 'GET',
-                    });*/
+                borrarContactoWP: function(miembroID) {
+                    fetch('http://localhost:8080/organizaciones/1/eliminarContactoWpp/'+miembroID)
                     alert("Contacto Eliminado.");
                 },
-                borrarContactoMail: function() {
-                    /*fetch('http://localhost:8080/conctacto/eliminar/' + IDCONTACTO, {
-                        method: 'GET',
-                    });*/
+                borrarContactoMail: function(miembroID) {
+                    fetch('http://localhost:8080/organizaciones/1/eliminarContactoMail/'+miembroID)
                     alert("Contacto Eliminado.");
                 }
             },
