@@ -11,7 +11,6 @@ import utn.frba.huelladecarbono.model.CalculoDeDistancias.Provincia;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Ubicacion;
 import utn.frba.huelladecarbono.service.CalculoDeDistanciaService.APIDistanciaService;
 import utn.frba.huelladecarbono.service.IUbicacionService;
-import utn.frba.huelladecarbono.service.UbicacionService;
 
 @RestController
 @RequestMapping("/ubicacion")

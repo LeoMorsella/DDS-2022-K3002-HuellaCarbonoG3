@@ -4,7 +4,6 @@ package utn.frba.huelladecarbono.service.CalculoDeHuellaService;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.List;
 
 public class CalculadoraHCService {
@@ -65,7 +64,7 @@ public class CalculadoraHCService {
         sectorTerritorial.setHC(HCTotal);
         HuellaCarbono huella = new HuellaCarbono(mesInicio, mesFin, HCTotal);
         sectorTerritorial.agregarHuella(huella);
-        HCTotal = control(valor);
+        HCTotal = control(HCTotal);
         return HCTotal;
     }
 

@@ -13,7 +13,6 @@ public class RecorridoService implements IRecorridoService{
     @Autowired
     private RecorridoRepository recorridoRepository;
 
-
     @Override
     public List<Recorrido> getRecorridos() {
         List <Recorrido> listaRecorridos = recorridoRepository.findAll();
