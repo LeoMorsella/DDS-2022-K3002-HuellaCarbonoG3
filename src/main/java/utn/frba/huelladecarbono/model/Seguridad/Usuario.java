@@ -34,7 +34,6 @@ public class Usuario {
     private int cantIntentos = 0;
     @OneToOne
     private Miembro miembro;
-
     private  Boolean estaActivo;
 
     public Usuario(String username, String password, List<Rol> roles) {
@@ -86,6 +85,15 @@ public class Usuario {
     }
 
     public Usuario() {
+    }
+
+    public Usuario(String username, String password,List<Rol> roles,int id) {
+        validarCredencialesUser(username,password);
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+        this.id = id;
+
     }
 
     public Usuario(String username, String password, int cantIntentos, Miembro miembro) {

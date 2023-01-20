@@ -13,6 +13,7 @@ import utn.frba.huelladecarbono.model.Seguridad.Rol;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.*;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
+import utn.frba.huelladecarbono.service.MiembroService;
 import utn.frba.huelladecarbono.service.UsuarioService;
 import java.util.*;
 
@@ -22,6 +23,9 @@ public class InitData implements CommandLineRunner {
 
     @Autowired
     UsuarioService usuarioService;
+
+    @Autowired
+    MiembroService miembroService;
     @Autowired
     OrganizacionRepository repoOrganizacion;
 
@@ -87,7 +91,7 @@ public class InitData implements CommandLineRunner {
         cargarRecorridos();
         cargarMedioNoMotorizado();
         cargarMedioMotorizado();
-        cargarUsuarios();
+        //cargarUsuarios();
         cargarParadas();
         cargarUbicaciones();
         cargarAreas();
@@ -96,7 +100,6 @@ public class InitData implements CommandLineRunner {
         darDeBajaOrganizacion();
         cargarTrayectos();
 
-
         Usuario usuarioMiembro = new Usuario("pablo@gmail.com","123",Arrays.asList(new Rol("ROLE_USER")));
         usuarioService.saveUsuario(usuarioMiembro);
 
@@ -104,7 +107,7 @@ public class InitData implements CommandLineRunner {
         usuarioService.saveUsuario(usuarioOrga);
 
         Usuario usuarioAS = new Usuario("gonza@gmail.com","123",Arrays.asList(new Rol("ROLE_ADM")));
-        usuarioService.saveUsuario(usuarioOrga);
+        usuarioService.saveUsuario(usuarioAS);
 
 
         System.out.println("INIT TERMINADO");
@@ -154,12 +157,7 @@ public class InitData implements CommandLineRunner {
         config.exposeIdsFor(Usuario.class);
         if(repoUsuario.count() == 0) {
 
-            Usuario usuario1 = new Usuario("prueba", "Yagni3210+", Arrays.asList(new Rol("ROLE_USER")));
-            List<Usuario> usuarios = new ArrayList<>();
-            usuarios.add(usuario1);
-            usuarios.stream().forEach(usuario -> {
-                repoUsuario.save(usuario);
-            });
+            System.out.println("Ok");
         }
         else{
             System.out.println("Ya existen Usuarios creados anteriormente");
@@ -248,7 +246,7 @@ public class InitData implements CommandLineRunner {
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.MINISTERIO, null, null, true, "Caralibro");
             Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
             Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro(area1, "Pablo", "Ortiz", "pablo@prueba", "2323", true);
-            //Miembro miembroPruebaDos = creadorDeObjetos.crearMiembro(area1,"Juan","Ortiz","juan@prueba","23523",true);
+            Miembro miembroPruebaDos = creadorDeObjetos.crearMiembro(area1,"Leonel","Morsella","leonel@prueba","23523",true);
         }
     }
 

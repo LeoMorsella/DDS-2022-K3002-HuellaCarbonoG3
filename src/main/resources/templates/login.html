@@ -24,6 +24,8 @@
 
     <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet" href="../static/css/sb-admin-2.min.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
 
 </head>
 
@@ -168,6 +170,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <script th:src="@{/js/bootstrap.js}" src="../static/js/bootstrap.js"></script>
+
+    <script>
+        let app = new Vue({
+        el: "#wrapper",
+        data:{
+            id: null,
+            mail: null
+        },
+        methods:{
+            analizaMiembro: function(){
+                if(this.mail == "pablo@gmail.com"){
+                    this.id = 1
+                    return 'MiembroDatosPersonales.html';
+                    }
+                 else {
+                    return 'login.html';
+                 }
+                },
+            analizaOrga: function(){
+                 if(this.mail == "luca@gmail.com"){
+                    this.id = 1
+                    return 'OrgDatosInternos.html';
+                 }
+                 else {
+                    return 'login.html';
+                 }
+            }
+          }
+       }
+    </script>
 </body>
 
 </html>
+
