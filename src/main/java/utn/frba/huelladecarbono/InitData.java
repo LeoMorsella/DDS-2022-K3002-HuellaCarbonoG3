@@ -13,6 +13,7 @@ import utn.frba.huelladecarbono.model.Seguridad.Rol;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.*;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
+import utn.frba.huelladecarbono.service.OrganizacionService;
 import utn.frba.huelladecarbono.service.UsuarioService;
 import java.util.*;
 
@@ -22,6 +23,9 @@ public class InitData implements CommandLineRunner {
 
     @Autowired
     UsuarioService usuarioService;
+
+    @Autowired
+    OrganizacionService organizacionService;
     @Autowired
     OrganizacionRepository repoOrganizacion;
 
@@ -95,6 +99,7 @@ public class InitData implements CommandLineRunner {
         cargarTransportePublico();
         darDeBajaOrganizacion();
         cargarTrayectos();
+        cargarDatosActividad();
 
 
         Usuario usuarioMiembro = new Usuario("pablo@gmail.com","123",Arrays.asList(new Rol("ROLE_USER")));
@@ -121,6 +126,12 @@ public class InitData implements CommandLineRunner {
             // Organizacion organizacion3 = new Organizacion("SRL", TipoOrg.ONG, Clasificacion.ESCUELA, null, null, true);
             // Recorrido recorridoPruebaDos =creadorDeObjetos.crearRecorrido(organizacion3,0.8,Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021));
         }
+    }
+
+    public void cargarDatosActividad() throws Exception {
+        String filePath = "..\\DDS-2022-K3002-HuellaCarbonoG3\\mediciones2.xlsx";
+        Organizacion organizacion = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.MINISTERIO, null, null, true, "Amason");
+        organizacionService.cargarMedicion(filePath,organizacion);
     }
 
     public void cargarParadas() throws Exception {

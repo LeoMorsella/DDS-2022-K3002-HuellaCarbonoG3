@@ -5,15 +5,27 @@ import net.minidev.json.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
+import utn.frba.huelladecarbono.repository.DatoActividadRepository;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCService;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.HuellaDeCarbono;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.RegistroCalculoHCDatoActividad;
+import utn.frba.huelladecarbono.service.CargaDeMedicionesService.CargaDeMediciones;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class OrganizacionService implements IOrganizacionService{
 
     @Autowired
+    private CalculadoraHCService calculadoraHCService;
+
+    @Autowired
     private OrganizacionRepository organizacionRepository;
+
+    @Autowired
+    private DatoActividadRepository datoActividadRepository;
 
 
     @Override
@@ -99,7 +111,52 @@ public class OrganizacionService implements IOrganizacionService{
         orgA.setTipo(TipoOrg.valueOf((String) jObject.get("tipoNuevo")));
         orgA.setClasificacion(Clasificacion.valueOf((String) jObject.get("clasificacionNuevo")));
         orgA.setUbicacion(new Ubicacion((String) jObject.get("paisNuevo"), (String) jObject.get("provinciaNuevo"), (String) jObject.get("municipioNuevo"), (String) jObject.get("localidadNuevo"), (String) jObject.get("calleNuevo"), (String) jObject.get("alturaNuevo")));
-
         this.saveOrganizacion(orgA);
     }
+
+    public void cargarMedicion (String filePath,Organizacion organizacion){
+        CargaDeMediciones cargaDeMediciones = new CargaDeMediciones();
+        cargaDeMediciones.useExistingWorkbook(filePath);
+        List<DatoDeMedicion> mediciones = cargaDeMediciones.lecturaArchivo(0);
+        calcularHCDatosActividadYGuardarRegistroCalculo(organizacion,mediciones);
+    }
+
+    private void calcularHCDatosActividadYGuardarRegistroCalculo(Organizacion organizacion, List<DatoDeMedicion> mediciones) {
+        List<HuellaDeCarbono> huellaDeCarbonoAnuales = new ArrayList<>();
+        List<HuellaDeCarbono> huellaDeCarbonoMensuales = new ArrayList<>();
+        Integer contador = 0;
+
+        for (DatoDeMedicion medicion : mediciones){
+            Double valorHuellaCarbono = calculadoraHCService.calcularHCDatoActividad(medicion);
+            System.out.println("prueba "+medicion.getPeriodoImputacion()+" "+valorHuellaCarbono);
+            HuellaDeCarbono huellaDeCarbono = new HuellaDeCarbono(medicion.getPeriodoImputacion(),valorHuellaCarbono);
+            if(medicion.getPeriodicidad().equals("Mensual")){
+                huellaDeCarbonoMensuales.add(huellaDeCarbono);
+            }else{
+                huellaDeCarbonoAnuales.add(huellaDeCarbono);
+            }
+            if(contador==10){
+                break;
+            }
+            contador++;
+        }
+
+        System.out.println("pueba 3"+huellaDeCarbonoMensuales.get(0).getValor());
+
+        guardarRegistroCalculoHCMensuales(organizacion, huellaDeCarbonoMensuales);
+        guardarRegistroCalculoHCAnuales(organizacion, huellaDeCarbonoAnuales);
+
+    }
+
+    public void guardarRegistroCalculoHCMensuales(Organizacion organizacion, List<HuellaDeCarbono> huellasDeCarbonos){
+        System.out.println("pueba 3"+huellasDeCarbonos.get(0).getValor());
+        huellasDeCarbonos.forEach(huellaDeCarbonos->datoActividadRepository.save(new RegistroCalculoHCDatoActividad("Mensual"
+             ,huellaDeCarbonos.getLocalDate(),huellaDeCarbonos.getValor())));
+    }
+
+    public void guardarRegistroCalculoHCAnuales(Organizacion organizacion,List<HuellaDeCarbono> huellasDeCarbonos){
+        huellasDeCarbonos.stream().forEach(huellaDeCarbonos->datoActividadRepository.save(new RegistroCalculoHCDatoActividad("Anual"
+                ,huellaDeCarbonos.getLocalDate(), calculadoraHCService.calcularHCAnualProrrateadoDatoActividad(huellaDeCarbonos.getValor(),2022))));
+    }
+
 }

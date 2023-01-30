@@ -8,7 +8,6 @@ import java.util.Calendar;
 @Component
 public class Calendario {
 
-
     public static LocalDate  crearFecha(int mes, int anio) {
         return LocalDate.of(anio,mes,1);
     }
