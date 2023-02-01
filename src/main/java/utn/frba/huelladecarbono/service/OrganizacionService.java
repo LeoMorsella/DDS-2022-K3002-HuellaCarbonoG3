@@ -146,17 +146,18 @@ public class OrganizacionService implements IOrganizacionService{
         guardarRegistroCalculoHCMensuales(organizacion, huellaDeCarbonoMensuales);
         guardarRegistroCalculoHCAnuales(organizacion, huellaDeCarbonoAnuales);
 
+
     }
 
     public void guardarRegistroCalculoHCMensuales(Organizacion organizacion, List<HuellaDeCarbono> huellasDeCarbonos){
         System.out.println("pueba 3"+huellasDeCarbonos.get(0).getValor());
         huellasDeCarbonos.forEach(huellaDeCarbonos->datoActividadRepository.save(new RegistroCalculoHCDatoActividad("Mensual"
-             ,huellaDeCarbonos.getLocalDate(),huellaDeCarbonos.getValor())));
+             ,huellaDeCarbonos.getLocalDate(),organizacion,huellaDeCarbonos.getValor())));
     }
 
     public void guardarRegistroCalculoHCAnuales(Organizacion organizacion,List<HuellaDeCarbono> huellasDeCarbonos){
         huellasDeCarbonos.stream().forEach(huellaDeCarbonos->datoActividadRepository.save(new RegistroCalculoHCDatoActividad("Anual"
-                ,huellaDeCarbonos.getLocalDate(), calculadoraHCService.calcularHCAnualProrrateadoDatoActividad(huellaDeCarbonos.getValor(),2022))));
+                ,huellaDeCarbonos.getLocalDate(), organizacion,calculadoraHCService.calcularHCAnualProrrateadoDatoActividad(huellaDeCarbonos.getValor(),2022))));
     }
 
 }

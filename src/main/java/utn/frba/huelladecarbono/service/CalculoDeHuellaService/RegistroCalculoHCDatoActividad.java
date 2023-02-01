@@ -26,6 +26,13 @@ public class RegistroCalculoHCDatoActividad {
     private Organizacion organizacion;
     private Double valor;
 
+    public RegistroCalculoHCDatoActividad(String periodicidad, String periodoImputacion, Organizacion organizacion, Double valor) {
+        this.periodicidad = periodicidad;
+        this.periodoImputacion = periodoImputacion;
+        this.organizacion = organizacion;
+        this.valor = valor;
+    }
+
     public RegistroCalculoHCDatoActividad() {
 
     }
@@ -38,11 +45,6 @@ public class RegistroCalculoHCDatoActividad {
         this.valor = valor;
     }
 
-    public RegistroCalculoHCDatoActividad(String periodicidad, String periodoImputacion, Double valor) {
-        this.periodicidad = periodicidad;
-        this.periodoImputacion = periodoImputacion;
-        this.valor = valor;
-    }
 
 
 }
