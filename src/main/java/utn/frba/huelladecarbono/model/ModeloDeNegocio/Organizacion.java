@@ -8,6 +8,8 @@ import utn.frba.huelladecarbono.model.Repositorios.RepositorioTrayectos;
 import utn.frba.huelladecarbono.respuestaEndpoint.MiembroEnEspera;
 import lombok.Getter;
 import lombok.Setter;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.RegistroCalculoHCDatoActividad;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,9 @@ public class Organizacion {
 
     @ManyToOne
     private Ubicacion ubicacion;
+
+    @OneToMany(mappedBy = "organizacion",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<RegistroCalculoHCDatoActividad> registroCalculoHCDatoActividads = new ArrayList<>();
     @OneToMany(mappedBy = "organizacion",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Area> areas = new ArrayList<>();
 

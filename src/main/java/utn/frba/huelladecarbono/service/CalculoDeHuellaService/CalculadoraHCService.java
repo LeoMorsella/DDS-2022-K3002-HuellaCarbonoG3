@@ -1,11 +1,13 @@
 package utn.frba.huelladecarbono.service.CalculoDeHuellaService;
 
 
+import org.springframework.stereotype.Service;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Service
 public class CalculadoraHCService {
     Double k = 0.0;
     private static CalculadoraHCService instance = null;
@@ -49,7 +51,7 @@ public class CalculadoraHCService {
     public Double calcularHCMedicion(List<DatoDeMedicion> datoDeMedicion, LocalDate mesInicio, LocalDate mesFin) {
         Double valor = CalculadoraHCMedicion.calcularHC(datoDeMedicion, k, mesInicio, mesFin);
         HuellaCarbono huella = new HuellaCarbono(mesInicio, mesFin, valor);
-        for(DatoDeMedicion dato : datoDeMedicion){
+        for (DatoDeMedicion dato : datoDeMedicion) {
             dato.agregarHuella(huella);
         }
         valor = control(valor);
@@ -87,15 +89,35 @@ public class CalculadoraHCService {
         return valor;
     }
 
-    public Double calcularHCPromedio(Area area,LocalDate mesInicio,LocalDate mesFin) throws Exception {
+    public Double calcularHCPromedio(Area area, LocalDate mesInicio, LocalDate mesFin) throws Exception {
         Double valor = CalculadoraHCArea.HCpromedio(area, mesInicio, mesFin);
         area.setHcPromedio(valor);
         valor = control(valor);
         return valor;
     }
 
-    public Double control(Double valor){
-        if(valor == 0.0 || valor.isNaN()){valor = Math.random();}
+    public Double control(Double valor) {
+        if (valor == 0.0 || valor.isNaN()) {
+            valor = Math.random();
+        }
         return valor;
     }
+
+    public Double calcularHCAnualProrrateadoDatoActividad(Double valor, Integer anioImputacion) {
+        LocalDate currentdate = LocalDate.now();
+
+        if (anioImputacion < currentdate.getYear()) {
+            // Si el DatoActividad es para el 2021 y estamos en el 2022, entonces el HC es a anio completo,
+            //  asi que se prorratea a 12 meses
+            return valor / 12;
+        }
+
+        Integer mesActual = currentdate.getMonth().getValue();
+        return valor / mesActual - 1;
+    }
+
+    public Double calcularHCDatoActividad(DatoDeMedicion medicion) {
+        return (Double) medicion.getValor();
+    }
+
 }
