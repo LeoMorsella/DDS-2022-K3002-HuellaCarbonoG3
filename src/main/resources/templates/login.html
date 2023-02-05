@@ -188,6 +188,7 @@
         },
         methods:{
             logMiem: function() {
+                let id = null;
                 let usuario = {
                     nombre: this.nombre,
                     contrasenia : this. contrasenia
@@ -198,8 +199,13 @@
                     'Content-Type': 'application/json;charset=utf-8'
                 },
                 body: JSON.stringify(usuario)
-            }).then(response => localStorage.setItem("id",response.text()));
-                window.location.href = 'http://localhost:8080/miembro/datosPersonales'
+            }).then(response => id = response.text());
+                if(id !== 1){
+                    localStorage.setItem("id", id);
+                    window.location.href = 'http://localhost:8080/miembro/datosPersonales';}
+                else{
+                    alert("Usuario o contraseña incorrecto")
+                }
             },
             logOrga: function() {
                 let usuario = {
@@ -212,8 +218,13 @@
                         'Content-Type': 'application/json;charset=utf-8'
                     },
                     body: JSON.stringify(usuario)
-                }).then(response => localStorage.setItem("id",response.text()));
-                window.location.href = 'http://localhost:8080/organizacion/recomendaciones'
+                }).then(response => id = response.text());
+                if(id !== 1){
+                    localStorage.setItem("id", id);
+                    window.location.href = 'http://localhost:8080/organizacion/recomendaciones';}
+                else{
+                    alert("Usuario o contraseña incorrecto")
+                }
             },
             logAS: function() {
                 let usuario = {
@@ -226,8 +237,13 @@
                         'Content-Type': 'application/json;charset=utf-8'
                     },
                     body: JSON.stringify(usuario)
-                }).then(response => localStorage.setItem("id",response.text()));
-                window.location.href = 'http://localhost:8080/AS/recomendaciones'
+                }).then(response => id = response.text());
+                if(id !== 1){
+                    localStorage.setItem("id", id);
+                    window.location.href = 'http://localhost:8080/AS/recomendaciones';}
+                else{
+                    alert("Usuario o contraseña incorrecto")
+                }
             }
         },
         created () {
