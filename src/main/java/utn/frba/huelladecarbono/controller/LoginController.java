@@ -1,6 +1,7 @@
 package utn.frba.huelladecarbono.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import utn.frba.huelladecarbono.DTO.LoginDTO;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
@@ -15,7 +16,7 @@ public class LoginController {
     }
 
     @PostMapping("miembro")
-    private Integer loginMiembro(LoginDTO login) {
+    private Integer loginMiembro(@RequestBody LoginDTO login) {
         Usuario usuario = this.usuarioRepository.findByUsername(login.getUsuario());
 
         if(usuario.getRol() == 1 && usuario.getPassword() == login.getContrasenia()) {
@@ -25,7 +26,7 @@ public class LoginController {
     }
 
     @PostMapping("organizacion")
-    private Integer loginOrganizacion(LoginDTO login) {
+    private Integer loginOrganizacion(@RequestBody LoginDTO login) {
         Usuario usuario = this.usuarioRepository.findByUsername(login.getUsuario());
 
         if(usuario.getRol() == 2 && usuario.getPassword() == login.getContrasenia()) {
@@ -35,7 +36,7 @@ public class LoginController {
     }
 
     @PostMapping("agenteSectorial")
-    private Integer loginAS(LoginDTO login) {
+    private Integer loginAS(@RequestBody LoginDTO login) {
         Usuario usuario = this.usuarioRepository.findByUsername(login.getUsuario());
 
         if(usuario.getRol() == 3 && usuario.getPassword() == login.getContrasenia()) {
