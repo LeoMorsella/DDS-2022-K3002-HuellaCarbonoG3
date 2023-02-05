@@ -1,30 +1,31 @@
-package utn.frba.huelladecarbono.respuestaEndpoint;
+package utn.frba.huelladecarbono.DTO;
 
 import lombok.Getter;
-import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
-public class ResMiembro2 {
-    private Integer miembroId;
+public class ResMiembro {
+    private Integer id;
     private String nombre;
     private String apellido;
     private String tipoDoc;
     private Integer numDoc;
     private String mail;
     private String telefono;
-    private String areaNombre;
-    private Integer areaId;
+    private List<ResArea> areas;
 
-    public ResMiembro2(Miembro miembro, Area area) {
-        this.miembroId = miembro.getID();
+    public ResMiembro(Miembro miembro) {
+        this.id = miembro.getID();
         this.nombre = miembro.getNombre();
         this.apellido = miembro.getApellido();
         this.tipoDoc = miembro.getTipoDoc();
         this.numDoc = miembro.getNumDoc();
         this.mail = miembro.getMail();
         this.telefono = miembro.getTelefono();
-        this.areaNombre = area.getNombre();
-        this.areaId = area.getId();
+        this.areas = new ArrayList<>();
+        miembro.getAreas().forEach(area -> this.areas.add(new ResArea(area)));
     }
 }

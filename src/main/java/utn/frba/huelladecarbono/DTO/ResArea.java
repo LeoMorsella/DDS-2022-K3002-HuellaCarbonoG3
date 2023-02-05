@@ -1,9 +1,7 @@
-package utn.frba.huelladecarbono.respuestaEndpoint;
+package utn.frba.huelladecarbono.DTO;
 
 import lombok.Getter;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
-
-import javax.persistence.criteria.CriteriaBuilder;
 
 @Getter
 public class ResArea {

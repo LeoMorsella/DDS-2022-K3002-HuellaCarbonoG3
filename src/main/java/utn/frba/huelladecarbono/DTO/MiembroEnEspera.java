@@ -1,4 +1,4 @@
-package utn.frba.huelladecarbono.respuestaEndpoint;
+package utn.frba.huelladecarbono.DTO;
 
 import lombok.Getter;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;

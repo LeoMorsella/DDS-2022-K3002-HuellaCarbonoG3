@@ -7,6 +7,7 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 import utn.frba.huelladecarbono.model.Repositorios.*;
+import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -43,10 +44,6 @@ public class CreadorDeObjetos {
 
     @Autowired
     AreaRepository repoArea;
-
-    @Autowired
-    RepositorioUsuarios repositorioUsuariosEnMemoria;
-
     @Autowired
     TransportePublicoRepository repoTransportesPublico;
 
@@ -64,19 +61,18 @@ public class CreadorDeObjetos {
 
     @Autowired
     RepositorioSectorTerritorial repositorioSectorTerritorialEnMemoria;
-
     @Autowired
     MedioMotorizadoRepository repoMedioMotorizado;
     @Autowired
     RepositorioMedioMotorizado repositorioMedioMotorizado;
-
     @Autowired
     MedioNoMotorizadoRepository repoMedioNoMotorizado;
     @Autowired
     RepositorioMedioNoMotorizado repositorioMedioNoMotorizado;
-
     @Autowired
     UbicacionRepository repoUbicacion;
+    @Autowired
+    UsuarioRepository repoUsuario;
 
 
 
@@ -188,6 +184,24 @@ public class CreadorDeObjetos {
         Ubicacion ubicacion = new Ubicacion(pais, provincia, municipio, localidad, calle, altura);
         repoUbicacion.save(ubicacion);
         return ubicacion;
+    }
+
+    public Usuario crearUsuario(String username, String password, Integer rol, Miembro miembro) {
+        Usuario usuario = new Usuario(username, password, rol, miembro);
+        repoUsuario.save(usuario);
+        return usuario;
+    }
+
+    public Usuario crearUsuario(String username, String password, Integer rol, Organizacion organizacion) {
+        Usuario usuario = new Usuario(username, password, rol, organizacion);
+        repoUsuario.save(usuario);
+        return usuario;
+    }
+
+    public Usuario crearUsuario(String username, String password, Integer rol, AgenteSectorial agente) {
+        Usuario usuario = new Usuario(username, password, rol, agente);
+        repoUsuario.save(usuario);
+        return usuario;
     }
 
 }

@@ -1,4 +1,4 @@
-package utn.frba.huelladecarbono.respuestaEndpoint;
+package utn.frba.huelladecarbono.DTO;
 
 public class ResInforme {
     public String nombre;

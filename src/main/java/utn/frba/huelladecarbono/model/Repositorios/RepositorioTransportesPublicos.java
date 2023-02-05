@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import utn.frba.huelladecarbono.controller.TransportePublicoController;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.TransportePublico;
-import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
-
 import java.util.ArrayList;
 import java.util.List;
 @Component

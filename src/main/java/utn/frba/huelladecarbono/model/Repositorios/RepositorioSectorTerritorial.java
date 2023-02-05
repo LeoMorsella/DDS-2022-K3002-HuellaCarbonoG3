@@ -3,10 +3,7 @@ package utn.frba.huelladecarbono.model.Repositorios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import utn.frba.huelladecarbono.controller.SectorTerritorialController;
-import utn.frba.huelladecarbono.controller.UsuarioController;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.SectorTerritorial;
-import utn.frba.huelladecarbono.model.Seguridad.Usuario;
-
 import java.util.ArrayList;
 import java.util.List;
 

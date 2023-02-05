@@ -5,7 +5,7 @@ import utn.frba.huelladecarbono.model.MedioDeTransporte.Medio;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioTrayectos;
-import utn.frba.huelladecarbono.respuestaEndpoint.MiembroEnEspera;
+import utn.frba.huelladecarbono.DTO.MiembroEnEspera;
 import lombok.Getter;
 import lombok.Setter;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.RegistroCalculoHCDatoActividad;

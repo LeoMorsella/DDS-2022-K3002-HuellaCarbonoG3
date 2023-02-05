@@ -1,6 +1,8 @@
 package utn.frba.huelladecarbono.model.Seguridad;
 
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.AgenteSectorial;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.service.ValidadorContraseniasService;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,100 +22,30 @@ public class Usuario {
     private String username;
     @Column
     private String password;
+    @Column
+    private Integer rol;
+    @Column
+    private Integer idRol;
 
-    public List<Rol> getRoles() {
-        return roles;
-    }
 
-    public void setRoles(List<Rol> roles) {
-        this.roles = roles;
-    }
-
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<Rol> roles;
-    private int cantIntentos = 0;
-    @OneToOne
-    private Miembro miembro;
-
-    private  Boolean estaActivo;
-
-    public Usuario(String username, String password, List<Rol> roles) {
+    public Usuario(String username, String password, Integer rol, Miembro miembro) {
         this.username = username;
         this.password = password;
-        this.roles = roles;
+        this.rol = rol;
+        this.idRol = miembro.getID();
     }
 
-
-
-    private void validarCredencialesUser(String user, String psw){
-        this.username = user;
-        this.password = psw;
-        ValidadorContraseniasService.getValidadorContrasenias().validarPassword(password);
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public int getCantIntentos() {
-        return cantIntentos;
-    }
-
-
-    public Miembro getMiembro() {
-        return miembro;
-    }
-
-    public void setCantIntentos(int cantIntentos) {
-        this.cantIntentos = cantIntentos;
-    }
-
-    public void setMiembro(Miembro miembro) {
-        this.miembro = miembro;
-    }
-
-    public void validarLogueo(String password) throws InterruptedException {
-        if(this.roles == Arrays.asList(new Rol("ROLE_USER"))) {
-            if(this.password != password) {
-                cantIntentos += 1;
-                TimeUnit.SECONDS.sleep(2 ^ cantIntentos);
-            }
-        }
-    }
-
-    public Usuario() {
-    }
-
-    public Usuario(String username, String password, int cantIntentos, Miembro miembro) {
+    public Usuario(String username, String password, Integer rol, Organizacion organizacion) {
         this.username = username;
         this.password = password;
-        this.cantIntentos = cantIntentos;
-        this.miembro = miembro;
+        this.rol = rol;
+        this.idRol = organizacion.getId();
     }
 
-    public Boolean getEstaActivo() {
-        return estaActivo;
-    }
-
-    public void setEstaActivo(Boolean estaActivo) {
-        this.estaActivo = estaActivo;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", roles=" + roles +
-                ", cantIntentos=" + cantIntentos +
-                ", miembro=" + miembro +
-                ", estaActivo=" + estaActivo +
-                '}';
+    public Usuario(String username, String password, Integer rol, AgenteSectorial agente) {
+        this.username = username;
+        this.password = password;
+        this.rol = rol;
+        this.idRol = agente.getId();
     }
 }

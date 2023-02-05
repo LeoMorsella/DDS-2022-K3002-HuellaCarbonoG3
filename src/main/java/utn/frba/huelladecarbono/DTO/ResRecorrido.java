@@ -1,9 +1,7 @@
-package utn.frba.huelladecarbono.respuestaEndpoint;
+package utn.frba.huelladecarbono.DTO;
 
 import lombok.Getter;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
-
-import java.time.LocalDate;
 
 @Getter
 public class ResRecorrido {

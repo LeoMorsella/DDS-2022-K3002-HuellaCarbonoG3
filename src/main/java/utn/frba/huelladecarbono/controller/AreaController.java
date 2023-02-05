@@ -1,24 +1,14 @@
 package utn.frba.huelladecarbono.controller;
 
-import net.minidev.json.JSONObject;
-import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
-import utn.frba.huelladecarbono.model.Repositorios.RepositorioOrganizaciones;
 import utn.frba.huelladecarbono.repository.AreaRepository;
-import utn.frba.huelladecarbono.repository.OrganizacionRepository;
-import utn.frba.huelladecarbono.respuestaEndpoint.ResArea;
-import utn.frba.huelladecarbono.respuestaEndpoint.ResDatoDeActividad;
+import utn.frba.huelladecarbono.DTO.ResArea;
+import utn.frba.huelladecarbono.DTO.ResDatoDeActividad;
 import utn.frba.huelladecarbono.service.AreaService;
-import utn.frba.huelladecarbono.service.IAreaService;
-import utn.frba.huelladecarbono.service.IOrganizacionService;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

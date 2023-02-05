@@ -9,7 +9,6 @@ import utn.frba.huelladecarbono.model.CreadorDeObjetos.CreadorDeObjetos;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
-import utn.frba.huelladecarbono.model.Seguridad.Rol;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.*;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
@@ -23,62 +22,39 @@ public class InitData implements CommandLineRunner {
 
     @Autowired
     UsuarioService usuarioService;
-
     @Autowired
     OrganizacionService organizacionService;
     @Autowired
     OrganizacionRepository repoOrganizacion;
-
     @Autowired
     OrganizacionController organizacionController;
-
-    //Usuarios
     @Autowired
     UsuarioRepository repoUsuario;
-
     @Autowired
     RecorridoRepository repoRecorrido;
-
-
-    //Paradas
     @Autowired
     ParadaRepository repoParadas;
-
-    //Sector
     @Autowired
     SectorTerritorialRepository repoSectores;
-
-    //Transporte
-
     @Autowired
     TransportePublicoRepository repoTransportes;
-
     @Autowired
     MedioNoMotorizadoRepository repoMedioNoMotorizado;
-
     @Autowired
     MedioMotorizadoRepository repoMedioMotorizado;
-
     @Autowired
     MiembroRepository repoMiembros;
-
     @Autowired
     UbicacionRepository repoUbicaciones;
-
     @Autowired
     AreaRepository repoAreas;
-
     @Autowired
     TrayectoRepository repoTrayectos;
-
     @Autowired
     SectorTerritorialRepository repoSectorTerritorial;
-
     @Autowired
     RepositoryRestConfiguration config;
-
     @Autowired
-
     CreadorDeObjetos creadorDeObjetos;
 
 
@@ -91,25 +67,13 @@ public class InitData implements CommandLineRunner {
         cargarRecorridos();
         cargarMedioNoMotorizado();
         cargarMedioMotorizado();
-        cargarUsuarios();
         cargarParadas();
         cargarUbicaciones();
         cargarAreas();
         cargarSectoresTerritoriales();
         cargarTransportePublico();
-        darDeBajaOrganizacion();
         cargarTrayectos();
         cargarDatosActividad();
-
-
-        Usuario usuarioMiembro = new Usuario("pablo@gmail.com","123",Arrays.asList(new Rol("ROLE_USER")));
-        usuarioService.saveUsuario(usuarioMiembro);
-
-        Usuario usuarioOrga = new Usuario("luca@gmail.com","123",Arrays.asList(new Rol("ROLE_ADM")));
-        usuarioService.saveUsuario(usuarioOrga);
-
-        Usuario usuarioAS = new Usuario("gonza@gmail.com","123",Arrays.asList(new Rol("ROLE_ADM")));
-        usuarioService.saveUsuario(usuarioOrga);
 
 
         System.out.println("INIT TERMINADO");
@@ -160,22 +124,7 @@ public class InitData implements CommandLineRunner {
         }
     }
 
-   public void cargarUsuarios() throws Exception
-    {
-        config.exposeIdsFor(Usuario.class);
-        if(repoUsuario.count() == 0) {
 
-            Usuario usuario1 = new Usuario("prueba", "Yagni3210+", Arrays.asList(new Rol("ROLE_USER")));
-            List<Usuario> usuarios = new ArrayList<>();
-            usuarios.add(usuario1);
-            usuarios.stream().forEach(usuario -> {
-                repoUsuario.save(usuario);
-            });
-        }
-        else{
-            System.out.println("Ya existen Usuarios creados anteriormente");
-        }
-    }
 
     public void cargarMedioNoMotorizado() throws Exception
     {
@@ -252,13 +201,13 @@ public class InitData implements CommandLineRunner {
             trayectos.stream().forEach(trayecto -> repoTrayectos.save(trayecto));*/
     }
 
-    //Solo a modo prueba es esto
 
     public void cargarMiembros() throws Exception {
         if (repoMiembros.count() == 0) {
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.MINISTERIO, null, null, true, "Caralibro");
             Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
             Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro(area1, "Pablo", "Ortiz", "pablo@prueba", "2323", true);
+            creadorDeObjetos.crearUsuario("lucadelpieri", "12345", 1, miembroPruebaUno);
             //Miembro miembroPruebaDos = creadorDeObjetos.crearMiembro(area1,"Juan","Ortiz","juan@prueba","23523",true);
         }
     }
@@ -266,36 +215,14 @@ public class InitData implements CommandLineRunner {
     public void cargarOrganizaciones() throws Exception {
         if (repoOrganizacion.count() == 0) {
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.MINISTERIO, null, null, true, "Amason");
+            creadorDeObjetos.crearUsuario("amason", "qwerty", 2, organizacion1);
             Organizacion organizacion2 = creadorDeObjetos.crearOrganizacion("SRA", TipoOrg.GUBERNAMENTAL, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.EMPRESA_SECTOR_PRIMARIO, null, null, false, "MMM");
+            creadorDeObjetos.crearUsuario("MMM", "qwerty", 2, organizacion2);
             Organizacion organizacion3 = creadorDeObjetos.crearOrganizacion("SRL", TipoOrg.ONG, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.ESCUELA, null, null, true, "Coto");
+            creadorDeObjetos.crearUsuario("cotoooo", "qwerty", 2, organizacion3);
             Organizacion organizacion4 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.INSTITUCION, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.EMPRESA_SECTOR_SECUNDARIO, null, null, false, "VVBA");
-            /*Ubicacion ubicacionPruebaUno = new Ubicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100");
-            ArrayList<Double> listaHCPrueba = new ArrayList<>();
-            //Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
-            organizacion1.setUbicacion(ubicacionPruebaUno);
-            listaHCPrueba.add(100.00);
-            HuellaCarbono huellaPrueba = new HuellaCarbono(Calendario.crearFecha(2,2021),Calendario.crearFecha(3,2021), 250.00);
-            List<HuellaCarbono> hashMapPrueba = new ArrayList<>();
-            hashMapPrueba.add(huellaPrueba);
-            Organizacion organizacionConHC = creadorDeObjetos.crearOrganizacionConHC("SA",TipoOrg.INSTITUCION,ubicacionPruebaUno,Clasificacion.EMPRESA_SECTOR_SECUNDARIO,null,null,listaHCPrueba,250.00,hashMapPrueba,500.00,false);
-            Miembro miembroPruebaMail = creadorDeObjetos.crearMiembro(null,"Gonza","D","mail@prueba","5511",true);
-            Miembro miembroPruebaWP = creadorDeObjetos.crearMiembro(null,"Gonza2","D","mail2@prueba","221",true);
-            organizacion1.agregarContactoWP(miembroPruebaWP);
-            organizacion1.agregarContactoMail(miembroPruebaMail);
-           // RepositorioOrganizaciones.getRepositorio().getOrganizaciones().add(organizacion1);*/
+            creadorDeObjetos.crearUsuario("vvba", "qwerty", 2, organizacion4);
         }
-    }
-/*
-    public void actualizarOrganizacion() throws Exception
-    {
-        Organizacion nuevaOrganizacion = repoOrganizacion.findById(1).get();
-        nuevaOrganizacion.setRazonSocial("OrganizacionPableken!");
-        organizacionController.actualizarOrganizacion(1,nuevaOrganizacion);
-    }
-*/
-    public void darDeBajaOrganizacion() throws Exception
-    {
-        organizacionController.deleteOrganizacion(1);
     }
 
     public void cargarSectoresTerritoriales() {
