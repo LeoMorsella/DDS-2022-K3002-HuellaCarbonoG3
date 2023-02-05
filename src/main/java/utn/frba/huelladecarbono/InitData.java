@@ -207,7 +207,7 @@ public class InitData implements CommandLineRunner {
             Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.MINISTERIO, null, null, true, "Caralibro");
             Area area1 = creadorDeObjetos.crearArea("AreaPrueba", organizacion1);
             Miembro miembroPruebaUno = creadorDeObjetos.crearMiembro(area1, "Pablo", "Ortiz", "pablo@prueba", "2323", true);
-            creadorDeObjetos.crearUsuario("lucadelpieri", "12345", 1, miembroPruebaUno);
+            creadorDeObjetos.crearUsuario("lucadelpieri@gmail.com", "12345", 1, miembroPruebaUno);
             //Miembro miembroPruebaDos = creadorDeObjetos.crearMiembro(area1,"Juan","Ortiz","juan@prueba","23523",true);
         }
     }

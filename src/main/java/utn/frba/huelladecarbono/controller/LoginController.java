@@ -7,6 +7,8 @@ import utn.frba.huelladecarbono.DTO.LoginDTO;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.UsuarioRepository;
 
+import java.util.logging.Logger;
+
 @RestController("login/")
 public class LoginController {
     private final UsuarioRepository usuarioRepository;
@@ -17,30 +19,39 @@ public class LoginController {
 
     @PostMapping("miembro")
     private Integer loginMiembro(@RequestBody LoginDTO login) {
-        Usuario usuario = this.usuarioRepository.findByUsername(login.getUsuario());
+        System.out.println("Comienza la request");
+        if( this.usuarioRepository.existsById(Integer.parseInt(login.getUsuario()))) {
+            Usuario usuario = this.usuarioRepository.findByUsername(login.getUsuario());
 
-        if(usuario.getRol() == 1 && usuario.getPassword() == login.getContrasenia()) {
-            return usuario.getIdRol();
+            if(usuario.getRol() == 1 && usuario.getPassword() == login.getContrasenia()) {
+                System.out.println("retorna el id");
+                return usuario.getIdRol();
+            }
         }
+        System.out.println("retorna -1");
         return -1;
     }
 
     @PostMapping("organizacion")
     private Integer loginOrganizacion(@RequestBody LoginDTO login) {
-        Usuario usuario = this.usuarioRepository.findByUsername(login.getUsuario());
+        if( this.usuarioRepository.existsById(Integer.parseInt(login.getUsuario()))) {
+            Usuario usuario = this.usuarioRepository.findByUsername(login.getUsuario());
 
-        if(usuario.getRol() == 2 && usuario.getPassword() == login.getContrasenia()) {
-            return usuario.getIdRol();
+            if(usuario.getRol() == 2 && usuario.getPassword() == login.getContrasenia()) {
+                return usuario.getIdRol();
+            }
         }
         return -1;
     }
 
     @PostMapping("agenteSectorial")
     private Integer loginAS(@RequestBody LoginDTO login) {
-        Usuario usuario = this.usuarioRepository.findByUsername(login.getUsuario());
+        if( this.usuarioRepository.existsById(Integer.parseInt(login.getUsuario()))) {
+            Usuario usuario = this.usuarioRepository.findByUsername(login.getUsuario());
 
-        if(usuario.getRol() == 3 && usuario.getPassword() == login.getContrasenia()) {
-            return usuario.getIdRol();
+            if (usuario.getRol() == 3 && usuario.getPassword() == login.getContrasenia()) {
+                return usuario.getIdRol();
+            }
         }
         return -1;
     }

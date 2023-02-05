@@ -25,9 +25,6 @@ public class AppController {
     @GetMapping({"/login", "/", "/index"})
     public String login() {return "login";}
 
-
-
-
     @GetMapping("/miembro/calcularHuella")
     public String calcularHuellaM() {return "MiembroCalculadora";}
     @GetMapping("/miembro/datosPersonales")
