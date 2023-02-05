@@ -29,8 +29,9 @@
 
 </head>
 
-<body id="wrapper" class="bg-gradient-primary">
+<body class="bg-gradient-primary">
 
+<div id="wrapper">
 <div class="container">
     <!-- Outer Row -->
     <div class="row justify-content-center">
@@ -64,12 +65,12 @@
                                     </div>
                                     <form action="" href="">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input v-model="usuario" type="email" class="form-control form-control-user"
                                                    id="mail-miembro" name="username" aria-describedby="emailHelp"
                                                    placeholder="Ingrese su usuario">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
+                                            <input v-model="contrasenia" type="password" class="form-control form-control-user"
                                                    id="contraseña-miembro" name="password"
                                                    placeholder="Ingrese su contraseña">
                                         </div>
@@ -91,12 +92,12 @@
                                     <form action="" href="">
 
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input v-model="usuario" type="email" class="form-control form-control-user"
                                                    id="mail-organizacion" aria-describedby="emailHelp"
                                                    placeholder="Ingrese su usuario"  name="username" >
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
+                                            <input v-model="contrasenia" type="password" class="form-control form-control-user"
                                                    id="constraseña-organizacion"  name="password" placeholder="Ingrese su contraseña">
                                         </div>
                                         <button
@@ -115,18 +116,18 @@
                                     </div>
                                     <form action="" href="">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input v-model="usuario" type="email" class="form-control form-control-user"
                                                    id="mail-agente-sectorial"   aria-describedby="emailHelp"
                                                    placeholder="Ingrese su usuario" name="username">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
+                                            <input v-model="contrasenia" type="password" class="form-control form-control-user"
                                                    id="contraseña-agente-sectorial"  name="password"
                                                    placeholder="Ingrese su contraseña">
                                         </div>
-                                        <button type ="button"
+                                        <button type = "button"
                                                 @click="logAS()"
-                                                class="btn btn-primary">
+                                                class= "btn btn-primary">
                                             Iniciar sesión
                                         </button>
                                     </form>
@@ -166,6 +167,7 @@
     </div>
 
 </div>
+</div>
 
 <!-- Custom scripts for all pages-->
 <script th:src="@{/js/sb-admin-2.min.js}" src="../static/js/sb-admin-2.min.js"></script>
@@ -184,47 +186,47 @@
             nombre: null,
             contrasenia: null
         },
-        methods: {
+        methods:{
             logMiem: function() {
                 let usuario = {
                     nombre: this.nombre,
                     contrasenia : this. contrasenia
-                }
+                };
                 fetch('http://localhost:8080/login/miembro',{
                     method: 'POST',
                     headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                body: JSON.stringify(nuevosDatosOrga)
-            }).then(response => localStorage.setItem("id",response.text()))
+                body: JSON.stringify(usuario)
+            }).then(response => localStorage.setItem("id",response.text()));
                 window.location.href = 'http://localhost:8080/miembro/datosPersonales'
             },
             logOrga: function() {
                 let usuario = {
                     nombre: this.nombre,
                     contrasenia : this. contrasenia
-                }
+                };
                 fetch('http://localhost:8080/login/organizacion',{
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
                     },
-                    body: JSON.stringify(nuevosDatosOrga)
-                }).then(response => localStorage.setItem("id",response.text()))
+                    body: JSON.stringify(usuario)
+                }).then(response => localStorage.setItem("id",response.text()));
                 window.location.href = 'http://localhost:8080/organizacion/recomendaciones'
             },
             logAS: function() {
                 let usuario = {
                     nombre: this.nombre,
                     contrasenia : this. contrasenia
-                }
+                };
                 fetch('http://localhost:8080/login/agenteSectorial',{
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
                     },
-                    body: JSON.stringify(nuevosDatosOrga)
-                }).then(response => localStorage.setItem("id",response.text()))
+                    body: JSON.stringify(usuario)
+                }).then(response => localStorage.setItem("id",response.text()));
                 window.location.href = 'http://localhost:8080/AS/recomendaciones'
             }
         },
@@ -232,6 +234,7 @@
         }
     })
 </script>
+
 </body>
 
 </html>

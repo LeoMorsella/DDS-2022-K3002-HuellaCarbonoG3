@@ -1,6 +1,5 @@
 package ContraseñasTest;
 
-import utn.frba.huelladecarbono.model.Seguridad.Rol;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.model.UserExceptions.EasyPasswordException;
 import org.junit.jupiter.api.Assertions;
