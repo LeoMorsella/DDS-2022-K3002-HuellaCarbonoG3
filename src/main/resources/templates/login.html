@@ -31,7 +31,7 @@
 
 <body class="bg-gradient-primary">
 
-<div class="container">
+<div id="wrapper" class="container">
     <!-- Outer Row -->
     <div class="row justify-content-center">
 
@@ -62,7 +62,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Ingreso miembros</h1>
                                     </div>
-                                    <form class="user" th:action="@{/login}" method="post" name="form_miembro">
+                                    <form action="" href="">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                    id="mail-miembro" name="username" aria-describedby="emailHelp"
@@ -85,7 +85,7 @@
                                         <h1 class="h4 text-gray-900 mb-4">Ingreso organizaciones</h1>
                                     </div>
 
-                                    <form class="user" th:action="@{/loginOrganizacion}" method="post" name="form_org">
+                                    <form action="" href="">
 
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
@@ -108,7 +108,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Ingreso agentes sectoriales</h1>
                                     </div>
-                                    <form class="user"  th:action="@{/loginAgente}" method="post" name="form_agente">
+                                    <form action="" href="">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                    id="mail-agente-sectorial"   aria-describedby="emailHelp"
@@ -173,42 +173,60 @@
 <script th:src="@{/js/bootstrap.js}" src="../static/js/bootstrap.js"></script>
 
 <script>
-    function verificaMiembro() {
-        var x = document.getElementById("mail-miembro").value;
-        var y = document.getElementById("contraseña-miembro").value;
-        if(x == "pablo@gmail.com" && y == "123"){
-            return true;
+    let app = new Vue({
+        el: "#wrapper",
+        data:{
+            nombre: null,
+            contrasenia: null
+        },
+        methods: {
+            logMiem: function() {
+                let usuario = {
+                    nombre: this.nombre,
+                    contrasenia : this. contrasenia
+                }
+                fetch('http://localhost:8080/login/miembro',{
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(nuevosDatosOrga)
+            })
+                    .then(response => localStorage.setItem("id",response.text()))
+            },
+            logOrga: function() {
+                let usuario = {
+                    nombre: this.nombre,
+                    contrasenia : this. contrasenia
+                }
+                fetch('http://localhost:8080/login/organizacion',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(nuevosDatosOrga)
+                })
+                    .then(response => localStorage.setItem("id",response.text()))
+            },
+            logAS: function() {
+                let usuario = {
+                    nombre: this.nombre,
+                    contrasenia : this. contrasenia
+                }
+                fetch('http://localhost:8080/login/agenteSectorial',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(nuevosDatosOrga)
+                })
+                    .then(response => localStorage.setItem("id",response.text()))
+            }
+        },
+        created () {
         }
-        else {
-            alert("Usuario y contraseña incorrecto");
-            return false;
-        }
-    }
-
-    function verificaOrganizacion() {
-        var x = document.getElementById("mail-organizacion").value;
-        var y = document.getElementById("constraseña-organizacion").value;
-        if(x == "luca@gmail.com" && y == "123"){
-            return true;
-        }
-        else {
-            alert("Usuario y contraseña incorrecto");
-            return false;
-        }
-    }
-
-    function verificaAgente() {
-        var x = document.getElementById("mail-agente-sectorial").value;
-        var y = document.getElementById("contraseña-agente-sectorial").value;
-        if(x == 'gonza@gmail.com' && y =='123'){
-            return true;
-        }
-        else {
-            alert("Usuario y contraseña incorrecto");
-            return false;
-        }
-    }
-    </script>
+    })
+</script>
 </body>
 
 </html>
