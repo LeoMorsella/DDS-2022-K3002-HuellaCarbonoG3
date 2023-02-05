@@ -336,9 +336,6 @@
                                     <thead>
                                         <tr role="row">
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending" style="width: 50px;">ID
-                                            </th>
-                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
                                                 rowspan="1" colspan="1" aria-sort="ascending" style="width: 50px;">Nombre
                                             </th>
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
@@ -351,7 +348,7 @@
                                             <td class="sorting_1">1</td>
                                             <td>{{recorrido.nombre}}</td>
                                             <td>
-                                                <a @click="borrarRecorrido(recorrido.id)" href="#" class="btn btn-danger btn-circle">
+                                                <a @click="eliminarRecorrido(recorrido.id)" href="#" class="btn btn-danger btn-circle">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
@@ -455,7 +452,7 @@
                         })
                 },
               borrarRecorrido: function (idRecorrido) {
-                  fetch('http://localhost:8080/recorrido/eliminar/'+idRecorrido);
+                  fetch('http://localhost:8080//recorrido/eliminar/'+idRecorrido);
                   alert("Recorrido eliminado.")
               },
               agregarTrayecto: function(){

@@ -183,14 +183,14 @@
     let app = new Vue({
         el: "#wrapper",
         data:{
-            nombre: null,
+            usuario: null,
             contrasenia: null
         },
         methods:{
             logMiem: function() {
                 let id = null;
                 let usuario = {
-                    nombre: this.nombre,
+                    usuario: this.usuario,
                     contrasenia : this. contrasenia
                 };
                 fetch('http://localhost:8080/login/miembro',{
@@ -200,7 +200,7 @@
                 },
                 body: JSON.stringify(usuario)
             }).then(response => id = response.text());
-                if(id !== 1){
+                if(id !== -1){
                     localStorage.setItem("id", id);
                     window.location.href = 'http://localhost:8080/miembro/datosPersonales';}
                 else{
@@ -208,8 +208,9 @@
                 }
             },
             logOrga: function() {
+                let id = null;
                 let usuario = {
-                    nombre: this.nombre,
+                    usuario: this.usuario,
                     contrasenia : this. contrasenia
                 };
                 fetch('http://localhost:8080/login/organizacion',{
@@ -219,7 +220,7 @@
                     },
                     body: JSON.stringify(usuario)
                 }).then(response => id = response.text());
-                if(id !== 1){
+                if(id !== -1){
                     localStorage.setItem("id", id);
                     window.location.href = 'http://localhost:8080/organizacion/recomendaciones';}
                 else{
@@ -227,8 +228,9 @@
                 }
             },
             logAS: function() {
+                let id = null;
                 let usuario = {
-                    nombre: this.nombre,
+                    usuario: this.usuario,
                     contrasenia : this. contrasenia
                 };
                 fetch('http://localhost:8080/login/agenteSectorial',{
@@ -238,7 +240,7 @@
                     },
                     body: JSON.stringify(usuario)
                 }).then(response => id = response.text());
-                if(id !== 1){
+                if(id !== -1){
                     localStorage.setItem("id", id);
                     window.location.href = 'http://localhost:8080/AS/recomendaciones';}
                 else{

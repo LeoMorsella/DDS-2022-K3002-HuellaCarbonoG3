@@ -60,9 +60,9 @@ public class RecorridoController {
         JSONParser parser = new JSONParser();
         JSONObject jObject  = (JSONObject) parser.parse(recorridoStr);
         Recorrido recorrido = recorridoRepository.getById((Integer) jObject.get("idRecorrido"));
-        recorrido.setPeso((Double) jObject.get("peso"));
-        recorrido.setFechaInicio((String) jObject.get("fechaInicio"));
-        recorrido.setFechaFin((String) jObject.get("fechaFin"));
+        recorrido.setPeso(Double.parseDouble((String) jObject.get("peso")));
+        recorrido.setFechaInicio((String) jObject.get("fechaDeInicio"));
+        recorrido.setFechaFin((String) jObject.get("fechaDeFin"));
         recorridoRepository.save(recorrido);
 
         Miembro miembro = miembroRepository.getById(miembroId);
