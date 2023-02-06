@@ -9,7 +9,6 @@ import utn.frba.huelladecarbono.model.CreadorDeObjetos.CreadorDeObjetos;
 import utn.frba.huelladecarbono.model.MedioDeTransporte.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
-import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.*;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Calendario;
 import utn.frba.huelladecarbono.service.OrganizacionService;

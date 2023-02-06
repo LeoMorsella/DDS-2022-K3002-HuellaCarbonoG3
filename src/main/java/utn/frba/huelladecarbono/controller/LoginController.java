@@ -1,15 +1,12 @@
 package utn.frba.huelladecarbono.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.DTO.LoginDTO;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.UsuarioRepository;
 
-import java.util.logging.Logger;
-
-@RestController("login/")
+@RestController
+@RequestMapping("login/")
 public class LoginController {
     private final UsuarioRepository usuarioRepository;
 
@@ -17,42 +14,40 @@ public class LoginController {
         this.usuarioRepository = usuarioRepository;
     }
 
-    @PostMapping("miembro")
-    private Integer loginMiembro(@RequestBody LoginDTO login) {
-        System.out.println("Comienza la request");
-        if( this.usuarioRepository.existsById(Integer.parseInt(login.getUsuario()))) {
-            Usuario usuario = this.usuarioRepository.findByUsername(login.getUsuario());
+    @GetMapping("miembro/{usuarioS}/{contrasenia}")
+    private Integer loginMiembro(@PathVariable String usuarioS, @PathVariable String contrasenia) {
+        if( this.usuarioRepository.existsByUsername(usuarioS)) {
+            Usuario usuario = this.usuarioRepository.findByUsername(usuarioS);
 
-            if(usuario.getRol() == 1 && usuario.getPassword() == login.getContrasenia()) {
-                System.out.println("retorna el id");
-                return usuario.getIdRol();
-            }
-        }
-        System.out.println("retorna -1");
-        return -1;
-    }
-
-    @PostMapping("organizacion")
-    private Integer loginOrganizacion(@RequestBody LoginDTO login) {
-        if( this.usuarioRepository.existsById(Integer.parseInt(login.getUsuario()))) {
-            Usuario usuario = this.usuarioRepository.findByUsername(login.getUsuario());
-
-            if(usuario.getRol() == 2 && usuario.getPassword() == login.getContrasenia()) {
+            if(usuario.getRol() == 1 && usuario.getPassword().equals(contrasenia)) {
                 return usuario.getIdRol();
             }
         }
         return -1;
     }
 
-    @PostMapping("agenteSectorial")
-    private Integer loginAS(@RequestBody LoginDTO login) {
-        if( this.usuarioRepository.existsById(Integer.parseInt(login.getUsuario()))) {
-            Usuario usuario = this.usuarioRepository.findByUsername(login.getUsuario());
+    @GetMapping("organizacion/{usuarioS}/{contrasenia}")
+    private Integer loginOrganizacion(@PathVariable String usuarioS, @PathVariable String contrasenia) {
+        if( this.usuarioRepository.existsByUsername(usuarioS)) {
+            Usuario usuario = this.usuarioRepository.findByUsername(usuarioS);
 
-            if (usuario.getRol() == 3 && usuario.getPassword() == login.getContrasenia()) {
+            if(usuario.getRol() == 2 && usuario.getPassword().equals(contrasenia)) {
                 return usuario.getIdRol();
             }
         }
         return -1;
     }
+
+    @GetMapping("agenteSectorial/{usuarioS}/{contrasenia}")
+    private Integer loginAS(@PathVariable String usuarioS, @PathVariable String contrasenia) {
+        if( this.usuarioRepository.existsByUsername(usuarioS)) {
+            Usuario usuario = this.usuarioRepository.findByUsername(usuarioS);
+
+            if(usuario.getRol() == 3 && usuario.getPassword().equals(contrasenia)) {
+                return usuario.getIdRol();
+            }
+        }
+        return -1;
+    }
+
 }
