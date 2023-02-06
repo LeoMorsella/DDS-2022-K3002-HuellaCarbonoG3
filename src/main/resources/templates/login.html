@@ -189,17 +189,10 @@
         methods:{
             logMiem: function() {
                 let id = null;
-                let usuario = {
-                    usuario: this.usuario,
-                    contrasenia : this. contrasenia
-                };
-                fetch('http://localhost:8080/login/miembro',{
-                    method: 'POST',
-                    headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify(usuario)
-            }).then(response => id = response.text());
+                fetch('http://localhost:8080/login/miembro/'+this.usuario+'/'+this.contrasenia,{
+                    method: 'GET',
+            }).then(response => response.json())
+                    .then(data => id = data)
                 if(id !== -1){
                     localStorage.setItem("id", id);
                     window.location.href = 'http://localhost:8080/miembro/datosPersonales';}
@@ -209,17 +202,10 @@
             },
             logOrga: function() {
                 let id = null;
-                let usuario = {
-                    usuario: this.usuario,
-                    contrasenia : this. contrasenia
-                };
-                fetch('http://localhost:8080/login/organizacion',{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8'
-                    },
-                    body: JSON.stringify(usuario)
-                }).then(response => id = response.text());
+                fetch('http://localhost:8080/login/organizacion/'+this.usuario+'/'+this.contrasenia,{
+                    method: 'GET',
+                }).then(response => response.json())
+                    .then(data => id = data)
                 if(id !== -1){
                     localStorage.setItem("id", id);
                     window.location.href = 'http://localhost:8080/organizacion/recomendaciones';}
@@ -229,17 +215,10 @@
             },
             logAS: function() {
                 let id = null;
-                let usuario = {
-                    usuario: this.usuario,
-                    contrasenia : this. contrasenia
-                };
-                fetch('http://localhost:8080/login/agenteSectorial',{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8'
-                    },
-                    body: JSON.stringify(usuario)
-                }).then(response => id = response.text());
+                fetch('http://localhost:8080/login/agenteSectorial/'+this.usuario+'/'+this.contrasenia,{
+                    method: 'GET',
+                }).then(response => response.json())
+                    .then(data => id = data)
                 if(id !== -1){
                     localStorage.setItem("id", id);
                     window.location.href = 'http://localhost:8080/AS/recomendaciones';}
