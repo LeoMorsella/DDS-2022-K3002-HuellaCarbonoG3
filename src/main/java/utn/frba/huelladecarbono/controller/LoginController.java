@@ -1,5 +1,6 @@
 package utn.frba.huelladecarbono.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.DTO.LoginDTO;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
@@ -8,11 +9,8 @@ import utn.frba.huelladecarbono.repository.UsuarioRepository;
 @RestController
 @RequestMapping("login/")
 public class LoginController {
-    private final UsuarioRepository usuarioRepository;
-
-    public LoginController(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
-    }
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @GetMapping("miembro/{usuarioS}/{contrasenia}")
     private Integer loginMiembro(@PathVariable String usuarioS, @PathVariable String contrasenia) {

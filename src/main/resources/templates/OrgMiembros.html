@@ -301,7 +301,7 @@
                 .then(response => response.json())
                 .then(miembroObtenido => {
                     this.miembrosPendientes = miembroObtenido
-                }),
+                });
                 fetch('http://localhost:8080/organizaciones/1/miembros2')
                     .then(response => response.json())
                     .then(data => {

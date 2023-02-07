@@ -152,19 +152,6 @@
 
         </div>
 
-    </div>
-    <div th:if="${param.error}" class="alert alert-danger" role="alert"
-         style="width: 350px; margin: 20px auto; text-align: center">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                aria-hidden="true">&times;</span></button>
-        Usuario o contraseña incorrecta
-    </div>
-    <div th:if="${param.logout}" class="alert alert-success" role="alert"
-         style="width: 350px; margin: 20px auto; text-align: center;">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                aria-hidden="true">&times;</span></button>
-        Sesión cerrada
-    </div>
 
 </div>
 </div>
@@ -189,10 +176,9 @@
         methods:{
             logMiem: function() {
                 let id = null;
-                fetch('http://localhost:8080/login/miembro/'+this.usuario+'/'+this.contrasenia,{
-                    method: 'GET',
-            }).then(response => response.json())
-                    .then(data => id = data)
+                fetch('http://localhost:8080/login/miembro/'+this.usuario+'/'+this.contrasenia)
+                    .then(response =>{ response.json()})
+                    .then(data => {id = data})
                 if(id !== -1){
                     localStorage.setItem("id", id);
                     window.location.href = 'http://localhost:8080/miembro/datosPersonales';}
@@ -202,10 +188,9 @@
             },
             logOrga: function() {
                 let id = null;
-                fetch('http://localhost:8080/login/organizacion/'+this.usuario+'/'+this.contrasenia,{
-                    method: 'GET',
-                }).then(response => response.json())
-                    .then(data => id = data)
+                fetch('http://localhost:8080/login/organizacion/'+this.usuario+'/'+this.contrasenia)
+                    .then(response =>{ response.json()})
+                    .then(data => {id = data})
                 if(id !== -1){
                     localStorage.setItem("id", id);
                     window.location.href = 'http://localhost:8080/organizacion/recomendaciones';}
@@ -215,9 +200,8 @@
             },
             logAS: function() {
                 let id = null;
-                fetch('http://localhost:8080/login/agenteSectorial/'+this.usuario+'/'+this.contrasenia,{
-                    method: 'GET',
-                }).then(response => response.json())
+                fetch('http://localhost:8080/login/agenteSectorial/'+this.usuario+'/'+this.contrasenia)
+                    .then(response => response.json())
                     .then(data => id = data)
                 if(id !== -1){
                     localStorage.setItem("id", id);
