@@ -234,7 +234,7 @@
                     email: this.email,
                     telefono: this.telefono
                 }
-                fetch('http://localhost:8080/miembro/editar/1', {
+                fetch('http://localhost:8080/miembro/editar/'+localStorage.getItem('id'), {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
@@ -245,7 +245,7 @@
             }
         },
         created () {
-            fetch('http://localhost:8080/miembro/1')
+            fetch('http://localhost:8080/miembro/'+localStorage.getItem('id'))
                 .then(response => response.json())
                 .then(data => {
                     this.nombre = data.nombre;
