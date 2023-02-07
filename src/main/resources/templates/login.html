@@ -171,44 +171,47 @@
         el: "#wrapper",
         data:{
             usuario: null,
-            contrasenia: null
+            contrasenia: null,
+            id: -1
         },
         methods:{
             logMiem: function() {
-                let id = null;
                 fetch('http://localhost:8080/login/miembro/'+this.usuario+'/'+this.contrasenia)
-                    .then(response =>{ response.json()})
-                    .then(data => {id = data})
-                if(id !== -1){
-                    localStorage.setItem("id", id);
+                    .then( response => response.text())
+                    .then( response => this.id = response)
+                    .then( variable => {
+                        console.log(this.id)
+                        if(this.id !== -1){
+                    localStorage.setItem("id", this.id);
                     window.location.href = 'http://localhost:8080/miembro/datosPersonales';}
-                else{
+            else{
                     alert("Usuario o contraseña incorrecto")
                 }
+                    })
             },
             logOrga: function() {
-                let id = null;
                 fetch('http://localhost:8080/login/organizacion/'+this.usuario+'/'+this.contrasenia)
-                    .then(response =>{ response.json()})
-                    .then(data => {id = data})
-                if(id !== -1){
-                    localStorage.setItem("id", id);
-                    window.location.href = 'http://localhost:8080/organizacion/recomendaciones';}
-                else{
-                    alert("Usuario o contraseña incorrecto")
-                }
+                    .then( response => response.text())
+                    .then( response => this.id = response)
+                    .then(variable => {console.log(this.id)
+                        if(this.id !== -1){
+                            localStorage.setItem("id", this.id);
+                            window.location.href = 'http://localhost:8080/organizacion/recomendaciones';}
+                        else{
+                            alert("Usuario o contraseña incorrecto")
+                        }})
             },
             logAS: function() {
-                let id = null;
                 fetch('http://localhost:8080/login/agenteSectorial/'+this.usuario+'/'+this.contrasenia)
-                    .then(response => response.json())
-                    .then(data => id = data)
-                if(id !== -1){
-                    localStorage.setItem("id", id);
-                    window.location.href = 'http://localhost:8080/AS/recomendaciones';}
-                else{
-                    alert("Usuario o contraseña incorrecto")
-                }
+                    .then( response => response.text())
+                    .then( response => this.id = response)
+                    .then( variable => {console.log(this.id)
+                        if(this.id !== -1){
+                            localStorage.setItem("id", this.id);
+                            window.location.href = 'http://localhost:8080/AS/recomendaciones';}
+                        else{
+                            alert("Usuario o contraseña incorrecto")
+                        }})
             }
         },
         created () {
