@@ -328,7 +328,7 @@
             }
         },
         created () {
-            fetch('http://localhost:8080/organizaciones/1')
+            fetch('http://localhost:8080/organizaciones/'+localStorage.getItem('id'))
                 .then(response => response.json())
                 .then(data => {
                     this.nombreSelect = data.nombre;

@@ -262,7 +262,7 @@
                 }
             },
             created () {
-                fetch('http://localhost:8080/miembro/1')
+                fetch('http://localhost:8080/miembro/'+localStorage.getItem('id'))
                     .then(response => response.json())
                     .then(data => {
                         this.areas = data.areas;

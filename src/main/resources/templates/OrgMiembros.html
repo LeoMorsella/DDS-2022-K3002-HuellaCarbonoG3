@@ -297,12 +297,12 @@
             }
         },
         created() {
-            fetch('http://localhost:8080/organizaciones/1/miembrosEnEspera')
+            fetch('http://localhost:8080/organizaciones/'+ localStorage.getItem('id') +'/miembrosEnEspera')
                 .then(response => response.json())
                 .then(miembroObtenido => {
                     this.miembrosPendientes = miembroObtenido
                 });
-                fetch('http://localhost:8080/organizaciones/1/miembros2')
+                fetch('http://localhost:8080/organizaciones/+ localStorage.getItem('id') +/miembros2')
                     .then(response => response.json())
                     .then(data => {
                         this.miembros = data
