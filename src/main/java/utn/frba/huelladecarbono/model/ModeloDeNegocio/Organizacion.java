@@ -8,6 +8,7 @@ import utn.frba.huelladecarbono.model.Repositorios.RepositorioTrayectos;
 import utn.frba.huelladecarbono.DTO.MiembroEnEspera;
 import lombok.Getter;
 import lombok.Setter;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Registro;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.RegistroCalculoHCDatoActividad;
 
 import javax.persistence.*;
@@ -24,7 +25,6 @@ public class Organizacion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     @Column
     private String nombre;
     @Column
@@ -50,28 +50,19 @@ public class Organizacion {
     private List<Miembro> contactosMail = new ArrayList<>();
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Miembro> contactosWP = new ArrayList<>();
-    @ElementCollection
-    private List<Double> hcMensual = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Registro> hcMensual = new ArrayList<>();
     @Column
     private Double hcPromedio;
 
     @Column
     private Boolean estaActivo;
 
-    /*  @ManyToMany(fetch = FetchType.LAZY,
-           cascade = {
-                   CascadeType.PERSIST,
-                   CascadeType.MERGE
-           })
-      @JoinTable(name = "organizacion_huellaCarbono",
-           joinColumns = { @JoinColumn(name = "organizacion_id") },
-           inverseJoinColumns = { @JoinColumn(name = "huellaCarbono_id") })**/
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<HuellaCarbono> huellasCarbono = new ArrayList<>();
 
 
-
-    public Organizacion(String razonSocial, TipoOrg tipo,Ubicacion ubicacion, Clasificacion clasificacion,List<Miembro> contactosMail, List<Miembro> contactosWP,List<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Double huellaCarbono,Boolean estaActivo, String nombre) {
+    public Organizacion(String razonSocial, TipoOrg tipo,Ubicacion ubicacion, Clasificacion clasificacion,List<Miembro> contactosMail, List<Miembro> contactosWP,List<Registro> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Double huellaCarbono,Boolean estaActivo, String nombre) {
 
         this.razonSocial = razonSocial;
         this.tipo = tipo;
@@ -321,6 +312,10 @@ public class Organizacion {
 
     public void eliminarContactoMail(Miembro miembro) {
         contactosMail.remove(miembro);
+    }
+
+    public void agregarRegistroMensual(Registro registro) {
+        hcMensual.add(registro);
     }
 }
 

@@ -28,25 +28,11 @@ public class Usuario {
     private Integer idRol;
 
 
-    public Usuario(String username, String password, Integer rol, Miembro miembro) {
+    public Usuario(String username, String password, Integer rol, Integer idRol) {
         this.username = username;
         this.password = password;
         this.rol = rol;
-        this.idRol = miembro.getID();
-    }
-
-    public Usuario(String username, String password, Integer rol, Organizacion organizacion) {
-        this.username = username;
-        this.password = password;
-        this.rol = rol;
-        this.idRol = organizacion.getId();
-    }
-
-    public Usuario(String username, String password, Integer rol, AgenteSectorial agente) {
-        this.username = username;
-        this.password = password;
-        this.rol = rol;
-        this.idRol = agente.getId();
+        this.idRol = idRol;
     }
 
     public Usuario() {

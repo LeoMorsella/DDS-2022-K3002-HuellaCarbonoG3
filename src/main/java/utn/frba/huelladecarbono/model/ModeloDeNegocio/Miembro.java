@@ -4,6 +4,7 @@ import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.model.Repositorios.RepositorioMiembros;
 import lombok.Getter;
 import lombok.Setter;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Registro;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -192,4 +193,5 @@ public class Miembro {
     public void agregarArea(Area area) {
         this.areas.add(area);
     }
+
 }
