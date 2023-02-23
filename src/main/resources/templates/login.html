@@ -176,31 +176,34 @@
         },
         methods:{
             logMiem: function() {
+                let idfunc;
                 fetch('http://localhost:8080/login/miembro/'+this.usuario+'/'+this.contrasenia)
                     .then( response => response.text())
                     .then( response => this.id = response)
                     .then( variable => {
-                        console.log(this.id)
+                        console.log(this.id);
                     localStorage.setItem("id", this.id);
-                    })
-                if(this.id !== -1 || this.id == null){
-                            window.location.href = 'http://localhost:8080/miembro/datosPersonales';}
-            else{
+                    }).then( ver => {if(localStorage.getItem("id") !== "-1" && localStorage.getItem("id") !== null){
+                    window.location.href = 'http://localhost:8080/miembro/datosPersonales';}
+                else{
                     alert("Usuario o contraseña incorrecto")
-                }
+                }})
             },
             logOrga: function() {
                 fetch('http://localhost:8080/login/organizacion/'+this.usuario+'/'+this.contrasenia)
                     .then( response => response.text())
                     .then( response => this.id = response)
-                    .then(variable => {console.log(this.id)
+                    .then(variable => {
                         localStorage.setItem("id", this.id);
+                        console.log(this.id)
+                        console.log(localStorage.getItem("id"))
                         })
-                            if(this.id !== -1 || this.id == null){
-                                window.location.href = 'http://localhost:8080/miembro/datosPersonales';}
-                            else{
-                                alert("Usuario o contraseña incorrecto")
-                            }
+                    .then(res => {if(localStorage.getItem("id")!== "-1" && localStorage.getItem("id") !== null){
+                        window.location.href = 'http://localhost:8080/organizacion/recomendaciones';}
+                    else{
+                        alert("Usuario o contraseña incorrecto")
+                    }})
+
             },
             logAS: function() {
                 fetch('http://localhost:8080/login/agenteSectorial/'+this.usuario+'/'+this.contrasenia)
@@ -210,11 +213,12 @@
                         console.log(this.id)
                         localStorage.setItem("id", this.id);
                     })
-                if(this.id !== -1 || this.id == null){
-                    window.location.href = 'http://localhost:8080/miembro/datosPersonales';}
+                    .then(res => {if(localStorage.getItem("id")!== "-1" && localStorage.getItem("id") !== null){
+                    window.location.href = 'http://localhost:8080/AS/recomendaciones';}
                 else{
                     alert("Usuario o contraseña incorrecto")
-                }
+                }})
+
             }
         },
         created () {
