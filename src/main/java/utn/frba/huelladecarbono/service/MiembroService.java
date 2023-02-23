@@ -60,7 +60,7 @@ public class MiembroService implements IMiembroService {
         miembroActualizado.setNombre((String) jObject.get("nombre"));
         miembroActualizado.setApellido((String) jObject.get("apellido"));
         miembroActualizado.setTipoDoc((String) jObject.get("tipoDoc"));
-        miembroActualizado.setNumDoc(Integer.parseInt((String )jObject.get("numDoc")));
+        miembroActualizado.setNumDoc(Integer.parseInt((String) jObject.get("numDoc")));
         miembroActualizado.setMail((String) jObject.get("email"));
         miembroActualizado.setTelefono((String) jObject.get("telefono"));
         this.saveMiembro(miembroActualizado);

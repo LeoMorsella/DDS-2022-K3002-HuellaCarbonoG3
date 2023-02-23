@@ -163,7 +163,7 @@
             data: {
             },
             created() {
-                fetch('https://impactoambiental-g3.herokuapp.com/AS/reportesTablas')
+                fetch('http://localhost:8080/AS/reportesTablas')
                     .then(response => response.text())
                     .then(handlebarsContenido => {
                         var htmlObject = document.getElementById('contenidoHandlebars');

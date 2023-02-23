@@ -181,37 +181,40 @@
                     .then( response => this.id = response)
                     .then( variable => {
                         console.log(this.id)
-                        if(this.id !== -1){
                     localStorage.setItem("id", this.id);
-                    window.location.href = 'http://localhost:8080/miembro/datosPersonales';}
+                    })
+                if(this.id !== -1 || this.id == null){
+                            window.location.href = 'http://localhost:8080/miembro/datosPersonales';}
             else{
                     alert("Usuario o contraseña incorrecto")
                 }
-                    })
             },
             logOrga: function() {
                 fetch('http://localhost:8080/login/organizacion/'+this.usuario+'/'+this.contrasenia)
                     .then( response => response.text())
                     .then( response => this.id = response)
                     .then(variable => {console.log(this.id)
-                        if(this.id !== -1){
-                            localStorage.setItem("id", this.id);
-                            window.location.href = 'http://localhost:8080/organizacion/recomendaciones';}
-                        else{
-                            alert("Usuario o contraseña incorrecto")
-                        }})
+                        localStorage.setItem("id", this.id);
+                        })
+                            if(this.id !== -1 || this.id == null){
+                                window.location.href = 'http://localhost:8080/miembro/datosPersonales';}
+                            else{
+                                alert("Usuario o contraseña incorrecto")
+                            }
             },
             logAS: function() {
                 fetch('http://localhost:8080/login/agenteSectorial/'+this.usuario+'/'+this.contrasenia)
                     .then( response => response.text())
                     .then( response => this.id = response)
-                    .then( variable => {console.log(this.id)
-                        if(this.id !== -1){
-                            localStorage.setItem("id", this.id);
-                            window.location.href = 'http://localhost:8080/AS/recomendaciones';}
-                        else{
-                            alert("Usuario o contraseña incorrecto")
-                        }})
+                    .then( variable => {
+                        console.log(this.id)
+                        localStorage.setItem("id", this.id);
+                    })
+                if(this.id !== -1 || this.id == null){
+                    window.location.href = 'http://localhost:8080/miembro/datosPersonales';}
+                else{
+                    alert("Usuario o contraseña incorrecto")
+                }
             }
         },
         created () {

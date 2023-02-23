@@ -212,27 +212,29 @@ public class InitData implements CommandLineRunner {
     }
 
     public void cargarOrganizaciones() throws Exception {
-        if (repoOrganizacion.count() == 0) {
-            Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.MINISTERIO, null, null, true, "Amason");
-            creadorDeObjetos.crearUsuario("amason", "qwerty", 2, organizacion1);
-            Organizacion organizacion2 = creadorDeObjetos.crearOrganizacion("SRA", TipoOrg.GUBERNAMENTAL, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.EMPRESA_SECTOR_PRIMARIO, null, null, false, "MMM");
-            creadorDeObjetos.crearUsuario("MMM", "qwerty", 2, organizacion2);
-            Organizacion organizacion3 = creadorDeObjetos.crearOrganizacion("SRL", TipoOrg.ONG, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.ESCUELA, null, null, true, "Coto");
-            creadorDeObjetos.crearUsuario("cotoooo", "qwerty", 2, organizacion3);
-            Organizacion organizacion4 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.INSTITUCION, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.EMPRESA_SECTOR_SECUNDARIO, null, null, false, "VVBA");
-            creadorDeObjetos.crearUsuario("vvba", "qwerty", 2, organizacion4);
-        }
+        if (repoOrganizacion.count() == 0){Organizacion organizacion1 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.EMPRESA, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.MINISTERIO, null, null, true, "Amason");
+        creadorDeObjetos.crearUsuario("amason", "qwerty", 2, organizacion1);
+        Organizacion organizacion2 = creadorDeObjetos.crearOrganizacion("SRA", TipoOrg.GUBERNAMENTAL, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.EMPRESA_SECTOR_PRIMARIO, null, null, false, "MMM");
+        creadorDeObjetos.crearUsuario("MMM", "qwerty", 2, organizacion2);
+        Organizacion organizacion3 = creadorDeObjetos.crearOrganizacion("SRL", TipoOrg.ONG, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.ESCUELA, null, null, true, "Coto");
+        creadorDeObjetos.crearUsuario("cotoooo", "qwerty", 2, organizacion3);
+        Organizacion organizacion4 = creadorDeObjetos.crearOrganizacion("SA", TipoOrg.INSTITUCION, creadorDeObjetos.crearUbicacion("ARGENTINA", "MISIONES", "MONTECARLO", "CARAGUATAY ", "maipu", "100"), Clasificacion.EMPRESA_SECTOR_SECUNDARIO, null, null, false, "VVBA");
+        creadorDeObjetos.crearUsuario("vvba", "qwerty", 2, organizacion4);
+    }
     }
 
     public void cargarSectoresTerritoriales() {
         if(repoSectorTerritorial.count() == 0) {
-           creadorDeObjetos.crearSectorTerritorial(new SectorTerritorial(null, null, "BUENOS AIRES"));
+           SectorTerritorial st = creadorDeObjetos.crearSectorTerritorial(new SectorTerritorial(null, null, "BUENOS AIRES"));
            creadorDeObjetos.crearSectorTerritorial(new SectorTerritorial(null, null, "FORMOSA"));
            creadorDeObjetos.crearSectorTerritorial(new SectorTerritorial(null, null, "CHACO"));
            creadorDeObjetos.crearSectorTerritorial(new SectorTerritorial(null, null, "SALTA"));
            creadorDeObjetos.crearSectorTerritorial(new SectorTerritorial(null, "MONTECARLO", "MISIONES"));
+           AgenteSectorial as = creadorDeObjetos.crearAS(st);
+           creadorDeObjetos.crearUsuario("usuarioAg", "qwerty", 3, as);
         }
     }
+
 
 }
 

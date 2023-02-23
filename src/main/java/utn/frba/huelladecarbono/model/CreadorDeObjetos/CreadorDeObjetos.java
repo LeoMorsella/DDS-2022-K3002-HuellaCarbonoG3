@@ -111,6 +111,11 @@ public class CreadorDeObjetos {
         return miembro;
     }
 
+    public  AgenteSectorial crearAS(SectorTerritorial st) {
+        AgenteSectorial as = new AgenteSectorial(st);
+        return as;
+    }
+
     public  Parada crearParada(String nombre, Ubicacion ubicacion) {
         Parada parada = new Parada(nombre,ubicacion);
         repoParadas.save(parada);

@@ -177,7 +177,7 @@
                                 <td class="sorting_1">{{areai.nombreOrga}}</td>
                                 <td>{{areai.area.nombre}}</td>
                                 <td>
-                                    <a @click="borrarArea(areai.id)" class="btn btn-danger btn-circle">
+                                    <a @click="borrarArea(areai.area.id)" class="btn btn-danger btn-circle">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -254,7 +254,7 @@
                     alert("Solicitud Enviada.");
                 },
                 borrarArea: function(areaId) {
-                    fetch('http://localhost:8080/miembro/eliminarArea/1/'+areaId, {
+                    fetch('http://localhost:8080/miembro/eliminarArea/'+localStorage.getItem('id')+'/'+areaId, {
                         method: 'GET',
                     });
                     this.areasyorg.shift();

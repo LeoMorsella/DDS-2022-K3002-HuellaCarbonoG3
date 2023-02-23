@@ -4,9 +4,11 @@ import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import utn.frba.huelladecarbono.model.CreadorDeObjetos.CreadorDeObjetos;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
 import utn.frba.huelladecarbono.repository.DatoActividadRepository;
 import utn.frba.huelladecarbono.repository.OrganizacionRepository;
+import utn.frba.huelladecarbono.repository.UbicacionRepository;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCService;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.HuellaDeCarbono;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.RegistroCalculoHCDatoActividad;
@@ -27,6 +29,8 @@ public class OrganizacionService implements IOrganizacionService{
     @Autowired
     private DatoActividadRepository datoActividadRepository;
 
+    @Autowired
+    UbicacionRepository ubicacionRepository;
 
     @Override
     public Organizacion findById(Integer id) throws Exception {
@@ -105,12 +109,12 @@ public class OrganizacionService implements IOrganizacionService{
     public void actualizarOrganizacion(String orgJson) throws Exception {
         JSONParser parser = new JSONParser();
         JSONObject jObject  = (JSONObject) parser.parse(orgJson);
-        Organizacion orgA = findOrganizacion((Integer) jObject.get("idOrgaNuevo"));
+        Organizacion orgA = findOrganizacion(Integer.parseInt((String) jObject.get("idOrgaNuevo")));
         orgA.setNombre((String) jObject.get("nombreNuevo"));
         orgA.setRazonSocial((String) jObject.get("razonSocialNuevo"));
         orgA.setTipo(TipoOrg.valueOf((String) jObject.get("tipoNuevo")));
         orgA.setClasificacion(Clasificacion.valueOf((String) jObject.get("clasificacionNuevo")));
-        orgA.setUbicacion(new Ubicacion((String) jObject.get("paisNuevo"), (String) jObject.get("provinciaNuevo"), (String) jObject.get("municipioNuevo"), (String) jObject.get("localidadNuevo"), (String) jObject.get("calleNuevo"), (String) jObject.get("alturaNuevo")));
+        //orgA.setUbicacion(creadorDeObjetos.crearUbicacion((String) jObject.get("paisNuevo"), (String) jObject.get("provinciaNuevo"), (String) jObject.get("municipioNuevo"), (String) jObject.get("localidadNuevo"), (String) jObject.get("calleNuevo"), (String) jObject.get("alturaNuevo")));
         this.saveOrganizacion(orgA);
     }
 
