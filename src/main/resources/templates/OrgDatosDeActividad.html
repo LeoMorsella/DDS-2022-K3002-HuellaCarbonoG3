@@ -250,7 +250,6 @@
             },
             methods: {
                     cargarAreaId: function(areaId){
-                        console.log(areaId);
                         this.areaID = areaId;
                     },
                   agregarXls: function() {
@@ -259,12 +258,12 @@
                 },
             },
             created() {
-                fetch('http://localhost:8080/areas/1')
+                fetch('http://localhost:8080/areas/'+localStorage.getItem('id'))
                     .then(response => response.json())
                     .then(data => {
                         this.areas = data
                     })
-                fetch('http://localhost:8080/datosDeActividad/1')
+                fetch('http://localhost:8080/datosDeActividad/'+localStorage.getItem('id'))
                     .then(response => response.json())
                     .then(data => {
                         this.datosActividad = data

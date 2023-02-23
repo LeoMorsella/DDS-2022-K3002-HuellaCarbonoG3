@@ -250,10 +250,8 @@
                 agregarArea: function() {
                     let nuevosDatosArea = {
                         nombre: this.nombreNuevo,
-                        //aca iría el id de la organizacion logueada
-                        id: "1",
+                        id: localStorage.getItem('id'),
                     };
-                    console.log("hola1")
                     let response = fetch('http://localhost:8080/area/crear', {
                         method: 'POST',
                         headers: {
@@ -261,7 +259,6 @@
                         },
                         body: JSON.stringify(nuevosDatosArea)
                     });
-                    console.log("hola2")
                     alert("Area creada.");
                 },
                 borrarArea: function(idArea) {
@@ -272,7 +269,7 @@
                 }
             },
             created() {
-                fetch('http://localhost:8080/areas/1')
+                fetch('http://localhost:8080/areas/'+localStorage.getItem('id'))
                     .then(response => response.json())
                     .then(data => {
                         this.areas = data

@@ -721,7 +721,7 @@
               });
           },
           borrarRecorrido: function (idRecorrido) {
-            fetch("http://localhost:8080//recorrido/eliminar/" + idRecorrido);
+            fetch("http://localhost:8080/recorrido/eliminar/" + idRecorrido);
             alert("Recorrido eliminado.");
           },
           agregarTrayecto: function () {
@@ -757,7 +757,7 @@
               nombre: this.nombreRecorrido,
               trayectos: this.trayectos.length,
             };
-            fetch("http://localhost:8080/recorrido/agregar/1", {
+            fetch("http://localhost:8080/recorrido/agregar/"+localStorage.getItem('id'), {
               method: "POST",
               headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -767,7 +767,7 @@
           },
         },
         created() {
-          fetch("http://localhost:8080/recorridos/1")
+          fetch("http://localhost:8080/recorridos/"+localStorage.getItem('id'))
             .then((response) => response.json())
             .then((recorridos) => {
               this.recorridos = recorridos;

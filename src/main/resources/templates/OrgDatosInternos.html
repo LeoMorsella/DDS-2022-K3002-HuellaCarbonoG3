@@ -466,7 +466,6 @@
                   },
               methods: {
                   cargarProvincias: function(idPais) {
-                    console.log("cargando provincias...");
                       fetch('http://localhost:8080/ubicacion/provincias/'+idPais)
                           .then(response => response.json())
                           .then(data => {
@@ -489,7 +488,7 @@
                   },
                   actualizarDatos: function() {
                       let nuevosDatosOrga = {
-                          idOrgaNuevo: 1,
+                          idOrgaNuevo: localStorage.getItem('id'),
                           nombreNuevo: this.nombreSelect,
                           razonSocialNuevo: this.razonSocialSelect,
                           tipoNuevo: this.tipoSelect,

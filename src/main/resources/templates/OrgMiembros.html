@@ -302,7 +302,7 @@
                 .then(miembroObtenido => {
                     this.miembrosPendientes = miembroObtenido
                 });
-                fetch('http://localhost:8080/organizaciones/+ localStorage.getItem('id') +/miembros2')
+                fetch('http://localhost:8080/organizaciones/'+ localStorage.getItem('id') +'/miembros2')
                     .then(response => response.json())
                     .then(data => {
                         this.miembros = data
