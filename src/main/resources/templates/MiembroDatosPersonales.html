@@ -150,8 +150,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="mail">Mail</label>
-                                    <input type="email" class="form-control form-control-user" id="mail"
+                                    <label for="email">Mail</label>
+                                    <input type="email" class="form-control form-control-user" id="email"
                                         placeholder="Mail" v-model="email">
                                 </div>
                                 <div class="form-group">
@@ -226,6 +226,9 @@
                 console.log(this.tipoDoc);
             },
             actualizarDatos: function() {
+                console.log(this.numDoc)
+                console.log(this.telefono)
+                console.log(this.email)
                 let nuevosDatosMiembro = {
                     nombre: this.nombre,
                     apellido: this.apellido,
@@ -252,7 +255,7 @@
                     this.apellido = data.apellido;
                     this.tipoDoc = data.tipoDoc;
                     this.numDoc = data.numDoc;
-                    this.email = data.email;
+                    this.email = data.mail;
                     this.telefono = data.telefono;
                 })
             }

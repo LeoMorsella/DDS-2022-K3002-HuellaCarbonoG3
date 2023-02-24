@@ -10,7 +10,7 @@ public class ResMiembro2 {
     private String nombre;
     private String apellido;
     private String tipoDoc;
-    private Integer numDoc;
+    private String numDoc;
     private String mail;
     private String telefono;
     private String areaNombre;
@@ -21,7 +21,7 @@ public class ResMiembro2 {
         this.nombre = miembro.getNombre();
         this.apellido = miembro.getApellido();
         this.tipoDoc = miembro.getTipoDoc();
-        this.numDoc = miembro.getNumDoc();
+        this.numDoc = miembro.getNumDoc().toString();
         this.mail = miembro.getMail();
         this.telefono = miembro.getTelefono();
         this.areaNombre = area.getNombre();

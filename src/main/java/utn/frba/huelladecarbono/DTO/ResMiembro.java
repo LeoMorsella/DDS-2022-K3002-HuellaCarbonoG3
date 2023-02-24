@@ -12,7 +12,7 @@ public class ResMiembro {
     private String nombre;
     private String apellido;
     private String tipoDoc;
-    private Integer numDoc;
+    private String numDoc;
     private String mail;
     private String telefono;
     private List<ResArea> areas;
@@ -22,7 +22,7 @@ public class ResMiembro {
         this.nombre = miembro.getNombre();
         this.apellido = miembro.getApellido();
         this.tipoDoc = miembro.getTipoDoc();
-        this.numDoc = miembro.getNumDoc();
+        this.numDoc = miembro.getNumDoc().toString();
         this.mail = miembro.getMail();
         this.telefono = miembro.getTelefono();
         this.areas = new ArrayList<>();
