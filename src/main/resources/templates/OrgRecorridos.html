@@ -670,6 +670,7 @@
       var app = new Vue({
         el: "#wrapper",
         data: {
+          cantTrayectos: 1,
           nombreRecorrido: null,
           selectTransporte: null,
           selectPatente: null,
@@ -750,7 +751,7 @@
             this.selectFin.localidad = null;
             this.selectFin.calle = null;
             this.selectFin.altura = null;
-            
+            this.cantTrayectos++;
           },
           agregarRecorrido: function () {
             nuevoRecorrido = {
@@ -764,6 +765,7 @@
               },
               body: JSON.stringify(nuevoRecorrido),
             });
+            this.cantTrayectos = 1;
           },
         },
         created() {

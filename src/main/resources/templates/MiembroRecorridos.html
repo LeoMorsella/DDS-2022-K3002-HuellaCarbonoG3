@@ -137,7 +137,7 @@
                                         <select id="m-organizacion" name="dataTable_length" aria-controls="dataTable"
                                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                                             <option selected disabled></option>
-                                            <option @click="cargarOrganizacion(organizacion.id)" v-for="organizacion in organizaciones" > {{organizacion.nombre}}</option>
+                                            <option @click="cargarOrganizacion(organizacion.id, organizacion.nombre)" v-for="organizacion in organizaciones" > {{organizacion.nombre}}</option>
                                         </select>
                                         <br><br>
                                         <label for="m-recorridos">Recorrido</label>
@@ -253,6 +253,7 @@
                 recorridosMiembro: [],
                 recorridos: [],
                 selectOrg: null,
+                selectOrgNombre: null,
                 selectRecorrido: null,
                 recorridoSeleccionado: null,
                 organizacionSeleccionado: null,
@@ -264,16 +265,21 @@
                 areasyorg: null
             },
             methods: {
-                cargarOrganizacion: function(orgID){
+                cargarOrganizacion: function(orgID, orgNombre){
                     this.selectOrg = orgID;
+                    this.selectOrgNombre = this.orgNombre;
+                    fetch('http://localhost:8080/organizaciones/recorridos/'+orgID, {
+                        method: 'GET',
+                    })
+                        .then(response => response.json())
+                        .then(data => this.recorridos = data);
                 },
                 cargarRecorrido: function(recID){
-                    console.log(recID);
                     this.selectRecorrido= recID;
                 },
                 agregarRecorrido: function() {
                     let nuevoRecorrido = {
-                        organizacionNombre: "nombreOrga",
+                        organizacionNombre: this.selectOrgNombre,
                         idOrg: this.selectOrg,
                         idRecorrido: this.selectRecorrido,
                         peso: this.selectPeso,
@@ -281,7 +287,7 @@
                         fechaDeFin: this.selectFechaFin,
                         estaActivo: true
                     };
-                    let response = fetch('http://localhost:8080/recorrido/agregarMiembro/1', {
+                    let response = fetch('http://localhost:8080/recorrido/agregarMiembro/'+localStorage.getItem("id"), {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json;charset=utf-8'
@@ -292,7 +298,7 @@
                 },
                 //cambiar a recorrido para miembro
                 borrarRecorrido: function(idRecorrido) {
-                    fetch('http://localhost:8080/recorrido/eliminar/'+idRecorrido, {
+                    fetch('http://localhost:8080/miembro/eliminarRecorrido/'+localStorage.getItem("id")+'/'+idRecorrido, {
                         method: 'GET',
                     });
                     alert("Recorrido Eliminado.");
