@@ -201,14 +201,6 @@
             }
             },
         methods: {
-            cargarAreas: function() {
-                fetch('http://localhost:8080/areas/byOrg/1')
-                    .then(response => response.json())
-                    .then(data => {
-                        this.areas = data;
-                    })
-            },
-
             calcularHuella: function() {
                 let fechainit = this.fechaIni;
                 let fechafin = this.fechaFin;
