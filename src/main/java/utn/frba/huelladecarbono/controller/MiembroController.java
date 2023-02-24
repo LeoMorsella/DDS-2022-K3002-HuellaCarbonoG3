@@ -3,11 +3,13 @@ package utn.frba.huelladecarbono.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
+import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 import utn.frba.huelladecarbono.DTO.ResMiembro;
 import utn.frba.huelladecarbono.DTO.ResRecorrido;
 import utn.frba.huelladecarbono.service.AreaService;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCMiembro;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaServiceV2.Calculadora;
 import utn.frba.huelladecarbono.service.IMiembroService;
 import utn.frba.huelladecarbono.service.IOrganizacionService;
 
@@ -70,11 +72,15 @@ public class MiembroController {
     public List<Double> calcularHuella(@PathVariable Integer miembroId, @PathVariable Integer diaI, @PathVariable Integer mesI, @PathVariable Integer anioI, @PathVariable Integer diaF, @PathVariable Integer mesF, @PathVariable Integer anioF, @PathVariable Integer orgId) throws Exception {
         LocalDate fechaI = LocalDate.of(anioI, mesI, diaI);
         LocalDate fechaF = LocalDate.of(anioF, mesF, diaF);
-        Double huella = CalculadoraHCMiembro.calcularHC(interfazMiembro.findMiembro(miembroId), fechaI, fechaF, interfazOrganizacion.findOrganizacion(orgId));
-        Double impacto = CalculadoraHCMiembro.calcularImpactoIndividual(interfazMiembro.findMiembro(miembroId),interfazOrganizacion.findOrganizacion(orgId), fechaI, fechaF);
+        Organizacion organizacion = interfazOrganizacion.findOrganizacion(orgId);
+        Double huella = Calculadora.calcularHCOrganizacion(organizacion, fechaI, fechaF);
+        Double impacto = Calculadora.calcularHCMiembro(fechaI, fechaF, interfazMiembro.findMiembro(miembroId));
+        System.out.println("Huella: " + huella);
+        System.out.println("Impacto: " + impacto);
         List<Double> resultado = new ArrayList<>();
-        resultado.add(huella);
-        resultado.add(impacto);
+
+        resultado.add(Math.round(huella * 100.0) / 100.0);
+        resultado.add(Math.round(impacto * 100.0) / 100.0);
         return resultado;
     }
 
