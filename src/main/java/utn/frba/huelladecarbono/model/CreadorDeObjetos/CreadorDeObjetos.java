@@ -9,6 +9,8 @@ import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 import utn.frba.huelladecarbono.model.Repositorios.*;
 import utn.frba.huelladecarbono.model.Seguridad.Usuario;
 import utn.frba.huelladecarbono.repository.*;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Registro;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +92,7 @@ public class CreadorDeObjetos {
         return null;
     }
 
-    public Organizacion crearOrganizacionConHC(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, List<Miembro> contactosMail, List<Miembro> contactosWP, List<Double> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Double huellaCarbono ,Boolean estaActivo, String nombre) {
+    public Organizacion crearOrganizacionConHC(String razonSocial, TipoOrg tipo, Ubicacion ubicacion, Clasificacion clasificacion, List<Miembro> contactosMail, List<Miembro> contactosWP, List<Registro> hcMensual, Double hcPromedio, List<HuellaCarbono> huellasCarbono, Double huellaCarbono , Boolean estaActivo, String nombre) {
         Organizacion organizacion = new Organizacion( razonSocial,  tipo,  ubicacion, clasificacion, contactosMail, contactosWP, hcMensual,  hcPromedio, huellasCarbono, huellaCarbono,  estaActivo, nombre);
         repoOrganizaciones.save(organizacion);
         repositorioOrganizacionesEnMemoria.agregarOrganizacion(organizacion);
@@ -192,19 +194,19 @@ public class CreadorDeObjetos {
     }
 
     public Usuario crearUsuario(String username, String password, Integer rol, Miembro miembro) {
-        Usuario usuario = new Usuario(username, password, rol, miembro);
+        Usuario usuario = new Usuario(username, password, rol, miembro.getID());
         repoUsuario.save(usuario);
         return usuario;
     }
 
     public Usuario crearUsuario(String username, String password, Integer rol, Organizacion organizacion) {
-        Usuario usuario = new Usuario(username, password, rol, organizacion);
+        Usuario usuario = new Usuario(username, password, rol, organizacion.getId());
         repoUsuario.save(usuario);
         return usuario;
     }
 
     public Usuario crearUsuario(String username, String password, Integer rol, AgenteSectorial agente) {
-        Usuario usuario = new Usuario(username, password, rol, agente);
+        Usuario usuario = new Usuario(username, password, rol, agente.getId());
         repoUsuario.save(usuario);
         return usuario;
     }
