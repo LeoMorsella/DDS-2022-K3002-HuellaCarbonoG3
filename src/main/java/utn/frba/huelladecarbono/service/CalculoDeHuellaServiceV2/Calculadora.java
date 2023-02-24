@@ -8,6 +8,7 @@ import utn.frba.huelladecarbono.model.Movilidad.Trayecto;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.FactoresDeEmision;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.Registro;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Random;
 
@@ -15,22 +16,17 @@ public class Calculadora {
 
     public static Double calcularHCOrganizacion(Organizacion organizacion, LocalDate mesInicio, LocalDate mesFin) throws Exception {
        Double hc = 0.0;
-       System.out.println("Calculando HC de " + organizacion.getNombre());
         // CALCULAR HC MES ACTUAL
         if (mesFin.getYear() > LocalDate.now().getYear()
                 || (mesFin.getYear() == LocalDate.now().getYear()
                 && mesFin.getMonthValue() >= LocalDate.now().getMonthValue())) {
             List<Area> areas = organizacion.getAreas();
            for (Area area : areas) {
-               System.out.println("Calculando HC de " + area.getNombre());
                hc += area.getHCMediciones();
                for (Miembro miembro : area.getMiembros()) {
-                   System.out.println("Calculando HC de " + miembro.getNombre());
                    for (Recorrido recorrido : miembro.getRecorridos()) {
-                       System.out.println("Calculando HC de " + recorrido.getNombre());
                            Random random = new Random();
                            hc += (random.nextDouble() + 1.0) * recorrido.getCantidadDeTrayectos();
-                           System.out.println();
                    }
                }
            }
@@ -46,5 +42,15 @@ public class Calculadora {
         }
 
         return hc;
+    }
+
+    public static Double calcularHCMiembro(LocalDate fechaI, LocalDate fechaF, Miembro miembro) {
+        Double hc = 0.0;
+        for (Recorrido recorrido : miembro.getRecorridos()) {
+            Random random = new Random();
+            hc += (random.nextDouble() + 1.0) * recorrido.getCantidadDeTrayectos();
+        }
+        return hc * ChronoUnit.MONTHS.between(fechaI, fechaF);
+
     }
 }
