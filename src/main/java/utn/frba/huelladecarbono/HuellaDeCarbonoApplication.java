@@ -2,11 +2,9 @@ package utn.frba.huelladecarbono;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import utn.frba.huelladecarbono.service.CalculoDeHuellaService.TareaMensual;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaServiceV2.TareaMensual;
 
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Timer;
 
 @SpringBootApplication
