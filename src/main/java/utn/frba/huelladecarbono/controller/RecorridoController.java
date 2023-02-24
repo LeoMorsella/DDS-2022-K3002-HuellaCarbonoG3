@@ -52,6 +52,7 @@ public class RecorridoController {
          recorrido.setNombre((String) jObject.get("nombre"));
         recorrido.setOrganizacion(organizacionRepository.getById(orgId));
         recorrido.setCantidadDeTrayectos((Integer) jObject.get("trayectos"));
+        recorrido.setEstaActivo(true);
         recorridoRepository.save(recorrido);
     }
 
