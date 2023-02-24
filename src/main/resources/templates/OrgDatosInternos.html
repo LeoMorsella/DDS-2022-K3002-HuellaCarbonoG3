@@ -500,7 +500,7 @@
                           calleNuevo: this.calleSelect,
                           alturaNuevo: this.alturaSelect
                       }
-                      
+                      console.log(this.localidadSelect)
                       let camposVacios = false;
                       for (const key in nuevosDatosOrga) {
                         if (nuevosDatosOrga.hasOwnProperty(key) && !nuevosDatosOrga[key]) {
@@ -516,6 +516,7 @@
                           },
                           body: JSON.stringify(nuevosDatosOrga)
                       });
+                      console.log(nuevosDatosOrga.clasificacionNuevo);
                       alert("Datos actualizados.");
                       } else {
                         alert("Complete todos los campos.");
@@ -537,6 +538,9 @@
                           this.localidadSelect = data.localidad;
                           this.calleSelect = data.calle;
                           this.alturaSelect = data.altura;
+                          console.log(this.localidadSelect)
+                          console.log(this.provinciaSelect)
+                          console.log(this.paisSelect)
                       });
                       fetch('http://localhost:8080/ubicacion/paises')
                           .then(response => response.json())
