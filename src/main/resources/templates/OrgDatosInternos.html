@@ -256,11 +256,11 @@
                     class="custom-select custom-select-sm form-control form-control-sm form-control-user"
                     required
                   >
-                    <option value="" disabled selected>{{tipoSelect}}</option>
+                    <option value="" disabled selected>{{this.tipoSelect}}</option>
                     <option value="GUBERNAMENTAL">Gubernamental</option>
                     <option value="ONG">ONG</option>
                     <option value="EMPRESA">Empresa</option>
-                    <option value="INSTITUCION">Instittución</option>
+                    <option value="INSTITUCION">Institución</option>
                   </select>
                   <br /><br />
                   <label for="clasificacion">Clasificación</label>
@@ -271,9 +271,7 @@
                     class="custom-select custom-select-sm form-control form-control-sm form-control-user"
                     required
                   >
-                    <option value="" disabled selected>
-                      {{clasificacionSelect}}
-                    </option>
+                    <option value="" disabled selected>{{this.clasificacionSelect}}</option>
                     <option value="MINISTERIO">Ministerio</option>
                     <option value="UNIVERSIDAD">Universidad</option>
                     <option value="ESCUELA">Escuela</option>
@@ -298,6 +296,7 @@
                           class="custom-select custom-select-sm form-control form-control-sm form-control-user"
                           required
                         >
+                          <option value="" style="background-color: black; color: white" disabled selected>{{this.paisSelect}}</option>
                           <option
                             v-for="pais in paises"
                             @click="cargarProvincias(pais.id)"
@@ -316,6 +315,7 @@
                           class="custom-select custom-select-sm form-control form-control-sm form-control-user"
                           required
                         >
+                          <option value="" style="background-color: black; color: white" disabled selected>{{this.provinciaSelect}}</option>
                           <option
                             v-for="provincia in provincias"
                             @click="cargarMunicipios(provincia.id)"
@@ -334,6 +334,7 @@
                           class="custom-select custom-select-sm form-control form-control-sm form-control-user"
                           required
                         >
+                          <option value="" disabled selected style="background-color: black; color: white">{{this.municipioSelect}}</option>
                           <option
                             v-for="municipio in municipios"
                             @click="cargarLocalidades(municipio.id)"
@@ -352,6 +353,7 @@
                           class="custom-select custom-select-sm form-control form-control-sm form-control-user"
                           required
                         >
+                          <option value="" style="background-color: black; color: white" disabled selected>{{this.localidadSelect}}</option>
                           <option v-for="localidad in localidades">
                             {{localidad.nombre}}
                           </option>
@@ -471,6 +473,9 @@
                           .then(data => {
                               this.provincias = data;
                           })
+                    console.log(this.provinciaSelect)
+                    console.log(this.municipioSelect)
+                    console.log(this.localidadSelect)
                   },
                   cargarMunicipios: function(idProvincia) {
                       fetch('http://localhost:8080/ubicacion/municipios/'+idProvincia)
@@ -488,19 +493,18 @@
                   },
                   actualizarDatos: function() {
                       let nuevosDatosOrga = {
-                          idOrgaNuevo: localStorage.getItem('id'),
-                          nombreNuevo: this.nombreSelect,
-                          razonSocialNuevo: this.razonSocialSelect,
-                          tipoNuevo: this.tipoSelect,
-                          clasificacionNuevo: this.clasificacionSelect,
-                          paisNuevo: this.paisSelect,
-                          provinciaNuevo: this.provinciaSelect,
-                          municipioNuevo: this.municipioSelect,
-                          localidadNuevo: this.localidadSelect,
-                          calleNuevo: this.calleSelect,
-                          alturaNuevo: this.alturaSelect
+                        idOrgaNuevo: localStorage.getItem('id'),
+                        nombreNuevo: this.nombreSelect,
+                        razonSocialNuevo: this.razonSocialSelect,
+                        tipoNuevo: this.tipoSelect,
+                        clasificacionNuevo: this.clasificacionSelect,
+                        paisNuevo: this.paisSelect,
+                        provinciaNuevo: this.provinciaSelect,
+                        municipioNuevo: this.municipioSelect,
+                        localidadNuevo: this.localidadSelect,
+                        calleNuevo: this.calleSelect,
+                        alturaNuevo: this.alturaSelect
                       }
-                      console.log(this.localidadSelect)
                       let camposVacios = false;
                       for (const key in nuevosDatosOrga) {
                         if (nuevosDatosOrga.hasOwnProperty(key) && !nuevosDatosOrga[key]) {
@@ -536,6 +540,7 @@
                           this.paisSelect = data.pais;
                           this.provinciaSelect = data.provincia;
                           this.localidadSelect = data.localidad;
+                        this.municipioSelect = data.municipio;
                           this.calleSelect = data.calle;
                           this.alturaSelect = data.altura;
                           console.log(this.localidadSelect)
