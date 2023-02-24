@@ -116,4 +116,12 @@ public class Area {
     public void cargarDatosDeActividad() {
         this.mediciones.add(new ListaDeDatosDeMedicion());
     }
+
+    public Double getHCMediciones() {
+        return mediciones.size() * Math.random();
+    }
+
+    public void limpiarMediciones() {
+        mediciones.clear();
+    }
 }

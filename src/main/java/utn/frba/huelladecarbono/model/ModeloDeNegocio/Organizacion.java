@@ -317,5 +317,9 @@ public class Organizacion {
     public void agregarRegistroMensual(Registro registro) {
         hcMensual.add(registro);
     }
+
+    public void limpiarMediciones() {
+        areas.forEach(area -> area.limpiarMediciones());
+    }
 }
 

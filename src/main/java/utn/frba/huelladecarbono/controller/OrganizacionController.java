@@ -13,6 +13,8 @@ import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCOrga
 import utn.frba.huelladecarbono.service.*;
 import utn.frba.huelladecarbono.service.CalculoDeHuellaService.CalculadoraHCService;
 import utn.frba.huelladecarbono.DTO.ResInforme;
+import utn.frba.huelladecarbono.service.CalculoDeHuellaServiceV2.Calculadora;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
@@ -193,11 +195,11 @@ public class OrganizacionController {
     }
 
     @GetMapping("calcularHuella/{org}/{diaI}/{mesI}/{anioI}/{diaF}/{mesF}/{anioF}/")
-    public Double calcularHuella(@PathVariable Integer org, @PathVariable Integer diaI, @PathVariable Integer mesI, @PathVariable Integer anioI, @PathVariable Integer diaF, @PathVariable Integer mesF, @PathVariable Integer anioF) {
+    public Double calcularHuella(@PathVariable Integer org, @PathVariable Integer diaI, @PathVariable Integer mesI, @PathVariable Integer anioI, @PathVariable Integer diaF, @PathVariable Integer mesF, @PathVariable Integer anioF) throws Exception {
         LocalDate fechaI = LocalDate.of(anioI, mesI, diaI);
         LocalDate fechaF = LocalDate.of(anioF, mesF, diaF);
         Organizacion organizacion = interfazOrganizacion.findOrganizacion(org);
-        return CalculadoraHCOrganizacion.calcularHC(organizacion, fechaI, fechaF);
+        return Calculadora.calcularHCOrganizacion(organizacion, fechaI, fechaF);
     }
 
     //PARA HANDLEBAR - REPORTES
