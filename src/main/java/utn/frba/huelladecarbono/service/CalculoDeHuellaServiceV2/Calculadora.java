@@ -41,6 +41,24 @@ public class Calculadora {
             }
         }
 
+        // CALCULO HC ANTERIOR + ACTUAL
+        if (mesFin.getMonthValue() > LocalDate.now().getMonthValue() && mesInicio.getYear() < LocalDate.now().getMonthValue()) {
+            List<Area> areas = organizacion.getAreas();
+            for (Area area : areas) {
+                hc += area.getHCMediciones();
+                for (Miembro miembro : area.getMiembros()) {
+                    for (Recorrido recorrido : miembro.getRecorridos()) {
+                        Random random = new Random();
+                        hc += (random.nextDouble() + 1.0) * recorrido.getCantidadDeTrayectos();
+                    }
+                }
+            }
+            List<Registro> registros = organizacion.getHcMensual();
+            List<Registro> select = registros.stream().filter(registro -> registro.getMes().isAfter(mesInicio) && registro.getMes().isBefore(LocalDate.now())).toList();
+            for (Registro registro : select) {
+                hc += registro.getHc();
+            }
+        }
         return hc;
     }
 
