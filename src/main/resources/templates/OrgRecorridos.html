@@ -275,9 +275,9 @@
                                 <option value="BICI">Bicicleta</option>
                                 <option value="MONOPATIN">Monopatin</option>
                                 <option value="A_PIE">Caminando</option>
-                                <option value="TREN">Tren</option>
-                                <option value="SUBTE">Subte</option>
-                                <option value="COLECTIVO">Colectivo</option>
+                                <option value="TREN" @click="cargarLineasTren()">Tren</option>
+                                <option value="SUBTE" @click="cargarLineasSubte()">Subte</option>
+                                <option value="COLECTIVO" @click="cargarLineasColectivo()">Colectivo</option>
                                 <option value="MOTO">Moto</option>
                                 <option value="AUTO">Auto</option>
                                 <option value="CAMIONETA">Camioneta</option>
@@ -330,7 +330,7 @@
                               />
                             </div>
                             <br />
-                            <div>
+                            <div id="ubicacionOrigen">
                               <label for="">Ubicación de origen</label>
                               <div>
                                 <label for="">País</label>
@@ -423,7 +423,7 @@
                               </div>
                             </div>
                             <br />
-                            <div>
+                            <div id="UbicacionFin">
                               <label for="">Ubicación de fin</label>
                               <div>
                                 <label for="">País</label>
@@ -514,6 +514,36 @@
                                   class="form-control form-control-user"
                                 />
                               </div>
+                            </div>
+                            <div id="paradaOrigen" style="display: none">
+                              <label>Parada de origen</label>
+                              <select
+                                      v-model="paradaSelect"
+                                      id=""
+                                      name="dataTable_length"
+                                      aria-controls="dataTable"
+                                      class="custom-select custom-select-sm form-control form-control-sm form-control-user"
+                              >
+                                <option value="" selected disabled></option>
+                                <option v-for="parada in paradas">
+                                  {{parada.nombre}}
+                                </option>
+                              </select>
+                            </div>
+                            <div id="paradaFin" style="display: none">
+                              <label>Parada de Fin</label>
+                              <select
+                                      v-model="paradaSelect"
+                                      id=""
+                                      name="dataTable_length"
+                                      aria-controls="dataTable"
+                                      class="custom-select custom-select-sm form-control form-control-sm form-control-user"
+                              >
+                                <option value="" selected disabled></option>
+                                <option v-for="parada in paradas">
+                                  {{parada.nombre}}
+                                </option>
+                              </select>
                             </div>
                           </div>
                         </div>
@@ -698,8 +728,33 @@
           provincias: null,
           municipios: null,
           localidades: null,
+          lineas: null,
+          selectLinea: null,
+          paradas: null,
+          selectParadas: null
         },
         methods: {
+          cargarLineasColectivo: function (){
+            fetch("http://localhost:8080/parada/colectivo")
+                    .then((response) => response.json())
+                    .then((data) => {
+                      this.paradas = data;
+                    });
+          },
+          cargarLineasTren: function (){
+            fetch("http://localhost:8080/parada/tren")
+                  .then((response) => response.json())
+                  .then((data) => {
+                    this.paradas = data;
+                  });
+            },
+          cargarLineasSubte: function (){
+            fetch("http://localhost:8080/parada/subte")
+                    .then((response) => response.json())
+                    .then((data) => {
+                      this.paradas = data;
+                    });
+          },
           cargarProvincias: function (idPais) {
             fetch("http://localhost:8080/ubicacion/provincias/" + idPais)
               .then((response) => response.json())
@@ -788,6 +843,7 @@
         mostrarTipoDeCombustible(v);
         mostrarPatente(v);
         mostrarServicioContratado(v);
+        habilitarParadas(v);
       }
 
       function mostrarTipoDeCombustible(v) {
@@ -814,6 +870,21 @@
           document.getElementById("servicioContratado").style.display = "none";
         } else {
           document.getElementById("servicioContratado").style.display = "";
+        }
+      }
+
+      function habilitarParadas(v){
+        if(v == "COLECTIVO" || v=="TREN" || v=="SUBTE") {
+          document.getElementById("ubicacionOrigen").style.display="none";
+          document.getElementById("ubicacionFin").style.display="none";
+          document.getElementById("paradaOrigen").style.display="";
+          document.getElementById("paradaFin").style.display="";
+        }
+        else{
+            document.getElementById("ubicacionOrigen").style.display="";
+            document.getElementById("ubicacionFin").style.display="";
+            document.getElementById("paradaOrigen").style.display="none";
+            document.getElementById("paradaFin").style.display="none";
         }
       }
     </script>
