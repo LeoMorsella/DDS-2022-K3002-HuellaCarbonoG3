@@ -1,7 +1,7 @@
 package APIMedicionesTests;
 
-import utn.frba.huelladecarbono.service.CargaDeMedicionesService.*;
-import utn.frba.huelladecarbono.model.ModeloDeNegocio.*;
+import heroku.huelladecarbono.model.ModeloDeNegocio.DatoDeMedicion;
+import heroku.huelladecarbono.service.CargaDeMedicionesService.CargaDeMediciones;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.List;
