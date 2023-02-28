@@ -248,7 +248,7 @@
                         })
                 },
                 agregarArea: function() {
-                    let response = fetch('http://localhost:8080/miembro/solicitarSerParte/'+this.selectOrganizacion+'/'+this.selectArea+'/1' ,{
+                    let response = fetch('http://localhost:8080/miembro/solicitarSerParte/'+this.selectOrganizacion+'/'+this.selectArea+'/'+localStorage.getItem("id") ,{
                         method: 'POST'
                     });
                     alert("Solicitud Enviada.");
