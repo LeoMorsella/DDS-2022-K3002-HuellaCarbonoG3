@@ -73,7 +73,10 @@ public class MiembroController {
     public List<Double> calcularHuella(@PathVariable Integer miembroId, @PathVariable Integer diaI, @PathVariable Integer mesI, @PathVariable Integer anioI, @PathVariable Integer diaF, @PathVariable Integer mesF, @PathVariable Integer anioF, @PathVariable Integer orgId) throws Exception {
         LocalDate fechaI = LocalDate.of(anioI, mesI, diaI);
         LocalDate fechaF = LocalDate.of(anioF, mesF, diaF);
+        System.out.println("Fecha inicio: " + fechaI);
+        System.out.println("Fecha fin: " + fechaF);
         Organizacion organizacion = interfazOrganizacion.findOrganizacion(orgId);
+
         Double huella = Calculadora.calcularHCOrganizacion(organizacion, fechaI, fechaF);
         Double impacto = Calculadora.calcularHCMiembro(fechaI, fechaF, interfazMiembro.findMiembro(miembroId));
         System.out.println("Huella: " + huella);

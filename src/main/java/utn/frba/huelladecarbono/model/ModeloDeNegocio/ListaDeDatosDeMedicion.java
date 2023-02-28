@@ -15,7 +15,7 @@ public class ListaDeDatosDeMedicion {
     private Integer id;
     @Column
     private LocalDate fecha;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<DatoDeMedicion> datosDeMedicion = new ArrayList<>();
 
     public ListaDeDatosDeMedicion() {

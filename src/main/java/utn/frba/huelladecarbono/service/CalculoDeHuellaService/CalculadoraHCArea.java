@@ -4,25 +4,24 @@ import utn.frba.huelladecarbono.model.ModeloDeNegocio.Area;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.DatoDeMedicion;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.ListaDeDatosDeMedicion;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
+import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
 
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 public class CalculadoraHCArea {
     public static Double calcularHC(Area area, LocalDate mesInicio, LocalDate mesFin){
-        Double HC = 0.0;
+        Double hc = 0.0;
+        hc += area.getHCMediciones();
         for (Miembro miembro : area.getMiembros()) {
-            try {
-                HC += CalculadoraHCService.getCalculadoraHC().calcularHCMiembro(miembro, mesInicio, mesFin, area.getOrganizacion());
-            } catch (Exception e) {
-                e.printStackTrace();
+            for (Recorrido recorrido : miembro.getRecorridos()) {
+                Random random = new Random();
+                hc += (random.nextDouble() + 1.0) * recorrido.getCantidadDeTrayectos();
             }
         }
-        for (ListaDeDatosDeMedicion mediciones :area.getMediciones() ) {
-            HC += CalculadoraHCService.getCalculadoraHC().calcularHCMedicion(mediciones.getDatosDeMedicion(), mesInicio, mesFin);
-        }
-        return HC;
+        return hc;
     }
 
     public static Double HCpromedio(Area area, LocalDate mesInicio, LocalDate mesFin) {

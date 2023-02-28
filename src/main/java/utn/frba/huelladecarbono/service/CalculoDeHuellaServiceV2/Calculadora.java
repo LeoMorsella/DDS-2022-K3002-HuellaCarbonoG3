@@ -51,7 +51,7 @@ public class Calculadora {
             Random random = new Random();
             hc += (random.nextDouble() + 1.0) * recorrido.getCantidadDeTrayectos();
         }
-        return hc * ChronoUnit.MONTHS.between(fechaI, fechaF);
+        return hc;
 
     }
 }

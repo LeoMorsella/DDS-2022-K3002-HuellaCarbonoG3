@@ -22,10 +22,8 @@ public class Area {
     @ManyToOne
     @JoinColumn (name="organizacion_id",referencedColumnName = "id")
     private Organizacion organizacion;
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private  List<ListaDeDatosDeMedicion> mediciones = new ArrayList<>();
-
-    //Hay que replicar esto en todos los arraylist para el many to many
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<HuellaCarbono> huellasCarbono = new ArrayList<>();
     @Column
