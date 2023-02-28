@@ -211,7 +211,7 @@
                 let mesFin= fechafin.substring(5,7);
                 let anioFin= fechafin.substring(0,3);
 
-                fetch('http://localhost:8080/miembro/calcularHuella/'+localStorage.getItem('id')+'/'+diaInit+'/'+mesInit+'/'+anioInit+'/'+diaFin+'/'+mesFin+'/'+anioFin+'/1')
+                fetch('http://localhost:8080/miembro/calcularHuella/'+localStorage.getItem('id')+'/'+diaInit+'/'+mesInit+'/'+anioInit+'/'+diaFin+'/'+mesFin+'/'+anioFin+'/'+this.selectOrga)
                     .then(response => response.json())
                     .then(data => {
                         this.huella = {

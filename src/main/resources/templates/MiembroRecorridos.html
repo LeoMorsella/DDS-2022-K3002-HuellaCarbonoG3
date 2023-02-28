@@ -310,7 +310,7 @@
                     .then(data => {
                         this.recorridosMiembro = data;
                     });
-                fetch("http://localhost:8080/organizaciones/")
+                fetch("http://localhost:8080/miembro/organizaciones/"+localStorage.getItem('id'))
                     .then(response => response.json())
                     .then(data => {
                         this.organizaciones = data;
