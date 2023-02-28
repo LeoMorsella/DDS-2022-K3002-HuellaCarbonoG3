@@ -2,6 +2,7 @@ package utn.frba.huelladecarbono.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import utn.frba.huelladecarbono.DTO.ResOrganizacion;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Miembro;
 import utn.frba.huelladecarbono.model.ModeloDeNegocio.Organizacion;
 import utn.frba.huelladecarbono.model.Movilidad.Recorrido;
@@ -112,4 +113,14 @@ public class MiembroController {
         interfazMiembro.desvincular(miembroId, areaId);
     }
 
+    @GetMapping("/organizaciones/{miembroId}")
+    public List<ResOrganizacion> organizacionesQueEsParte(@PathVariable Integer miembroId) {
+        Miembro miembro = interfazMiembro.findMiembro(miembroId);
+        List<Organizacion> orgs = miembro.getOrganizaciones();
+        List<ResOrganizacion> res = new ArrayList<>();
+        for (Organizacion org : orgs) {
+            res.add(new ResOrganizacion(org));
+        }
+        return res;
+    }
 }
