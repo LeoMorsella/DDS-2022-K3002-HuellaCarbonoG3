@@ -22,6 +22,6 @@ public class ResRecorrido {
         this.fechaI = recorrido.getFechaInicio();
         this.fechaF = recorrido.getFechaFin();
         this.estaActivo = recorrido.getEstaActivo();
-        this.cantTrayectos = recorrido.getTrayectos().size();
+        this.cantTrayectos = recorrido.getCantidadDeTrayectos();
     }
 }
