@@ -144,7 +144,7 @@
                                         <select name="recorridos" id="m-recorridos" aria-controls="dataTable"
                                             class="custom-select custom-select-sm form-control form-control-sm form-control-user">
                                             <option selected disabled></option>
-                                            <option @clicK="cargarRecorrido(recorrido.id)" v-for="recorrido in recorridos" > {{recorrido.nombre}}</option>
+                                            <option @click="cargarRecorrido(recorrido.id)" v-for="recorrido in recorridos" > {{recorrido.nombre}}</option>
                                         </select>
                                         <br><br>
                                         <label for="pesoRecorrido">Peso</label>
@@ -305,7 +305,7 @@
                 }
             },
             created () {
-                fetch('http://localhost:8080/recorrido/miembro/1')
+                fetch('http://localhost:8080/recorrido/miembro/'+localStorage.getItem('id'))
                     .then(response => response.json())
                     .then(data => {
                         this.recorridosMiembro = data;
@@ -314,11 +314,6 @@
                     .then(response => response.json())
                     .then(data => {
                         this.organizaciones = data;
-                    });
-                fetch('http://localhost:8080/recorridos/1')
-                    .then(response => response.json())
-                    .then(recorridos => {
-                        this.recorridos = recorridos
                     });
             }
         })
